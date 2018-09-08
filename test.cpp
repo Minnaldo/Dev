@@ -121,3 +121,16 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
+
+int tmpidx = 0;
+    for (int  = 0; a < numdart.size(); a++)
+    {
+        if (numdart[a] >= 65 && numdart[a] <= 90)
+        {
+            bonusidx[tmpidx] = a;
+        }
+        
+        cout<<"numdart[a] : "<<numdart[a]<<"\t" << "bonusidx[tmpidx] : " << bonusidx[tmpidx] << "\t";
+        cout << "tmpidx : " << tmpidx << endl;
+        tmpidx++;
+    }
