@@ -57,11 +57,9 @@ int algol_LRU(int csize, vector<string> &city_list) //city_list에는 cities의 
     vector<string> cache2(csize); //원소 시간 계산을 위한 비교벡터
     vector<int> lasttime(csize);  //cache1에 각원소가 머문 시간 계산
 
+
     if (csize > 0)
     {
-        // cache2.assign(cache1.begin(), cache1.end()); //cache1을 cache2에 복사    assign == 기존원소 제거후 임의의 값으로 n개의 원소 할당
-        //city_list 뒤집힘 city_list.back == 주어진 벡터의 첫번째 원소
-
         for (int i = 0; i < listlen; i++) //입력받은 원소의 개수만큼 반복
         {
             //cache hit == city_list.back() 에 해당하는 원소가 cache1에 있음
@@ -77,36 +75,74 @@ int algol_LRU(int csize, vector<string> &city_list) //city_list에는 cities의 
                         lasttime[j] += 1;
                 }
             }
-            //cache miss == city_list.back() 에 해당하는 원소가 cache1에 없음
-            // cache1.find(city_list.back());
             else
             { //cache miss == cache에 저장된 원소를 현재의 원소와 바꿔야 함
-                cout << "Cache Miss" << endl;
+                // // cout << "Cache Miss" << endl;
                 int tmpidx = 0;
-                // tmpidx = calTime(csize, cache1, cache2, lasttime);
-                for (int a = 0; a < csize; a++)
+                // // // tmpidx = calTime(csize, cache1, cache2, lasttime);
+
+                // // for(int b = 0; b <csize; b++){
+                // //     if(cache1[b].empty()){
+                // //         cache1[b] = city_list.back();
+                // //         city_list.pop_back();
+                // //     }
+
+                // }
+
+                // for (int a = 0; a < csize; a++)
+                // {
+                //     //가장 오래 있었던 값의 인덱스 찾기
+                //     if (lasttime[a] == *(max_element(lasttime.begin(), lasttime.end())))
+                //         tmpidx = a;
+                // }
+
+                // cache1[tmpidx] = city_list.back();
+                // lasttime[tmpidx] = 0;
+                // city_list.pop_back();
+                // time += 5;
+
+                // //cache1의 내용 cache2로 복사
+                // for (int h = 0; h < csize; h++)
+                // {
+                //     cache2[h] = cache1[h];
+                // }
+
+                if (cache1.empty())
                 {
-                    //가장 오래 있었던 값의 인덱스 찾기
-                    if (lasttime[a] == *(max_element(lasttime.begin(), lasttime.end())))
-                        tmpidx = a;
+                    cache1[0] = city_list.back();
+                    city_list.pop_back();
                 }
-
-                cache1[tmpidx] = city_list.back();
-                lasttime[tmpidx] = 0;
-                city_list.pop_back();
-                time += 5;
-
-                //cache1의 내용 cache2로 복사
-                for (int h = 0; h < csize; h++)
+                else if (!cache1.empty())
                 {
-                    cache2[h] = cache1[h];
+
+                    for (int i = 0; i < csize; i++)
+                    {
+                        if (cache1[i] == *(max_element(cache1.begin(), cache1.end())))
+                            tmpidx = i;
+                    }
+
+                    cache1[tmpidx] = city_list.back();
+                    lasttime[tmpidx] = 0;
+                    city_list.pop_back();
+                    time += 5;
+                }
+                else
+                {
+                    for (int i = 0; i < csize; i++)
+                    {
+                        if (find(cache1.begin(), cache1.end(), NULL) != cache1.end())
+                        {
+                        }
+                        else
+                        {
+                        }
+                    }
                 }
             }
         }
     }
     else
     {
-        cout<<"1111111"<<endl;
         time = 5 * city_list.size();
     }
 
@@ -123,7 +159,7 @@ int main(int argc, char const *argv[])
     vector<string> cities =
         {"Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"};
     // {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"};
-    
+
     if (cacheSize < 0 && cacheSize > 30)
     {
         cout << "Error" << endl;
@@ -131,6 +167,12 @@ int main(int argc, char const *argv[])
     }
 
     reverse(cities.begin(), cities.end());
+    
+    for(int i = 0; i < cities.size(); i++)
+    {
+        cout<<cities[i]<<"\t";
+    }
+    
     answer = algol_LRU(cacheSize, cities);
 
     cout << "Answer : " << answer << endl;
