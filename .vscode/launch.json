@@ -8,7 +8,7 @@
             "name": "WSL GDB Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/c/Users/alban/Documents/Dev/${fileBasenameNoExtension}.exe",
+            "program": "/mnt/c/Users/alban/Documents/Dev/${fileBasenameNoExtension}",
             "args": ["-fThreading"],
             "stopAtEntry": false,
             "cwd": "/mnt/c/Users/alban/Documents/Dev",
