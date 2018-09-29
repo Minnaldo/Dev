@@ -1,14 +1,13 @@
-#include <vector>
-
+#include <iostream>
 using namespace std;
 
-int main(int argc, char const *argv[])
+int main()
 {
-    int N = 0;
-    long long answer = 0;
+    string arrangement = "()(((()())(())()))(())";
+    int answer = 0;
+
+    auto itr = arrangement.begin();
 
     
-
-
     return 0;
 }
