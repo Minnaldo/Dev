@@ -17,31 +17,41 @@ int main(int argc, char const *argv[])
 int solution(int bridge_length, int weight, vector<int> truck_weights)
 {
     vector<vector<int>> info(truck_weights.size(), vector<int>(2, 0));
-    vector<int>::iterator itr = truck_weights.begin();
+    vector<int> rtruck_weight;
+
+    rtruck_weight.assign(truck_weights.rbegin(), truck_weights.rend());
+    vector<int>::reverse_iterator itr = rtruck_weight.rbegin();
     queue<int> bridge;
     int weightSum = 0;
-    int cTime = 0;
+    int cTime = 1;
 
-    do
+    while (true)
     {
+        //IN
         if (weightSum + *itr <= weight)
         {
-            //Enter
             if (bridge.size() <= bridge_length)
             {
-                weightSum += *itr;
+                cout<<"2"<<*itr<<endl;
                 bridge.push(*itr);
                 itr++;
             }
+            else
+            {
+                continue;
+            }
+
+            if(bridge.empty() && itr == rtruck_weight.rend()){
+                break;
+            }
         }
+        //OUT
         else
         {
-            //Not Enter
+            itr--;
         }
+    }
 
-        cTime++;
-    } while (!bridge.empty());
-
-    answer = cTime;
+    int answer = cTime;
     return answer;
 }
