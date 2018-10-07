@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <algorithm>
 
 using namespace std;
 string solution(vector<string> participant, vector<string> completion);
@@ -19,22 +20,41 @@ string solution(vector<string> participant, vector<string> completion)
 
     auto start = chrono::high_resolution_clock::now();
 
-    int pSize = participant.size();
-    int cSize = completion.size();
+    auto citr = completion.begin();
+    auto pitr = participant.begin();
 
-    for (int i = 0; i < pSize; i++)
+    //이름이 같으면 뺀다
+    while (pitr != participant.end())
     {
-        for (int j = 0; j < cSize; j++)
+        if (*citr == *pitr)
         {
-            if (participant[i] == completion[j])
-            {
-                participant[i] = "";
-                completion[j] = "";
-                break;
-            }
+            *pitr = "";
+            *citr = "";
         }
-        answer += participant[i];
+        else
+        {
+            answer += *pitr;
+            pitr++;
+        }
+            citr++;
     }
+
+    // int pSize = participant.size();
+    // int cSize = completion.size();
+
+    // for (int i = 0; i < pSize; i++)
+    // {
+    //     for (int j = 0; j < cSize; j++)
+    //     {
+    //         if (participant[i] == completion[j])
+    //         {
+    //             participant[i] = "";
+    //             completion[j] = "";
+    //             break;
+    //         }
+    //     }
+    //     answer += participant[i];
+    // }
 
     auto end = chrono::high_resolution_clock::now();
 
