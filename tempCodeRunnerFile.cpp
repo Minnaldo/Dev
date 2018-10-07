@@ -1,75 +1,41 @@
+#include <string>
 #include <vector>
 #include <iostream>
-#include <queue>
-#include <chrono>
 
 using namespace std;
 
-int solution(int bridge_length, int weight, vector<int> truck_weights);
+solution (vector <int> prices);
 
 int main(int argc, char const *argv[])
 {
-    cout << "T1 : " << solution(2, 10, {7, 4, 5, 6}) << endl;
-    cout << "T2 : " << solution(100, 100, {10}) << endl;
-    cout << "T3 : " << solution(100, 100, {10, 10, 10, 10, 10, 10, 10, 10, 10, 10}) << endl;
+    cout<<solution(vector <int> prices = {498, 501, 470, 489})<<endl;
+    return 0;
 }
 
-int solution(int bridge_length, int weight, vector<int> truck_weights)
-{
-    int cTime = 1;
-    queue<int> bridge;
-    vector<int>::iterator itr = truck_weights.begin();
-    int weightSum = 0;
 
-    if (truck_weights.size() <= 1)
+vector<int> solution(vector<int> prices) {
+    vector<int> answer;    
+    vector<int> arr;    
+    
+    for(int i =0; i<prices.size(); i++)
     {
-        cTime += bridge_length;
-        return cTime;
-    }
-    else
-    {
-        while (true)
-        {
-            if (bridge_length > bridge.size())
+        int tmp = i + 1;
+        
+        if(i != prices.size()){
+            for(int j = tmp; j<prices.size(); j++)
             {
-                if (weightSum + *itr <= weight)
+                if(prices[tmp] >prices[j])
                 {
-                    weightSum += *itr;
-                    bridge.push(*itr);
-                    itr = truck_weights.erase(itr);
-                }
-                else
-                {
-                    bridge.push(0);
-                }
-            }
-            else
-            {
-                if (bridge.front() == 0)
-                {
-                    bridge.pop();
-                    continue;
-                }
-                else
-                {
-                    weightSum -= bridge.front();
-                    bridge.pop();
-                    if (weightSum + *itr <= weight && !truck_weights.empty())
+                    if(j != prices.size())
                     {
-                            weightSum += *itr;
-                            bridge.push(*itr);
-                            itr = truck_weights.erase(itr);
-                        
-                    }else{
-                        bridge.push(0);
+                        answer.push_back(j-i);        
+                        continue;
+                    }  else{
+                        answer.push_back(0);
                     }
-                }
+                } 
             }
-            if(truck_weights.empty()){
-                cTime += bridge_length;
-                return cTime;
-            }
-            cTime++;
         }
     }
+    return answer;
 }
