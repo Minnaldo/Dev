@@ -22,22 +22,10 @@ string solution(vector<string> participant, vector<string> completion)
 
     auto citr = completion.begin();
     auto pitr = participant.begin();
+    auto epitr = participant.end();
 
     //이름이 같으면 뺀다
-    while (pitr != participant.end())
-    {
-        if (*citr == *pitr)
-        {
-            *pitr = "";
-            *citr = "";
-        }
-        else
-        {
-            answer += *pitr;
-            pitr++;
-        }
-            citr++;
-    }
+    
 
     // int pSize = participant.size();
     // int cSize = completion.size();
