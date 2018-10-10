@@ -22,10 +22,8 @@ int solution(vector<string> lines)
     int answer = 0;
     int logSize = lines.size();
     string tmpStr;
-
-    vector<float> startTime;
     vector<float> duration;
-
+    vector<float> startTime;
     vector<vector<string>> log(logSize, vector<string>(2));
 
     //lines 로그기록 나누기, 띄워쓰기 단위로 나누기
@@ -39,8 +37,7 @@ int solution(vector<string> lines)
 
         duration.push_back(stof(log[i][1]));
     }
-
-
+    //TODO: 시간을 초로 바꾸기
     //출력
     for (int i = 0; i < logSize; i++)
     {
@@ -54,7 +51,7 @@ int solution(vector<string> lines)
     for (int i = 0; i < duration.size(); i++)
     {
         cout << duration[i] << endl;
-        cout << "startTime : " << startTime.at(i) << endl;
+        cout << "Start Time : " << startTime[i] << endl;
     }
 
     return answer;
