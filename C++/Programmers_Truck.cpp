@@ -5,68 +5,96 @@
 
 using namespace std;
 
+int solution(int bridge_length, int weight, vector<int> truck_weights);
+
 int main(int argc, char const *argv[])
 {
-    int answer = 0;
-    //EX 1)
-    int bridge_length = 2;
-    int weight = 10;
-    vector<int> truck_weights = {7, 4, 5, 6};
-
-    queue<int> arr;
-    queue<int> bQue;
-    vector<int>::iterator itr = truck_weights.begin();
-    int cross_time = 1;
-    int weight_sum = 0;
-    int tmpidx = 0;
     auto start = chrono::high_resolution_clock::now();
+    
+    cout << "T1 : " << solution(2, 10, {7, 4, 5, 6}) << endl;
+    cout << "T2 : " << solution(100, 100, {10}) << endl;
+    cout << "T3 : " << solution(100, 100, {10, 10, 10, 10, 10, 10, 10, 10, 10, 10}) << endl;
 
-    while (itr != truck_weights.end())
+    auto end = chrono::high_resolution_clock::now();
+    cout << "Code Duration Time : " << (float)(end - start).count() / CLOCKS_PER_SEC << endl;
+}
+
+int solution(int bridge_length, int weight, vector<int> truck_weights)
+{
+    int cTime = 1;
+    queue<int> bridge;
+    vector<int>::iterator itr = truck_weights.begin();
+    // vector <int>::iterator bitr = bridge.begin();
+    int weightSum = 0;
+
+    if (truck_weights.size() <= 1) //대기 트럭이 하나 일 때
     {
-
-        if (weight >= weight_sum + *itr)
+        cTime += bridge_length;
+        return cTime;
+    }
+    else //대기 트럭이 하나가 아닐 때
+    {
+        cout << endl;
+        while (true)
         {
-            weight_sum += *itr;
-            if (bQue.size() < bridge_length)
+            if (bridge_length > bridge.size())
             {
-                bQue.push(*itr);
-                arr.push(cross_time);
-                cout << "the truck is in the bridge : " << *itr << endl;
+                if (weightSum + truck_weights.front() <= weight && !truck_weights.empty())
+                {
+                    cout << truck_weights.front() << " 삽입\t"
+                         << "Time : " << cTime << endl;
+                    //다리위에 올라간 트럭무게의 총합 = weightSum이 다리 하중보다 낮을때
+                    weightSum += truck_weights.front();
+                    bridge.push(truck_weights.front());
+                    truck_weights.erase(truck_weights.begin());
+                }
+                else
+                {
+                    //트럭 무게 합이 다리하중보다 높을 때
+                    cout << "0 삽입" << endl;
+                    bridge.push(0);
+                }
             }
             else
             {
-                int tmp = bQue.front();
-                weight_sum -= tmp;
-                cout << "Crossed over truck : " << tmp << endl;
-                bQue.pop();
-                if (bQue.empty())
+                cout << "Front : " << bridge.front() << endl;
+
+                if (bridge.front() == 0)
                 {
-                    break;
+                    bridge.pop();
+                    cout << "0 삭제" << endl;
+                    continue;
+                }
+                else
+                {
+                    weightSum -= bridge.front();
+                    cout << bridge.front() << " 삭제\t"
+                         << "Time : " << cTime << endl;
+                    bridge.pop();
+
+                    if (weightSum + truck_weights.front() <= weight && !truck_weights.empty()) //나가는 동시에 입장 가능
+                    {
+                        cout << truck_weights.front() << " 동시 삽입\t"
+                             << "Time : " << cTime << endl;
+                        weightSum += truck_weights.front();
+                        bridge.push(truck_weights.front());
+                        truck_weights.erase(truck_weights.begin());
+                    }
+                    else
+                    {
+                        bridge.push(0);
+                    }
                 }
             }
-            cout << tmpidx << "번 째 Q 사이즈 : " << bQue.size() << endl;
-            tmpidx++;
-        }
-        else
-        {
-            if ((arr.front() + bridge_length) == cross_time)
-            {
-                weight_sum = 0;
-                cout << "Crossed over truck : " << bQue.front() << endl;
-                bQue.pop();
-                arr.pop();
-            }
-            cross_time++;
-            continue;
-        }
-        cross_time++;
-        itr++;
-    }
-    answer = cross_time;
 
-    //프로그램 실행시간 체크
-    auto end = chrono::high_resolution_clock::now();
-    cout << "Duration Time : " << (float)(end - start).count() / CLOCKS_PER_SEC << " sec" << endl;
-    cout << "Answer : " << answer << endl;
-    return 0;
+            cout << "Bridge Size : " << bridge.size() << endl;
+
+            if (truck_weights.empty())
+            {
+                cTime += bridge_length;
+                return cTime;
+            }
+            cTime++;
+        }
+    }
 }

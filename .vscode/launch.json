@@ -8,20 +8,22 @@
             "name": "WSL GDB Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/c/Users/alban/Documents/Dev/${fileBasenameNoExtension}",
-            "args": ["-fThreading"],
+            "program": "/mnt/c/Users/alban/Documents/Dev/C++/${fileBasenameNoExtension}",
+            "args": [
+                "-fThreading"
+            ],
             "stopAtEntry": false,
-            "cwd": "/mnt/c/Users/alban/Documents/Dev",
+            "cwd": "/mnt/c/Users/alban/Documents/Dev/C++",
             "environment": [],
             "externalConsole": true,
-                "MIMode": "gdb",
-                "setupCommands": [
-                    {
-                        "description": "Enable pretty-printing for gdb",
-                        "text": "-enable-pretty-printing",
-                        "ignoreFailures": true
-                    }
-                ],
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
             "pipeTransport": {
                 "debuggerPath": "/usr/bin/gdb",
                 "pipeProgram": "C:/WINDOWS/sysnative/bash.exe",

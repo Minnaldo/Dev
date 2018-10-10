@@ -1,60 +1,33 @@
-#include <queue>
+#include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
-int solution(int bridge_length, int weight, vector<int> truck_weights);
+int solution(int m, int n, vector<string> board);
 
 int main(int argc, char const *argv[])
 {
-    cout << "T1 : " << solution(2, 10, {7, 4, 5, 6}) << endl;
-    cout << "T2 : " << solution(100, 100, {10}) << endl;
-    cout << "T3 : " << solution(100, 100, {10, 10, 10, 10, 10, 10, 10, 10, 10, 10}) << endl;
+    solution(4, 5, {"CCBDE", "AAADE", "AAABF", "CCBBF"});
+    return 0;
 }
 
-int solution(int bridge_length, int weight, vector<int> truck_weights) {
-    queue<int> arr;
-    queue<int> bQue;
-    vector<int>::iterator itr = truck_weights.begin();
+
+int solution(int m, int n, vector<string> board){
+    int answer = 0;
+
+    vector < vector<string> > map;
     
-    int cross_time = 1;
-    int weight_sum = 0;
+    
+    for(int i = 0; i < board.size(); i++)
+    {
+        vector <string> row;
+        row.push_back(board[i]);
 
-while (itr != truck_weights.end())
-{
-    if (weight >= weight_sum + *itr)
-    {
-        weight_sum += *itr;
-        if (bQue.size() < bridge_length)
-        {
-            bQue.push(*itr);
-            arr.push(cross_time);
-        }
-        else
-        {
-            weight_sum -= bQue.front();
-            bQue.pop();
-            if (bQue.empty())
-            {
-                break;
-            }
-        }
+        map.push_back(row);
     }
-    else
-    {
-        if ((arr.front() + bridge_length) == cross_time)
-        {
-            // weight_sum = 0;
-            bQue.pop();
-            arr.pop();
-        }
-        cross_time++;
-        continue;
-    }
-    cross_time++;
-    itr++;
-}
-int answer = cross_time;
+    
+
     return answer;
 }

@@ -3,6 +3,7 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "stdio.h": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "chrono": "cpp"
     }
 }
