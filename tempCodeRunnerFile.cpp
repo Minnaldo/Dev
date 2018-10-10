@@ -4,37 +4,27 @@
 using namespace std;
 
 int solution(vector<vector<int>> maps);
-vector<int> findRoad(vector<vector<int>> maps, int xpos, int ypos);
+int findRoad(vector<vector<int>> maps, int xpos, int ypos, int xLen, int yLen);
 
 int main(int argc, char const *argv[])
 {
-    vector<vector<int>> maps = {{1, 0, 1, 1, 1},
-                                {1, 0, 1, 0, 1},
-                                {1, 0, 1, 1, 1},
-                                {1, 1, 1, 0, 1},
-                                {0, 0, 0, 0, 1}};
-    // int result = solution(maps);
+    vector<vector<int>> maps1 = {{1, 0, 1, 1, 1},
+                                 {1, 0, 1, 0, 1},
+                                 {1, 0, 1, 1, 1},
+                                 {1, 1, 1, 0, 1},
+                                 {0, 0, 0, 0, 1}};
 
-    cout<<maps[5][4];
-
-    // cout << "Result : " << result << endl;
-    return 0;
-}
-
-int solution(vector<vector<int>> maps)
-{
-    int answer = 0;
-    
 
 try
 {
-    cout<<maps[5][5]<<endl;
+    cout<< maps1.at(5).at(1);
 }
 catch(const std::exception& e)
 {
     std::cerr << e.what() << '\n';
 }
 
-
-    return answer;
+// cout<< maps1.at(5).at(1);
+    
+    return 0;
 }

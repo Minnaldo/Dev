@@ -8,86 +8,88 @@ int findRoad(vector<vector<int>> maps, int xpos, int ypos, int xLen, int yLen);
 
 int main(int argc, char const *argv[])
 {
-    vector<vector<int>> maps = {{1, 0, 1, 1, 1},
-                                {1, 0, 1, 0, 1},
-                                {1, 0, 1, 1, 1},
-                                {1, 1, 1, 0, 1},
-                                {0, 0, 0, 0, 1}};
-    int result = solution(maps);
+    vector<vector<int>> maps1 = {{1, 0, 1, 1, 1},
+                                 {1, 0, 1, 0, 1},
+                                 {1, 0, 1, 1, 1},
+                                 {1, 1, 1, 0, 1},
+                                 {0, 0, 0, 0, 1}};
 
-    cout << "Result : " << result << endl;
+    vector<vector<int>> maps2 = {{1, 0, 1, 1, 1},
+                                 {1, 0, 1, 0, 1},
+                                 {1, 0, 1, 1, 1},
+                                 {1, 1, 1, 0, 0},
+                                 {0, 0, 0, 0, 1}};
+
+    // int result1 = solution(maps1);
+    int result2 = solution(maps2);
+    // cout << "Result 1 : "<< result1 << endl;
+    cout << "Result 2 : " << result2 << endl;
     return 0;
 }
 
 int solution(vector<vector<int>> maps)
 {
     int answer = 0;
-    int xpos, ypos = 0;
+    int xpos = 0;
+    int ypos = 0;
 
-    int xLen = maps.size();
-    int yLen = maps.at(0).size();
+    int yLen = maps.size();
+    int xLen = maps.at(0).size();
 
-    answer = findRoad(maps, xpos, ypos, xLen, yLen);
+    //기본 위치가 있으므로 1
+    int cnt = 1;
 
-    return answer;
-}
-
-int findRoad(vector<vector<int>> map, int xpos, int ypos, int xLen, int yLen)
-{
-    int cnt = 0;
-    if (xpos != xLen && ypos != yLen)
+    // X => 상하, Y=> 좌우
+    while (true)
     {
-        if (xpos < xLen && ypos < yLen)
+        cout << "Xpos : " << xpos << "   ypos : " << ypos << endl;
+        if (xpos < xLen && ypos < yLen && xpos >= 0 && ypos >= 0)
         {
-            int tmpR = map[xpos + 1][ypos];
-            int tmpL = map[xpos - 1][ypos];
-            int tmpU = map[xpos][ypos - 1];
-            int tmpD = map[xpos][ypos + 1];
-
-            if (tmpR == 1)
+            if (maps[xpos + 1][ypos] == 1)
             {
                 //Right
-                cout<<"Move Right"<<endl;
-                map[xpos][ypos] = 0;
+                cout << "Move Down" << endl;
+                maps[xpos][ypos] = 0;
                 xpos++;
                 cnt++;
-                findRoad(map, xpos, ypos, xLen, yLen);
             }
-            else if (tmpD == 1)
+            else if (maps[xpos][ypos + 1] == 1)
             {
                 //Down
-                cout<<"Move Down"<<endl;
-                map[xpos][ypos] = 0;
+                cout << "Move Right" << endl;
+                maps[xpos][ypos] = 0;
                 ypos++;
                 cnt++;
-                findRoad(map, xpos, ypos, xLen, yLen);
             }
-            else if (tmpU == 1)
+            else if (maps[xpos - 1][ypos] == 1)
             {
                 //Up
-                cout<<"Move UP"<<endl;
-                map[xpos][ypos] = 0;
-                ypos--;
-                cnt++;
-                findRoad(map, xpos, ypos, xLen, yLen);
-            }
-            else if (tmpD == 1)
-            {
-                //Left
-                cout<<"Move Left"<<endl;
-                map[xpos][ypos] = 0;
+                cout << "Move Up" << endl;
+                maps[xpos][ypos] = 0;
                 xpos--;
                 cnt++;
-                findRoad(map, xpos, ypos, xLen, yLen);
+            }
+            else if (maps[xpos][ypos - 1] == 1)
+            {
+                //Left
+                cout << "Move Left" << endl;
+                maps[xpos][ypos] = 0;
+                ypos--;
+                cnt++;
             }
             else
             {
-                return -1;
+                //모든 방향이 0
+                cout << "No more way" << endl;
+                cnt = (-1);
+                return cnt;
             }
         }
-    }
-    else
-    {
-        return cnt;
+
+        if (xpos == (xLen - 1) && ypos == (yLen - 1))
+        {
+            cout << "The end" << endl;
+            return cnt;
+        }
     }
 }
