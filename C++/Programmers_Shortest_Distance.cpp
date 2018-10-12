@@ -9,7 +9,10 @@ int findRoad(vector<vector<int>> maps, int xpos, int ypos, int xLen, int yLen);
 int main(int argc, char const *argv[])
 {
     vector<vector<int>> maps1 = {{1, 0, 1, 1, 1}, {1, 0, 1, 0, 1}, {1, 0, 1, 1, 1}, {1, 1, 1, 0, 1}, {0, 0, 0, 0, 1}};
+<<<<<<< HEAD
 
+=======
+>>>>>>> c7ae2091ec98e34d7ab2cfa5243797b8924ed914
     vector<vector<int>> maps2 = {{1, 0, 1, 1, 1}, {1, 0, 1, 0, 1}, {1, 0, 1, 1, 1}, {1, 1, 1, 0, 0}, {0, 0, 0, 0, 1}};
 
     // int result1 = solution(maps1);
