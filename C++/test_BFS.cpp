@@ -1,11 +1,10 @@
 #include <vector>
-#include <queue>
 #include <iostream>
 
 using namespace std;
 
 vector<int> xq, yq, lq;
-int cnt = 0;
+int cnt;
 
 void enqueue(int _x, int _y, int _l)
 {
@@ -15,16 +14,20 @@ void enqueue(int _x, int _y, int _l)
     cnt++;
 }
 
+// -1 리턴 조건 : 모든지점을 방문하였는데 최종점에 도달하지 못했을 경우
 int BFS(vector<vector<int>> maps, int xpos, int ypos, int xlen, int ylen)
 {
     int pos = 0; // Queue 포지션
 
     enqueue(xpos, ypos, 1);
 
+    //FIXME: condition
     while (pos < cnt && (xq[pos] != xlen - 1 || yq[pos] != ylen - 1))
     {
+        cout<<"Go\t";
         maps[yq[pos]][xq[pos]] = 0; //지나갔다는 표시
 
+        //갈수 있을 경우 다음 위치의 좌표를 큐에 삽입
         if (yq[pos] > 0 && maps[yq[pos] - 1][xq[pos]] == 1) //UP 가능할경우 이동할 지점 좌표를 큐에 삽입
         {
             enqueue(xq[pos], yq[pos] - 1, lq[pos] + 1);
@@ -41,34 +44,36 @@ int BFS(vector<vector<int>> maps, int xpos, int ypos, int xlen, int ylen)
         {
             enqueue(xq[pos] + 1, yq[pos], lq[pos] + 1);
         }
+        //큐의 다음 인덱스로 이동 == 좌표로 이동
         pos++;
+
+        cout << xq[pos] << " ";
+        cout << yq[pos] << " ";
+        cout << lq[pos] << " " << endl;
     }
 
-    for (int i = 0; i < xq.size(); i++)
-    {
-        cout << xq[i] << " ";
-    }
-    cout << endl;
-    for (int i = 0; i < yq.size(); i++)
-    {
-        cout << yq[i] << " ";
-    }
-    cout << endl;
-    for (int i = 0; i < lq.size(); i++)
-    {
-        cout << lq[i] << " ";
-    }
-    cout << endl;
+    // //queue 프린트
+    // for (int i = 0; i < xq.size(); i++)
+    // {
+    //     cout << xq[i] << " ";
+    // }
+    // cout << endl;
+    // for (int i = 0; i < yq.size(); i++)
+    // {
+    //     cout << yq[i] << " ";
+    // }
+    // cout << endl;
+    // for (int i = 0; i < lq.size(); i++)
+    // {
+    //     cout << lq[i] << " ";
+    // }
+    // cout << endl;
 
+    //pos : queue의 인덱스, cnt : 큐에 집어 넣을때마다 1씩 증가
     if (pos < cnt)
     {
         cout << "arrived at the Final spot" << endl;
         return lq[pos];
-    }
-    else
-    {
-        cout << "No More way" << endl;
-        return (-1);
     }
 }
 

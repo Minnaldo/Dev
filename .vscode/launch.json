@@ -28,7 +28,7 @@
                 "debuggerPath": "/usr/bin/gdb",
                 "pipeProgram": "C:/WINDOWS/sysnative/bash.exe",
                 "pipeArgs": [
-                    "-c"
+                    "-c",
                 ],
                 "pipeCwd": ""
             },
