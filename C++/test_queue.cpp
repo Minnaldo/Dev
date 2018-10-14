@@ -1,11 +1,11 @@
+#include <queue>
 #include <vector>
-#include <algorithm>
 #include <chrono>
 #include <iostream>
 
 using namespace std;
 
-int BFS(vector<vector<int>>);
+int BFS(vector<vector<int>> maps);
 int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 int main(int argc, char const *argv[])
@@ -28,46 +28,50 @@ int main(int argc, char const *argv[])
 
 int BFS(vector<vector<int>> maps)
 {
-    int pos = 0; //좌표 포지션
     int ylen = maps.size();
     int xlen = maps.at(0).size();
 
-    vector<pair<int, int>> cur_pos;
-    vector<int> length;
-    cur_pos.reserve(xlen*ylen);
-    cur_pos.push_back(make_pair(0, 0));
-    length.push_back(1);
+    queue<int> cur_ypos, cur_xpos, length;
 
-    while ((cur_pos.at(pos).first != ylen - 1 || cur_pos.at(pos).second != xlen - 1))
+    cur_ypos.push(0);
+    cur_xpos.push(0);
+    length.push(1);
+
+    while ((cur_ypos.front() != ylen - 1 || cur_xpos.front() != xlen - 1))
     {
-        //현재위치 밟은것 표시
-        maps[cur_pos.at(pos).first][cur_pos.at(pos).second] = 0;
+
+        int y = cur_ypos.front();
+        int x = cur_xpos.front();
+        int distance = length.front();
+        maps[y][x] = 0;
 
         for (int i = 0; i < 4; i++)
         {
-            int next_ypos = cur_pos.at(pos).first + dir[i][0];
-            int next_xpos = cur_pos.at(pos).second + dir[i][1];
+            int next_ypos = y + dir[i][0];
+            int next_xpos = x + dir[i][1];
 
-            //맵 안에 있는가?
             if ((next_ypos >= 0 && next_xpos >= 0 && next_ypos < ylen && next_xpos < xlen) && maps[next_ypos][next_xpos] == 1)
             {
-                cur_pos.push_back(make_pair(next_ypos, next_xpos));
-                length.push_back(length.at(pos) + 1);
+                cur_ypos.push(next_ypos);
+                cur_xpos.push(next_xpos);
+                length.push(distance + 1);
             }
         }
 
-        cout << "Pos : " << pos << "  ypos : " << cur_pos.at(pos).first << " xpos : " << cur_pos.at(pos).second << "   length : " << length.at(pos) << endl;
+        cout << " Y : " << y << "   X : " << x << "  length : " << length.front() << " Q ysize: " << cur_ypos.size() << " Q xsize: " << cur_xpos.size() << endl;
 
-        if ((cur_pos.begin() + pos == cur_pos.end() - 1) && (cur_pos.at(pos).first != (ylen - 1) || cur_pos.at(pos).second != (xlen - 1)))
+        if ((cur_ypos.size() <= 1) && (y != (ylen - 1) || x != (xlen - 1)))
         {
             return (-1);
         }
 
-        pos++;
+        cur_ypos.pop();
+        cur_xpos.pop();
+        length.pop();
     }
 
-    if ((cur_pos.at(pos).first == (ylen - 1) && cur_pos.at(pos).second == (xlen - 1))) //4,4지점 (도착점)에 도착했을 때
+    if (cur_ypos.front() == ylen - 1 && cur_xpos.front() == xlen - 1)
     {
-        return length.at(pos);
+        return length.front();
     }
 }
