@@ -1,35 +1,68 @@
-#include<iostream>
+#include <string>
 #include <vector>
-#include <algorithm>
+#include <iostream>
 
 using namespace std;
 
-vector<int> solution(vector<int> array, vector<vector<int>> commands) {
-    vector<int> answer;
-    
-    for (int i = 0; i < commands.size(); i++)
+string solution(int a, int b)
+{
+    string answer = "";
+    int tmp = b;
+    if (a != 1)
     {
-            auto itr = array.begin() + (commands[i][0] - 1);
-            auto itr2 = array.begin() + (commands[i][1] - 1);
-            vector<int> tmp;
-            tmp.assign(itr, itr2);
-            sort(tmp.begin(), tmp.end());
-            answer.push_back(*(tmp.begin() + commands[i][2] - 1));     
+        for (int i = 2; i < a - 1; i++)
+        {
+            if (i != 2)
+            {
+                if (i % 2 == 1)
+                {
+                    tmp += 31;
+                }
+                else
+                {
+                    if (i == 8)
+                    {
+                        tmp += 31;
+                        continue;
+                    }
+                    tmp += 30;
+                }
+            }
+            else
+            {
+                tmp += 29;
+            }
+        }
+    }
+
+    switch (tmp % 7)
+    {
+    case 1:
+        answer += "FRI";
+        break;
+    case 2:
+        answer += "SAT";
+        break;
+    case 3:
+        answer += "SUN";
+        break;
+    case 4:
+        answer += "MON";
+        break;
+    case 5:
+        answer += "TUE";
+        break;
+    case 6:
+        answer += "WED";
+        break;
+    case 0:
+        answer += "THU";
+        break;
     }
     return answer;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
-    vector <int> arr = {1, 5, 2, 6, 3, 7, 4};
-    vector < vector< int>> commands = { {2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
-        vector <int> tmpAnswer = solution(arr, commands);
-
-    
-    for(int i = 0; i < tmpAnswer.size(); i++)
-    {
-        cout<<tmpAnswer[i]<<" "<<endl;
-    }
-    
-    return 0;
+    cout << solution(5, 24) << endl;
 }
