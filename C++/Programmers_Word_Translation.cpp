@@ -65,7 +65,7 @@ int solution(string begin, string target, vector<string> words)
             pos++;
         }
 
-        if (target == tmpStr&& visit)
+        if (target == tmpStr)
         {
             answer = len.back();
         }
@@ -78,7 +78,7 @@ int solution(string begin, string target, vector<string> words)
     {
         answer = 0;
     }
-    
+
     return answer;
 }
 
