@@ -1,68 +1,77 @@
-#include <string>
-#include <vector>
 #include <iostream>
+#include <string>
+#include <stack>
+#include <sstream>
 
 using namespace std;
 
-string solution(int a, int b)
+int main()
 {
-    string answer = "";
-    int tmp = b;
-    if (a != 1)
+    int length;
+    for (int i = 1; i <= 10; i++)
     {
-        for (int i = 2; i < a - 1; i++)
+        scanf("%d", &length);
+        char *a = new char[length];
+        scanf("%s", a);
+        // string str;
+        // getline(cin, str);
+        stack<char> s;
+
+        for (int k = 0; k < length; k++)
         {
-            if (i != 2)
+            if (a[k] == '(' || a[k] == '{' || a[k] == '[')
             {
-                if (i % 2 == 1)
-                {
-                    tmp += 31;
-                }
-                else
-                {
-                    if (i == 8)
-                    {
-                        tmp += 31;
-                        continue;
-                    }
-                    tmp += 30;
-                }
+                s.push(a[k]);
             }
             else
             {
-                tmp += 29;
+                if (s.top() == '(')
+                {
+                    if (a[k] != ')')
+                    {
+                        printf("#%d %d\n", i, 0);
+                        break;
+                    }
+                    else
+                    {
+                        s.pop();
+                    }
+                }
+                else if (s.top() == '{')
+                {
+                    if (a[k] != '}')
+                    {
+                        printf("#%d %d\n", i, 0);
+                        break;
+                    }
+                    else
+                    {
+                        s.pop();
+                    }
+                }
+                else
+                {
+                    if (a[k] != ']')
+                    {
+                        printf("#%d %d\n", i, 0);
+                        break;
+                    }
+                    else
+                    {
+                        s.pop();
+                    }
+                }
             }
         }
-    }
 
-    switch (tmp % 7)
-    {
-    case 1:
-        answer += "FRI";
-        break;
-    case 2:
-        answer += "SAT";
-        break;
-    case 3:
-        answer += "SUN";
-        break;
-    case 4:
-        answer += "MON";
-        break;
-    case 5:
-        answer += "TUE";
-        break;
-    case 6:
-        answer += "WED";
-        break;
-    case 0:
-        answer += "THU";
-        break;
+        if (s.empty())
+        {
+            printf("#%d %d\n", i, 1);
+        }
+        else
+        {
+            printf("#%d %d\n", i, 0);
+        }
     }
-    return answer;
-}
-
-int main()
-{
-    cout << solution(5, 24) << endl;
+    return 0;
 }
