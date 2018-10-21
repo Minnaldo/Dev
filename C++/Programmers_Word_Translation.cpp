@@ -66,7 +66,7 @@ int solution(string begin, string target, vector<string> words)
         }
 
         if (target == tmpStr)
-        {
+        { 
             answer = len.back();
         }
         else
