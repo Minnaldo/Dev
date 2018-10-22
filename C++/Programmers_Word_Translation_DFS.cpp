@@ -14,18 +14,16 @@ using namespace std;
 */
 
 stack<string> s;
-queue<string> q;
-bool visit[50];
 vector<string> cpStr(50);
-int pos, strLength, depthCnt;
-vector<int> len;
+bool visit[50];
+int strLength;
 
-bool stringRecog(string front, string word)
+bool stringRecog(string cur_string, string word)
 {
     int strChk = 0;
     for (int i = 0; i < word.size(); i++)
     {
-        if (front[i] != word[i])
+        if (cur_string[i] != word[i])
         {
             strChk++;
         }
@@ -41,31 +39,38 @@ bool stringRecog(string front, string word)
     }
 }
 
-void dfs(string curStr, string cmpStr)
+string findString(string cur_Str, vector<string> words)
 {
-    visit[i] = true;
-    for (int i = 0; i < strLength; i++)
+    int n = words.size();
+    vector<string> arr;
+
+    for (int i = 0; i < n; i++)
     {
-        if (!visit[i] && stringRecog(curStr, cmpStr))
+        if (!visit[i] && stringRecog(cur_Str, words[i]))
         {
-            depthCnt++;
-            dfs(s.top(), cpStr[i]);
+            arr.push_back(words[i]);
         }
     }
+
+    sort(arr.begin(), arr.end());
+    return arr.at(0);
+}
+
+void dfs()
+{
+
 }
 
 int solution(string begin, string target, vector<string> words)
 {
     cpStr.assign(words.begin(), words.end());
-    int answer = 0;
     strLength = cpStr.size();
+    int answer = 0;
 
     if (find(cpStr.begin(), cpStr.end(), target) != cpStr.end()) //target word가 words 배열 안에 있음
     {
-        // q.push(begin);
-        s.push(begin);
-        len.push_back(0);
-
+        // s.push(begin);
+        // len.push_back(0);
         for (int i = 0; i < strLength; i++)
         {
             if (!visit[i])
