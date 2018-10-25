@@ -5,7 +5,7 @@
 using namespace std;
 
 /***
- * *네트워크 문제, 네트워크가 몇개인가?
+ * 네트워크 문제 https://programmers.co.kr/learn/courses/30/lessons/43162
  * *깊이 우선 탐색 - DFS를 활용하여 문제푼다
  * *순환을 이용하면 편하며, visit은 방문여부를 확인하는 배열
  * *Computers행렬은 N x N 행렬이지만 visit의 크기가 N인 이유는  Computers가 대칭행렬이기 때문에
