@@ -5,6 +5,11 @@
 #include <algorithm>
 
 using namespace std;
+
+/** https://programmers.co.kr/learn/courses/30/lessons/42576 (완주하지 못한 선수)
+ *
+ */
+
 string solution(vector<string> participant, vector<string> completion);
 
 int main(int argc, char const *argv[])
@@ -25,28 +30,19 @@ string solution(vector<string> participant, vector<string> completion)
     auto epitr = participant.end();
 
     //이름이 같으면 뺀다
-    
 
-    // int pSize = participant.size();
-    // int cSize = completion.size();
+    sort(participant.begin(), participant.end());
+    sort(completion.begin(), completion.end());
 
-    // for (int i = 0; i < pSize; i++)
-    // {
-    //     for (int j = 0; j < cSize; j++)
-    //     {
-    //         if (participant[i] == completion[j])
-    //         {
-    //             participant[i] = "";
-    //             completion[j] = "";
-    //             break;
-    //         }
-    //     }
-    //     answer += participant[i];
-    // }
+    for (int i = 0; i < completion.size(); i++)
+    {
+        if (participant[i] != completion[i])
+            return participant[i];
+    }
+    return participant[participant.size() - 1];
 
     auto end = chrono::high_resolution_clock::now();
 
     cout << "Code Duration : " << (float)(end - start).count() / CLOCKS_PER_SEC << " sec" << endl;
 
-    return answer;
 }
