@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+#define null 0
+
 using namespace std;
 
 /**
@@ -10,14 +12,19 @@ using namespace std;
  * * 이진 탐색 트리 : 각노드에 값이 있다. 노드의 왼쪽 서브트리는 노드보다 작은 값, 오른쪽 서브트리는 노드보다 큰 값
  */
 
-template <typename T>
-class tree
+// template <typename T> class TreeNode{
+//     friend class tree<T>;
+//     private:
+//     T data;
+// };
+
+template <typename T> class tree
 {
   private:
+    tree<T>* root;
     T *right;
     T *left;
     int data;
-
   public:
     tree(T data = 0)
     {
@@ -85,7 +92,7 @@ class tree
     //TODO DeleteNode 구현
     void deleteNode(tree<T> *node)
     {
-        if(search(root, root-><data) != null)
+        if(search(root, root->data) != null)
         {
 
         }
@@ -98,9 +105,6 @@ class tree
 
 int main(int argc, char const *argv[])
 {
-    // tree.right
-    // tree.left
-    tree.data = 0;
 
     return 0;
 }
