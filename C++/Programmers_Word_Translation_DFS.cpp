@@ -58,7 +58,10 @@ string findString(string cur_Str, vector<string> words)
 
 void dfs()
 {
+    while()
+    {
 
+    }
 }
 
 int solution(string begin, string target, vector<string> words)

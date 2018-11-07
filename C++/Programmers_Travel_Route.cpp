@@ -1,4 +1,5 @@
 #include <string>
+#include <queue>
 #include <vector>
 #include <iostream>
 #include <stack>
@@ -12,6 +13,7 @@ using namespace std;
  * * LG CNS Code Monster와 비슷하다
  *  */
 
+queue<string>q;
 stack<string> s;
 vector<string> stopOver; //경유지를 저장할 벡터 배열
 bool visit[10000];       //방문 여부를 확인하는 배열
@@ -30,6 +32,8 @@ void dfs(string arrive, vector<vector<string>> ticket)
         }
     }
 }
+
+
 
 vector<string> solution(vector<vector<string>> tickets)
 {
