@@ -45,7 +45,7 @@ int solution(int n, vector<vector<int>> computers)
 
 int main(int argc, char const *argv[])
 {
-    vector<vector<int>> arr = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
+    vector<vector<int>> arr = {{1, 0, 1}, {0, 1, 0}, {1, 0, 1}};
     int coms = 3;
     cout << solution(coms, arr) << endl;
     return 0;
