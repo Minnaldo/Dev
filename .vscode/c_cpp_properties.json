@@ -1,19 +1,16 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "Linux",
             "includePath": [
-                "C:\\GCC\\lib\\gcc\\x86_64-w64-mingw32\\5.1.0\\include"
+                "/mnt/usr/include"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:\\GCC\\bin\\g++.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "msvc-x64"
         }
     ],
     "version": 4
