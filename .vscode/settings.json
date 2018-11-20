@@ -1,9 +1,3 @@
 {
-    "C_Cpp.intelliSenseEngineFallback": "Disabled",
-    "C_Cpp.errorSquiggles": "Enabled",
-    "files.associations": {
-        "stdio.h": "c",
-        "iostream": "cpp",
-        "chrono": "cpp"
-    }
+
 }

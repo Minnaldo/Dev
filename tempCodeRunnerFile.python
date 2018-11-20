@@ -1,7 +1,0 @@
-import tensorflow as tf
-
-a= tf.constant(3)
-b=tf.constant(6)
-
-with tf.Session() as sess:
-    print(sess.run(a+b))
