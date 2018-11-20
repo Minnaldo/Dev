@@ -8,36 +8,28 @@ using namespace std;
  * ? 효율성문제 발생 ==> 시간이 문제?
  */
 
-int arr[80];
+long long arr[80];
 
 void fibo(int n)
 {
-    int cnt = 1;
-    while (cnt <= n)
+    for (int i = 2; i < n; i++)
     {
-        if (cnt <= 2)
-        {
-            arr[cnt] = 1;
-        }
-        else
-        {
-            arr[cnt] = arr[cnt - 1] + arr[cnt - 2];
-        }
-        cnt++;
+        arr[i] = arr[i - 1] + arr[i - 2];
     }
 }
 
 long long solution(int N)
 {
+    arr[0] = 1, arr[1] = 1;
     fibo(N);
 
-    int num1 = arr[N], num2 = arr[N-1];
-    return (long long) (num1*2)+((num2+num1)*2);
+    long long num1 = arr[N - 1], num2 = arr[N - 2];
+    return (num1 * 4) + (num2 * 2);
 }
 
 int main(int argc, char const *argv[])
 {
-    // cout << solution(5) << endl;
+    cout << solution(5) << endl;
     cout << solution(6) << endl;
     return 0;
 }
