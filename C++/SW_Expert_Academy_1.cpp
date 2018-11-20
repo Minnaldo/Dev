@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
     int n, k = 0;
 
     vector<vector<int>> map(n, vector<int>(n));
-    vector <vector <int> > check (n, nvector <int> (n));
+    vector <vector <int> > check (n, vector <int> (n));
 
     //check 벡터 초기화
     for(int i = 0; i<n; i++)
@@ -55,7 +55,7 @@ void find(vector<vector<int>> map, int xpos, int ypos, int n)
         switch(tmpPos)
         {
             case 0:
-            
+
             break;
             case 1:
             break;
