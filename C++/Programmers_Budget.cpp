@@ -7,6 +7,7 @@ using namespace std;
 
 /** 예산 문제(https://programmers.co.kr/learn/courses/30/lessons/43237)
  * *예산의 상한액을 구하는 문제, 이분탐색을 이용한다.
+ * *동적 계획법을 이용하면 더욱 빠른시간 내에 풀 수 있을지도
  */
 
 int solution(vector<int> budgets, int M)
