@@ -8,12 +8,12 @@
             "name": "WSL GDB Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/c/Users/alban/Documents/Dev/C++/${fileBasenameNoExtension}",
+            "program": "${fileBasenameNoExtension}",
             "args": [
                 "-fThreading"
             ],
             "stopAtEntry": false,
-            "cwd": "/mnt/c/Users/alban/Documents/Dev/C++",
+            "cwd": "./",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
@@ -30,7 +30,7 @@
                 "pipeArgs": [
                     "-c"
                 ],
-                "pipeCwd": ""
+                "pipeCwd": "${fileDirname}"
             },
             "sourceFileMap": {
                 "/mnt/c": "C:/"

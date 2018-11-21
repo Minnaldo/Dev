@@ -32,29 +32,24 @@ void findPrimeNum(int N)
     }
 }
 
-int solution(string numbers)
-{
+// int solution(string numbers)
+// {
 
-    int N = numbers.size();
-    pNum.assign(N, 0);
-    findPrimeNum(N);    //N자리 소수까지 pNum에 저장
+//     int N = numbers.size();
+//     pNum.assign(N, 0);
+//     findPrimeNum(N);    //N자리 소수까지 pNum에 저장
 
-    //TODO : numbers내의 숫자를 이용한 숫자 조합 찾기
-    //소수의 집합에서 numbers 내의 숫자가 포함된 소수 찾기
-    for (int i = 0; i < N; i++)
-    {
-        for(int j = 0; j<; j++)
-        {
-            if(pNum[i] != 0)
-            {
+//     //TODO : numbers내의 숫자를 이용한 숫자 조합 찾기
+//     //소수의 집합에서 numbers 내의 숫자가 포함된 소수 찾기
 
-            }
-        }
-    }
-}
+// }
 
 int main(int argc, char const *argv[])
 {
-
+    findPrimeNum(5);
+    for(int i = 0; i<pNum.size(); i++)
+    {
+        cout<<pNum[i]<<"  ";
+    }
     return 0;
 }
