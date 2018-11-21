@@ -1,5 +1,5 @@
-mplate <typename T> class TreeNode{
-//     friend class tree<T>;
-//     private:
-//     T data;
-// };
+
+        else
+        {
+            arr.push_back(pow(3, cnt));
+        }
