@@ -1,14 +1,17 @@
 #include <vector>
 #include <cmath>
+#include <chrono>
 #include <iostream>
 
 using namespace std;
 
 /**
- * * 시간초과
+ * *
  */
 
-vector <long long> arr;
+vector<long long> arr;
+
+
 
 long long func(long long n)
 {
@@ -43,7 +46,11 @@ long long solution(long long n)
 int main(int argc, char const *argv[])
 {
     long long n = 11;
-    cout << solution(n) << endl;
+    auto start = chrono::system_clock::now();
+    cout<<"Test 1 : " << solution(n) << "\t";
+    auto end = chrono::system_clock::now();
+
+    cout << "Duration : " << (float)(end - start).count()/CLOCKS_PER_SEC << " sec" << endl;
 
     return 0;
 }
