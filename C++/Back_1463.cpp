@@ -2,22 +2,6 @@
 
 using namespace std;
 
-<<<<<<< HEAD
-int solution(int N, int cnt)
-{
-    solution(N / 3, ++cnt);
-    solution(N / 2, ++cnt);
-    solution(--N, ++cnt);
-
-    if (N == 1)
-    {
-        return cnt;
-    }
-    else
-    {
-        return 0;
-    }
-=======
 /** 1로 만들기 백준온라인저지_1463 (https://www.acmicpc.net/problem/1463)
  *  * 문제와 반대로 1->N을 만들수 있는 경우의 수를 찾아 최소연산을 리턴
  */
@@ -30,14 +14,10 @@ int memo[1000001];
 int min(int a, int b)
 {
     return a > b ? b : a;
->>>>>>> 098a6ccd0fa07f3f90a4b52fc380a027ba660bc0
 }
 
 int main(int argc, char const *argv[])
 {
-<<<<<<< HEAD
-    cout << solution(10, 0) << endl;
-=======
     int N;
     cin >> N;
 
@@ -58,6 +38,5 @@ int main(int argc, char const *argv[])
     }
 
     cout << memo[N] << endl;
->>>>>>> 098a6ccd0fa07f3f90a4b52fc380a027ba660bc0
     return 0;
 }
