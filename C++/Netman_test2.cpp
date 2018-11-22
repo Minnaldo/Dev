@@ -5,7 +5,11 @@
 
 using namespace std;
 
-bool visit[100000];
+/**
+ * * 중복 체크 필수! 중복위치의 몬스터의 위치가 같은 직선좌표에 있을 수 있음
+ */
+
+bool visit[100000]; //총알을 썻는지 안썻는지 판별
 
 int solution(vector<vector<int>> monsters, vector<vector<int>> bullets)
 {
@@ -13,6 +17,7 @@ int solution(vector<vector<int>> monsters, vector<vector<int>> bullets)
     int monSize = monsters.size();
     int bulSize = bullets.size();
 
+    //슬라이딩 윈도 기법을 이용하여 체크를 하면 좋을듯
     for (int j = 0; j < bulSize; j++)
     {
         for (int i = 0; i < monSize; i++)
