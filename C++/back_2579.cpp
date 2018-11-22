@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 
 using namespace std;
@@ -23,6 +24,8 @@ int solution(int *stair) //call by reference
         memo[i] = max(memo[i], memo[i - 1] + stair[i]); //1칸 올라갔을 경우
         memo[i] = max(memo[i], memo[i - 2] + stair[i]); //2칸 올라갔을 경우
     }
+
+    return memo[T];
 }
 
 int main(int argc, char const *argv[])
@@ -38,7 +41,7 @@ int main(int argc, char const *argv[])
         stair[i] = tmp;
     }
 
-    solution(stair); //call by reference;
+    cout << solution(stair) << endl; //call by reference;
 
     delete stair; //Dynamic alloc Array memory return
 
