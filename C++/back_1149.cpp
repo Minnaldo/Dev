@@ -1,13 +1,16 @@
 #include <iostream>
 #include <sstream>
 #include <chrono>
-// #include <fstream>
 
 #define red 0
 #define green 1
 #define blue 2
 
 using namespace std;
+
+/**
+ * * 같은 값이 존재 할 때 처리를 어떻게 할 것인가? (TODO)
+ */
 
 int N, dp[1000]; // 집의 수 <= 1000
 int preColor = -1;
@@ -51,7 +54,7 @@ int solution(int **cost)
 int main(int argc, char const *argv[])
 {
     stringstream ss;
-    string in_file = "3 26 40 83 49 60 57 13 89 99";
+    string in_file = "3 2 2 5 2 1 5 5 1 1"; // correct answer : 4, output : 5
     ss.str(in_file);
 
     auto start = chrono::steady_clock::now();
@@ -71,8 +74,13 @@ int main(int argc, char const *argv[])
         }
     }
 
+    //TODO 3가지 값중 가장 작은값이 두개 이상일 때 어느걸 선택할 지
     dp[0] = min(cost[0][0], red, cost[0][1], green);
     dp[0] = min(cost[0][preColor], preColor, cost[0][2], blue);
+
+    cost[0][0] == cost[0][1]
+
+
     cout << solution(cost) << endl;
 
 
