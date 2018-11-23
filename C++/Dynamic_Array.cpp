@@ -27,7 +27,17 @@ int main(int argc, char const *argv[])
     for (int i = 0; i < size_Y; i++)
     {
         arrd2[i] = new int[size_X];
+        memset(arrd2[i], 0, sizeof(int) * size_Y);  //메모리 공간 0으로 초기화
     }
+
+    // 동적할당 2차원 배열 해제
+    for (int i = 0; i < size_Y; i++)
+    {
+        //각 행별의 열에 할당된 값 해제
+        delete[] arrd2[size_Y];
+    }
+    //각 행에 할당된 값 해제
+    delete[] arrd2;
 
     //2차원 배열 동적 할당 C style
     int **carrd2 = (int **)malloc(sizeof(int) * size_Y);
@@ -36,23 +46,23 @@ int main(int argc, char const *argv[])
         carrd2[i] = (int *)malloc(sizeof(int) * size_X);
     }
 
-    cout<<"CPP Style Dynamic Array"<<endl;
-    for(int i; i<size_Y; i++ )
+    cout << "CPP Style Dynamic Array" << endl;
+    for (int i; i < size_Y; i++)
     {
-        for(int j; j<size_X; j++ )
+        for (int j; j < size_X; j++)
         {
-            cout<<arrd2[i][j];
+            cout << arrd2[i][j];
         }
-        cout<<endl;
+        cout << endl;
     }
-    cout<<"C Style Dynamic Array"<<endl;
-    for(int i; i<size_Y; i++ )
+    cout << "C Style Dynamic Array" << endl;
+    for (int i; i < size_Y; i++)
     {
-        for(int j; j<size_X; j++ )
+        for (int j; j < size_X; j++)
         {
-            cout<<carrd2[i][j];
+            cout << carrd2[i][j];
         }
-        cout<<endl;
+        cout << endl;
     }
 
     return 0;
