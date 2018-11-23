@@ -5,9 +5,9 @@ using namespace std;
 
 /** 계단 오르기 백준온라인저지_2579 (https://www.acmicpc.net/problem/2579)
  *  ! 최대값을 구하라
- *  * 계단은 한칸 or 두칸 이동 가능, 3칸연속 불가
- *  * 점화식 1) memo[i] = memo[i-3] +stair[i-1]+stair[i]
- *  *        2) memo[i] = memo[i-2] + stair[i]
+ *  * 계단은 한칸 or 두칸 이동 가능, 3칸연속 불가, 마지막 칸은 무조건 밟아야 함
+ *  * 점화식 1) memo[i] = memo[i-3] +stair[i-1]+stair[i]    --> 마지막칸에서 3칸전, 1칸 전, 1칸 올라온 경우 (3칸 연속 불가 조건에 따라, 마지막 칸은 무조건 밟아야 함)
+ *  *        2) memo[i] = memo[i-2] + stair[i]              --> 마지막칸에서 2칸전, 2칸 올라온 경우 (마지막 칸을 밟아야 한다는 조건)
  *  * 제출.ver 는 iostream --> cstdio
  */
 
