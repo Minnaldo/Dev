@@ -6,6 +6,8 @@ using namespace std;
 /** 계단 오르기 백준온라인저지_2579 (https://www.acmicpc.net/problem/2579)
  *  ! 최대값을 구하라
  *  * 계단은 한칸 or 두칸 이동 가능, 3칸연속 불가
+ *  * 점화식 1) memo[i] = memo[i-3] +stair[i-1]+stair[i]
+ *  *        2) memo[i] = memo[i-2] + stair[i]
  *  * 제출.ver 는 iostream --> cstdio
  */
 
@@ -21,24 +23,9 @@ int max(int a, int b)
 int solution(int *stair)
 {
     // i는 현재 계단이 몇번 째 인지 나타냄
-    for (int i = 2; i <= T; i++) //i는 2부터 ==> 첫번째는 한칸이동 외엔 못밟음
+    for (int i = 3; i <= T; i++) //i는 2부터 ==> 첫번째는 한칸이동 외엔 못밟음
     {
-        int cnt = 1; //3칸연속 판단 변수
-        if (cnt < 3)
-        {
-            //TODO : 조건을 따로 주자
-            memo[i] = max(memo[i], memo[i - 1] + stair[i]); //1칸 올라갔을 경우
-            cnt++;
-            memo[i] = max(memo[i], memo[i - 2] + stair[i]); //2칸 올라갔을 경우
-            i++; //2칸 증가하였으므로 i값도 똑같이 2가 증가하게 해줘야함
-            cnt = 1;
-        }
-        else
-        {
-            memo[i] = max(memo[i], memo[i - 2] + stair[i]); //2칸 올라갔을 경우
-            i++;
-            cnt = 1;
-        }
+        memo[i] = max(memo[i - 3] + stair[i - 1] + stair[i], memo[i - 2] + stair[i]);
     }
 
     return memo[T];
@@ -61,7 +48,9 @@ int main(int argc, char const *argv[])
         ss >> tmp;
         stair[i] = tmp;
     }
+    stair[0] = 0;
     memo[1] = stair[1];
+    memo[2] = max(stair[2] + memo[0], stair[2] + memo[1]);
     cout << solution(stair) << endl;
 
     delete[] stair; //Dynamic alloc Array memory return
