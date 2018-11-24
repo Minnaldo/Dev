@@ -8,9 +8,9 @@
 
 using namespace std;
 
-/**
- *  * 같은 값이 존재 할 때 처리를 어떻게 할 것인가? (TODO)
+/** 백준 온라인 RGB거리 (https://www.acmicpc.net/problem/1149)
  *  * Dynamic Programming Problem
+ *  TODO : 다른 사람이 푼 문제의 점화식과 내 점화식 비교
  */
 
 int N, dp[1000]; // 집의 수 <= 1000
