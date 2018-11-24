@@ -7,7 +7,7 @@ using namespace std;
  */
 
 //N 사용 횟수를 dp배열에 저장
-int dp[32000], numCnt;
+int dp[32000], sumCnt[32000];
 
 int min(int a, int b)
 {
@@ -19,14 +19,14 @@ int solution(int N, int number)
 
     for (int i = 1; i <= N; i++)
     {
-        dp[i] = min(dp[i], dp[i - N]) + 1; // '+' case
-        dp[i] = min(dp[i], dp[i / N]) + 1; // '*' case
-        dp[i] = min(dp[i], dp[i + N]) + 1; // '-' case
-        dp[i] = min(dp[i], dp[i * N]) + 1; // '/' case
+        dp[i] = min(dp[i], dp[i - N] + 1); // '+' case
+        dp[i] = min(dp[i], dp[i / N] + 1); // '*' case
+        dp[i] = min(dp[i], dp[i + N] + 1); // '-' case
+        dp[i] = min(dp[i], dp[i * N] + 1); // '/' case
 
         number -= dp[i];
 
-        if(number == 0)
+        if (number == 0)
         {
             return dp[i];
         }
@@ -35,6 +35,9 @@ int solution(int N, int number)
 
 int main(int argc, char const *argv[])
 {
+    int N = 5;
+    int number = 12;
 
+    cout << solution(N, number) << endl;
     return 0;
 }

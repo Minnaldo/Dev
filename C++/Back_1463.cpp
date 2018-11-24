@@ -3,6 +3,7 @@
 using namespace std;
 
 /** 1로 만들기 백준온라인저지_1463 (https://www.acmicpc.net/problem/1463)
+ *  * Dynamic Programming Problem
  *  * 문제와 반대로 1->N을 만들수 있는 경우의 수를 찾아 최소연산을 리턴
  */
 

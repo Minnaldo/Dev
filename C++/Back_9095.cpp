@@ -3,10 +3,10 @@
 using namespace std;
 
 /** 1,2,3 더하기 백준온라인저지_9095번 (https://www.acmicpc.net/problem/9095)
- * * DP Algorithm Problem, Use Recursive Function
- * * 목표 수 n에서 빼는 방법으로 표현 함
- * ? Bottom-Up 방식의 dp로 풀려면??
- * TODO : bottom Up 방식으로 풀어보자
+ *  * Dynamic Programming Problem, Use Recursive Function
+ *  * 목표 수 n에서 빼는 방법으로 표현 함
+ *  ? Bottom-Up 방식의 dp로 풀려면??
+ *  TODO : bottom Up 방식으로 풀어보자
  */
 
 int cnt;

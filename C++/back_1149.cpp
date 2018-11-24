@@ -9,7 +9,8 @@
 using namespace std;
 
 /**
- * * 같은 값이 존재 할 때 처리를 어떻게 할 것인가? (TODO)
+ *  * 같은 값이 존재 할 때 처리를 어떻게 할 것인가? (TODO)
+ *  * Dynamic Programming Problem
  */
 
 int N, dp[1000]; // 집의 수 <= 1000
