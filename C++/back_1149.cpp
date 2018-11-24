@@ -10,7 +10,9 @@ using namespace std;
 
 /** 백준 온라인 RGB거리 (https://www.acmicpc.net/problem/1149)
  *  * Dynamic Programming Problem
- *  TODO : 다른 사람이 푼 문제의 점화식과 내 점화식 비교
+ *  TODO : 다른 사람이 푼 문제의 점화식과 내 점화식 비교 (http://hellogohn.com/post_one255)
+ *
+ *
  */
 
 int N, dp[1000]; // 집의 수 <= 1000
