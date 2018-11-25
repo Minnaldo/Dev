@@ -5,7 +5,7 @@
 
 using namespace std;
 
-/**
+/** 넷맨 테스트_1 = 백준_1009와 같음( https://www.acmicpc.net/problem/1009 )
  * *
  */
 
