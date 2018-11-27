@@ -11,8 +11,6 @@ using namespace std;
 /** 백준 온라인 RGB거리 (https://www.acmicpc.net/problem/1149)
  *  * Dynamic Programming Problem
  *  TODO : 다른 사람이 푼 문제의 점화식과 내 점화식 비교 (http://hellogohn.com/post_one255)
- *
- *
  */
 
 int N, dp[1000]; // 집의 수 <= 1000
@@ -81,7 +79,7 @@ int main(int argc, char const *argv[])
     dp[0] = min(cost[0][0], red, cost[0][1], green);
     dp[0] = min(cost[0][preColor], preColor, cost[0][2], blue);
 
-    cost[0][0] == cost[0][1]
+    cost[0][0] == cost[0][1];
 
 
     cout << solution(cost) << endl;

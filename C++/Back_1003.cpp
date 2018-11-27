@@ -1,5 +1,6 @@
 #include <vector>
 #include <utility>
+#include <chrono>
 #include <iostream>
 
 using namespace std;
@@ -20,7 +21,7 @@ void solution(int n)
         arr[i].first = arr[i - 1].first + arr[i - 2].first;
         arr[i].second = arr[i - 1].second + arr[i - 2].second;
     }
-    cout<<arr[n].first<<" "<<arr[n].second<<endl;
+    cout << arr[n].first << " " << arr[n].second;
 }
 
 int main(int argc, char const *argv[])
@@ -37,7 +38,11 @@ int main(int argc, char const *argv[])
     {
         int n;
         cin >> n;
+        auto start = chrono::steady_clock::now();
         solution(n);
+        auto end = chrono::steady_clock::now();
+        auto duration = chrono::duration_cast<chrono::nanoseconds>(end-start);
+        cout<<"\t"<<"Duration : "<<duration.count()/1000000.0<<  " ms" << endl;
     }
 
     return 0;
