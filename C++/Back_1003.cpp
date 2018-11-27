@@ -5,7 +5,7 @@
 
 using namespace std;
 
-/** 백준_1003 문제 (https://www.acmicpc.net/problem/1003)
+/** 피보나치 함수 - 백준_1003 문제 (https://www.acmicpc.net/problem/1003)
  *  * 피보나치 수열을 구현시, 0 or 1이 몇번 호출되는지 묻는 문제
  *  ! DP가 아닌 패턴을 찾는 문제였다
  *  ? 2차원 배열을 이용하여 풀이도 가능
@@ -29,10 +29,8 @@ int main(int argc, char const *argv[])
     int T;
     cin >> T;
 
-    arr[0].first = 1;
-    arr[0].second = 0;
-    arr[1].first = 0;
-    arr[1].second = 1;
+    arr[0].first = arr[1].second = 1;
+    arr[0].second = arr[1].first = 0;
 
     for (int i = 0; i < T; i++)
     {
@@ -41,8 +39,9 @@ int main(int argc, char const *argv[])
         auto start = chrono::steady_clock::now();
         solution(n);
         auto end = chrono::steady_clock::now();
-        auto duration = chrono::duration_cast<chrono::nanoseconds>(end-start);
-        cout<<"\t"<<"Duration : "<<duration.count()/1000000.0<<  " ms" << endl;
+        auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start);
+        cout << "\t"
+             << "Duration : " << duration.count() / 1000000.0 << " ms" << endl;
     }
 
     return 0;
