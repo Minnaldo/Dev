@@ -2,12 +2,15 @@
 #include <sstream>
 #include <chrono>
 
-using namespace std;
-
 /** 백준 온라인 RGB거리 (https://www.acmicpc.net/problem/1149)
  *  * Dynamic Programming Problem
- *  TODO : 다른 사람이 푼 문제의 점화식과 내 점화식 비교 (http://hellogohn.com/post_one255)
+    dp[i][j] = min(arr[i][j] + dp[i+1][j - 1] + dp[i][j - 2], arr[i][j] + dp[i+1][j - 1] + dp[i+2][j - 2]);
+    dp[i][j] = min(dp[i][j], arr[i][j] + dp[i+2][j - 1] + dp[i][j - 2]);
+    dp[i][j] = min(dp[i][j], arr[i][j] + dp[i+2][j - 1] + dp[i+1][j - 2]);
  */
+
+using namespace std;
+
 
 int dp[3][1001]; // 집의 수 <= 1000
 
@@ -23,24 +26,17 @@ int solution(int n, int **arr)
     {
         for (int i = 0; i < 3; i++)
         {
-            //if문 수정 가능 할듯
             if (i == 0)
             {
-                dp[i][j] = min(arr[i][j] + dp[1][j - 1] + dp[0][j - 2], arr[i][j] + dp[1][j - 1] + dp[2][j - 2]);
-                dp[i][j] = min(dp[i][j], arr[i][j] + dp[2][j - 1] + dp[0][j - 2]);
-                dp[i][j] = min(dp[i][j], arr[i][j] + dp[2][j - 1] + dp[1][j - 2]);
+                dp[i][j] = min(arr[i][j] + dp[i + 1][j - 1], arr[i][j] + dp[i + 2][j - 1]);
             }
             else if (i == 1)
             {
-                dp[i][j] = min(arr[i][j] + dp[2][j - 1] + dp[0][j - 2], arr[i][j] + dp[0][j - 1] + dp[1][j - 2]);
-                dp[i][j] = min(dp[i][j], arr[i][j] + dp[2][j - 1] + dp[0][j - 2]);
-                dp[i][j] = min(dp[i][j], arr[i][j] + dp[2][j - 1] + dp[1][j - 2]);
+                dp[i][j] = min(arr[i][j] + dp[i + 1][j - 1], arr[i][j] + dp[i - 1][j - 1]);
             }
             else
             {
-                dp[i][j] = min(arr[i][j] + dp[0][j - 1] + dp[1][j - 2], arr[i][j] + dp[0][j - 1] + dp[2][j - 2]);
-                dp[i][j] = min(dp[i][j], arr[i][j] + dp[1][j - 1] + dp[0][j - 2]);
-                dp[i][j] = min(dp[i][j], arr[i][j] + dp[1][j - 1] + dp[2][j - 2]);
+                dp[i][j] = min(arr[i][j] + dp[i - 1][j - 1], arr[i][j] + dp[i - 2][j - 1]);
             }
 
             cout << dp[i][j] << " ";
@@ -63,12 +59,14 @@ int main(int argc, char const *argv[])
     int n, tmp;
     ss >> n;
     int **arr = new int *[3];
-
-// !배열 설정이 잘못 되었다.
     for (int i = 0; i < 3; i++)
     {
-        arr[i] = new int[n+1];
-        for (int j = 1; j <= n; j++)
+        arr[i] = new int[n + 1];
+    }
+
+    for (int j = 1; j <= n; j++)
+    {
+        for (int i = 0; i < 3; i++)
         {
             ss >> tmp;
             arr[i][j] = tmp;
@@ -81,15 +79,6 @@ int main(int argc, char const *argv[])
     dp[0][2] = min(arr[0][2] + dp[1][1], arr[0][2] + dp[2][1]);
     dp[1][2] = min(arr[1][2] + dp[0][1], arr[1][2] + dp[2][1]);
     dp[2][2] = min(arr[2][2] + dp[1][1], arr[2][2] + dp[0][1]);
-
-    for (int i = 1; i <= 2; i++)
-    {
-        for (int j = 0; j <3; j++)
-        {
-            cout << dp[j][i] << " ";
-        }
-        cout << endl;
-    }
 
     cout << solution(n, arr) << endl;
 
