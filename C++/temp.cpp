@@ -2,6 +2,20 @@
 
 using namespace std;
 
+int solution(int n)
+{
+    int cycle, pre;
+
+    while(true)
+    {
+        if(n<0){
+
+        }
+
+        cycle++;
+    }
+}
+
 int main(int argc, char const *argv[])
 {
     int C;
