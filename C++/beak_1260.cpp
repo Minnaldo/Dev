@@ -52,14 +52,6 @@ int main(int argc, char const *argv[])
         }
     }
 
-    // for (int i = 0; i < M; i++)
-    // {
-    //     int y, x;
-    //     cin>>y>>x;
-
-    //     arr[y][x] = 1;
-    // }
-
     DFS(V, arr);
     cout<<endl;
     // BFS(V, arr);
