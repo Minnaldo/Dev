@@ -1,6 +1,12 @@
 #include <iostream>
+#include <cstdio>
 #include <queue>
 #include <algorithm>
+
+/** 미로 탐색 백준_2178 (https://www.acmicpc.net/problem/2178)
+ *  TODO 입력값을 나눠받아야 함
+ */
+
 
 using namespace std;
 
@@ -15,9 +21,6 @@ int min(int a, int b)
 
 int solution(int **arr, int n, int m)
 {
-    q.push(make_pair(0, 0));
-    visit[0][0] = true;
-    cnt[0][0] = 1;
     int cur_xpos = q.front().second;
     int cur_ypos = q.front().first;
 
@@ -51,21 +54,22 @@ int solution(int **arr, int n, int m)
 int main(int argc, char const *argv[])
 {
     int N, M;
-    cin >> N >> M;
+    scanf("%d %d", &N, &M);
 
     int **arr = new int *[N];
-
     for (int i = 0; i < N; i++)
     {
         arr[i] = new int[M];
         for (int j = 0; j < M; j++)
         {
-            int tmp;
-            cin >> tmp;
-            arr[i][j] = tmp;
+            scanf("%1d", &arr[i][j]);
         }
     }
 
-    cout << solution(arr, N, M) << endl;
+    q.push(make_pair(0, 0));
+    visit[0][0] = true;
+    cnt[0][0] = 1;
+
+    printf("%d\n", solution(arr, N, M));
     return 0;
 }
