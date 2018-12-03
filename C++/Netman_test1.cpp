@@ -5,7 +5,7 @@
 
 using namespace std;
 
-/** 넷맨 테스트_1 = 백준_1009와 같음( https://www.acmicpc.net/problem/1009 )
+/** 넷맨 테스트_1 = 백준_1009와 비슷( https://www.acmicpc.net/problem/1009 )
  * *
  */
 
@@ -45,7 +45,7 @@ long long solution(long long n)
 
 int main(int argc, char const *argv[])
 {
-    long long n = 11;
+    long long n = 21;
     auto start = chrono::system_clock::now();
     cout<<"Test 1 : " << solution(n) << "\t";
     auto end = chrono::system_clock::now();

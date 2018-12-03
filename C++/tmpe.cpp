@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -45,6 +46,8 @@ int main(int argc, char const *argv[])
         arr[i] = (arr[i] / M) * 100;
         sum += arr[i];
     }
+
+    pow(2,2);
 
     cout << (sum / N) << endl;
 

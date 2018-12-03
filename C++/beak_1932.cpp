@@ -2,34 +2,34 @@
 #include <iostream>
 
 /** 정수삼각형 백준_1932 (https://www.acmicpc.net/problem/1932)
- *  NOTE  (http://penglog.tistory.com/59) 참조
- *  ! 수정 필요
+ *
  */
 
 using namespace std;
 
 int dp[501][501];
 
-int max(int a1, int a2, int b1, int b2)
+int max(int a, int b)
 {
-    return (a1 + a2) > (b1 + b2) ? a1 : b1;
+    return a > b ? a : b;
 }
 
-// int** tri ==> call by reference
 int solution(int n, int **tri)
 {
-    for (int i = 2; i <= n; i++)
+    for (int i = 3; i <= n; i++)
     {
-        for (int j = 1; j <= i; j++)
+        for (int j = 1; j <= n; j++)
         {
-            dp[i][j] = max(tri[i - 1][j - 1], tri[i - 1][j]);
-
-            if (i == (n - 1))
-            {
-                return dp[i][j];
-            }
+            dp[i][j] = max(tri[i][j] + dp[i - 1][j - 1], tri[i][j] + dp[i - 1][j]);
         }
     }
+
+    int answer = dp[n][0];
+    for (int i = 1; i < n; i++)
+    {
+        answer = max(answer, dp[n][i]);
+    }
+    return answer;
 }
 
 int main(int argc, char const *argv[])
@@ -40,11 +40,11 @@ int main(int argc, char const *argv[])
     int T;
     ss >> T;
 
-    int **tri = new int *[T+1];
+    int **tri = new int *[T + 1];
 
     for (int i = 1; i <= T; i++)
     {
-        tri[i] = new int[i + 2];
+        tri[i] = new int[i + 1];
         for (int j = 1; j <= i + 1; j++)
         {
             int tmp;
@@ -53,7 +53,20 @@ int main(int argc, char const *argv[])
         }
     }
 
-    dp[1][1] = tri[0][0];
+    // for(int i = 1; i<= T; i++)
+    // {
+    //     for(int j= 1; j<= i+1; j++)
+    //     {
+    //         int tmp;
+    //         ss>>tmp;
+    //         tri[i][j] = tmp;
+    //     }
+    // }
+
+    dp[1][1] = tri[1][1]; // segfault
+    dp[2][1] = tri[2][1] + dp[1][1];
+    dp[2][2] = tri[2][2] + dp[1][1];
+
     cout << solution(T, tri) << endl;
     return 0;
 }
