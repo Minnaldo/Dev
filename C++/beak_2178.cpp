@@ -6,6 +6,7 @@
 /** 미로 탐색 백준_2178 (https://www.acmicpc.net/problem/2178)
  *  * 전형적인 BFS문제
  *  * 붙어서 들어오는 입력값은 string으로 받아 처리
+ *  ? 개선점 : queue 를 직접 구현하거나 이와 비슷한 것을 구현 할 수 있을까?
  */
 
 using namespace std;
