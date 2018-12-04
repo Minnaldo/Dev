@@ -3,7 +3,6 @@
 
 /** 연속합 백준_1912 (https://www.acmicpc.net/problem/1912)
  *  * 음수를 더하여도 최대가 될 수있는 경우가 생김
- *  ! 모르겠다
  */
 
 using namespace std;
