@@ -4,7 +4,8 @@
 #include <sstream>
 
 /** 미로 탐색 백준_2178 (https://www.acmicpc.net/problem/2178)
- *  TODO 입력값을 나눠받아야 함
+ *  * 전형적인 BFS문제
+ *  * 붙어서 들어오는 입력값은 string으로 받아 처리
  */
 
 using namespace std;
@@ -63,19 +64,6 @@ int main(int argc, char const *argv[])
         ss >> tmp;
         arr[i] = tmp;
     }
-
-    // for (int i = 1; i <= N; i++)
-    // {
-    //     for (int j = 0; j < M; j++)
-    //     {
-    //         cout << arr[i][j] << " ";
-    //         if((arr[i][j]-'0') == 1)
-    //         {
-    //             cout<< "this is integer"<<endl;
-    //         }
-    //     }
-    //     cout << endl;
-    // }
 
     cout << "Answer : " << solution(arr, N, M) << endl;
     delete[] arr;
