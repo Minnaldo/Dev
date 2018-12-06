@@ -1,19 +1,26 @@
-#include <vector>
-#include <algorithm>
-#include <string>
 #include <iostream>
 
 using namespace std;
 
-int main(int argc, char const *argv[])
-{
-    int num = 29;
-    for(int i = 28; i>=13; i--)
-    {
-        num *= i;
+long long dp[250];
 
+long long solution(int n)
+{
+    for(int i = 1; i<=n; i++)
+    {
+        dp[i] = dp[i-1] + (2*dp[i-2]);
     }
 
-    cout<<num<<endl;
+    return dp[n];
+}
+
+int main(int argc, char const *argv[])
+{
+    while(!cin.eof())
+    {
+        int n;
+        cin>>n;
+        cout<<solution(n)<<endl;
+    }
     return 0;
 }
