@@ -1,22 +1,19 @@
-#include <cstdio>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
-int main()
+int main(int argc, char const *argv[])
 {
-    int n,num,ans;
-    scanf("%d", &n);
-    scanf("%d", &num);
-    while(true)
+    int num = 29;
+    for(int i = 28; i>=13; i--)
     {
-        ans = ans + (num%10);
-        num /= 10;
-        
-        if(num<0)
-        {
-            printf("%d", ans);
-        }
+        num *= i;
+
     }
-    // printf("%d\n", num);
+
+    cout<<num<<endl;
     return 0;
 }
