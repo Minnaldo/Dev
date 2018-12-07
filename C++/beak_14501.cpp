@@ -14,26 +14,19 @@ int max(int a, int b)
     return a > b ? a : b;
 }
 
-int solution(int n, int **arr)
+int solution(int n, int *T, int *P)
 {
     for (int i = 1; i <= n; i++)
     {
-        if (i + arr[0][i] <= n) //최대 범위 n 이하일 경우에만 계산해야 함, if 문은 소용 없을듯
+        if (i + T[i] <= n) //최대 범위 n 이하일 경우에만 계산해야 함, if 문은 소용 없을듯
         {
             // i번째 날
             // 오늘 상담을 하는 경우
-            dp[i + arr[0][i]] = max(dp[i + arr[0][i]], dp[i] + arr[1][i]);
+            dp[i + T[i]] = max(dp[i + T[i]], dp[i] + P[i]);
             // 오늘 상담을 안하는 경우
             dp[i + 1] = max(dp[i + 1], dp[i]);
         }
-        cout << dp[i] << endl;
     }
-
-    // int answer = dp[1];
-    // for(int i=2; i<=n; i++)
-    // {
-    //     answer = max(answer, dp[i]);
-    // }
 
     return dp[n];
 }
@@ -51,19 +44,17 @@ int main(int argc, char const *argv[])
     int N;
     ss >> N;
 
-    int **arr = new int *[2];
-    for (int i = 0; i < 2; i++)
-    {
-        arr[i] = new int[N + 1];
-    }
+    int *T = new int[N + 1];
+    int *P = new int[N + 1];
+
     for (int j = 1; j <= N; j++)
     {
-        int T, P;
-        ss >> T >> P;
-        arr[0][j] = T;
-        arr[1][j] = P;
+        int Ttmp, Ptmp;
+        ss >> Ttmp >> Ptmp;
+        T[j] = Ttmp;
+        P[j] = Ptmp;
     }
-    cout << solution(N, arr) << endl;
+    cout << solution(N, T, P) << endl;
 
     return 0;
 }
