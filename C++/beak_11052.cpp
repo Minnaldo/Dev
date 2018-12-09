@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/** 카드 구매하기 백준_11052 (https://www.acmicpc.net/problem/11052)
+ *  * 풀었다..
+ */
+
 int dp[10001];
 
 int max(int a, int b)
@@ -20,7 +24,7 @@ int solution(int *arr, int n)
             //  REVIEW
             // 정답이긴 한데 어떻게 된 점화식인지 이해가 필요할 듯
             dp[i] = max(arr[i / j] * j, dp[i]);
-            dp[i] = max(dp[i], arr[i-j] + dp[j]);
+            dp[i] = max(dp[i], arr[i - j] + dp[j]);
         }
     }
     return dp[n];
@@ -52,4 +56,4 @@ int main(int argc, char const *argv[])
     cout << solution(arr, N) << endl;
 
     return 0;
-}
+}https://www.acmicpc.net/problem/11052
