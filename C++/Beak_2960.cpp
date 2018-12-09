@@ -6,6 +6,7 @@ using namespace std;
  *  * 에라토스 테네스의 체 에서 K번째 지워지는 수 찾기
  *  * 에라토스 테네스의 체 (https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4)
  *  * 지울 때 마다 cnt변수를 통해 카운트를 하여 알아낸다
+ *  * 에라토스 테네스의 체는 소수(Prime Number)를 찾는 방법의 하나 이므로 지워지는 수는 소수가 아닌 수
  */
 
 int solution(int n, int k, int *arr)
