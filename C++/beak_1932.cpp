@@ -2,7 +2,7 @@
 #include <iostream>
 
 /** 정수삼각형 백준_1932 (https://www.acmicpc.net/problem/1932)
- *  ? 백준에 왜 런타임 에러가?
+ *  ? 백준에 왜 런타임 에러가? but 값은 정상
  *  REVIEW
  */
 
@@ -17,19 +17,16 @@ int max(int a, int b)
 
 int solution(int n, int **tri)
 {
+    int answer = 0;
     for (int i = 3; i <= n; i++)
     {
         for (int j = 1; j <= i; j++)
         {
             dp[i][j] = max(tri[i][j] + dp[i - 1][j - 1], tri[i][j] + dp[i - 1][j]);
+            answer = answer > dp[i][j] ? answer : dp[i][j];
         }
     }
 
-    int answer = dp[n][0];
-    for (int i = 1; i <= n; i++)
-    {
-        answer = max(answer, dp[n][i]);
-    }
     return answer;
 }
 
@@ -42,6 +39,7 @@ int main(int argc, char const *argv[])
     ss >> T;
 
     int **tri = new int *[T + 1];
+    tri[0] = new int [1];
     for (int i = 1; i <= T; i++)
     {
         tri[i] = new int[i];
@@ -56,6 +54,11 @@ int main(int argc, char const *argv[])
     dp[1][1] = tri[1][1];
     dp[2][1] = tri[2][1] + dp[1][1];
     dp[2][2] = tri[2][2] + dp[1][1];
+
+    for(int i = 0; i<=T; i++)
+    {
+        tri[i][0] = 0;
+    }
 
     cout << solution(T, tri) << endl;
 

@@ -5,6 +5,10 @@ using namespace std;
 
 /** 카드 구매하기 백준_11052 (https://www.acmicpc.net/problem/11052)
  *  * 풀었다..
+ *  * n개가 든 카드팩 보다 적게든 카드팩으로 n개를 맞춰야함
+ *  * dp(n) = n개를 만들수 있는 가짓수중 최댓 값
+ *  * ==> n개를 만들려면 어떻게 해야할까?
+ *  *한가지를 n번 반복 => n개
  */
 
 int dp[10001];
@@ -56,4 +60,4 @@ int main(int argc, char const *argv[])
     cout << solution(arr, N) << endl;
 
     return 0;
-}https://www.acmicpc.net/problem/11052
+}
