@@ -3,6 +3,7 @@
 
 /** 스티커 백준_9465 (https://www.acmicpc.net/problem/9465)
  *  * 스티커 점수의 최대값을 구하라
+ *  REVIEW
  */
 using namespace std;
 
