@@ -1,8 +1,8 @@
-#include <sstream>
 #include <iostream>
+#include <sstream>
 
 /** 정수삼각형 백준_1932 (https://www.acmicpc.net/problem/1932)
- *  ? 백준에 왜 런타임 에러가? but 값은 정상
+ *  ? 백준에 왜 런타임 에러가? but 값은 정상    ==> (해결) 배열을 할당할 때에 비대칭으로 할당해서 그런다...
  *  REVIEW
  */
 
@@ -33,19 +33,19 @@ int solution(int n, int **tri)
 int main(int argc, char const *argv[])
 {
     stringstream ss;
-    string str = "5 7 3 8 8 1 0 2 7 4 4 4 5 2 6 5";
+    string str = "5 7 3 8 8 1 0 2 7 4 4 4 5 2 6 5"; //30
     ss.str(str);
-    int T;
+
+    int T, tmp;
     ss >> T;
 
     int **tri = new int *[T + 1];
-    tri[0] = new int [1];
+    tri[0] = new int[1];
     for (int i = 1; i <= T; i++)
     {
-        tri[i] = new int[i];
+        tri[i] = new int[T+1];
         for (int j = 1; j <= i; j++)
         {
-            int tmp;
             ss >> tmp;
             tri[i][j] = tmp;
         }
@@ -55,7 +55,7 @@ int main(int argc, char const *argv[])
     dp[2][1] = tri[2][1] + dp[1][1];
     dp[2][2] = tri[2][2] + dp[1][1];
 
-    for(int i = 0; i<=T; i++)
+    for (int i = 0; i <= T; i++)
     {
         tri[i][0] = 0;
     }
