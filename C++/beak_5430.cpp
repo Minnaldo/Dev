@@ -43,22 +43,24 @@ vector<int> solution(vector<int> arr, int n, string func)
 int main(int argc, char const *argv[])
 {
     ifstream fs("input.txt");
-    fs
+
     int T, n;
-    cin >> T;
+    fs >> T;
 
     for (int i = 0; i < T; i++)
     {
-        string func;
-        cin >> func; //수행할 케이스
-        cin >> n;    //배열 크기, 숫자 갯수
+        // string func;
+        char func[100];
+        // fs >> func; //수행할 케이스
+        fs.getline(func,sizeof(func));
+        fs >> n;    //배열 크기, 숫자 갯수
         vector<int> arr(n, 0);
         string array; // 숫자들
         getline(cin, array, ',');
         for (int j = 0; j < n; j++)
         {
             int tmp;
-            cin >> tmp;
+            fs >> tmp;
             arr[j] = tmp;
         }
 
