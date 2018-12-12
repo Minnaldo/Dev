@@ -1,7 +1,3 @@
-/**
- *  ! 문제 발생 bind 에서
- */
-
 #include <arpa/inet.h>
 #include <cstdio>
 #include <cstring>
@@ -9,6 +5,10 @@
 #include <sys/socket.h>
 
 #define MAXLINE 1024
+
+/**
+ *  ? 이제 연결은 된다?
+ */
 
 using namespace std;
 
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 
     while (1)
     {
-        if (-1 == listen(server_socket, 5))
+        if (-1 == listen(server_socket, 5)) // 소켓을 수동 대기모드로 설정
         {
             cerr << "대기상태 모드 설정 실패" << endl;
             exit(1);
@@ -57,13 +57,17 @@ int main(int argc, char const *argv[])
             cerr << "클라이언트 연결 수락 실패" << endl;
             exit(1);
         }
+        char temp[20];
+        inet_ntop(AF_INET, &client_addr.sin_addr.s_addr, temp, sizeof(temp));
+        cout<<"Server : "<<temp<<" client connected\n";
 
         recv(client_socket, buf_rcv, MAXLINE, 0);
         cout << "receive : " << buf_rcv << endl;
         cout << buf_snd << strlen(buf_rcv) << " : " << buf_rcv << endl;
         send(client_socket, buf_snd, strlen(buf_snd) + 1, 0); //NULL까지 전송
-        shutdown(client_socket,SHUT_RDWR);
+        shutdown(client_socket, SHUT_RDWR);
     }
+    shutdown(server_socket, SHUT_RDWR);
 
     return 0;
 }

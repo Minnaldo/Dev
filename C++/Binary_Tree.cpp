@@ -24,6 +24,7 @@ class TreeNode
     TreeNode *right;
 };
 
+//typedef <typename T> class Tree{};
 template <typename T>
 class Tree
 {

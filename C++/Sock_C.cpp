@@ -6,6 +6,10 @@
 
 #define MAXLINE 1024
 
+/**
+ *  ? 이제 연결은 된다?
+ */
+
 using namespace std;
 
 int main(int argc, char const *argv[])
@@ -26,13 +30,13 @@ int main(int argc, char const *argv[])
     serveraddr.sin_port = htons(9999);
 
     socklen_t client_len = sizeof(serveraddr);
+
     if (connect(sock, (struct sockaddr *)&serveraddr, client_len) == -1)
     {
         cerr << "coonect error" << endl;
         return 1;
     }
     memset(buf, 0x00, MAXLINE); //cstring헤더에 포함 : memset
-    recv(sock, buf, MAXLINE, 0);
 
     if (send(sock, buf, MAXLINE, MSG_NOSIGNAL) <= 0)
     {
@@ -40,14 +44,16 @@ int main(int argc, char const *argv[])
         return 1;
     }
     memset(buf, 0x00, MAXLINE);
+
     if (recv(sock, buf, MAXLINE, 0) <= 0)
     {
         perror("read error");
         return 1;
     }
 
-    shutdown(sock, SHUT_RDWR);
-
+    // recv(sock, buf, MAXLINE, 0);
     cout << "server : " << buf << endl;
+
+    shutdown(sock, SHUT_RDWR);
     return 0;
 }
