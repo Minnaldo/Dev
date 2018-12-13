@@ -6,8 +6,9 @@
 
 #define MAXLINE 1024
 
-/**
- *  ? 이제 연결은 된다?
+/** * the source code that cs style network
+ *  * Client
+ *  * LoopBack IP
  */
 
 using namespace std;
