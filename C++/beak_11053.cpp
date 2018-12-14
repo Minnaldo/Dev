@@ -2,7 +2,6 @@
 #include <iostream>
 
 /** 가장 긴 증가하는 부분 수열 백준_11053 (https://www.acmicpc.net/problem/11053)
- *  ? 처음에 arr[n+1]보다 큰 값이 나왔는데, arr[n+1]부터의 증가수열이 더길다면?? (현 코드의 반례)
  *  * 참조 : (http://seungkwan.tistory.com/8)
  */
 
