@@ -5,24 +5,37 @@
 /** 다리 놓기 백준_1010 (https://www.acmicpc.net/problem/1010)
  *  * 참조 (http://lmcoa15.tistory.com/8)
  *  * 참조 2 (http://degurii.tistory.com/29)
+ *  ? 얘도 방사형으로 나올까?
  */
 
 using namespace std;
 
-int dp[31][2];
+int dp[31];
 
-int solution(int n, int m)
+long long solution(int n, int m)
 {
-    for (int i = 2; i <= n; i++)
+    if (n == m)
     {
+        return 1;
     }
+    else
+    {
+        for (int i = 1; i <= n; i++)
+        {
+        }
 
-    return dp[n][m];
+        long long answer = dp[1];
+        for (int i = 2; i <= n; i++)
+        {
+            answer *= dp[i];
+        }
+        return answer;
+    }
 }
 
 int main(int argc, char const *argv[])
 {
-    // string str = "3 2 2 1 5 13 29";
+    // string str = "3 2 2 1 5 13 29";  // 1, 5, 67863915
     // stringstream ss;
     // ss.str(str);
 
@@ -36,7 +49,6 @@ int main(int argc, char const *argv[])
         {
             int n, m;
             fs >> n >> m;
-            dp[1] = m - (n - 1);
             cout << solution(n, m) << endl;
         }
     }
