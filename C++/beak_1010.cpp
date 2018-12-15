@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <sstream>
 
@@ -12,9 +13,8 @@ int dp[31][2];
 
 int solution(int n, int m)
 {
-    for(int i = 2; i<=n; i++)
+    for (int i = 2; i <= n; i++)
     {
-
     }
 
     return dp[n][m];
@@ -22,19 +22,23 @@ int solution(int n, int m)
 
 int main(int argc, char const *argv[])
 {
-    string str = "3 2 2 1 5 13 29";
-    stringstream ss;
-    ss.str(str);
+    // string str = "3 2 2 1 5 13 29";
+    // stringstream ss;
+    // ss.str(str);
 
+    ifstream fs("input.txt");
     int T;
-    ss >> T;
+    // ss >> T;
 
-    for (int i = 0; i < T; i++)
+    while (fs >> T)
     {
-        int n, m;
-        ss >> n >> m;   // NOTE string stream의 새로운 사용법
-        dp[1] = m-(n-1);
-        cout<<solution(n, m)<<endl;
+        for (int i = 0; i < T; i++)
+        {
+            int n, m;
+            fs >> n >> m;
+            dp[1] = m - (n - 1);
+            cout << solution(n, m) << endl;
+        }
     }
     return 0;
 }
