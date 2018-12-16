@@ -5,6 +5,7 @@ using namespace std;
 /** 이항 계수 2 백준_11051 (https://www.acmicpc.net/problem/11051)
  *  * 이항계수를 조합으로 나타낼 수 있다.
  *  * 본 문제에서는 크기때문에 미리 10007을 나누어주어야 틀리지 않는다
+ *  NOTE Combination implement
  */
 
 int dp[1001][1001];
