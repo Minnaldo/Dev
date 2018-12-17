@@ -1,50 +1,24 @@
+#include <fstream>
 #include <iostream>
 #include <sstream>
 
+/**
+ *  * dp[n] = n을 만들수 있는 경우의 수
+ */
+
 using namespace std;
 
-int dp[101];
+int dp[101], cnt, num;
 
-// long long combination(int n, int r)
-// {
-//     long long **combination = new long long *[n + 1];
-//     for (int i = 0; i <= n; i++)
-//     {
-//         combination[i] = new long long[r + 1];
-//     }
-//     combination[1][1] = 1;
-
-//     // 100개에서 r개를 뽑는 경우의 수 ==> i개에서 j개를 뽑는 경우의 수
-//     for (int i = 2; i <= n; i++)
-//     {
-//         for (int j = 1; j <= r; j++)
-//         {
-//             combination[i][j] = combination[i - 1][j - 1] + combination[i - 1][j];
-//         }
-//     }
-//     long long answer = combination[n][r];
-
-//     for (int i = 0; i <= n; i++)
-//     {
-//         delete[] combination[i];
-//     }
-//     delete[] combination;
-
-//     return answer;
-// }
-
-int solution(int k, int *arr, int n)
+int solution(int k, int *arr)
 {
     for (int i = 1; i <= k; i++)
     {
-        for (int j = 1; j <= n; j++)
+        for (int j = 1; j <= num; j++)
         {
-            if ((i - arr[j]) >= 0)
-            {
-                dp[i] += dp[i - arr[j]] + 1;
-            }
+            if (i - arr[j] >= 0)
+                dp[i] = dp[i] + dp[i - arr[j]];
         }
-        cout<<"dp "<<dp[i]<<endl;
     }
 
     return dp[k];
@@ -52,20 +26,32 @@ int solution(int k, int *arr, int n)
 
 int main(int argc, char const *argv[])
 {
-    string str = "3 10 1 2 5";
-    stringstream ss;
-    ss.str(str);
-    int n, K;
-    ss >> n >> K;
+    ios::sync_with_stdio(false);
+    // string str = "3 10 1 2 5";   //10
+    // stringstream ss;
+    // ss.str(str);
+    ifstream fs("input.txt"); //10
+    int n, K, tmp;
 
-    int *arr = new int[n + 1];
-    for (int i = 1; i <= n; i++)
+    while (fs >> n)
     {
-        int tmp;
-        ss >> tmp;
-        arr[i] = tmp;
+        num = n;
+        fs >> K;
+        int *arr = new int[n + 1];
+        for (int i = 1; i <= n; i++)
+        {
+            fs >> tmp;
+            arr[i] = tmp;
+        }
+
+        // for(int i = 1; i<=n; i++)
+        // {
+        //     for(int j = 1; j<=n; j++)
+        // }
+
+        cout << solution(K, arr) << "\n";
     }
 
-    cout << solution(K, arr, n) << endl;
+    cout << cnt << endl;
     return 0;
 }
