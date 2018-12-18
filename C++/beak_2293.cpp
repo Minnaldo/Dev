@@ -2,21 +2,23 @@
 #include <iostream>
 #include <sstream>
 
-/**
- *  * dp[n] = n을 만들수 있는 경우의 수
+/** 동전1 백준_2293 (https://www.acmicpc.net/problem/2293)
+ *  * arr[1]로 나타낼 수 있는 경우의 수를 계산 후, arr[2]. arr[3], ... , arr[n]으로 나타낼 수 있는 경우의수를 구하여 모두 더하면 답이 나온다
+ *  NOTE anothor solution
  */
 
 using namespace std;
 
-int dp[101], cnt, num;
+int dp[10001];
 
-int solution(int k, int *arr)
+// arr[1]로 나타낼 수 있는 경우의 수를 계산 후, arr[2]. arr[3], ... , arr[n]으로 나타낼 수 있는 경우의수를 구하여 모두 더하면 답이 나온다
+int solution(int n, int k, int *arr)
 {
-    for (int i = 1; i <= k; i++)
+    for (int j = 1; j <= n; j++)    // n = 동전의 갯수
     {
-        for (int j = 1; j <= num; j++)
+        for (int i = 1; i <= k; i++)    // k = 나타내야할 가치
         {
-            if (i - arr[j] >= 0)
+            if (i >= arr[j])
                 dp[i] = dp[i] + dp[i - arr[j]];
         }
     }
@@ -35,7 +37,6 @@ int main(int argc, char const *argv[])
 
     while (fs >> n)
     {
-        num = n;
         fs >> K;
         int *arr = new int[n + 1];
         for (int i = 1; i <= n; i++)
@@ -43,15 +44,8 @@ int main(int argc, char const *argv[])
             fs >> tmp;
             arr[i] = tmp;
         }
-
-        // for(int i = 1; i<=n; i++)
-        // {
-        //     for(int j = 1; j<=n; j++)
-        // }
-
-        cout << solution(K, arr) << "\n";
+        dp[0] = 1;
+        cout << solution(n, K, arr) << "\n";
     }
-
-    cout << cnt << endl;
     return 0;
 }
