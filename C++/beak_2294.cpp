@@ -3,7 +3,8 @@
 
 /** 동전2 백준_2294 (https://www.acmicpc.net/problem/2294)
  *  * dp[n] = n을 나타내는데 사용한 동전의 최소 갯수
- *  * 참조 (https://blog.naver.com/occidere/220794872664)
+ *  * 참조 1.(https://blog.naver.com/occidere/220794872664) ==> 문제 풀이의 개념
+ *  * 참조 2.(http://hsp1116.tistory.com/24)    ==> line 29의 이유를 설명해놓음
  *  * 초기값 = 10001, 초기값에서 변하지 않았다면 이는 방법의 가짓수가 매우 크다는 뜻이므로, 이 때에 -1을 리턴한다
  *  * 비교 순서 --> arr[1]로 만들수 있는 경우의수, arr[2]로, arr[3], ... , arr[n]을 비교한다.
  */
