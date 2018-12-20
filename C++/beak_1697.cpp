@@ -8,7 +8,8 @@ using namespace std;
  *  REVIEW
  */
 
-int dp[100000], cnt;
+int dp[100001];
+bool visit[100001];
 
 int min(int a, int b)
 {
@@ -25,52 +26,44 @@ int solution(int n, int k)
     {
         int cur_pos = q.front();
 
-        while (cnt < 3)
+        if (cur_pos == k)
         {
-            int nxt_pos;
-
-            switch (cnt)
-            {
-            case 0:
-                nxt_pos = cur_pos + 1;
-                break;
-            case 1:
-                nxt_pos = cur_pos - 1;
-                break;
-            case 2:
-                nxt_pos = cur_pos * 2;
-                break;
-            }
-
-            if (nxt_pos >= 0 && nxt_pos <= 100000)
-            {
-                q.push(nxt_pos);
-                dp[nxt_pos] = min(dp[cur_pos] + 1, dp[nxt_pos]);
-            }
-            cnt++;
+            return dp[k];
         }
-        cnt = 0;
+
+        if (cur_pos - 1 >= 0 && !visit[cur_pos - 1])
+        {
+            dp[cur_pos - 1] = dp[cur_pos] + 1;
+            visit[cur_pos - 1] = true;
+            q.push(cur_pos - 1);
+        }
+        if (cur_pos + 1 <= 100000 && !visit[cur_pos + 1])
+        {
+            dp[cur_pos + 1] = dp[cur_pos] + 1;
+            visit[cur_pos + 1] = true;
+            q.push(cur_pos + 1);
+        }
+        if (cur_pos * 2 <= 100000 && !visit[cur_pos * 2])
+        {
+            dp[cur_pos * 2] = dp[cur_pos] + 1;
+            visit[cur_pos * 2] = true;
+            q.push(cur_pos * 2);
+        }
 
         q.pop();
-
-        if (q.front() == k)
-        {
-            break;
-        }
     }
-    return dp[k];
 }
 
 int main(int argc, char const *argv[])
 {
     ios::sync_with_stdio(false);
     // int S = 5, B = 17; // 4
-    int S = 4, B = 100000;  //seg fault
+    int S = 4, B = 100000; // 20?
     // int S, B;
     // cin >> S >> B;
 
     //초기값 100001의 이유 --> 아무리 오래걸려도 이시간 이내에는 도착할 것이다. == 이보다 큰 값은 나올 리 없다
-    for (int i = 0; i < 100000; i++)
+    for (int i = 0; i <= 100000; i++)
     {
         dp[i] = 100001;
     }
