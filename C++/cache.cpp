@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <iostream>
 
+/**
+ *  * 캐시문제, LRU캐시를 구현해라. 캐시구조체 선언(?)
+ */
+
 using namespace std;
 
 int time;
