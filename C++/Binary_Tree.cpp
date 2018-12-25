@@ -40,15 +40,9 @@ class Tree
         return root;
     }
 
-    void makeNode()
-    {
-        root->left = new Tree<T>('B', new Tree<T>('D', new Tree<T>('H')), new Tree<T>('E', new Tree<T>('I'), new Tree<T>('J')));
-        root->right = new Tree<T>('C', new Tree<T>('F'), new Tree<T>('G', NULL, new Tree<T>('K')));
-    }
-
     void visit(Node<T> *current) { cout << current->data << " "; }
 
-    TreeNode<T> *getRoot()
+    Node<T> *getRoot()
     {
         return root;
     }
@@ -58,7 +52,7 @@ class Tree
         return root->data;
     }
 
-    void insertNode(TreeNode<T> *node)
+    void insertNode(Node<T> *node)
     {
         if (search(root, node->data) == NULL)
         {
@@ -90,12 +84,12 @@ class Tree
         }
     }
 
-    void visit(TreeNode<T> *current)
+    void visit(Node<T> *current)
     {
         cout << current->data << "  ";
     }
 
-    TreeNode<T> *search(TreeNode<T> *current, T data)
+    Node<T> *search(Node<T> *current, T data)
     {
         if (current == NULL)
             return NULL;
@@ -112,6 +106,14 @@ class Tree
             search(current->right, data);
         }
     }
+
+    // 전위순회 : 중 - 좌 - 우
+    void preorder(){}
+    // 중위순회 : 좌 - 중 - 우
+    void inorder(){}
+    // 후위순회 : 좌 - 우 - 중
+    void postorder(){}
+    // 레벨순회 : BFS로 구현 가능,
 };
 
 int main(int argc, char const *argv[])
@@ -119,5 +121,8 @@ int main(int argc, char const *argv[])
     Tree<int> tree(8);                 // root값 8로 초기화
     cout << tree.getRoot() << endl;    // root node의 주소값 불러오기
     cout << tree.getRootVal() << endl; // root의 값을 불러오기
+    // new Node(value)로 새로운 노드 생성
+    tree.insertNode(new Node(9)); // 새로운 node 생성
+    tree.search(tree.getRoot(), 9);    // 트리에서 9 값을 찾는 방법, root노드부터 찾아 들어간다, 해당 값을 가지는 노드의 주소 반환
     return 0;
 }
