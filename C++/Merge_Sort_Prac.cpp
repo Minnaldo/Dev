@@ -1,5 +1,12 @@
 #include <iostream>
 
+/**
+ *  * 분할-정복 방식의 정렬 알고리즘
+ *  * 정확히는 분할하는 것이 아니라, 임시배열에 정렬된 값을 임시 저장 했다가 마지막에 원래 배열에 덮어씌운다
+ *  * merge() 에 첨으로 들어가는 것은 길이 1의 배열이 들어가 비교를 한후 반환 값들을 계속 정렬 복사 해나간다
+ *  REVIEW this code need review
+ */
+
 using namespace std;
 
 int sorted[1000]; // 임시 배열
@@ -28,6 +35,7 @@ void merge(int *arr, int left, int mid, int right)
     // 남아 있는 값들을 일괄 복사
     if (i > mid)
     {
+        // 뒤쪽 배열을 임시 배열로 복사
         for (int l = j; l <= right; l++)
         {
             sorted[k++] = arr[l];
@@ -35,6 +43,7 @@ void merge(int *arr, int left, int mid, int right)
     }
     else
     {
+        // 앞쪽 배열을 임시 배열로 복사
         for (int l = i; l <= mid; l++)
         {
             sorted[k++] = arr[l];
@@ -47,6 +56,7 @@ void merge(int *arr, int left, int mid, int right)
         arr[l] = sorted[l];
     }
 }
+
 void merge_sort(int *arr, int left, int right)
 {
     int mid;
