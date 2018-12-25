@@ -6,12 +6,12 @@ template <typename T>
 class Tree;
 
 template <typename T>
-class TreeNode
+class Node
 {
     friend class Tree<T>;
 
   public:
-    TreeNode(T data = 0, TreeNode *left = NULL, TreeNode *right = NULL)
+    Node(T data = 0, Node *left = NULL, Node *right = NULL)
     {
         this->data = data;
         this->left = left;
@@ -19,23 +19,34 @@ class TreeNode
     }
 
   private:
+    Node *right;
+    Node *left;
     T data;
-    TreeNode *left;
-    TreeNode *right;
 };
 
-//typedef <typename T> class Tree{};
 template <typename T>
 class Tree
 {
   private:
-    TreeNode<T> *root;
+    Node<T> *root;
 
   public:
     Tree(T data = 0)
     {
-        root = new TreeNode<T>(data);
+        root = new Node<T>(data);
     }
+    Node<T> *getRoot()
+    {
+        return root;
+    }
+
+    void makeNode()
+    {
+        root->left = new Tree<T>('B', new Tree<T>('D', new Tree<T>('H')), new Tree<T>('E', new Tree<T>('I'), new Tree<T>('J')));
+        root->right = new Tree<T>('C', new Tree<T>('F'), new Tree<T>('G', NULL, new Tree<T>('K')));
+    }
+
+    void visit(Node<T> *current) { cout << current->data << " "; }
 
     TreeNode<T> *getRoot()
     {
