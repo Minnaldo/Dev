@@ -1,5 +1,11 @@
 #include <iostream>
 
+/** 이진 탐색 트리 참조 (http://jizard.tistory.com/111)
+ *  * Node클래스와 Tree클래스를 이용하여 구현
+ *  * Node 클래스는 Tree클래스의 friend 클래스
+ *  * Tree 클래스의 생성자로 root노드 초기화, 초기값을 받지 않으면 0으로 초기화한다
+ */
+
 using namespace std;
 
 template <typename T>
