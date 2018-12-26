@@ -13,12 +13,16 @@ int sorted[1000]; // 임시 배열
 
 void merge(int *arr, int left, int mid, int right)
 {
+
+    // left : 분할 된 배열의 첫번째 인덱스
+    // right : 분할 된 배열의 마지막 인덱스
+    // mid : 분할 된 배열의 중간 인덱스
     int i, j, k;
     i = left;    // 앞쪽 배열의 첫 인덱스
     j = mid + 1; // 뒤쪽 배열의 첫 인덱스
     k = left;    // 임시 배열의 인덱스, merge 함수 전체에 걸쳐 k를 1씩 증가해가며 인덱스를 증가해 나가며 임시배열에 정렬된 값을 집어넣는다
 
-    // 분할 정렬된 list 합병
+    // 분할된 배열끼리 대소 비교하면서 병합
     while (i <= mid && j <= right)
     {
         if (arr[i] <= arr[j])
@@ -34,6 +38,7 @@ void merge(int *arr, int left, int mid, int right)
     // 남아 있는 값들을 일괄 복사
     if (i > mid)
     {
+        // i>mid 인 경우는 위에서 앞쪽배열의 정렬이 모두 끝났을 경우
         // 뒤쪽 배열을 임시 배열로 복사
         for (int l = j; l <= right; l++)
         {
@@ -42,6 +47,7 @@ void merge(int *arr, int left, int mid, int right)
     }
     else
     {
+        // 위에서 뒤쪽 배열의 정렬이 모두 끝난 경우
         // 앞쪽 배열을 임시 배열로 복사
         for (int l = i; l <= mid; l++)
         {
@@ -58,13 +64,11 @@ void merge(int *arr, int left, int mid, int right)
 
 void merge_sort(int *arr, int left, int right)
 {
-    int mid;
-
     if (left < right)
     {
-        mid = (left + right) / 2;
-        merge_sort(arr, left, mid);      // 앞쪽 부분 리스트 정렬
-        merge_sort(arr, mid + 1, right); // 뒤쪽 부분 리스트 정렬
+        int mid = (left + right) / 2;
+        merge_sort(arr, left, mid);      // 앞쪽 부분 배열 분할
+        merge_sort(arr, mid + 1, right); // 뒤쪽 부분 배열 분할
         merge(arr, left, mid, right);    // 분할된 리스트 병합
     }
 }
