@@ -15,14 +15,15 @@ void swap(int &a, int &b)
  *  * 피벗은 항상 최우측의 값, 배열의 마지막 값
  */
 
+//  arr[right] : pivot
 void quick_lomuto(int *arr, int left, int right)
 {
-    if (left < right)
+    if (left < right) // 배열의 전체 길이가 2 이상일 때
     {
-        int i = left - 1; // i : 피벗보다 작은값의 인덱스
+        int i = left - 1; // i : 처음 인덱스 - 1 (배열의 왼쪽 바깥)
 
         // 인덱스 j가 right(pivot 인덱스) 보다 작을 때까지 반복
-        for (int j = 1; j < right; j++) // j : 피벗보다 큰값의 인덱스
+        for (int j = left; j < right; j++) // j : 피벗보다 큰값의 인덱스
         {
             if (arr[j] < arr[right]) // arr[right] : pivot, arr[j]의 값이 피벗보다 작을경우 arr[i+1]와 arr[j]를 스왑
             {
@@ -30,27 +31,29 @@ void quick_lomuto(int *arr, int left, int right)
             }
         }
 
-        swap(arr[++i], arr[right]); // j = right - 1 이면, pivot과 arr[i+1]을 스왑, 스왑후  i는 현재 단계의 피벗
+        // j = right - 1 이면, pivot과 arr[i+1]을 스왑, pivot index = i <-- right;
+        swap(arr[++i], arr[right]);
 
-        // 피벗을 제외한 나머지를 다시 정렬하기 위함
-        quick_lomuto(arr, left, i - 1);
-        quick_lomuto(arr, i + 1, right);
+        // 피벗을 제외한 나머지를 다시 정렬하기 위함, 피벗의 위치는 정해짐
+        quick_lomuto(arr, left, i - 1);  //  분할
+        quick_lomuto(arr, i + 1, right); //  분할
     }
 }
 
 /* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Hoare Partion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
-// 피벗의 위치를 반환한다
+//  피벗의 위치를 반환한다
+//  피벗 위치를 계산하며 정렬
 int partition(int *arr, int left, int right)
 {
     int low = left;
     int high = right + 1;
-    int pivot = arr[left];
+    int pivot = arr[left]; // pivot
 
     do
     {
         do
         {
-            low++; // low는 left+1에서 시작
+            low++; // low는 left+1에서 시작, arr[left]가 pivot이기 때문
             // arr[low]가 피벗 인덱스의 값보다 크거나 right보다 클 때까지 low + 1
         } while (low <= right && arr[low] < pivot);
 
@@ -83,24 +86,29 @@ void quick_sort(int *arr, int left, int right)
         // 피벗을 기준으로 리스트를 비균등 분할
         // 피벗 기준 앞의 값들은 피벗보다 작고, 뒤쪽 값들은 피벗보다 크다
         int q = partition(arr, left, right); // q : 피벗의 위치
-    }
 
-    // 피벗을 제외한 2개의 부분 리슽를 대상으로 순환 호출
-    quick_sort(arr, left, q - 1);  // 앞쪽 부분 리스트 정렬
-    quick_sort(arr, q + 1, right); // 뒤쪽 부분 리스트 정렬
+        // 피벗을 제외한 2개의 부분 리슽를 대상으로 순환 호출
+        quick_sort(arr, left, q - 1);  // 앞쪽 부분 리스트 정렬
+        quick_sort(arr, q + 1, right); // 뒤쪽 부분 리스트 정렬
+    }
 }
 
 int main(int argc, char const *argv[])
 {
-    int n; //배열 사이즈
-    int *arr = new int[n + 1];
+    // int n; //배열 사이즈
+    // int *arr = new int[n + 1];
 
-    quick_sort(arr, 0, n - 1);
+    int arr[10] = {3, 7, 9, 10, 8, 1, 2, 5, 4, 6};
+    int size = (sizeof(arr) / sizeof(arr[0])) - 1;
+
+    // quick_sort(arr, 0, size);
+    quick_lomuto(arr, 0, size);
 
     // 정렬 결과 출력
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= size; i++)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] << " ";
     }
+    cout << "\n";
     return 0;
 }

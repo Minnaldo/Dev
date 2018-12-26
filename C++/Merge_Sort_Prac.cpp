@@ -75,7 +75,7 @@ void merge_sort(int *arr, int left, int right)
 
 int main(int argc, char const *argv[])
 {
-    int n = 10;
+    // int n = 10;
     // int *arr = new int[n + 1];
     int arr[10] = {3, 7, 9, 10, 8, 1, 2, 5, 4, 6};
     int size = (sizeof(arr) / sizeof(arr[0])) - 1;
@@ -84,7 +84,7 @@ int main(int argc, char const *argv[])
 
     merge_sort(arr, 0, size); // size 설정 잘해줘야 함
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= size; i++)
     {
         cout << arr[i] << " ";
     }
