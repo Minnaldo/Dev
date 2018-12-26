@@ -17,6 +17,7 @@ void swap(int &a, int &b)
  *  * 동작 방식
  *  * i가 고정상태에서 j로 배열을 돌며 피벗보다 작은 값을 찾는다
  *  * 피벗은 항상 최우측의 값 (배열의 마지막 값)
+ *  REVIEW
  */
 
 //  arr[right] : pivot
