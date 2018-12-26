@@ -2,11 +2,40 @@
 
 using namespace std;
 
-void swap(int a, int b)
+void swap(int &a, int &b)
 {
     int tmp = a;
     a = b;
     b = tmp;
+}
+
+/** Lomuto 방식 Quick Sort
+ *  * 동작 방식
+ *  * i가 고정상태에서 j로 배열을 돌며 피벗보다 작은 값을 찾는다
+ *  * 피벗은 항상 최우측의 값, 배열의 마지막 값
+ */
+
+void quick_lomuto(int *arr, int left, int right)
+{
+    if (left < right)
+    {
+        int i = left - 1; // i : 피벗보다 작은값의 인덱스
+
+        // 인덱스 j가 right(pivot 인덱스) 보다 작을 때까지 반복
+        for (int j = 1; j < right; j++) // j : 피벗보다 큰값의 인덱스
+        {
+            if (arr[j] < arr[right]) // arr[right] : pivot, arr[j]의 값이 피벗보다 작을경우 arr[i+1]와 arr[j]를 스왑
+            {
+                swap(arr[++i], arr[j]); // i의 현재 위치는 0이기 때문에 1부터 시작하는 배열의 처음을 가리키려면 1을 증가시킨 후 연산해야 함
+            }
+        }
+
+        swap(arr[++i], arr[right]); // j = right - 1 이면, pivot과 arr[i+1]을 스왑, 스왑후  i는 현재 단계의 피벗
+
+        // 피벗을 제외한 나머지를 다시 정렬하기 위함
+        quick_lomuto(arr, left, i - 1);
+        quick_lomuto(arr, i + 1, right);
+    }
 }
 
 // 피벗의 위치를 반환한다
@@ -36,7 +65,7 @@ int partition(int *arr, int left, int right)
             swap(arr[low], arr[high]);
         }
 
-    // low 가 high보다 커지면 루프 종료
+        // low 가 high보다 커지면 루프 종료
     } while (low < high);
 
     // arr[left]와 arr[high]를 교환
