@@ -76,14 +76,18 @@ void merge_sort(int *arr, int left, int right)
 int main(int argc, char const *argv[])
 {
     int n = 10;
-    int *arr = new int[n + 1];
-    int size = sizeof(arr) / sizeof(arr[0]);
+    // int *arr = new int[n + 1];
+    int arr[10] = {3, 7, 9, 10, 8, 1, 2, 5, 4, 6};
+    int size = (sizeof(arr) / sizeof(arr[0])) - 1;
 
-    merge_sort(arr, 0, size);
+    cout << " Array Size is " << size << endl;
+
+    merge_sort(arr, 0, size); // size 설정 잘해줘야 함
 
     for (int i = 0; i < n; i++)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] << " ";
     }
+    cout << "\n";
     return 0;
 }
