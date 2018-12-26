@@ -1,5 +1,9 @@
 #include <iostream>
 
+/**
+ *  * 퀵 정렬의 두가지 방식 (Hoare & Lomuto)
+ */
+
 using namespace std;
 
 void swap(int &a, int &b)
@@ -12,7 +16,7 @@ void swap(int &a, int &b)
 /** Lomuto 방식 Quick Sort
  *  * 동작 방식
  *  * i가 고정상태에서 j로 배열을 돌며 피벗보다 작은 값을 찾는다
- *  * 피벗은 항상 최우측의 값, 배열의 마지막 값
+ *  * 피벗은 항상 최우측의 값 (배열의 마지막 값)
  */
 
 //  arr[right] : pivot
