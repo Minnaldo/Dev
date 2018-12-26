@@ -2,7 +2,7 @@
 #include <string>
 
 /** 그룹 단어 체커 백준_1316 (https://www.acmicpc.net/problem/1316)
- *  *
+ *  TODO
  */
 
 using namespace std;
