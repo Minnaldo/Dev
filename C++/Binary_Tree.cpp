@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 /** 이진 탐색 트리 참조 (http://jizard.tistory.com/111)
  *  * Node클래스와 Tree클래스를 이용하여 구현
@@ -25,6 +26,7 @@ class Node
     }
 
   private:
+    Node *parent;
     Node *right;
     Node *left;
     T data;
@@ -62,8 +64,8 @@ class Tree
     {
         if (search(root, node->data) == NULL)
         {
-            TreeNode<T> *parent = NULL;
-            TreeNode<T> *current = root;
+            Node<T> *parent = NULL;
+            Node<T> *current = root;
 
             while (current != NULL)
             {
@@ -114,12 +116,44 @@ class Tree
     }
 
     // 전위순회 : 중 - 좌 - 우
-    void preorder(){}
+    void preorder(Node<T> *current)
+    {
+        visit(current);
+        if (current->left != NULL)
+            preorder(current->left);
+        if (current->right != NULL)
+            preorder(current->right);
+    }
     // 중위순회 : 좌 - 중 - 우
-    void inorder(){}
+    void inorder(Node<T> *current)
+    {
+        if (current->left == NULL)
+        {
+            visit(current);
+        }
+        inorder(current);
+        inorder(current);
+    }
     // 후위순회 : 좌 - 우 - 중
-    void postorder(){}
+    void postorder() {}
+
     // 레벨순회 : BFS로 구현 가능,
+    void leverTraversal(Node<T> *current)
+    {
+        queue<Node<T> *> treeQue;
+        treeQue.push(current);
+
+        while (!treeQue.empty())
+        {
+            if (current->left != NULL)
+                treeQue.push(current->left);
+            if (current->right != NULL)
+                treeQue.push(current->right);
+
+            cout << treeQue.front()->data << " ";
+            treeQue.pop();
+        }
+    }
 };
 
 int main(int argc, char const *argv[])
@@ -128,7 +162,7 @@ int main(int argc, char const *argv[])
     cout << tree.getRoot() << endl;    // root node의 주소값 불러오기
     cout << tree.getRootVal() << endl; // root의 값을 불러오기
     // new Node(value)로 새로운 노드 생성
-    tree.insertNode(new Node(9)); // 새로운 node 생성
-    tree.search(tree.getRoot(), 9);    // 트리에서 9 값을 찾는 방법, root노드부터 찾아 들어간다, 해당 값을 가지는 노드의 주소 반환
+    tree.insertNode(new Node(9));   // 새로운 node 생성
+    tree.search(tree.getRoot(), 9); // 트리에서 9 값을 찾는 방법, root노드부터 찾아 들어간다, 해당 값을 가지는 노드의 주소 반환
     return 0;
 }

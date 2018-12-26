@@ -38,6 +38,7 @@ void quick_lomuto(int *arr, int left, int right)
     }
 }
 
+/* ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Hoare Partion ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ */
 // 피벗의 위치를 반환한다
 int partition(int *arr, int left, int right)
 {
