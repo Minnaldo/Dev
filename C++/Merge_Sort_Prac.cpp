@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int sorted[1000]; // 임시 배열
+int sorted[100000]; // 임시 배열
 
 void merge(int *arr, int left, int mid, int right)
 {
@@ -62,13 +62,13 @@ void merge(int *arr, int left, int mid, int right)
     }
 }
 
-void merge_sort(int *arr, int left, int right)
+void devide(int *arr, int left, int right)
 {
     if (left < right)
     {
         int mid = (left + right) / 2;
-        merge_sort(arr, left, mid);      // 앞쪽 부분 배열 분할
-        merge_sort(arr, mid + 1, right); // 뒤쪽 부분 배열 분할
+        devide(arr, left, mid);      // 앞쪽 부분 배열 분할
+        devide(arr, mid + 1, right); // 뒤쪽 부분 배열 분할
         merge(arr, left, mid, right);    // 분할된 리스트 병합
     }
 }
@@ -82,7 +82,7 @@ int main(int argc, char const *argv[])
 
     cout << " Array Size is " << size << endl;
 
-    merge_sort(arr, 0, size); // size 설정 잘해줘야 함
+    devide(arr, 0, size); // size 설정 잘해줘야 함
 
     for (int i = 0; i <= size; i++)
     {
