@@ -50,11 +50,6 @@ class Tree
 
     void visit(Node<T> *current) { cout << current->data << " "; }
 
-    Node<T> *getRoot()
-    {
-        return root;
-    }
-
     T getRootVal()
     {
         return root->data;
@@ -70,7 +65,7 @@ class Tree
             while (current != NULL)
             {
                 parent = current;
-                if (node->ata < parent->data)
+                if (node->data < parent->data)
                 {
                     current = current->left;
                 }
@@ -90,11 +85,6 @@ class Tree
             }
             cout << "Inserted " << node->data << endl;
         }
-    }
-
-    void visit(Node<T> *current)
-    {
-        cout << current->data << "  ";
     }
 
     Node<T> *search(Node<T> *current, T data)
@@ -138,17 +128,22 @@ class Tree
     void postorder() {}
 
     // 레벨순회 : BFS로 구현 가능,
-    void leverTraversal(Node<T> *current)
+    void levelTraversal(Node<T> *current)
     {
         queue<Node<T> *> treeQue;
         treeQue.push(current);
 
         while (!treeQue.empty())
         {
+            current = treeQue.front();
             if (current->left != NULL)
+            {
                 treeQue.push(current->left);
+            }
             if (current->right != NULL)
+            {
                 treeQue.push(current->right);
+            }
 
             cout << treeQue.front()->data << " ";
             treeQue.pop();
@@ -162,7 +157,9 @@ int main(int argc, char const *argv[])
     cout << tree.getRoot() << endl;    // root node의 주소값 불러오기
     cout << tree.getRootVal() << endl; // root의 값을 불러오기
     // new Node(value)로 새로운 노드 생성
-    tree.insertNode(new Node(9));   // 새로운 node 생성
-    tree.search(tree.getRoot(), 9); // 트리에서 9 값을 찾는 방법, root노드부터 찾아 들어간다, 해당 값을 가지는 노드의 주소 반환
+    tree.insertNode(new Node<int>(9)); // 새로운 node 생성, 타입을 꼭 지정해줘야 함
+    tree.search(tree.getRoot(), 9);    // 트리에서 9 값을 찾는 방법, root노드부터 찾아 들어간다, 해당 값을 가지는 노드의 주소 반환
+
+    tree.levelTraversal(tree.getRoot());
     return 0;
 }

@@ -13,7 +13,6 @@ int sorted[1000]; // 임시 배열
 
 void merge(int *arr, int left, int mid, int right)
 {
-
     int i, j, k;
     i = left;    // 앞쪽 배열의 첫 인덱스
     j = mid + 1; // 뒤쪽 배열의 첫 인덱스

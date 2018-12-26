@@ -40,12 +40,13 @@ class Linked
     Node<T> *tail;
 
   public:
-    // 생성자, 객체 생성시 입력된 값을 기준으로 head 노드 생성
-    Linked(T data = 0)
-    {
-        head = NULL;
-        tail = head; // 초기 값이 하나일 때에는 head와 tail은 같다.
-    }
+    // // 생성자, 객체 생성시 입력된 값을 기준으로 head 노드 생성
+    // Linked(T data = 0)
+    // {
+    //     head = NULL;
+    //     tail = head; // 초기 값이 하나일 때에는 head와 tail은 같다.
+    // }
+
     ~Linked() { cout << "Deleted the list " << endl; } //소멸자
 
     Node<T> *getHead()
@@ -56,10 +57,10 @@ class Linked
     void insertNode(T val)
     {
         Node<T> *newNode = new Node<T>(val); // 새로운 노드 객체 생성
-        // newNode->data = val;     // 데이터 저장
-        newNode->next = NULL; // 노드의 다음 변수 초기화
+        newNode->data = val;     // 데이터 저장
+        // newNode->next = NULL;             // 노드의 다음 변수 초기화
 
-        // ! 왜 segment fault가?
+        // ! 왜 segment fault가? head에 next가 계속 생성되어있다?
         if (head == NULL)
         {
             head = newNode;
@@ -98,9 +99,6 @@ class Linked
 
 int main(int argc, char const *argv[])
 {
-    ios::sync_with_stdio(false);
-    int readData;
-    // cin >> readData;
     Linked<int> *link;
 
     link->insertNode(8);
