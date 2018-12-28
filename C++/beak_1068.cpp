@@ -27,6 +27,11 @@ int solution(int *arr, int idx, int n)
     //  자식 노드가 없는 것의 판별은??  나의 인덱스 * 2 가 없고 나의 인덱스 *2 +1 도 없다 (-2 or NULL)
     // TODO
 
+    for(int i = n; i>0; i--){
+        if(arr[i/2] > -1 && arr[i*2])
+            ans++;
+    }
+
 
     for (int i = 1; i <= n; i++)
     {
