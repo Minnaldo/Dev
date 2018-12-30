@@ -9,69 +9,68 @@
 
 using namespace std;
 
-struct Node
-{
-  public:
-    int data;
-    Node *next;
-};
-
-// template <typename T>
-// class Linked;
-
-// template <typename T>
-// class Node
+// struct Node
 // {
-
-//     friend class Linked<T>;
-
 //   public:
-//     Node(T data = 0, Node *next = NULL)
-//     {
-//         this->data = data;
-//         this->next = next;
-//     }
-
-//   private:
-//     T data;
+//     int data;
 //     Node *next;
 // };
+
+template <typename T>
+class Linked;
+
+template <typename T>
+class Node
+{
+
+    friend class Linked<T>;
+
+  public:
+    Node()
+    {
+        data = 0;
+        next = NULL;
+    }
+
+  private:
+    T data;
+    Node *next;
+};
 
 template <typename T>
 class Linked
 {
   private:
-    Node *head;
-    Node *tail;
+    Node<T> *head = new Node<T>();
+    Node<T> *tail = new Node<T>();
 
     // 노드 전체 출력
-    void printAllList(Node *current)
+    void printAllList(Node<T> *current)
     {
         cout << current->data << " ";
-        if (current->next != nullptr)
+        if (current->next != NULL)
         {
             printAllList(current->next);
         }
     }
 
-    void insertNode(Node *newNode, T val)
+    void insertNode(T val)
     {
-        // Node *newNode = new Node; // 새로운 노드 객체 생성
-        newNode->data = val;  // 데이터 저장
-        newNode->next = nullptr; // 노드의 다음 변수 초기화
+        Node<T> *newNode = new Node<T>(); // 새로운 노드 객체 생성
+        newNode->data = val;              // 데이터 저장
+        newNode->next = NULL;             // 노드의 다음 변수 초기화
 
         // ! 왜 segment fault가? head에 next가 계속 생성되어있다?
-        if (head->next == tail) // ! 얘가 문제다?
+        if (head == NULL) // ! 얘가 문제다?
         {
-            tail = newNode;
             head->next = newNode;
         }
         else
         {
             // 꼬리를 설정하기 전에 새로운 노드를 먼저 꼬리노드의 다음노드로 선언해야 함
             tail->next = newNode;
-            tail = newNode; // 꼬리 노드를 새로 넣은 노드로 지정
         }
+        tail = newNode; // 꼬리 노드를 새로 넣은 노드로 지정
 
         cout << "Inserted new Node" << endl;
     }
@@ -86,18 +85,18 @@ class Linked
 
     ~Linked() { cout << "Deleted the list " << endl; } //소멸자
 
-    Node *getHead()
+    Node<T> *getHead()
     {
         return head;
     }
 
     void insert(T val)
     {
-        insertNode(new Node, val);
+        insertNode(val);
     }
 
     // 노드 삭제    REVIEW  need modify
-    void deleteNode(Node *current, T val)
+    void deleteNode(Node<T> *current, T val)
     {
         if (val == current->next->data)
         {
