@@ -3,6 +3,7 @@
 /**
  *  * 필요할 때마다 Node를 생성해 데이터를 저장하고 이들을 서로 연결한다.
  *  * Good_Notes -> 낙서 p.27
+ *  TODO search function implement
  */
 
 using namespace std;
@@ -53,6 +54,37 @@ class Link
         insertNode(val);
     }
 
+    void deleteNode(T val)
+    {
+        Node<T> *temp = head->next;
+        Node<T> *prev = nullptr;
+        while (temp->data != val)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if (temp == head->next)
+        {
+            // 가장 앞에 노드를 삭제하는 경우
+            head->next = temp->next;
+        }
+        else if (temp == tail->next)
+        {
+            //가장 마지막 노드를 삭제하는 경우
+            tail->next = prev;
+            prev->next = nullptr; // 삭제한 노드의 이전노드의 포인터 변수를 null로 초기화 해줘야함 그렇게 하지 않으면 쓰레기값을 가리키게 되어 print시 쓰레기값 출력
+        }
+        else
+        {
+            prev->next = temp->next;
+        }
+
+        cout << temp->data << " deleted" << endl;
+        delete temp;
+        Count--;
+    }
+
     int size()
     {
         return Count;
@@ -84,11 +116,12 @@ class Link
 
     void print(Node<T> *current)
     {
-        cout << current->data << " ";
-        if (current->next != nullptr)
+        while (current->next != nullptr)
         {
-            print(current->next);
+            cout << current->data << " ";
+            current = current->next;
         }
+        cout << current->data << " ";
     }
 
     void insertNode(T data)
@@ -108,35 +141,6 @@ class Link
         temp->next = newNode;
         tail->next = newNode;
     }
-
-    void deleteNode(T val)
-    {
-        Node<T> *temp = head->next;
-        Node<T> *prev = nullptr;
-        while (temp->data != val)
-        {
-            prev = temp;
-            temp = temp->next;
-        }
-
-        if (temp == head->next)
-        {
-            // 가장 앞에 노드를 삭제하는 경우
-            head->next = temp->next;
-        }
-        else if (temp == tail->next)
-        {
-            //가장 마지막 노드를 삭제하는 경우
-            tail->next = prev;
-        }
-        else
-        {
-            prev->next = temp->next;
-        }
-
-        cout << temp->data << " deleted" << endl;
-        delete temp;
-    }
 };
 
 int main(int argc, char const *argv[])
@@ -153,5 +157,8 @@ int main(int argc, char const *argv[])
     cout << "List Size : " << link->size() << endl;
     link->isEmpty();
 
+    link->deleteNode(9);
+    cout << link->size() << endl;
+    link->printNode();
     return 0;
 }
