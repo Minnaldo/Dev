@@ -1,10 +1,8 @@
 #include <iostream>
 
 /**
- *  ! 손볼곳이 많다
  *  * 필요할 때마다 Node를 생성해 데이터를 저장하고 이들을 서로 연결한다.
  *  * Good_Notes -> 낙서 p.27
- *  TODO
  */
 
 using namespace std;
@@ -35,7 +33,7 @@ class Link
     void printNode()
     {
         print(head->next);
-        cout<<endl;
+        cout << endl;
     }
 
     bool isEmpty()
@@ -50,16 +48,6 @@ class Link
         }
     }
 
-    Node<T> *search(Node<T> *current)
-    {
-        if (current->next == nullptr)
-        {
-            return current;
-        }
-
-        search(current->next);
-    }
-
     void insert(T val)
     {
         insertNode(val);
@@ -67,14 +55,6 @@ class Link
 
     int size()
     {
-        Count = 0;
-        Node<T> *temp = head;
-
-        while (temp->next != nullptr)
-        {
-            temp = temp->next;
-            Count++;
-        }
         return Count;
     }
 
@@ -98,7 +78,6 @@ class Link
     }
 
   private:
-
     Node<T> *head = new Node<T>();
     Node<T> *tail = new Node<T>();
     int Count;
@@ -121,6 +100,7 @@ class Link
         while (temp->next != nullptr)
         {
             temp = temp->next;
+            Count++;
         }
 
         Node<T> *newNode = new Node<T>();
@@ -129,9 +109,33 @@ class Link
         tail->next = newNode;
     }
 
-    void deleteNode()
+    void deleteNode(T val)
     {
+        Node<T> *temp = head->next;
+        Node<T> *prev = nullptr;
+        while (temp->data != val)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
 
+        if (temp == head->next)
+        {
+            // 가장 앞에 노드를 삭제하는 경우
+            head->next = temp->next;
+        }
+        else if (temp == tail->next)
+        {
+            //가장 마지막 노드를 삭제하는 경우
+            tail->next = prev;
+        }
+        else
+        {
+            prev->next = temp->next;
+        }
+
+        cout << temp->data << " deleted" << endl;
+        delete temp;
     }
 };
 
