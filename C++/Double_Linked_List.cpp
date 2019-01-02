@@ -63,6 +63,15 @@ class dLink
 
     void search(T val)
     {
+        Node<T> *tmphead = head->next;
+        Node<T> *tmptail = tail->prev;
+
+        while (tmphead->data != val && tmptail->data != val)
+        {
+            tmphead = tmphead->next;
+            tmptail = tmptail->prev;
+        }
+        // TODO 추가필요
     }
 
     bool isEmpty()
@@ -79,6 +88,13 @@ class dLink
 
     void printNode()
     {
+        Node<T> *temp = head->next;
+
+        while (temp->next != nullptr)
+        {
+            cout << temp->data << " ";
+        }
+        cout << temp->data << endl;
     }
 
     int size()
