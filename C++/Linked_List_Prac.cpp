@@ -26,9 +26,9 @@ class Node
     friend class Linked<T>;
 
   public:
-    Node()
+    Node(T val = 0)
     {
-        data = 0;
+        this.data = val;
         next = NULL;
     }
 
@@ -54,32 +54,11 @@ class Linked
         }
     }
 
-    void insertNode(T val)
-    {
-        Node<T> *newNode = new Node<T>(); // 새로운 노드 객체 생성
-        newNode->data = val;              // 데이터 저장
-        newNode->next = NULL;             // 노드의 다음 변수 초기화
-
-        // ! 왜 segment fault가? head에 next가 계속 생성되어있다?
-        if (head == NULL) // ! 얘가 문제다?
-        {
-            head->next = newNode;
-        }
-        else
-        {
-            // 꼬리를 설정하기 전에 새로운 노드를 먼저 꼬리노드의 다음노드로 선언해야 함
-            tail->next = newNode;
-        }
-        tail = newNode; // 꼬리 노드를 새로 넣은 노드로 지정
-
-        cout << "Inserted new Node" << endl;
-    }
-
   public:
     // 생성자, 객체 생성시 입력된 값을 기준으로 head 노드 생성
     Linked()
     {
-        head->next = nullptr;
+        head->next = NULL;
         tail = head->next; // 초기 값이 하나일 때에는 head와 tail은 같다.
     }
 
@@ -87,12 +66,34 @@ class Linked
 
     Node<T> *getHead()
     {
-        return head;
+        return this->head;
+    }
+
+    Node<T> *search(Node<T> *current)
+    {
+        if (current->next == NULL)
+        {
+            return current;
+        }
+
+        search(current->next);
     }
 
     void insert(T val)
     {
-        insertNode(val);
+        Node<T> *newNode = new Node<T>();
+        newNode->data = val;
+        Node<T> *current = search(getHead());
+
+        if (head->next == nullptr)
+        {
+            head->next = newNode;
+        }
+        else
+        {
+            current->next = newNode;
+            tail = newNode;
+        }
     }
 
     // 노드 삭제    REVIEW  need modify
@@ -119,7 +120,7 @@ int main(int argc, char const *argv[])
 {
     Linked<int> *link;
 
-    link->insert(8);
+    // link->insert(8);
     // link->insertNode(7);
     // link->insertNode(6);
 
