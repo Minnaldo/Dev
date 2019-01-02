@@ -4,6 +4,7 @@
  *  * 필요할 때마다 Node를 생성해 데이터를 저장하고 이들을 서로 연결한다.
  *  * Good_Notes -> 낙서 p.27
  *  TODO search function implement
+ *  TODO insert node in middle of list
  */
 
 using namespace std;
