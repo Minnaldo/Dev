@@ -128,6 +128,11 @@ class Link
         temp->next = newNode;
         tail->next = newNode;
     }
+
+    void deleteNode()
+    {
+
+    }
 };
 
 int main(int argc, char const *argv[])
