@@ -3,33 +3,24 @@
 /**
  *  ! 손볼곳이 많다
  *  * 필요할 때마다 Node를 생성해 데이터를 저장하고 이들을 서로 연결한다.
- *  * 사용의 편의성을 위해 머리와 꼬리르 노드를 따로 갖고 있는다.
+ *  * Good_Notes -> 낙서 p.27
  *  TODO
  */
 
 using namespace std;
 
-// struct Node
-// {
-//   public:
-//     int data;
-//     Node *next;
-// };
-
 template <typename T>
-class Linked;
+class Link;
 
 template <typename T>
 class Node
 {
+    friend class Link<T>;
 
-    friend class Linked<T>;
-
-  public:
-    Node(T val = 0)
+    Node()
     {
-        this.data = val;
         next = NULL;
+        data = -1; // 기본 초기화 값
     }
 
   private:
@@ -38,31 +29,25 @@ class Node
 };
 
 template <typename T>
-class Linked
+class Link
 {
-  private:
-    Node<T> *head = new Node<T>();
-    Node<T> *tail = new Node<T>();
-
-    // 노드 전체 출력
-    void printAllList(Node<T> *current)
+  public:
+    void print()
     {
-        cout << current->data << " ";
-        if (current->next != NULL)
+        printNode(getHead());
+    }
+
+    bool isEmpty()
+    {
+        if (getHead()->next == NULL)
         {
-            printAllList(current->next);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
-
-  public:
-    // 생성자, 객체 생성시 입력된 값을 기준으로 head 노드 생성
-    Linked()
-    {
-        head->next = NULL;
-        tail = head->next; // 초기 값이 하나일 때에는 head와 tail은 같다.
-    }
-
-    ~Linked() { cout << "Deleted the list " << endl; } //소멸자
 
     Node<T> *getHead()
     {
@@ -79,52 +64,50 @@ class Linked
         search(current->next);
     }
 
-    void insert(T val)
+    int size()
     {
+        Count = 0;
+        Node<T> *temp = getHead()->next;
+
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+            Count++;
+        }
+    }
+
+  private:
+    Node<T> *haed = new Node<T>();
+    Node<T> *tail = new Node<T>();
+    int Count;
+
+    void printNode(Node<T> *current)
+    {
+        cout << current->data << " ";
+        if (current->next != NULL)
+        {
+            printNode(current->next);
+        }
+    }
+
+    void insertNode(T data)
+    {
+        Node<T> *temp = getHead()->next; // temp : 제일 첫번째 값이 들어가있는 노드
+
+        //  다음을 가리키는 포인터가 비어있는 노드를 반복문을 돌며 찾는다
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+
         Node<T> *newNode = new Node<T>();
-        newNode->data = val;
-        Node<T> *current = search(getHead());
-
-        if (head->next == nullptr)
-        {
-            head->next = newNode;
-        }
-        else
-        {
-            current->next = newNode;
-            tail = newNode;
-        }
-    }
-
-    // 노드 삭제    REVIEW  need modify
-    void deleteNode(Node<T> *current, T val)
-    {
-        if (val == current->next->data)
-        {
-            delete current->next;
-            current->next = current->next->next;
-        }
-        else
-        {
-            deleteNode(current->next);
-        }
-    }
-
-    void printList()
-    {
-        printAllList(getHead());
+        newNode->data = data;
+        temp->next = newNode;
+        tail->next = newNode;
     }
 };
 
 int main(int argc, char const *argv[])
 {
-    Linked<int> *link;
-
-    // link->insert(8);
-    // link->insertNode(7);
-    // link->insertNode(6);
-
-    link->printList();
-
     return 0;
 }
