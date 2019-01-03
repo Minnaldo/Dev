@@ -73,7 +73,7 @@ class dLink
         }
         else
         {
-            // 중간 노드
+            // 중간 노드, TODO
         }
     }
 

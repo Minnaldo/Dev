@@ -117,12 +117,13 @@ class Link
 
     void print(Node<T> *current)
     {
+        cout << "[ ";
         while (current->next != nullptr)
         {
-            cout << current->data << " ";
+            cout << current->data << ", ";
             current = current->next;
         }
-        cout << current->data << " ";
+        cout << current->data << " ]";
     }
 
     void insertNode(T data)
@@ -160,6 +161,7 @@ int main(int argc, char const *argv[])
 
     link->deleteNode(9);
     cout << link->size() << endl;
+    cout << "Value in List : ";
     link->printNode();
     return 0;
 }
