@@ -3,6 +3,7 @@
 /**
  *  * 필요할 때마다 Node를 생성해 데이터를 저장하고 이들을 서로 연결한다.
  *  * Good_Notes -> 낙서 p.27
+ *  * 각 노드에 인덱스 삽입? REVIEW
  *  TODO search function implement
  *  TODO insert node in middle of list
  */

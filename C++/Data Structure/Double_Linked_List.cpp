@@ -3,7 +3,7 @@
 /**
  *  * 노드를 삽입할 때, 정렬을 해서 삽입해야??
  *  * 탐색시 절반이 넘어가면, tail에서부터 탐색해 올 수 있음 ==> 성능에 이점
- *  ! 잘못된 구조로 짜여있음 --> 수정 필요
+ *  * 각 노드에 인덱스 삽입? REVIEW
  */
 
 using namespace std;
@@ -41,8 +41,7 @@ class dLink
         tail->prev = head;
     }
 
-    //TODO need difference perspective
-    // ! 여기서 문제
+    // 리스트 뒤쪽 끝단에 노드 삽입
     void insertNode(T val)
     {
         Node<T> *newNode = new Node<T>();
@@ -59,8 +58,8 @@ class dLink
         {
             // 가장 첫번째 노드, 현재 리스트가 비어있는 상태
             temp->next = newNode;
-            newNode->prev = temp;
             newNode->next = tail;
+            newNode->prev = temp;
             tail->prev = newNode;
         }
         else if (temp == tail->prev)
@@ -71,10 +70,22 @@ class dLink
             newNode->prev = temp;
             tail->prev = newNode;
         }
-        else
-        {
-            // 중간 노드, TODO
-        }
+    }
+
+    // 리스트 중간에 노드 삽입
+    void insertNode(T preVal, T nxtVal, T val)
+    {
+        Node<T> *newNode = new Node<T>();
+        newNode->data = val;
+
+        Node<T> *tempH = search(preVal);
+        Node<T> *tempT = search(nxtVal);
+
+        tempH->next = newNode;
+        newNode->prev = tempH;
+        tempT->prev = newNode;
+        newNode->next = tempT;
+        Count++;
     }
 
     void deleteNode(T val)
@@ -105,13 +116,15 @@ class dLink
 
     void printNode()
     {
-        Node<T> *temp = head; // 주소복사라서 같은 값을 가리킨다.
-
+        Node<T> *temp = head->next; // 주소복사라서 같은 값을 가리킨다.
+        cout << "List : "
+             << "[ ";
         while (temp->next != tail)
         {
-            cout << temp->data << " ";
+            cout << temp->data << ", ";
+            temp = temp->next;
         }
-        // cout << temp->data << endl;
+        cout << temp->data << " ]" << endl;
     }
 
     int size()
@@ -119,6 +132,15 @@ class dLink
         return Count;
     }
 
+    Node<T>* getHead()
+    {
+        return head;
+    }
+
+    Node<T>* getTail()
+    {
+        return tail;
+    }
   private:
     Node<T> *head = new Node<T>();
     Node<T> *tail = new Node<T>();
@@ -154,8 +176,18 @@ int main(int argc, char const *argv[])
     dlink->insertNode(10);
     dlink->insertNode(8);
     dlink->insertNode(7);
-
     dlink->printNode();
 
+    dlink->insertNode(8, 7, 11);    // 중간 삽입
+    dlink->printNode();
+
+    dlink->deleteNode(8);   // 중간 삭제
+    dlink->printNode();
+
+    dlink->deleteNode(9);   // 처음 삭제
+    dlink->printNode();
+
+    dlink->deleteNode(7);   // 마지막 삭제
+    dlink->printNode();
     return 0;
 }
