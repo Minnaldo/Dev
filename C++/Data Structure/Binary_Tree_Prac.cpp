@@ -3,8 +3,6 @@
 
 /** 이진 탐색 트리 참조 (http://jizard.tistory.com/111)
  *  * Node클래스와 Tree클래스를 이용하여 구현
- *  * Node 클래스는 Tree클래스의 friend 클래스
- *  * Tree 클래스의 생성자로 root노드 초기화, 초기값을 받지 않으면 0으로 초기화한다
  */
 
 using namespace std;
@@ -18,11 +16,12 @@ class Node
     friend class Tree<T>;
 
   public:
-    Node(T data = 0, Node *left = NULL, Node *right = NULL)
+    Node(T data = -2000000000, Node *left = nullptr, Node *right = nullptr)
     {
         this->data = data;
         this->left = left;
         this->right = right;
+        parent = nullptr;
     }
 
   private:
@@ -39,16 +38,20 @@ class Tree
     Node<T> *root;
 
   public:
-    Tree(T data = 0)
+    Tree()
     {
-        root = new Node<T>(data);
+        root = new Node<T>();
     }
     Node<T> *getRoot()
     {
         return root;
     }
 
-    void visit(Node<T> *current) { cout << current->data << " "; }
+    // 방문한 노드를 출력하는 함수. REVIEW
+    void visit(Node<T> *current)
+    {
+        cout << current->data << " ";
+    }
 
     T getRootVal()
     {
@@ -124,7 +127,7 @@ class Tree
         inorder(current);
         inorder(current);
     }
-    // 후위순회 : 좌 - 우 - 중
+    // 후위순회 : 좌 - 우 - 중, TODO
     void postorder() {}
 
     // 레벨순회 : BFS로 구현 가능,
