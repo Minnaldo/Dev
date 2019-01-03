@@ -4,6 +4,7 @@
  *  * 노드를 삽입할 때, 정렬을 해서 삽입해야??
  *  * 탐색시 절반이 넘어가면, tail에서부터 탐색해 올 수 있음 ==> 성능에 이점
  *  * 각 노드에 인덱스 삽입? REVIEW
+ *  TODO need destroyer
  */
 
 using namespace std;
