@@ -3,6 +3,7 @@
 /**
  *  * 노드를 삽입할 때, 정렬을 해서 삽입해야??
  *  * 탐색시 절반이 넘어가면, tail에서부터 탐색해 올 수 있음 ==> 성능에 이점
+ *  ! 잘못된 구조로 짜여있음 --> 수정 필요
  */
 
 using namespace std;
@@ -19,7 +20,7 @@ class Node
     {
         next = nullptr;
         prev = nullptr;
-        data = -1;
+        data = -1999999999;
     }
 
   private:
@@ -31,6 +32,7 @@ class Node
 template <typename T>
 class dLink
 {
+  public:
     dLink() // 생성자
     {
         head->prev = nullptr;
@@ -43,9 +45,9 @@ class dLink
     void insertNode(T val)
     {
         Node<T> *newNode = new Node<T>();
-        newNode->data = data;
+        newNode->data = val;
 
-        Node<T> *temp = haed;
+        Node<T> *temp = head;
         while (temp->next != nullptr)
         {
             temp = temp->next;
@@ -54,24 +56,21 @@ class dLink
 
         temp->next = newNode->prev;
         newNode->prev = temp->next;
-        newNode->next = nullptr;
+        newNode->next = tail->prev;
     }
 
     void deleteNode(T val)
     {
-    }
+        Node<T> *temp = search(val);
 
-    void search(T val)
-    {
-        Node<T> *tmphead = head->next;
-        Node<T> *tmptail = tail->prev;
+        Node<T> *prev = temp->prev;
+        Node<T> *nxt = temp->next;
 
-        while (tmphead->data != val && tmptail->data != val)
-        {
-            tmphead = tmphead->next;
-            tmptail = tmptail->prev;
-        }
-        // TODO 추가필요
+        prev->next = nxt->prev;
+        nxt->prev = prev->next;
+
+        Count--;
+        delete temp;
     }
 
     bool isEmpty()
@@ -88,9 +87,9 @@ class dLink
 
     void printNode()
     {
-        Node<T> *temp = head->next;
+        Node<T> *temp = head;
 
-        while (temp->next != nullptr)
+        while (temp->next != nullptr) // ! segfault
         {
             cout << temp->data << " ";
         }
@@ -103,13 +102,42 @@ class dLink
     }
 
   private:
-    Node<T> *haed = new Node<T>();
+    Node<T> *head = new Node<T>();
     Node<T> *tail = new Node<T>();
     int Count;
+
+    Node<T> *search(T val)
+    {
+        Node<T> *tmphead = head->next;
+        Node<T> *tmptail = tail->prev;
+
+        while (tmphead->data != val && tmptail->data != val)
+        {
+            tmphead = tmphead->next;
+            tmptail = tmptail->prev;
+        }
+
+        if (tmphead->data == val)
+        {
+            return tmphead;
+        }
+        else
+        {
+            return tmptail;
+        }
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    dLink<int> *link = new dLink<int>();
+    dLink<int> *dlink = new dLink<int>();
+
+    dlink->insertNode(9);
+    dlink->insertNode(10);
+    dlink->insertNode(8);
+    dlink->insertNode(7);
+
+    dlink->printNode();
+
     return 0;
 }
