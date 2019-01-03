@@ -20,7 +20,7 @@ class Node
     Node()
     {
         next = nullptr;
-        data = -1999999999; // 기본 초기화 값
+        data = -2000000000; // 기본 초기화 값
     }
 
   private:

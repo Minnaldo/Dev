@@ -20,7 +20,7 @@ class Node
     {
         next = nullptr;
         prev = nullptr;
-        data = -1999999999;
+        data = -2000000000;
     }
 
   private:
@@ -37,26 +37,44 @@ class dLink
     {
         head->prev = nullptr;
         tail->next = nullptr;
-        head->next = tail->prev;
-        tail->prev = head->next;
+        head->next = tail;
+        tail->prev = head;
     }
 
     //TODO need difference perspective
+    // ! 여기서 문제
     void insertNode(T val)
     {
         Node<T> *newNode = new Node<T>();
         newNode->data = val;
+        Count++;
 
         Node<T> *temp = head;
-        while (temp->next != nullptr)
+        while (temp->next != tail)
         {
             temp = temp->next;
-            Count++;
         }
 
-        temp->next = newNode->prev;
-        newNode->prev = temp->next;
-        newNode->next = tail->prev;
+        if (temp == head)
+        {
+            // 가장 첫번째 노드, 현재 리스트가 비어있는 상태
+            temp->next = newNode;
+            newNode->prev = temp;
+            newNode->next = tail;
+            tail->prev = newNode;
+        }
+        else if (temp == tail->prev)
+        {
+            // 가장 마지막 노드
+            temp->next = newNode;
+            newNode->next = tail;
+            newNode->prev = temp;
+            tail->prev = newNode;
+        }
+        else
+        {
+            // 중간 노드
+        }
     }
 
     void deleteNode(T val)
@@ -66,8 +84,8 @@ class dLink
         Node<T> *prev = temp->prev;
         Node<T> *nxt = temp->next;
 
-        prev->next = nxt->prev;
-        nxt->prev = prev->next;
+        prev->next = nxt;
+        nxt->prev = prev;
 
         Count--;
         delete temp;
@@ -87,13 +105,13 @@ class dLink
 
     void printNode()
     {
-        Node<T> *temp = head;
+        Node<T> *temp = head; // 주소복사라서 같은 값을 가리킨다.
 
-        while (temp->next != nullptr) // ! segfault
+        while (temp->next != tail)
         {
             cout << temp->data << " ";
         }
-        cout << temp->data << endl;
+        // cout << temp->data << endl;
     }
 
     int size()
