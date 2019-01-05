@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
     }
 
     // 서버는 계속해서 확인하고 응답해야하므로 반복문을 통해 반복한다
-    while (1)
+    while (true)
     {
         // 포트번호 열어두고 listen
         if (-1 == listen(server_socket, 5)) // 소켓을 수동 대기모드로 설정

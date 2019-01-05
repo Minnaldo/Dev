@@ -1,22 +1,26 @@
-#include <pthread.h>
-#include <thread>
 #include <iostream>
+#include <thread>
+
+/**
+ *  *   g++ Thread_Prac.cpp -o Thread_Prac.out --std=c++11 -pthread && ./Thread_Prac.out    ==> 컴파일 옵션
+ */
 
 using namespace std;
 
-pthread_t p[3];
-
-void *show(void *arg)
+void counter(int id, int length)
 {
-    std::cout<<"show!"<<std::endl;
+    for (int i = 1; i <= length; i++)
+    {
+        printf("counter[%d] : %d\n", id, i);
+    }
 }
 
 int main()
 {
-
-    pthread_create(&p[0], NULL, show, NULL );
-
-
+    thread t1(counter, 1, 5);
+    thread t2(counter, 2, 7);
+    t1.join();
+    t2.join();
 
     return 0;
 }

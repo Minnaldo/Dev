@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
     memset(buf, 0x00, MAXLINE); //cstring헤더에 포함 : memset
 
     //여기부터 while문을 통해 반복되게 만든다, 종료 조건은?
-    while (1)
+    while (true)
     {
         if (send(client_socket, buf, MAXLINE, MSG_NOSIGNAL) <= 0)
         {
