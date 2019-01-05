@@ -121,7 +121,7 @@ class Tree
         }
     }
 
-    void ToArray()
+    int *ToArray()
     {
         int *arr = new int[Count + 1];
         int idx = 1;
@@ -132,11 +132,11 @@ class Tree
         while (!treeQue.empty())
         {
             current = treeQue.front();
-            if (current->left != NULL)
+            if (current->left != nullptr)
             {
                 treeQue.push(current->left);
             }
-            if (current->right != NULL)
+            if (current->right != nullptr)
             {
                 treeQue.push(current->right);
             }
@@ -144,6 +144,8 @@ class Tree
             arr[idx++] = treeQue.front()->data;
             treeQue.pop();
         }
+
+        return arr;
     }
 
   public:
@@ -159,36 +161,43 @@ class Tree
     {
         Node<T> *temp = root;
         Node<T> *newNode = new Node<T>();
-        newNode->data = val;
 
-        while (true)
+        if (temp->data == -2000000000)
         {
-            if (temp->data > val)
+            root->data = val;
+        }
+        else
+        {
+            newNode->data = val;
+            while (true)
             {
-                if (temp->left == nullptr)
+                if (temp->data > val)
                 {
-                    temp->left = newNode;
-                    newNode->parent = temp;
-                    cout << "Inserted : " << newNode->data << endl;
-                    break;
+                    if (temp->left == nullptr)
+                    {
+                        temp->left = newNode;
+                        newNode->parent = temp;
+                        cout << "Inserted : " << newNode->data << endl;
+                        break;
+                    }
+                    else
+                    {
+                        temp = temp->left;
+                    }
                 }
-                else
+                else if (temp->data < val)
                 {
-                    temp = temp->left;
-                }
-            }
-            else if (temp->data < val)
-            {
-                if (temp->right == nullptr)
-                {
-                    temp->right = newNode;
-                    newNode->parent = temp;
-                    cout << "Inserted : " << newNode->data << endl;
-                    break;
-                }
-                else
-                {
-                    temp = temp->right;
+                    if (temp->right == nullptr)
+                    {
+                        temp->right = newNode;
+                        newNode->parent = temp;
+                        cout << "Inserted : " << newNode->data << endl;
+                        break;
+                    }
+                    else
+                    {
+                        temp = temp->right;
+                    }
                 }
             }
         }
@@ -227,13 +236,13 @@ class Tree
 
     int *bTreeToArray()
     {
-        ToArray();
+        return ToArray();
     }
 };
 
 int main(int argc, char const *argv[])
 {
-    Tree<int> *tree = new Tree<int>();  //  트리 클래스 객체 생성
+    Tree<int> *tree = new Tree<int>(); //  트리 클래스 객체 생성
 
     tree->insertNode(8);
     tree->insertNode(10);
@@ -248,9 +257,8 @@ int main(int argc, char const *argv[])
     cout << "Node Quantity : " << tree->getNodeCount() << endl;
 
     int *arrayTree = tree->bTreeToArray();
-
-    int size = (sizeof(arrayTree) / sizeof(arrayTree[0])) ;
-
+    int size = tree->getNodeCount();
+    // ? 잘 나온다, 그러나 sizeof를 통한 사이즈를 구하지 못한다
     for (int i = 1; i <= size; i++)
     {
         cout << arrayTree[i] << " ";
