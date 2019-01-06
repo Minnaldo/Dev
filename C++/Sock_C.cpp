@@ -10,6 +10,7 @@
  *  * Client
  *  * LoopBack IP
  *  * Complete
+ *  * Socket(소켓 선언) -> Connect(서버와 연결/ 서버에 접속)    ==> behave
  */
 
 using namespace std;

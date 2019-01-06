@@ -10,6 +10,7 @@
  *  * Server
  *  * LoopBack IP
  *  * Complete
+ *  * Socket(소켓 선언) -> Binding(IP Addr과 Socket을 결합) -> Listen(클라이언트의 접속 대기) -> Accept(클라이언트와 접속 수락) ==> behave
  */
 
 using namespace std;
@@ -22,8 +23,8 @@ int main(int argc, char const *argv[])
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;
 
-    char buf_rcv[MAXLINE];
-    char buf_snd[MAXLINE];
+    char buf_rcv[MAXLINE]; // 수신 버퍼
+    char buf_snd[MAXLINE]; // 송신 버퍼
 
     server_socket = socket(PF_INET, SOCK_STREAM, 0);
     if (-1 == server_socket)
@@ -33,9 +34,9 @@ int main(int argc, char const *argv[])
     }
 
     memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;   // 프로토콜
-    server_addr.sin_port = htons(9999); // 열어둘 포트 번호
-    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_addr.sin_family = AF_INET;                // 프로토콜
+    server_addr.sin_port = htons(9999);              // 열어둘 포트 번호
+    server_addr.sin_addr.s_addr = htonl(INADDR_ANY); // INADDR_ANY ==> 모든 주소 허용
 
     if (-1 == bind(server_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)))
     {
