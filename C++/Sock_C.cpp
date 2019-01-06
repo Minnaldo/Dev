@@ -9,6 +9,7 @@
 /** * the source code that cs style network
  *  * Client
  *  * LoopBack IP
+ *  * Complete
  */
 
 using namespace std;
@@ -61,24 +62,24 @@ int main(int argc, char const *argv[])
             cout << "Send Msg : " << buf << endl;
         }
 
-        // ? 데이터가 날라오지 않는다
         int recv_result = recv(client_socket, buf_rcv, MAXLINE, 0);
         if (recv_result < 0)
         {
-            cerr << "read error\n";
+            cerr << "Receive error\n";
             break;
         }
         else if (recv_result > 0)
         {
-            cout << "receive from server : " << buf_rcv << endl;
-            memset(buf_rcv, 0x00, MAXLINE); // 입력 버퍼 초기화
+            cout << "Receive from server : " << buf_rcv << endl;
+            break;
         }
         else
         {
-            cerr << "read error\n"
+            cerr << "Receive error" << endl
                  << "Server send to me message that size 0" << endl;
             break;
         }
+        memset(buf_rcv, 0x00, MAXLINE); // 입력 버퍼 초기화
     }
     shutdown(client_socket, SHUT_RDWR);
     return 0;
