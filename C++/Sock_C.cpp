@@ -17,6 +17,7 @@ int main(int argc, char const *argv[])
 {
     struct sockaddr_in server_addr;
     char buf[MAXLINE];
+    char buf_rcv[MAXLINE];
     // * 1번째 인자 - 프로토콜 체계 (PF_INET : IPv4, PF_INET6 : IPv6) 이들은 매크로 상수
     // * 2번째 인자 - 서비스 타입 (SOCK_STREAM : TCP, SOCK_DGRAM : UDP)
     int client_socket = socket(PF_INET, SOCK_STREAM, 0); //클라이언트 소켓 설정
@@ -37,25 +38,47 @@ int main(int argc, char const *argv[])
         cerr << "coonect error\n";
         return 1;
     }
+    else
+    {
+        cout << "Coonnect Complete" << endl;
+    }
+
     memset(buf, 0x00, MAXLINE); //cstring헤더에 포함 : memset
 
     //여기부터 while문을 통해 반복되게 만든다, 종료 조건은?
     while (true)
     {
-        if (send(client_socket, buf, MAXLINE, MSG_NOSIGNAL) <= 0)
+        string msg = "test msg\0";
+        strcpy(buf, msg.c_str());
+
+        if (send(client_socket, buf, sizeof(buf), 0) <= 0)
         {
             cerr << "write error\n";
-            return 1;
+            break;
+        }
+        else
+        {
+            cout << "Send Msg : " << buf << endl;
         }
 
-        if (recv(client_socket, buf, MAXLINE, 0) <= 0)
+        // ? 데이터가 날라오지 않는다
+        int recv_result = recv(client_socket, buf_rcv, MAXLINE, 0);
+        if (recv_result < 0)
         {
             cerr << "read error\n";
-            return 1;
+            break;
         }
-
-        cout << "server : " << buf << endl;
-        memset(buf, 0x00, MAXLINE); // 입력 버퍼 초기화
+        else if (recv_result > 0)
+        {
+            cout << "receive from server : " << buf_rcv << endl;
+            memset(buf_rcv, 0x00, MAXLINE); // 입력 버퍼 초기화
+        }
+        else
+        {
+            cerr << "read error\n"
+                 << "Server send to me message that size 0" << endl;
+            break;
+        }
     }
     shutdown(client_socket, SHUT_RDWR);
     return 0;

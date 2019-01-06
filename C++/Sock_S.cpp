@@ -21,8 +21,8 @@ int main(int argc, char const *argv[])
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;
 
-    char buf_rcv[MAXLINE + 5];
-    char buf_snd[MAXLINE + 5];
+    char buf_rcv[MAXLINE];
+    char buf_snd[MAXLINE];
 
     server_socket = socket(PF_INET, SOCK_STREAM, 0);
     if (-1 == server_socket)
@@ -62,13 +62,34 @@ int main(int argc, char const *argv[])
 
         char temp[20]; //접속한 클라이언트의 IP주소를 담을 배열
         inet_ntop(AF_INET, &client_addr.sin_addr.s_addr, temp, sizeof(temp));
-        cout << "Server : " << temp << " client connected\n";
+        cout << temp << " client connected\n";
 
-        recv(client_socket, buf_rcv, MAXLINE, 0);
-        cout << "receive : " << buf_rcv << "\n";
-        cout << buf_snd << strlen(buf_rcv) << " : " << buf_rcv << "\n";
-        send(client_socket, buf_snd, strlen(buf_snd) + 1, 0); //NULL까지 전송
-        shutdown(client_socket, SHUT_RDWR);                   //클라이언트와 연결된 소켓 제거
+        // ! 최대 버퍼 사이즈(MAXLINE) 만큼의 데이터를 가져와 buf에 저장
+        // ! recv함수는 가져온 byte길이를 리턴
+        int result = recv(client_socket, buf_rcv, MAXLINE, 0);
+
+        if (result < 0)
+        {
+            cerr << "receive Error" << endl;
+            break;
+        }
+        else if (result > 0)
+        {
+            cout << "rcv_size : " << strlen(buf_rcv) << "    receive : " << buf_rcv << "\n";
+            // cout << buf_snd << strlen(buf_rcv) << " : " << buf_rcv << "\n";
+            string rcv_str = buf_rcv;
+            strcpy(buf_snd, rcv_str.c_str());
+            send(client_socket, buf_snd, sizeof(buf_snd), 0); //NULL까지 전송, echo
+            shutdown(client_socket, SHUT_RDWR);               //클라이언트와 연결된 소켓 제거
+        }
+        else
+        {
+            cout << "Client send to me message that size 0" << endl;
+            break;
+        }
+
+        memset(buf_snd, 0x00, MAXLINE);
+        memset(buf_rcv, 0x00, MAXLINE);
     }
     shutdown(server_socket, SHUT_RDWR);
 
