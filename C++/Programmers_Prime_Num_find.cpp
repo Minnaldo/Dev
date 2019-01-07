@@ -8,27 +8,28 @@
  *  @param pNum : 소수 테이블, vec : 숫자 조합 케이스 저장
  *  REVIEW
  *  * 순열의 경우를 구한다. nP1 ~ nPn 까지, 이를 vec배열에 넣고, 중복 제거, 그리고 소수테이블과 비교하여 카운팅
+ *  현재 코드는 최적화 버전
  */
 
 using namespace std;
 
-int pNum[2][10000000];
+int pNum[10000000];
 vector<int> vec;
 
 // Generate PrimeNumber Table
-void table()
+void table(int max)
 {
-    for (int i = 2; i <= 10000000; i++)
+    for (int i = 2; i <= max; i++)
     {
-        pNum[0][i] = i;
+        pNum[i] = i;
     }
 
-    for (int i = 2; i <= 10000000; i++)
+    for (int i = 2; i <= max; i++)
     {
-        if (pNum[0][i] != 0)
+        if (pNum[i] != 0)
         {
-            for (int j = i * 2; j <= 10000000; j += i)
-                pNum[0][j] = 0;
+            for (int j = i * 2; j <= max; j += i)
+                pNum[j] = 0;
         }
     }
 }
@@ -46,6 +47,9 @@ void perm(int *arr, int depth, int n, int r)
     if (depth == r)
     {
         string str = "";
+
+        // ! 범위를 r까지 해주어야 제대로 나옴
+        // 순열 구하기 참조 : http://swlock.blogspot.com/2016/03/permutation-algorithm.html
         for (int i = 0; i < r; i++)
         {
             str += (arr[i] + '0');
@@ -68,8 +72,6 @@ int solution(string numbers)
     int size = numbers.size();
     int *arr = new int[size];
 
-    table();
-
     for (int i = 0; i < size; i++)
     {
         arr[i] = numbers[i] - '0';
@@ -86,27 +88,32 @@ int solution(string numbers)
     int vSize = vec.size();
     int idx = 0;
 
+    cout << "vec : ";
     for (int i = 0; i < vSize; i++)
     {
         cout << vec[i] << " ";
     }
     cout << endl;
 
+    table(vec[vSize - 1]);
+
     for (int i = 0; i < vSize; i++)
     {
         idx = vec[i];
-        if (idx > 1 && pNum[0][idx] != 0 && pNum[1][idx] == 0)
+        if (idx > 1 && pNum[idx] != 0)
         {
-            pNum[1][idx] = 1;
             answer++;
         }
     }
+
     return answer;
 }
 
 int main(int argc, char const *argv[])
 {
-    string str = "017";
-    cout << solution(str) << endl;
+    string str = "17";
+    int answer = solution(str);
+
+    cout << "Answer : " << answer << endl;
     return 0;
 }
