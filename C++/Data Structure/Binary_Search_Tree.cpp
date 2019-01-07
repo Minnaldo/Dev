@@ -6,8 +6,6 @@
  *  * root노드의 값을 무엇으로 설정할 것인가??
  */
 
-
-
 using namespace std;
 
 template <typename T>
