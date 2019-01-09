@@ -1,5 +1,4 @@
 #include <arpa/inet.h>
-#include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <sys/socket.h>
@@ -50,13 +49,13 @@ int main(int argc, char const *argv[])
     //여기부터 while문을 통해 반복되게 만든다, 종료 조건은?
     while (true)
     {
-        string msg = "test msg\0";
+        string msg = "test msg";
         strcpy(buf, msg.c_str());
 
         if (send(client_socket, buf, sizeof(buf), 0) <= 0)
         {
             cerr << "write error\n";
-            break;
+            exit(1);
         }
         else
         {
@@ -67,7 +66,7 @@ int main(int argc, char const *argv[])
         if (recv_result < 0)
         {
             cerr << "Receive error\n";
-            break;
+            exit(1);
         }
         else if (recv_result > 0)
         {
@@ -78,7 +77,7 @@ int main(int argc, char const *argv[])
         {
             cerr << "Receive error" << endl
                  << "Server send to me message that size 0" << endl;
-            break;
+            exit(1);
         }
         memset(buf_rcv, 0x00, MAXLINE); // 입력 버퍼 초기화
     }
