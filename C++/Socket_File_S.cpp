@@ -37,11 +37,13 @@ int main(int argc, char const *argv[])
     server_Addr.sin_port = htons(9999);              //sin_port : socket_internet_port, htons : host ~~~
     server_Addr.sin_addr.s_addr = htonl(INADDR_ANY); //INADDR_ANY : allow all addr
 
-    SocketOpt = 1;
+    SocketOpt = 1;                                                                      //Socket Option
     setsockopt(server_Socket, SOL_SOCKET, SO_REUSEADDR, &SocketOpt, sizeof(SocketOpt)); // bind 에러시 포트를 다시 사용할 수 있도록 해주는 부분
 
     // REVIEW 2번째 인자를 왜 이렇게 해야되는가?
-    if (bind(server_Socket, (struct sockaddr *)&server_Addr, sizeof(server_Addr) == -1))
+    // ! 코드 작성 실수 !! bind() 내에 비교문을 넣어 에러가 발생하였음
+    // ! 이런 사소한 실수는 항상 조심하고 또 조심해야 함!
+    if (bind(server_Socket, (struct sockaddr *)&server_Addr, sizeof(server_Addr)) == -1)
     {
         //error_hadling
         cout << "Binding Error" << endl;
@@ -96,7 +98,7 @@ int main(int argc, char const *argv[])
                     file.read(buf_snd, sizeof(buf_snd));
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
-                file.close();   // 열린 파일 닫기
+                file.close(); // 열린 파일 닫기
 
                 string str = "Transmission Complete";
                 send(client_Socket, str.c_str(), sizeof(str.c_str()), 0);
