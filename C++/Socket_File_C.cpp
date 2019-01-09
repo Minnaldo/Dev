@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
         }
 
         ofstream file;
-        file.open(buf_snd, ios::in | ios::binary);
+        file.open(buf_snd, ios::out | ios::binary);
 
         if (file.is_open())
         {

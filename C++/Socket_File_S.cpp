@@ -85,7 +85,10 @@ int main(int argc, char const *argv[])
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
 
-                if (shutdown(client_Socket, SHUT_WR) == -1) // 전송 소켓 닫음
+                string str = "Transmission Complete";
+                send(client_Socket, str.c_str(), sizeof(str.c_str()), 0);
+
+                if (shutdown(client_Socket, SHUT_RDWR) == -1) // 전송 소켓 닫음
                 {
                     // error_handling
                     cout << "ShutDown Error" << endl;
