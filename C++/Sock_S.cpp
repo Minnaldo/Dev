@@ -1,5 +1,4 @@
 #include <arpa/inet.h>
-#include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <sys/socket.h>
@@ -11,6 +10,7 @@
  *  * LoopBack IP
  *  * Complete
  *  * Socket(소켓 선언) -> Binding(IP Addr과 Socket을 결합) -> Listen(클라이언트의 접속 대기) -> Accept(클라이언트와 접속 수락) ==> behave
+ *  파일 전송 플로우 차트(https://drive.google.com/open?id=1t938SzD6U5HK82GmzZphaKZHbBEMYgDl)
  */
 
 using namespace std;
