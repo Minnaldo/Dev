@@ -8,6 +8,7 @@
 #define local_host "127.0.0.1"
 #define port 9999
 
+
 using namespace std;
 
 int main(int argc, char const *argv[])
@@ -42,9 +43,9 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        string filename;
+        string filename = "test.txt";
         cout << "input the file name" << endl;
-        cin >> filename;
+        // cin >> filename;
         strcpy(buf_snd, filename.c_str());
 
         if (send(client_Socket, buf_snd, sizeof(buf_snd), 0) == -1)
@@ -53,8 +54,9 @@ int main(int argc, char const *argv[])
             exit(1);
         }
 
+        string fileSaveDir="./Client_Test.txt";
         ofstream file;
-        file.open(buf_snd, ios::out | ios::binary);
+        file.open(fileSaveDir, ios::out | ios::binary);
 
         if (file.is_open())
         {

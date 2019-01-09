@@ -4,9 +4,10 @@
 #include <iostream>
 #include <sys/socket.h>
 
-// #define BUF_SIZE 1024 서버는 주소 설정이 필요 없다
-#define local_host "127.0.0.1"
+// #define local_host "127.0.0.1"   서버는 주소 설정이 필요 없다
+#define BUF_SIZE 1024
 #define port 9999
+#define fileDir "./FileTransferTest/"
 
 using namespace std;
 
@@ -74,8 +75,11 @@ int main(int argc, char const *argv[])
         {
             cout << "Receive Size : " << sizeof(buf_rcv) << " File Name : " << buf_rcv << endl;
 
+            string dir = fileDir;
+            dir += buf_rcv; // 파일 이름과 경로 설정
+
             ifstream file;
-            file.open(buf_rcv, ios::in | ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
+            file.open(dir, ios::in | ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
 
             if (file.is_open())
             {
