@@ -6,7 +6,7 @@
 
 // #define local_host "127.0.0.1"   서버는 주소 설정이 필요 없다
 #define BUF_SIZE 1024
-#define port 9999
+#define PORT 9999
 #define fileDir "./FileTransferTest/"
 
 using namespace std;
@@ -15,6 +15,7 @@ int main(int argc, char const *argv[])
 {
     int server_Socket;
     int client_Socket;
+    int SocketOpt;
 
     struct sockaddr_in server_Addr;
     struct sockaddr_in client_Addr;
@@ -27,24 +28,30 @@ int main(int argc, char const *argv[])
     if (server_Socket == -1)
     {
         // error_handling
+        cout << "Socket Error" << endl;
         exit(1);
     }
 
     memset(&server_Addr, 0, sizeof(server_Addr));    //구조체라서 초기화 필요
     server_Addr.sin_family = AF_INET;                //sin_family : socket_Internet_family
-    server_Addr.sin_port = htons(port);              //sin_port : socket_internet_port, htons : host ~~~
+    server_Addr.sin_port = htons(9999);              //sin_port : socket_internet_port, htons : host ~~~
     server_Addr.sin_addr.s_addr = htonl(INADDR_ANY); //INADDR_ANY : allow all addr
+
+    SocketOpt = 1;
+    setsockopt(server_Socket, SOL_SOCKET, SO_REUSEADDR, &SocketOpt, sizeof(SocketOpt)); // bind 에러시 포트를 다시 사용할 수 있도록 해주는 부분
 
     // REVIEW 2번째 인자를 왜 이렇게 해야되는가?
     if (bind(server_Socket, (struct sockaddr *)&server_Addr, sizeof(server_Addr) == -1))
     {
         //error_hadling
+        cout << "Binding Error" << endl;
         exit(1);
     }
 
     if (listen(server_Socket, 5) == -1) //소켓 수동 모드
     {
         //error_handling
+        cout << "Listenning Error" << endl;
         exit(1);
     }
 
@@ -56,6 +63,7 @@ int main(int argc, char const *argv[])
         if (client_Socket == -1)
         {
             //accept error_handling, 클라이언트 연결 수락 실패
+            cout << "Accept Error" << endl;
             exit(1);
         }
 
@@ -88,6 +96,7 @@ int main(int argc, char const *argv[])
                     file.read(buf_snd, sizeof(buf_snd));
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
+                file.close();   // 열린 파일 닫기
 
                 string str = "Transmission Complete";
                 send(client_Socket, str.c_str(), sizeof(str.c_str()), 0);
@@ -110,7 +119,8 @@ int main(int argc, char const *argv[])
                 exit(1);
             }
         }
-    }
+        shutdown(server_Socket, SHUT_RDWR);
+    } //end while
 
     return 0;
 }

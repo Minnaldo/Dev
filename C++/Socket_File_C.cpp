@@ -21,6 +21,7 @@ int main(int argc, char const *argv[])
     if (client_Socket == -1)
     {
         //error_handling
+        cout<<"Socket Error"<<endl;
         exit(1);
     }
 
@@ -34,6 +35,7 @@ int main(int argc, char const *argv[])
     if (connect(client_Socket, (struct sockaddr *)&server_Addr, client_Size) == -1)
     {
         // erroer_handling
+        cout<<"Connect Eorror"<<endl;
         exit(1);
     }
     else
@@ -51,6 +53,7 @@ int main(int argc, char const *argv[])
         if (send(client_Socket, buf_snd, sizeof(buf_snd), 0) == -1)
         {
             //error handling
+            cout<<"Sending Error"<<endl;
             exit(1);
         }
 
@@ -68,6 +71,7 @@ int main(int argc, char const *argv[])
                     file.write(buf_rcv, rcv_Byte);
                 }
                 cout << "File Download Complete" << endl;
+                file.close();   // 열린 파일 닫기
             }
             else
             {
