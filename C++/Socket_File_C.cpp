@@ -6,8 +6,11 @@
 
 #define BUF_SIZE 1024
 #define local_host "127.0.0.1"
-#define port 9999
+#define PORT 9999
 
+/**
+ *  * 전송 성공 그러나, 원래 파일 값 뒤에 쓰레기값이 붙는다
+ */
 
 using namespace std;
 
@@ -28,7 +31,7 @@ int main(int argc, char const *argv[])
     struct sockaddr_in server_Addr;
     server_Addr.sin_family = AF_INET;
     server_Addr.sin_addr.s_addr = inet_addr(local_host);
-    server_Addr.sin_port = htons(port);
+    server_Addr.sin_port = htons(PORT);
 
     socklen_t client_Size = sizeof(server_Addr);
 
@@ -46,7 +49,7 @@ int main(int argc, char const *argv[])
     while (true)
     {
         string filename = "test.txt";
-        cout << "input the file name" << endl;
+        // cout << "input the file name" << endl;
         // cin >> filename;
         strcpy(buf_snd, filename.c_str());
 
@@ -69,9 +72,12 @@ int main(int argc, char const *argv[])
                 while (rcv_Byte != 0)
                 {
                     file.write(buf_rcv, rcv_Byte);
+                    rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 }
                 cout << "File Download Complete" << endl;
                 file.close();   // 열린 파일 닫기
+                shutdown(client_Socket, SHUT_RDWR);
+                return 0;
             }
             else
             {

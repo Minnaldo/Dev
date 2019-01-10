@@ -4,6 +4,10 @@
 #include <iostream>
 #include <sys/socket.h>
 
+/**
+ *  * 전송 성공 그러나, 원래 파일 값 뒤에 쓰레기값이 붙는다
+ */
+
 // #define local_host "127.0.0.1"   서버는 주소 설정이 필요 없다
 #define BUF_SIZE 1024
 #define PORT 9999
@@ -34,7 +38,7 @@ int main(int argc, char const *argv[])
 
     memset(&server_Addr, 0, sizeof(server_Addr));    //구조체라서 초기화 필요
     server_Addr.sin_family = AF_INET;                //sin_family : socket_Internet_family
-    server_Addr.sin_port = htons(9999);              //sin_port : socket_internet_port, htons : host ~~~
+    server_Addr.sin_port = htons(PORT);              //sin_port : socket_internet_port, htons : host ~~~
     server_Addr.sin_addr.s_addr = htonl(INADDR_ANY); //INADDR_ANY : allow all addr
 
     SocketOpt = 1;                                                                      //Socket Option
@@ -74,7 +78,7 @@ int main(int argc, char const *argv[])
         cout << "Client Connection Success" << endl;
 
         int rcv_Byte = recv(client_Socket, buf_rcv, BUF_SIZE, 0);
-
+        cout << "Request File : " << buf_rcv << endl;
         if (rcv_Byte < 0)
         {
             //error handling
@@ -107,10 +111,12 @@ int main(int argc, char const *argv[])
                 {
                     // error_handling
                     cout << "ShutDown Error" << endl;
+                    exit(1);
                 }
                 else
                 {
                     cout << "Shutdown Complete" << endl;
+                    break;
                 }
             }
             else
@@ -121,7 +127,6 @@ int main(int argc, char const *argv[])
                 exit(1);
             }
         }
-        shutdown(server_Socket, SHUT_RDWR);
     } //end while
 
     return 0;
