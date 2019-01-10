@@ -5,7 +5,8 @@
 #include <sys/socket.h>
 
 /**
- *  * 전송 성공 그러나, 원래 파일 값 뒤에 쓰레기값이 붙는다
+ *  * 전송 성공
+ *  * 파일의 내용이 깨지는 현상 발생
  */
 
 // #define local_host "127.0.0.1"   서버는 주소 설정이 필요 없다
@@ -92,20 +93,30 @@ int main(int argc, char const *argv[])
             string dir = fileDir;
             dir += buf_rcv; // 파일 이름과 경로 설정
 
-            ifstream file;
-            file.open(dir, ios::in | ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
+            fstream fout;
+            fout.open(dir, ios::in); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
 
-            if (file.is_open())
+            if (fout.is_open())
             {
-                while (!file.eof())
+                cout << "File Opend" << endl;
+                // 연 파일의 크기를 가져온다,
+                fout.seekg(0, ios::end); // 파일의 마지막으로 파일포인터를 옮긴다
+                int size = fout.tellg(); // 파일포인터가 몇번째인지 출력 : 이는 바이트 크기이므로 곧 파일의 크기가 됨
+                char fileSize[4] = {0};
+                *((int *)fileSize) = size;
+                cout << "File Size : " << size << endl;
+                send(client_Socket, fileSize, sizeof(fileSize), 0); // 파일 크기를 보낸다
+
+                while (!fout.eof())
                 {
-                    file.read(buf_snd, sizeof(buf_snd));
+                    fout.read(buf_snd, sizeof(buf_snd));
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
-                file.close(); // 열린 파일 닫기
+                fout.close(); // 열린 파일 닫기
 
                 string str = "Transmission Complete";
-                send(client_Socket, str.c_str(), sizeof(str.c_str()), 0);
+                memcpy(buf_snd, str.c_str(), sizeof(str.c_str()));
+                send(client_Socket, buf_snd, sizeof(buf_snd), 0);
 
                 if (shutdown(client_Socket, SHUT_RDWR) == -1) // 전송 소켓 닫음
                 {

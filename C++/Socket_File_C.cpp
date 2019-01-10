@@ -4,14 +4,14 @@
 #include <iostream>
 #include <sys/socket.h>
 
+/**
+ *  * 전송 성공
+ *  * 파일의 내용이 깨지는 현상 발생
+ */
+
 #define BUF_SIZE 1024
 #define local_host "127.0.0.1"
 #define PORT 9999
-
-/**
- *  * 전송 성공 그러나, 원래 파일 값 뒤에 쓰레기값이 붙는다
- *  ? 파일을 받는 while문에서 문제인가??
- */
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
     if (client_Socket == -1)
     {
         //error_handling
-        cout<<"Socket Error"<<endl;
+        cout << "Socket Error" << endl;
         exit(1);
     }
 
@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
     if (connect(client_Socket, (struct sockaddr *)&server_Addr, client_Size) == -1)
     {
         // erroer_handling
-        cout<<"Connect Eorror"<<endl;
+        cout << "Connect Eorror" << endl;
         exit(1);
     }
     else
@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        string filename = "test.txt";
+        string filename = "testText.txt";
         // cout << "input the file name" << endl;
         // cin >> filename;
         strcpy(buf_snd, filename.c_str());
@@ -57,28 +57,39 @@ int main(int argc, char const *argv[])
         if (send(client_Socket, buf_snd, sizeof(buf_snd), 0) == -1)
         {
             //error handling
-            cout<<"Sending Error"<<endl;
+            cout << "Sending Error" << endl;
             exit(1);
         }
 
-        string fileSaveDir="./Client_Test.txt";
-        ofstream file;
-        file.open(fileSaveDir, ios::out | ios::binary);
+        string fileSaveDir = "./Client_Test.txt";
+        fstream fin;
+        fin.open(fileSaveDir, ios::out);
 
-        if (file.is_open())
+        if (fin.is_open())
         {
+            char size[4] = {0};
+            cout << "File Opend" << endl;
+            recv(client_Socket, size, sizeof(buf_rcv), 0); // 파일 크기 수신
+            int fileSize = *((int *)size);                 // TODO 다른 소켓 정수보내는법을 찾아보자
+            cout << "File Size : " << fileSize << endl;
+
             int rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
             if (rcv_Byte >= 0)
             {
                 // TODO
-                // ? 바이너리 모드가 문제인가???
-                while (rcv_Byte != 0)
+                // ! 수신 된 파일은 바이너리 모드로 aaplication/octet-stream charset=binay로 되어있음
+                // ! 테스트 파일 : text/plain; charset=utf-8
+                while (fileSize > 0)
                 {
-                    file.write(buf_rcv, rcv_Byte);
+                    fileSize -= rcv_Byte;
+                    fin.write(buf_rcv, sizeof(buf_rcv));
                     rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 }
                 cout << "File Download Complete" << endl;
-                file.close();   // 열린 파일 닫기
+                fin.close(); // 열린 파일 닫기
+
+                recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
+                cout << buf_rcv << endl; // ! 메세지가 잘림
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
             }
