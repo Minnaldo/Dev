@@ -2,7 +2,7 @@
 #include <thread>
 
 /**
- *  *   g++ Thread_Prac.cpp -o Thread_Prac.out --std=c++11 -pthread && ./Thread_Prac.out    ==> 컴파일 옵션
+ *  *   g++ Thread_Prac.cpp -o Thread_Prac.out -pthread && ./Thread_Prac.out    ==> 컴파일 옵션
  */
 
 using namespace std;
