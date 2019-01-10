@@ -10,6 +10,7 @@
 
 /**
  *  * 전송 성공 그러나, 원래 파일 값 뒤에 쓰레기값이 붙는다
+ *  ? 파일을 받는 while문에서 문제인가??
  */
 
 using namespace std;
@@ -69,6 +70,8 @@ int main(int argc, char const *argv[])
             int rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
             if (rcv_Byte >= 0)
             {
+                // TODO
+                // ? 바이너리 모드가 문제인가???
                 while (rcv_Byte != 0)
                 {
                     file.write(buf_rcv, rcv_Byte);
