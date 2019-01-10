@@ -5,6 +5,11 @@
 #include <sys/socket.h>
 
 /**
+ *  * 참조 : (http://forum.falinux.com/zbxe/index.php?document_srl=431494&mid=C_LIB)
+ *  * http://luckyyowu.tistory.com/75?category=755949
+ *  * https://stackoverrun.com/ko/q/4190527
+ *  * http://blog.naver.com/PostView.nhn?blogId=soulsieg&logNo=70132116026
+ *  * https://stackoverflow.com/questions/2014033/send-and-receive-a-file-in-socket-programming-in-linux-with-c-c-gcc-g
  *  * 전송 성공
  *  * 파일의 내용이 깨지는 현상 발생
  */
@@ -109,6 +114,7 @@ int main(int argc, char const *argv[])
 
                 while (!fout.eof())
                 {
+                    cout<<buf_snd<<endl;
                     fout.read(buf_snd, sizeof(buf_snd));
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }

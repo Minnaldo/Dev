@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
 
         string fileSaveDir = "./Client_Test.txt";
         fstream fin;
-        fin.open(fileSaveDir, ios::out);
+        fin.open(fileSaveDir, ios::out|ios::binary);
 
         if (fin.is_open())
         {
@@ -82,6 +82,7 @@ int main(int argc, char const *argv[])
                 while (fileSize > 0)
                 {
                     fileSize -= rcv_Byte;
+                    cout<<buf_rcv<<endl;
                     fin.write(buf_rcv, sizeof(buf_rcv));
                     rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 }
