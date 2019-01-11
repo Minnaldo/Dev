@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <sys/socket.h>
+#include <unistd.h>
 
 /**
  *  * 참조 : (http://forum.falinux.com/zbxe/index.php?document_srl=431494&mid=C_LIB)
@@ -99,7 +100,7 @@ int main(int argc, char const *argv[])
             dir += buf_rcv; // 파일 이름과 경로 설정
 
             fstream fout;
-            fout.open(dir, ios::in); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
+            fout.open(dir, ios::in|ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
 
             if (fout.is_open())
             {
@@ -115,7 +116,7 @@ int main(int argc, char const *argv[])
                 while (!fout.eof())
                 {
                     cout<<buf_snd<<endl;
-                    fout.read(buf_snd, sizeof(buf_snd));
+                    fout.read(reinterpret_cast<char *>(&buf_snd), sizeof(buf_snd));
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
                 fout.close(); // 열린 파일 닫기

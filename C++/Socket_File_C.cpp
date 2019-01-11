@@ -82,15 +82,17 @@ int main(int argc, char const *argv[])
                 while (fileSize > 0)
                 {
                     fileSize -= rcv_Byte;
-                    cout<<buf_rcv<<endl;
-                    fin.write(buf_rcv, sizeof(buf_rcv));
+                    // cout<<buf_rcv<<endl;
+                    fin.write(reinterpret_cast<const char *>(&buf_rcv), rcv_Byte);
+                    // memset(buf_rcv, 0, sizeof(buf_rcv));
+                    // cout<<"test"<<buf_rcv<<endl;
                     rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 }
                 cout << "File Download Complete" << endl;
                 fin.close(); // 열린 파일 닫기
-
+                memset(buf_rcv, 0, sizeof(buf_rcv));
                 recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
-                cout << buf_rcv << endl; // ! 메세지가 잘림
+                // cout << buf_rcv << endl; // ! 메세지가 잘림
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
             }
