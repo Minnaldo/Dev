@@ -2,18 +2,19 @@
 #include <string>
 #include <vector>
 
+/**
+ *  ! segFault
+ */
+
 using namespace std;
 
 // dp[n] = n일째 남아있는 밀가루 양
 int dp[100001];
+int idx;
 
-int max_Dates(int a, int b, int aidx, int bidx)
+int max(int a, int b, int aIdx, int bIdx)
 {
-    return a > b ? aidx : bidx;
-}
-
-int max(int &a, int &b)
-{
+    idx = a > b ? aIdx : bIdx;
     return a > b ? a : b;
 }
 
@@ -26,35 +27,32 @@ int solution(int stock, vector<int> dates, vector<int> supplies, int k)
 
     dp[1] = stock;
 
-    for (int i = 1; i <= dSize; i++)
+    for (int i = 0; i < dSize; i++)
     {
+        // dates[i] 날짜에 얻을 수 있는 밀가루 양
         dp[dates[i]] = tmpStock - dates[i] + supplies[i];
 
-        for (int j = i + 1; j <= dSize; j++)
+        for (int j = 0; j < dSize; j++)
         {
-            // n+1일 ~ n+supplise[n] 사이의 공급받을 수 있는 날짜
-            if (dp[i] > dates[j])
+            // n+1일 ~ n+supplise[n] 사이의 공급받을 수 있는 날짜, dp[dates[]]
+            if (dp[i] - dates[j] >= 0)
             {
                 tmpVec.push_back(j);
             }
         }
 
         int tVecSize = tmpVec.size();
-        int idx = 0;
-        int tmpStk = 0;
-        int todayStock = dp[i];
-        for (int k = 0; k < tVecSize - 1; k++)
+
+        dp[dates[tmpVec[0]]] = dp[i] - dates[tmpVec[0]] + supplies[tmpVec[0]];
+        // i 일째 기준으로 버틸 수 있는 날짜에 밀가루 공급받을 경우 중 가장 오래 버틸 수 있는 경우
+        for (int k = 1; k < tVecSize; k++)
         {
-            // 오늘 공급 받았을때 버틸 수 있는 공급일 배열 : tmpVec
-            tmpStk = max(todayStock - dates[tmpVec[k]] + supplies[tmpVec[k]], tmpStk);
-            idx = max_Dates(todayStock - dates[tmpVec[k]] + supplies[tmpVec[k]], todayStock - dates[tmpVec[k+1]] + supplies[tmpVec[k+1]], tmpVec[k], tmpVec[k + 1]); // 가장 오랫동안 버틸 수 있는 공급일자의 인덱스
+            dp[dates[tmpVec[k]]] = max((dp[i] - dates[tmpVec[k]] + supplies[tmpVec[k]]), dp[dates[tmpVec[k - 1]]], tmpVec[k], tmpVec[k - 1]);
         }
-
-        dp[idx] = tmpStk;
         answer++;
-
         if (dp[idx] >= k - 1) // 위에서 구한 dates에 공급을 받았을 때, 저장량이 k-1보다 클 경우 종료
         {
+            answer++;
             return answer;
         }
     }
