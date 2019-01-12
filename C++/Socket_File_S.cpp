@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
@@ -21,6 +22,15 @@
 #define fileDir "./FileTransferTest/"
 
 using namespace std;
+
+void printByte(char *buf)
+{
+    int size = sizeof(buf) / sizeof(buf[0]);
+    for (int i = 0; i < size; i++)
+    {
+        printf("%c", buf[i]);
+    }
+}
 
 int main(int argc, char const *argv[])
 {
@@ -82,8 +92,6 @@ int main(int argc, char const *argv[])
             exit(1);
         }
 
-
-
         char temp[20];
         inet_ntop(AF_INET, &client_Addr.sin_addr.s_addr, temp, sizeof(temp)); // 클라이언트의 주소를 가져옴
         cout << "Client Connection Success" << endl;
@@ -98,7 +106,7 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            cout << "Receive Size : " << sizeof(buf_rcv) << " File Name : " << buf_rcv << endl;
+            cout << "Receive Size : " << sizeof(buf_rcv) << " Rcv Data : " << buf_rcv << endl;
 
             string dir = fileDir;
             dir += buf_rcv; // 파일 이름과 경로 설정
@@ -114,20 +122,21 @@ int main(int argc, char const *argv[])
                 int size = fout.tellg(); // 파일포인터가 몇번째인지 출력 : 이는 바이트 크기이므로 곧 파일의 크기가 됨
                 char fileSize[4] = {0};
                 *((int *)fileSize) = size;
-                cout << "File Size : " << size << endl;
-                send(client_Socket, fileSize, sizeof(fileSize), 0); // 파일 크기를 보낸다
+                write(client_Socket, fileSize, sizeof(fileSize)); // 파일 크기를 보낸다
+                cout << "File Size : " << size << endl;           // @param File Size
 
+                //NOTE
                 while (!fout.eof())
                 {
-                    cout << buf_snd << endl;
-                    fout.read(reinterpret_cast<char *>(&buf_snd), sizeof(buf_snd));
-                    send(client_Socket, buf_snd, sizeof(buf_snd), 0);
+                    fout.read(buf_snd, sizeof(buf_snd));
+                    printByte(buf_snd);
+                    write(client_Socket, buf_snd, sizeof(buf_snd));
                 }
                 fout.close(); // 열린 파일 닫기
 
-                string str = "Transmission Complete";
-                memcpy(buf_snd, str.c_str(), sizeof(str.c_str()));
-                send(client_Socket, buf_snd, sizeof(buf_snd), 0);
+                // string str = "Transmission Complete";
+                // memcpy(buf_snd, str.c_str(), sizeof(str.c_str()));
+                // write(client_Socket, buf_snd, sizeof(buf_snd));
 
                 if (shutdown(client_Socket, SHUT_RDWR) == -1) // 전송 소켓 닫음
                 {

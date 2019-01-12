@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
@@ -16,8 +17,19 @@
 
 using namespace std;
 
+void printByte(char *buf)
+{
+    int size = sizeof(buf) / sizeof(buf[0]);
+    for (int i = 0; i < size; i++)
+    {
+        printf("%c", buf[i]);
+    }
+}
+
 int main(int argc, char const *argv[])
 {
+    FILE *file;
+
     char buf_rcv[BUF_SIZE];
     char buf_snd[BUF_SIZE];
 
@@ -70,29 +82,25 @@ int main(int argc, char const *argv[])
         {
             char size[4] = {0};
             cout << "File Opend" << endl;
-            recv(client_Socket, size, sizeof(buf_rcv), 0); // 파일 크기 수신
-            int fileSize = *((int *)size);                 // TODO 다른 소켓 정수보내는법을 찾아보자
-            cout << "File Size : " << fileSize << endl;
+            read(client_Socket, size, sizeof(buf_rcv)); // 파일 크기 수신
+            int fileSize = *((int *)size);              // TODO 다른 소켓 정수보내는법을 찾아보자
+            cout << "File Size : " << fileSize << endl; // @param File Size
 
-            int rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
+            int rcv_Byte = read(client_Socket, buf_rcv, sizeof(buf_rcv));
             if (rcv_Byte >= 0)
             {
-                // TODO
-                // ! 수신 된 파일은 바이너리 모드로 aaplication/octet-stream charset=binay로 되어있음
-                // ! 테스트 파일 : text/plain; charset=utf-8
+                //NOTE
                 while (fileSize > 0)
                 {
                     fileSize -= rcv_Byte;
-                    // cout<<buf_rcv<<endl;
-                    fin.write(reinterpret_cast<const char *>(&buf_rcv), rcv_Byte);
-                    // memset(buf_rcv, 0, sizeof(buf_rcv));
-                    // cout<<"test"<<buf_rcv<<endl;
-                    rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
+                    printByte(buf_rcv);
+                    fin.write(buf_rcv, rcv_Byte);
+                    rcv_Byte = read(client_Socket, buf_rcv, sizeof(buf_rcv));
                 }
                 cout << "File Download Complete" << endl;
                 fin.close(); // 열린 파일 닫기
                 memset(buf_rcv, 0, sizeof(buf_rcv));
-                recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
+                read(client_Socket, buf_rcv, sizeof(buf_rcv));
                 // cout << buf_rcv << endl; // ! 메세지가 잘림
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
