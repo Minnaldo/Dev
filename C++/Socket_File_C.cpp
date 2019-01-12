@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <sys/socket.h>
+#include <unistd.h>
 
 /**
  *  * 전송 성공

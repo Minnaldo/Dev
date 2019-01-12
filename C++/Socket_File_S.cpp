@@ -73,12 +73,16 @@ int main(int argc, char const *argv[])
         socklen_t client_Addr_size = sizeof(client_Addr); //REVIEW  why need client_Addr_size;
         client_Socket = accept(server_Socket, (struct sockaddr *)&client_Addr, &client_Addr_size);
 
+        cout << "Server is waiting for Client..." << endl;
+
         if (client_Socket == -1)
         {
             //accept error_handling, 클라이언트 연결 수락 실패
             cout << "Accept Error" << endl;
             exit(1);
         }
+
+
 
         char temp[20];
         inet_ntop(AF_INET, &client_Addr.sin_addr.s_addr, temp, sizeof(temp)); // 클라이언트의 주소를 가져옴
@@ -100,7 +104,7 @@ int main(int argc, char const *argv[])
             dir += buf_rcv; // 파일 이름과 경로 설정
 
             fstream fout;
-            fout.open(dir, ios::in|ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
+            fout.open(dir, ios::in | ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
 
             if (fout.is_open())
             {
@@ -115,7 +119,7 @@ int main(int argc, char const *argv[])
 
                 while (!fout.eof())
                 {
-                    cout<<buf_snd<<endl;
+                    cout << buf_snd << endl;
                     fout.read(reinterpret_cast<char *>(&buf_snd), sizeof(buf_snd));
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
