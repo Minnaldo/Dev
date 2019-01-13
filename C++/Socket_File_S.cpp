@@ -7,26 +7,19 @@
 
 /**
  *  * 텍스트 파일, 이미지 전송 성공
- *  *
- *  TODO file header struct define
+ *  * 클라이언트가 요청한 파일 탐색 후, 존재하면 송신
+ *  TODO file information that used to define structure type
  *  TODO multiple client socket communication, use thread
  *  TODO 파일에 대한 동기화가 더 필요
  *  ? 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
  */
 
 // #define local_host "127.0.0.1"   서버는 주소 설정이 필요 없다
-#define BUF_SIZE 1024
-#define PORT 9999
-#define fileDir "./FileTransferTest/"
+#define BUF_SIZE 1024                 // 송수신 버퍼 사이즈
+#define PORT 9999                     // 열어둘 포트
+#define fileDir "./FileTransferTest/" // 파일 경로
 
 using namespace std;
-
-struct FILEHEADER
-{
-    char fileName[256];
-    char fileExt[256];
-    long long fileSize = 0;
-};
 
 void printByte(char *buf)
 {

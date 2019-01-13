@@ -7,24 +7,18 @@
 
 /**
  *  * 텍스트 파일, 이미지 전송 성공
- *  TODO file header struct define
+ *  * 파일 이름으로 파일 요청 후, 수신
+ *  TODO file information that used to define structure type
  *  TODO multiple client socket communication, use thread
  *  TODO 파일에 대한 동기화가 더 필요
  *  ? 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
  */
 
-#define BUF_SIZE 1024
-#define local_host "127.0.0.1"
-#define PORT 9999
+#define BUF_SIZE 1024          // 송수신 버퍼 사이즈
+#define local_host "127.0.0.1" // 접속할 주소
+#define PORT 9999              // 접속할 포트
 
 using namespace std;
-
-struct FILEHEADER
-{
-    char fileName[256];
-    char fileExt[256];
-    long long fileSize = 0;
-};
 
 void printByte(char *buf)
 {
@@ -77,11 +71,9 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        string filename = "testText.txt";   //@param filename
+        string strFilename = "testText.txt"; //@param filename
         // string filename = "test_img.jpg";
-        // cout << "input the file name" << endl;
-        // cin >> filename;
-        strcpy(buf_snd, filename.c_str());
+        memcpy(fHeader->fileName,strFilename.c_str(),sizeof(strFilename.c_str()));
 
         if (send(client_Socket, buf_snd, sizeof(buf_snd), 0) == -1)
             error_handling("Sending Error");
@@ -116,12 +108,11 @@ int main(int argc, char const *argv[])
                 cout << "File Download Complete" << endl;
                 fin.close(); // 열린 파일 닫기
 
-
                 // ! 마지막 Transmission Complete 메시지 전송 안됨
                 memset(buf_rcv, 0, sizeof(buf_rcv));
                 recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 printByte(buf_rcv);
-                cout<<endl;
+                cout << endl;
 
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
@@ -131,7 +122,7 @@ int main(int argc, char const *argv[])
         }
         else
             error_handling("File open Error");
-    }//end of while
+    } //end of while
 
     return 0;
 }
