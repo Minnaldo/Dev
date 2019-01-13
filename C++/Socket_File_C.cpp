@@ -6,7 +6,10 @@
 #include <sys/socket.h>
 
 /**
- *  * 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
+ *  * 텍스트 파일, 이미지 전송 성공
+ *  TODO file header struct define
+ *  TODO multiple client socket communication, use thread
+ *  ? 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
  */
 
 #define BUF_SIZE 1024
@@ -41,6 +44,8 @@ void error_handling(string str)
     {
         log_File << str;
     }
+    cerr << str;
+    exit(1);
 }
 
 int main(int argc, char const *argv[])
@@ -71,21 +76,18 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        string filename = "testText.txt";
+        // string filename = "testText.jpg";   //@param filename
+        string filename = "test_img.jpg";
         // cout << "input the file name" << endl;
         // cin >> filename;
         strcpy(buf_snd, filename.c_str());
 
         if (send(client_Socket, buf_snd, sizeof(buf_snd), 0) == -1)
-        {
-            //error handling
-            cout << "Sending Error" << endl;
-            exit(1);
-        }
+            error_handling("Sending Error");
 
-        string fileSaveDir = "./Client_Test.txt";
+        string fileSaveDir = "./Client_Test.jpg";
         ofstream fin;
-        fin.open(fileSaveDir); // NOTE file write configuration
+        fin.open(fileSaveDir, ios::binary); // NOTE file write configuration
 
         if (fin.is_open())
         {
@@ -98,24 +100,25 @@ int main(int argc, char const *argv[])
             memset(buf_rcv, 0, sizeof(buf_rcv));
             char tempContent[BUF_SIZE];
             int rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
-            if (rcv_Byte >= 0)
+            if (rcv_Byte > 0)
             {
                 //NOTE
                 while (fileSize > 0)
                 { //TODO the file have garbage value on this point
                     // buf_rcv배열의 크기만큼 입력을 해서 의도치 않은 쓰레기값이 들어가는 것 같다
                     fileSize -= rcv_Byte;
-                    printByte(buf_rcv);
+                    // printByte(buf_rcv);
                     fin.write(buf_rcv, sizeof(buf_rcv));
                     // fin << tempContent;
                     rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 }
-                cout << endl
-                     << "File Download Complete" << endl;
+                cout << "File Download Complete" << endl;
                 fin.close(); // 열린 파일 닫기
+
                 memset(buf_rcv, 0, sizeof(buf_rcv));
                 recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
-                cout << buf_rcv << endl; // ! 메세지가 잘림
+                printByte(buf_rcv);
+
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
             }

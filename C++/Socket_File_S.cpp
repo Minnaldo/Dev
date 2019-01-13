@@ -6,7 +6,10 @@
 #include <sys/socket.h>
 
 /**
- *  * 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
+ *  * 텍스트 파일, 이미지 전송 성공
+ *  TODO file header struct define
+ *  TODO multiple client socket communication, use thread
+ *  ? 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
  */
 
 // #define local_host "127.0.0.1"   서버는 주소 설정이 필요 없다
@@ -42,6 +45,7 @@ void error_handling(string str)
     {
         log_File << str;
     }
+    cerr << str;
     exit(1);
 }
 
@@ -112,7 +116,7 @@ int main(int argc, char const *argv[])
             dir += buf_rcv; // 파일 이름과 경로 설정
 
             ifstream fout;
-            fout.open(dir); // NOTE file read configuration, 파일 경로로 파일 열기
+            fout.open(dir, ios::binary); // NOTE file read configuration, 파일 경로로 파일 열기
 
             if (fout.is_open())
             {
@@ -131,25 +135,21 @@ int main(int argc, char const *argv[])
                     // ? fout.read(); 와 fout >> buf_snd의 차이점은 무엇??
                     fout.read(buf_snd, sizeof(buf_snd));
                     // fout >> buf_snd;
-                    printByte(buf_snd);
+                    // printByte(buf_snd);
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
                 fout.close(); // 열린 파일 닫기
-
-                cout << endl;
 
                 string str = "Transmission Complete";
                 memcpy(buf_snd, str.c_str(), sizeof(str.c_str()));
                 send(client_Socket, buf_snd, sizeof(buf_snd), 0);
 
                 if (shutdown(client_Socket, SHUT_RDWR) == -1) // 전송 소켓 닫음
-                {
                     error_handling("ShutDown Error");
-                }
                 else
                 {
                     cout << "Shutdown Complete" << endl;
-                    break;  // 서버 프로그램을 종료하기 싫으면 break문 지우기
+                    break; // 서버 프로그램을 종료하기 싫으면 break문 지우기
                 }
             }
             else
