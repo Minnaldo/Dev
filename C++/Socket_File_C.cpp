@@ -9,6 +9,7 @@
  *  * 텍스트 파일, 이미지 전송 성공
  *  TODO file header struct define
  *  TODO multiple client socket communication, use thread
+ *  TODO 파일에 대한 동기화가 더 필요
  *  ? 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
  */
 
@@ -76,8 +77,8 @@ int main(int argc, char const *argv[])
 
     while (true)
     {
-        // string filename = "testText.jpg";   //@param filename
-        string filename = "test_img.jpg";
+        string filename = "testText.txt";   //@param filename
+        // string filename = "test_img.jpg";
         // cout << "input the file name" << endl;
         // cin >> filename;
         strcpy(buf_snd, filename.c_str());
@@ -85,7 +86,7 @@ int main(int argc, char const *argv[])
         if (send(client_Socket, buf_snd, sizeof(buf_snd), 0) == -1)
             error_handling("Sending Error");
 
-        string fileSaveDir = "./Client_Test.jpg";
+        string fileSaveDir = "./Client_Test.txt";
         ofstream fin;
         fin.open(fileSaveDir, ios::binary); // NOTE file write configuration
 
@@ -115,9 +116,12 @@ int main(int argc, char const *argv[])
                 cout << "File Download Complete" << endl;
                 fin.close(); // 열린 파일 닫기
 
+
+                // ! 마지막 Transmission Complete 메시지 전송 안됨
                 memset(buf_rcv, 0, sizeof(buf_rcv));
                 recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 printByte(buf_rcv);
+                cout<<endl;
 
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
@@ -127,7 +131,7 @@ int main(int argc, char const *argv[])
         }
         else
             error_handling("File open Error");
-    }
+    }//end of while
 
     return 0;
 }

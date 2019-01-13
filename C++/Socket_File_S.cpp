@@ -9,6 +9,7 @@
  *  * 텍스트 파일, 이미지 전송 성공
  *  TODO file header struct define
  *  TODO multiple client socket communication, use thread
+ *  TODO 파일에 대한 동기화가 더 필요
  *  ? 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
  */
 
@@ -158,7 +159,7 @@ int main(int argc, char const *argv[])
                 error_handling("File open error");
             }
         }
-    } //end while
+    } //end of while
 
     return 0;
 }
