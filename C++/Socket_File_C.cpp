@@ -4,7 +4,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <sys/socket.h>
-#include <unistd.h>
 
 /**
  *  * 파일헤더 구조체에는 어떠한 것들을 넣는것이 좋을까??
@@ -16,20 +15,37 @@
 
 using namespace std;
 
+struct FILEHEADER
+{
+    char fileName[256];
+    char fileExt[256];
+    long long fileSize = 0;
+};
+
 void printByte(char *buf)
 {
     int size = sizeof(buf) / sizeof(buf[0]);
     cout << "'";
     for (int i = 0; i < size; i++)
     {
-        cout <<buf[i];
+        cout << buf[i];
     }
     cout << "'";
 }
 
+void error_handling(string str)
+{
+    fstream log_File("./client_Log.txt", ios::out);
+
+    if (log_File.is_open())
+    {
+        log_File << str;
+    }
+}
+
 int main(int argc, char const *argv[])
 {
-    FILE *file;
+    FILEHEADER *fHeader;
 
     char buf_rcv[BUF_SIZE];
     char buf_snd[BUF_SIZE];
@@ -37,11 +53,7 @@ int main(int argc, char const *argv[])
     int client_Socket = socket(PF_INET, SOCK_STREAM, 0);
 
     if (client_Socket == -1)
-    {
-        //error_handling
-        cout << "Socket Error" << endl;
-        exit(1);
-    }
+        error_handling("Socket Error");
 
     struct sockaddr_in server_Addr;
     server_Addr.sin_family = AF_INET;
@@ -51,11 +63,7 @@ int main(int argc, char const *argv[])
     socklen_t client_Size = sizeof(server_Addr);
 
     if (connect(client_Socket, (struct sockaddr *)&server_Addr, client_Size) == -1)
-    {
-        // erroer_handling
-        cout << "Connect Eorror" << endl;
-        exit(1);
-    }
+        error_handling("Connect Eorror");
     else
     {
         cout << "Connection Complete" << endl;
@@ -77,7 +85,7 @@ int main(int argc, char const *argv[])
 
         string fileSaveDir = "./Client_Test.txt";
         ofstream fin;
-        fin.open(fileSaveDir);  // NOTE file write configuration
+        fin.open(fileSaveDir); // NOTE file write configuration
 
         if (fin.is_open())
         {
@@ -94,7 +102,7 @@ int main(int argc, char const *argv[])
             {
                 //NOTE
                 while (fileSize > 0)
-                {   //TODO the file have garbage value on this point
+                { //TODO the file have garbage value on this point
                     // buf_rcv배열의 크기만큼 입력을 해서 의도치 않은 쓰레기값이 들어가는 것 같다
                     fileSize -= rcv_Byte;
                     printByte(buf_rcv);
@@ -107,23 +115,15 @@ int main(int argc, char const *argv[])
                 fin.close(); // 열린 파일 닫기
                 memset(buf_rcv, 0, sizeof(buf_rcv));
                 recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
-                // cout << buf_rcv << endl; // ! 메세지가 잘림
+                cout << buf_rcv << endl; // ! 메세지가 잘림
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;
             }
             else
-            {
-                //error_handling
-                cout << "Error from File receive" << endl;
-                exit(1);
-            }
+                error_handling("Error from File receive");
         }
         else
-        {
-            //error_handling
-            cout << "File open Error" << endl;
-            exit(1);
-        }
+            error_handling("File open Error");
     }
 
     return 0;
