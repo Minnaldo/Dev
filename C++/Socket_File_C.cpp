@@ -20,10 +20,12 @@ using namespace std;
 void printByte(char *buf)
 {
     int size = sizeof(buf) / sizeof(buf[0]);
+    cout << "'";
     for (int i = 0; i < size; i++)
     {
-        printf("%c", buf[i]);
+        cout <<buf[i];
     }
+    cout << "'";
 }
 
 int main(int argc, char const *argv[])
@@ -75,32 +77,37 @@ int main(int argc, char const *argv[])
         }
 
         string fileSaveDir = "./Client_Test.txt";
-        fstream fin;
-        fin.open(fileSaveDir, ios::out|ios::binary);
+        ofstream fin;
+        fin.open(fileSaveDir);  // NOTE file write configuration
 
         if (fin.is_open())
         {
             char size[4] = {0};
             cout << "File Opend" << endl;
-            read(client_Socket, size, sizeof(buf_rcv)); // 파일 크기 수신
-            int fileSize = *((int *)size);              // TODO 다른 소켓 정수보내는법을 찾아보자
-            cout << "File Size : " << fileSize << endl; // @param File Size
+            recv(client_Socket, size, sizeof(buf_rcv), 0); // 파일 크기 수신
+            int fileSize = *((int *)size);                 // TODO 다른 소켓 정수보내는법을 찾아보자
+            cout << "File Size : " << fileSize << endl;    // @param File Size
 
-            int rcv_Byte = read(client_Socket, buf_rcv, sizeof(buf_rcv));
+            memset(buf_rcv, 0, sizeof(buf_rcv));
+            char tempContent[BUF_SIZE];
+            int rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
             if (rcv_Byte >= 0)
             {
                 //NOTE
                 while (fileSize > 0)
-                {
+                {   //TODO the file have garbage value on this point
+                    // buf_rcv배열의 크기만큼 입력을 해서 의도치 않은 쓰레기값이 들어가는 것 같다
                     fileSize -= rcv_Byte;
                     printByte(buf_rcv);
-                    fin.write(buf_rcv, rcv_Byte);
-                    rcv_Byte = read(client_Socket, buf_rcv, sizeof(buf_rcv));
+                    fin.write(buf_rcv, sizeof(buf_rcv));
+                    // fin << tempContent;
+                    rcv_Byte = recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 }
-                cout << "File Download Complete" << endl;
+                cout << endl
+                     << "File Download Complete" << endl;
                 fin.close(); // 열린 파일 닫기
                 memset(buf_rcv, 0, sizeof(buf_rcv));
-                read(client_Socket, buf_rcv, sizeof(buf_rcv));
+                recv(client_Socket, buf_rcv, sizeof(buf_rcv), 0);
                 // cout << buf_rcv << endl; // ! 메세지가 잘림
                 shutdown(client_Socket, SHUT_RDWR);
                 return 0;

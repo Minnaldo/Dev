@@ -26,10 +26,12 @@ using namespace std;
 void printByte(char *buf)
 {
     int size = sizeof(buf) / sizeof(buf[0]);
+    cout << "'";
     for (int i = 0; i < size; i++)
     {
-        printf("%c", buf[i]);
+        cout << buf[i];
     }
+    cout << "'";
 }
 
 int main(int argc, char const *argv[])
@@ -111,8 +113,8 @@ int main(int argc, char const *argv[])
             string dir = fileDir;
             dir += buf_rcv; // 파일 이름과 경로 설정
 
-            fstream fout;
-            fout.open(dir, ios::in | ios::binary); //  buf_rcv : 전송할 파일 이름을 담고잇는 char형 배열
+            ifstream fout;
+            fout.open(dir); // NOTE file read configuration  dir : 전송할 파일 이름을 담고잇는 char형 배열
 
             if (fout.is_open())
             {
@@ -122,17 +124,21 @@ int main(int argc, char const *argv[])
                 int size = fout.tellg(); // 파일포인터가 몇번째인지 출력 : 이는 바이트 크기이므로 곧 파일의 크기가 됨
                 char fileSize[4] = {0};
                 *((int *)fileSize) = size;
-                write(client_Socket, fileSize, sizeof(fileSize)); // 파일 크기를 보낸다
+                send(client_Socket, fileSize, sizeof(fileSize),0); // 파일 크기를 보낸다
                 cout << "File Size : " << size << endl;           // @param File Size
-
+                fout.seekg(0,ios::beg); // ! 파일 포인터를 끝으로 보내 파일의 크기를 구했으면, 다시 파일의 처음으로 포인터를 보내 파일을 읽고 전송해야 한다
                 //NOTE
                 while (!fout.eof())
                 {
+                    // ? fout.read(); 와 fout >> buf_snd의 차이점은 무엇??
                     fout.read(buf_snd, sizeof(buf_snd));
+                    // fout >> buf_snd;
                     printByte(buf_snd);
-                    write(client_Socket, buf_snd, sizeof(buf_snd));
+                    send(client_Socket, buf_snd, sizeof(buf_snd),0);
                 }
                 fout.close(); // 열린 파일 닫기
+
+                cout << endl;
 
                 // string str = "Transmission Complete";
                 // memcpy(buf_snd, str.c_str(), sizeof(str.c_str()));
