@@ -7,6 +7,7 @@
 
 /**
  *  * 텍스트 파일, 이미지 전송 성공
+ *  *
  *  TODO file header struct define
  *  TODO multiple client socket communication, use thread
  *  TODO 파일에 대한 동기화가 더 필요
@@ -71,6 +72,8 @@ int main(int argc, char const *argv[])
     if (server_Socket == -1)
         error_handling("Socket Error");
 
+    // htons => host byte to network byte in short
+    // htonl => host byte to network byte in long
     memset(&server_Addr, 0, sizeof(server_Addr));    //구조체라서 초기화 필요
     server_Addr.sin_family = AF_INET;                //sin_family : socket_Internet_family
     server_Addr.sin_port = htons(PORT);              //sin_port : socket_internet_port, htons : host-
@@ -88,12 +91,12 @@ int main(int argc, char const *argv[])
     if (listen(server_Socket, 5) == -1) //소켓 수동 모드
         error_handling("Listenning Error");
 
+    cout << "Server is waiting for Client..." << endl;
+
     while (true)
     {
         socklen_t client_Addr_size = sizeof(client_Addr); //REVIEW  why need client_Addr_size, ↓ 필요
         client_Socket = accept(server_Socket, (struct sockaddr *)&client_Addr, &client_Addr_size);
-
-        cout << "Server is waiting for Client..." << endl;
 
         if (client_Socket == -1)
             error_handling("Accept Error");
