@@ -29,3 +29,16 @@ man[name] = "가나다"; // 오브젝트 속성 접근 후 수정
                 객체의 정의되지 않은 속성의 타입이나 값
     null : 개발자가 명시적으로 아무것도 없는 비어있는 상태를 나타낼 때 사용
 */
+
+var a;  // undefined
+console.log(a++);   // a를 먼저 출력후, a값을 1증가
+console.log(a);
+
+a=1;
+console.log(++a);   // a값을 1 증가후, a를 출력
+console.log(a);
+
+// Math관련 명령어
+Math.pow(A,b); // A의 b승
+Math.sqrt(A); // A의 제곱근
+Math.random(); // 0~1 사이의 임의의 난수 발생
