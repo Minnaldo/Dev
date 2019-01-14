@@ -8,6 +8,7 @@
 /**
  *  * 텍스트 파일, 이미지 전송 성공
  *  * 클라이언트가 요청한 파일 탐색 후, 존재하면 송신
+ *  * 동기화 소켓 프로그래밍
  *  TODO file information that used to define structure type
  *  TODO multiple client socket communication, use thread
  *  TODO 파일에 대한 동기화가 더 필요
