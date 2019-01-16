@@ -1,5 +1,10 @@
 #include <iostream>
 
+/**
+ *  * DEQUE implementation
+ *  @param push_front / push_back / pop_front / pop_back / size / print / front / back
+ */
+
 using namespace std;
 
 template <typename T>
@@ -45,8 +50,8 @@ class Deque
         if (temp->back != nullptr)
         {
             temp->back->front = newNode;
-            newNode->front = head;
-            head->back = newNode;
+            temp->back = newNode;
+            newNode->front = temp;
         }
         else
         {
@@ -102,6 +107,7 @@ class Deque
         Count++;
     }
 
+    // TODO need modify
     void pop_back()
     {
         Node<T> *temp = tail->front;
@@ -153,13 +159,20 @@ int main(int argc, char const *argv[])
 
     deq->print();
     cout << "Size : " << deq->size() << endl;
+    cout << "Front : " << deq->front() << "  "
+         << " Back : " << deq->back() << endl;
 
-    deq->push_front(6);
-    deq->push_front(5);
-    deq->push_front(4);
+    // deq->push_front(6);
+    // deq->push_front(5);
+    // deq->push_front(4);
 
-    deq->print();   // ? 뭐지?
-    cout << "Size : " << deq->size() << endl;
+    // cout << "Front : " << deq->front() << "  "
+    //      << " Back : " << deq->back() << endl;
+
+    // deq->print(); // ? 뭐지? push_front에 문제?
+    // cout << "Size : " << deq->size() << endl;
+
+    // deq->pop_back();
 
     return 0;
 }
