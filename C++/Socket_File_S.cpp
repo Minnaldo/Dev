@@ -54,8 +54,6 @@ int main(int argc, char const *argv[])
     struct sockaddr_in server_Addr;
     struct sockaddr_in client_Addr;
 
-    FILEHEADER *fHeader;
-
     char buf_rcv[BUF_SIZE];
     char buf_snd[BUF_SIZE];
 
@@ -68,7 +66,7 @@ int main(int argc, char const *argv[])
 
     // htons => host byte to network byte in short
     // htonl => host byte to network byte in long
-    memset(&server_Addr, 0, sizeof(server_Addr));    //구조체라서 초기화 필요
+    memset(&server_Addr, 0, sizeof(server_Addr));    //구조체 --> memset()을 통한 초기화 필요
     server_Addr.sin_family = AF_INET;                //sin_family : socket_Internet_family
     server_Addr.sin_port = htons(PORT);              //sin_port : socket_internet_port, htons : host-
     server_Addr.sin_addr.s_addr = htonl(INADDR_ANY); //INADDR_ANY : allow all addr
@@ -87,6 +85,7 @@ int main(int argc, char const *argv[])
 
     cout << "Server is waiting for Client..." << endl;
 
+    // 서버의 기본설정 이후 클라이언트의 접속을 대기하는 부분
     while (true)
     {
         socklen_t client_Addr_size = sizeof(client_Addr); //REVIEW  why need client_Addr_size, ↓ 필요
