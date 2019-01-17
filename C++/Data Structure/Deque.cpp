@@ -67,16 +67,18 @@ class Deque
     // TODO
     void pop_front()
     {
-        Node<T> *temp = head->back;
-        T val = temp->data;
-        head->back = temp->back;
-        temp->back->front = head;
+        Node<T> *temp = head;
 
-        delete temp;
-
-        Count--;
-
-        cout << "\'" << val << "\' : deleted\n";
+        if (temp->back != nullptr)
+        {
+            Count--;
+            cout << "\'" << val << "\' : deleted\n";
+        }
+        else
+        {
+            cout << "Error Occured" << endl;
+            return;
+        }
     }
 
     T front()
