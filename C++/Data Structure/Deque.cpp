@@ -46,9 +46,9 @@ class Deque
         Node<T> *newNode = new Node<T>();
         newNode->data = val;
 
-        // if (head->back != nullptr)
         if (temp->back != nullptr)
         {
+            newNode->back = temp->back;
             temp->back->front = newNode;
             temp->back = newNode;
             newNode->front = temp;
@@ -64,6 +64,7 @@ class Deque
         Count++;
     }
 
+    // TODO
     void pop_front()
     {
         Node<T> *temp = head->back;
@@ -118,7 +119,6 @@ class Deque
         delete temp;
 
         Count--;
-
         cout << "\'" << val << "\' : deleted\n";
     }
 
@@ -158,21 +158,25 @@ int main(int argc, char const *argv[])
     deq->push_back(3);
 
     deq->print();
-    cout << "Size : " << deq->size() << endl;
     cout << "Front : " << deq->front() << "  "
-         << " Back : " << deq->back() << endl;
+         << " Back : " << deq->back() << "  "
+         << "Size : " << deq->size() << endl;
 
-    // deq->push_front(6);
-    // deq->push_front(5);
-    // deq->push_front(4);
+    // push_front의 문제
+    deq->push_front(6);
+    deq->push_front(5);
+    deq->push_front(4);
 
-    // cout << "Front : " << deq->front() << "  "
-    //      << " Back : " << deq->back() << endl;
+    deq->print();
+    cout << "Front : " << deq->front() << "  "
+         << " Back : " << deq->back() << "  "
+         << "Size : " << deq->size() << endl;
 
-    // deq->print(); // ? 뭐지? push_front에 문제?
-    // cout << "Size : " << deq->size() << endl;
+    deq->pop_back();
+    deq->print();
 
-    // deq->pop_back();
+    deq->pop_front();
+    deq->print();
 
     return 0;
 }
