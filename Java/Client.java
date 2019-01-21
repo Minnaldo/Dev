@@ -12,7 +12,7 @@ import java.net.InetSocketAddress;
 public class Client {
     public static void main(String[] args) {
         int PORT = 9999; // 서버 port
-        String addr = "127.0.0.1"; // 서버 address
+        String addr = "alban.ddns.net"; // 서버 address
 
         // 자동 close, 클라이언트 소켓 선언
         try (Socket client_Socket = new Socket()) {

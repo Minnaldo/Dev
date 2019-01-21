@@ -22,8 +22,9 @@ public class Server {
 
             System.out.println("Initialize coplete");
 
-            // Server listenning, wiat for accept
+            // Server listenning, wait for accept
             Socket client_Socket = server_Socket.accept();
+            System.out.println(client_Socket.getInetAddress()+" : " + client_Socket.getPort());
             System.out.println("Connection");   // print connection message, when client accept
 
             // send, receiver stream 받아오기
