@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 
 public class File_Client {
 
@@ -34,24 +35,24 @@ public class File_Client {
                 receiver.read(rcv_data, 0, rcv_data.length);
 
                 // header = the variable that save file size
-                String header = new String(rcv_data, 0, 10); // 10byte만큼 읽어온다
-                header = "0000000000".substring(0,10-header.length())+header;
-                System.out.println("File size : " + header);
-                System.out.println(Integer.parseInt(header));
+                String header = new String(rcv_data, 0, 10); // 10byte만큼 읽어와서 바로 String 객체 header에 할당
+                header = "0000000000".substring(0, 10 - header.length()) + header;
+                int file_size = Integer.parseInt(header);
+                System.out.print("File size : "+file_size);
 
-                // FileOutputStream fos = new FileOutputStream(/* File name */ file_route +
-                // "/client_test");
+                Arrays.fill(rcv_data, (byte) 0);
+                FileOutputStream fos = new FileOutputStream(/* File name */ file_route + "/client_test.txt");
 
+                while (file_size > 0) {
+                    int tmp = receiver.read(rcv_data, 0, rcv_data.length);
+                    fos.write(rcv_data, 0, rcv_data.length);
+                    file_size -= tmp;
+                }
 
-                // while (file_size > 0) {
-                // int tmp = receiver.read(rcv_data, 0, rcv_data.length);
-                // fos.write(rcv_data, 0, rcv_data.length);
-                // file_size -= tmp;
-                // }
-                // fos.close(); // 파일 버퍼 닫기
+                fos.close(); // 파일 버퍼 닫기
 
+                Arrays.fill(rcv_data, (byte) 0);
                 receiver.read(rcv_data, 0, rcv_data.length);
-
                 System.out.println(new String(rcv_data)); // 종료 메세지 출력
 
                 client_Socket.close(); // 소켓 닫기
