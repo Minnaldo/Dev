@@ -4,9 +4,9 @@ import java.net.Socket;
 import java.net.InetSocketAddress;
 
 /**
- *  * 전송시 OutputStream /수신시 InputStream 을 이용하여 송수신
- *  * 수신 read(byte, offset, length); / 송신 write(byte, offset, length); 사용
- *  * 소켓 통신을 더욱 OOP스럽게 하려면, 데이터 헤더 클래스를 이용
+ * * 전송시 OutputStream /수신시 InputStream 을 이용하여 송수신 * 수신 read(byte, offset,
+ * length); / 송신 write(byte, offset, length); 사용 * 소켓 통신을 더욱 OOP스럽게 하려면, 데이터 헤더
+ * 클래스를 이용
  */
 
 public class Client {
@@ -21,16 +21,21 @@ public class Client {
             // 접속 ( Connect )
             client_Socket.connect(ipep);
 
+            if (!client_Socket.isConnected()) {
+                System.out.println("Connect Error!");
+                exit(1);
+            }
+
             // sender, receiver stream 받아오기
             try (OutputStream sender = client_Socket.getOutputStream();
                     InputStream receiver = client_Socket.getInputStream();) {
                 // 서버로부터 데이터 받기
                 byte[] data = new byte[100];
-                receiver.read(data, 0, 100);    // byte, offset, length
+                receiver.read(data, 0, 100); // byte, offset, length
 
                 // 수신 메세지 출력
                 String msg = new String(data);
-                String out = String.format("receive - %s", msg);    // ? what is 'String.format();'
+                String out = String.format("receive - %s", msg); // ? what is 'String.format();'
                 System.out.println(out);
 
                 // 서버로 데이터 보내기

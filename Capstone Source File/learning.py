@@ -58,6 +58,9 @@ Visualize the summaries with this command:
 tensorboard --logdir /tmp/retrain_logs
 
 """
+import plaidml.keras
+plaidml.keras.install_backend()
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
