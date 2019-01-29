@@ -30,7 +30,7 @@
 *.exe
 *.out
 *.app
-AndroidProject/*
+Android*
 *.class
 C++/Client_Test.txt
 AndroidProject
