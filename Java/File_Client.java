@@ -26,8 +26,9 @@ public class File_Client {
             }
 
             try {
-                OutputStream sender = client_Socket.getOutputStream();
-                InputStream receiver = client_Socket.getInputStream();
+                file_info fInfo = new file_info();
+                OutputStream sender = client_Socket.getOutputStream();  // 송신 스트림 객체 생성
+                InputStream receiver = client_Socket.getInputStream();  // 수신 스트림 객체 생성
 
                 byte[] snd_data = new byte[snd_BUF];
                 byte[] rcv_data = new byte[rcv_BUF];
@@ -38,7 +39,7 @@ public class File_Client {
                 String header = new String(rcv_data, 0, 10); // 10byte만큼 읽어와서 바로 String 객체 header에 할당
                 header = "0000000000".substring(0, 10 - header.length()) + header;
                 int file_size = Integer.parseInt(header);
-                System.out.print("File size : "+file_size);
+                System.out.print("File size : " + file_size);
 
                 Arrays.fill(rcv_data, (byte) 0);
                 FileOutputStream fos = new FileOutputStream(/* File name */ file_route + "/client_test.txt");
@@ -55,11 +56,11 @@ public class File_Client {
                 receiver.read(rcv_data, 0, rcv_data.length);
                 System.out.println(new String(rcv_data)); // 종료 메세지 출력
 
-                client_Socket.close(); // 소켓 닫기
-
+                receiver.close(); // 수신 스트림 닫기
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            client_Socket.close(); // 소켓 닫기
         } catch (Throwable e) {
             e.printStackTrace();
         }

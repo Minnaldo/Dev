@@ -15,12 +15,12 @@ public class File_Server {
         try {
             ServerSocket server_Socket = new ServerSocket();
             InetSocketAddress ipep = new InetSocketAddress(PORT);
-            server_Socket.bind(ipep);
-
+            server_Socket.bind(ipep);   // 서버 소켓 바인드 (Initialize)
             System.out.println("Initialize complete");
 
+            // 클라이언트 소켓이 접속하면 서버 소켓과 연결
             Socket client_Socket = server_Socket.accept();
-
+            // 소켓이 연결이 안되면 에러메시지 출력후 종료, Tyime Out을 집어넣으면 좋을 듯
             if (!client_Socket.isConnected()) {
                 System.out.println("Connect Error!");
                 server_Socket.close();
@@ -66,11 +66,11 @@ public class File_Server {
                 sender.write(fin_message.getBytes()); // 종료 메세지 전송
                 System.out.println(fin_message);
 
-                sender.close(); // 소켓 닫기
+                sender.close(); // 전송 스트림 닫기
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            server_Socket.close();
+            server_Socket.close();  // 서버 소켓 닫기
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Throwable e) {
