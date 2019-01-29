@@ -36,7 +36,7 @@ public class File_Server {
 
                 File file = new File(/* 파일 경로 입력 */"./sending/test_Text.txt");
                 FileInputStream fio = new FileInputStream(file);
-                // what is the valueOf Function?
+                // TODO  what is the valueOf Function?
                 String file_size = String.valueOf(file.length());   // get file size
                 System.out.println("File size 1111 ::::"+file_size);
                 String header = "0000000000".substring(0,10-file_size.length())+file_size;
