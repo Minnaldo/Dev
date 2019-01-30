@@ -9,6 +9,7 @@
  *  * 텍스트 파일, 이미지 전송 성공
  *  * 클라이언트가 요청한 파일 탐색 후, 존재하면 송신
  *  * 동기화 소켓 프로그래밍
+ *  * C to Java 소켓통신에서는 구조체를 바이트로 변환하여 전송한다
  *  TODO file information that used to define structure type
  *  TODO multiple client socket communication, use thread
  *  TODO 파일에 대한 동기화가 더 필요
@@ -22,6 +23,7 @@
 
 using namespace std;
 
+// 바이트 출력
 void printByte(char *buf)
 {
     int size = sizeof(buf) / sizeof(buf[0]);
@@ -43,6 +45,35 @@ void error_handling(string str)
     }
     cerr << str;
     exit(1);
+}
+
+// 메시지 전송 함수
+void send_msg(int &csockFD, string msg)
+{
+    char buf_snd[BUF_SIZE];
+    memcpy(buf_snd, msg.c_str(), sizeof(msg.c_str()));
+    send(csockFD, buf_snd, sizeof(buf_snd), 0);
+}
+
+// 오픈한 파일의 크기를 가져온다
+int getFileSize(ifstream &ifs)
+{
+    ifs.seekg(0, ios::end); // 파일포인터 이동, 파일 포인터는 바이트 크기
+    int size = ifs.tellg();
+    ifs.seekg(0, ios::beg); // ! 파일 포인터를 끝으로 보내 파일의 크기를 구했으면, 다시 파일의 처음으로 포인터를 보내 파일을 읽고 전송해야 한다
+
+    return size;
+}
+
+// 종료 프로세스
+void cSocket_Close(int &csock)
+{
+    if (shutdown(csock, SHUT_RDWR) == -1) // 전송 소켓 닫음
+        error_handling("ShutDown Error");
+    else
+    {
+        cout << "Shutdown Complete" << endl;
+    }
 }
 
 int main(int argc, char const *argv[])
@@ -89,7 +120,7 @@ int main(int argc, char const *argv[])
     while (true)
     {
         socklen_t client_Addr_size = sizeof(client_Addr); //REVIEW  why need client_Addr_size, ↓ 필요
-        client_Socket = accept(server_Socket, (struct sockaddr *)&client_Addr, &client_Addr_size);
+        client_Socket = accept(server_Socket, (struct sockaddr *)&client_Addr, &client_Addr_size);  // 멀티스레드 환경에서 client_Socket.accept()후 스레드에 주소값으로 넘겨준다
 
         if (client_Socket == -1)
             error_handling("Accept Error");
@@ -113,41 +144,31 @@ int main(int argc, char const *argv[])
             dir += buf_rcv; // 파일 이름과 경로 설정
 
             ifstream fout;
-            fout.open(dir, ios::binary); // NOTE file read configuration, 파일 경로로 파일 열기
+            fout.open(dir, ios::binary);
 
             if (fout.is_open())
             {
                 cout << "File Opend" << endl;
-                // 연 파일의 크기를 가져온다,
-                fout.seekg(0, ios::end); // 파일의 마지막으로 파일포인터를 옮긴다
-                int size = fout.tellg(); // 파일포인터가 몇번째인지 출력 : 이는 바이트 크기이므로 곧 파일의 크기가 됨
-                char fileSize[4] = {0};
-                *((int *)fileSize) = size;
+                int size = getFileSize(fout);
+                cout << "File Size : " << size << endl;
+
+                char fileSize[4] = {0};                             // int : 4byte, char : 1byte ==> char[4] == int[1]
+                *((int *)fileSize) = size;                          // 포인터 형변환, int형 포인터 크기만큼 fileSize에 size를 저장한다
                 send(client_Socket, fileSize, sizeof(fileSize), 0); // 파일 크기를 보낸다
-                cout << "File Size : " << size << endl;             // @param File Size
-                fout.seekg(0, ios::beg);                            // ! 파일 포인터를 끝으로 보내 파일의 크기를 구했으면, 다시 파일의 처음으로 포인터를 보내 파일을 읽고 전송해야 한다
-                //NOTE
+
                 while (!fout.eof())
                 {
                     // ? fout.read(); 와 fout >> buf_snd의 차이점은 무엇??
-                    fout.read(buf_snd, sizeof(buf_snd));
+                    fout.read(buf_snd, sizeof(buf_snd)); // buf_snd 사이즈 만큼 읽어온다, 바이너리 모드로 열었기 때문에 바이트 크기만큼 읽어옴
                     // fout >> buf_snd;
-                    // printByte(buf_snd);
                     send(client_Socket, buf_snd, sizeof(buf_snd), 0);
                 }
                 fout.close(); // 열린 파일 닫기
 
-                string str = "Transmission Complete";
-                memcpy(buf_snd, str.c_str(), sizeof(str.c_str()));
-                send(client_Socket, buf_snd, sizeof(buf_snd), 0);
+                // 종료 메시지 전송 후 소켓 닫기/ 주소값으로 소켓 전달
+                send_msg(client_Socket, "File Transmission Complete");
 
-                if (shutdown(client_Socket, SHUT_RDWR) == -1) // 전송 소켓 닫음
-                    error_handling("ShutDown Error");
-                else
-                {
-                    cout << "Shutdown Complete" << endl;
-                    break; // 서버 프로그램을 종료하기 싫으면 break문 지우기
-                }
+                cSocket_Close(client_Socket);
             }
             else
             {
