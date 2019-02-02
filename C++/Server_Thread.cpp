@@ -19,6 +19,11 @@ using namespace std;
 
 queue<int> thread_Pool;
 int thread_id;
+enum funct_Num
+{
+    chatroom = 1,
+    file_transfer
+};
 
 // 메시지 송수신 버퍼는 스레드가 실행할 함수에서 선언하여 사용하여야 한다
 void ThreadFunc(int &sockFD, int id)
@@ -28,7 +33,6 @@ void ThreadFunc(int &sockFD, int id)
 
     cout << id << " Connected" << endl;
     thread_Pool.push(id);
-    // 소켓과의 통신 종료는 여기서 종료
 
     while (true)
     {
@@ -54,7 +58,29 @@ void ThreadFunc(int &sockFD, int id)
         }
         else
         {
-            cout << "Client Sends the message what is \"" << buf_rcv << "\"" << endl;
+            // cout << "Client Sends the message what is \"" << buf_rcv << "\"" << endl;
+
+            string tmp = (string)buf_rcv;
+            int funct_num;
+
+            if (tmp == "chatroom")
+                funct_num = 1;
+            else
+                funct_num = 2;
+
+            // 전송받은 메시지로 제공 기능을 나눈다
+            switch (funct_num)
+            {
+            case chatroom:
+                cout << "enter the chatroom" << endl;
+                // chatroom
+                break;
+            case file_transfer:
+                cout << "starting file transfer service" << endl;
+                // file transfer
+                break;
+            }
+
             start_Time = clock();
         }
     }
@@ -86,6 +112,8 @@ void thread_terminate_process(int &sockFD, int pro_Num)
 
 int main(int argc, char const *argv[])
 {
+    ios::sync_with_stdio(false);
+
     int server_Socket, client_Socket, SocketOpt;
     struct sockaddr_in server_Addr, client_Addr;
     char cAddr[20]; //클라이언트 주소 저장 변수
@@ -151,7 +179,7 @@ int main(int argc, char const *argv[])
                 thread_terminate_process(client_Socket, 0);
             }
         }
-    }   // end of while
+    } // end of while
 
     return 0;
 }
