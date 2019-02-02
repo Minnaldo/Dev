@@ -26,7 +26,6 @@ public class File_Client {
             }
 
             try {
-                file_info fInfo = new file_info();
                 OutputStream sender = client_Socket.getOutputStream();  // 송신 스트림 객체 생성
                 InputStream receiver = client_Socket.getInputStream();  // 수신 스트림 객체 생성
 
