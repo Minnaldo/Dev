@@ -16,6 +16,20 @@
 
 using namespace std;
 
+enum funct_Num
+{
+    chatroom = 1,
+    file_transfer,
+    terminate
+};
+
+struct chatInfo
+{
+    string name = NULL; // 받는 사람 이름 or ID
+    string msg = NULL;  // 메시지 내용
+    int time = 0;       // 전송 시각
+};
+
 int main(int argc, char const *argv[])
 {
     ios::sync_with_stdio(false);
@@ -49,13 +63,16 @@ int main(int argc, char const *argv[])
     // 실행 할 로직 작성
     while (true)
     {
-        int funct;
+        int function_Num;
         cout << "사용할 기능의 번호를 입력해주세요\n1 : 채팅방 입장, 2 : 파일 전송, 3 : 프로그램 종료" << endl;
-        cin >> funct;
-        switch (funct)
+        cin >> function_Num;
+        switch (function_Num)
         {
         case 1:
-            chatroom(Client_Socket);
+            chatInfo *info;
+            cout << "받는 사람의 이름 or ID 를 입력해 주세요" << endl;
+            cin >> info->name;
+            chatroom(Client_Socket, info);
             break;
         case 2:
             file_Transfer(Client_Socket);
@@ -71,18 +88,23 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-void chatroom(int &socketFD)
+void chatroom(int &socketFD, chatInfo *info)
 {
     char msg_rcv[BUF_SIZE], msg_snd[BUF_SIZE];
     cout << "채팅방에 입장하셨습니다." << endl;
+    cout << "대화 상대 : " << info->name << endl;
+
+    // 서버에 chatroom 기능 요청
     string tmp = "chatroom";
     memcpy(msg_snd, tmp.c_str(), tmp.size());
-    send(socketFD, msg_snd, sizeof(msg_snd), 0); // 서버에 채팅방 기능 요청
+    send(socketFD, msg_snd, sizeof(msg_snd), 0);
 
+    // chatroom 주 기능 로직
     while (true)
     {
-        cout << "메시지를 입력해 주세요" << endl;
-        cout << "ESC 키를 누르면 채팅방을 종료합니다" << endl;
+        cout << "메시지를 입력해 주세요";
+        // cout << "ESC 키를 누르면 채팅방을 종료합니다" << endl;
+        cout << "\'ctrl + C\' 를 누르면 채팅방을 종료합니다" << endl;
 
         string snd_msg;
         cin >> snd_msg;
@@ -94,6 +116,7 @@ void chatroom(int &socketFD)
         char rTime[8];
         memcpy(rTime, msg_rcv, 8);
 
+// 전송 / 수신 시각 tokenizer
         int sndTime = stoi(cur_time.substr(3, 2) + cur_time.substr(6, 2));
         int rcvTime = (rTime[3] + rTime[4] + rTime[6] + rTime[7]);
 

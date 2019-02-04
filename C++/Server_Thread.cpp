@@ -22,7 +22,8 @@ int thread_id;
 enum funct_Num
 {
     chatroom = 1,
-    file_transfer
+    file_transfer,
+    terminate
 };
 
 // 메시지 송수신 버퍼는 스레드가 실행할 함수에서 선언하여 사용하여야 한다
