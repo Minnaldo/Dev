@@ -116,7 +116,7 @@ void chatroom(int &socketFD, chatInfo *info)
         char rTime[8];
         memcpy(rTime, msg_rcv, 8);
 
-// 전송 / 수신 시각 tokenizer
+        // 전송 / 수신 시각 tokenizer
         int sndTime = stoi(cur_time.substr(3, 2) + cur_time.substr(6, 2));
         int rcvTime = (rTime[3] + rTime[4] + rTime[6] + rTime[7]);
 
