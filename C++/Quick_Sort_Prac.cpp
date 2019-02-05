@@ -92,7 +92,7 @@ void quick_sort(int *arr, int left, int right)
         // 피벗 기준 앞의 값들은 피벗보다 작고, 뒤쪽 값들은 피벗보다 크다
         int q = partition(arr, left, right); // q : 피벗의 위치
 
-        // 피벗을 제외한 2개의 부분 리슽를 대상으로 순환 호출
+        // 피벗을 제외한 2개의 부분 리스트를 대상으로 순환 호출
         quick_sort(arr, left, q - 1);  // 앞쪽 부분 리스트 정렬
         quick_sort(arr, q + 1, right); // 뒤쪽 부분 리스트 정렬
     }
