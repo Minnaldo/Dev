@@ -12,7 +12,7 @@ void swap(int &a, int &b)
 int partition(int arr[], int start, int end)
 {
     int pivot = end;
-    int idx1 = start, idx2 = start + 1;
+    int idx1 = start - 1, idx2 = start;
 
     if (start < end)
     {
@@ -20,6 +20,7 @@ int partition(int arr[], int start, int end)
         {
             idx2++;
         }
+        idx1++;
         while (arr[pivot] < arr[idx1])
         {
             idx1++;
