@@ -67,9 +67,9 @@ void devide(int *arr, int left, int right)
     if (left < right)
     {
         int mid = (left + right) / 2;
-        devide(arr, left, mid);      // 앞쪽 부분 배열 분할
-        devide(arr, mid + 1, right); // 뒤쪽 부분 배열 분할
-        merge(arr, left, mid, right);    // 분할된 리스트 병합
+        devide(arr, left, mid);       // 앞쪽 부분 배열 분할
+        devide(arr, mid + 1, right);  // 뒤쪽 부분 배열 분할
+        merge(arr, left, mid, right); // 분할된 리스트 병합
     }
 }
 
