@@ -1,6 +1,7 @@
 #include <iostream>
 
 /**
+ *  TODO there is no error but, has logical error, I need to modify that
  *  * DEQUE implementation
  *  @param push_front / push_back / pop_front / pop_back / size / print / front / back
  */
@@ -42,42 +43,42 @@ class Deque
 
     void push_front(T val)
     {
-        Node<T> *temp = head;
-        Node<T> *newNode = new Node<T>();
-        newNode->data = val;
+        Node<T> *temp = head->back;
+        Node<T> *newNode = new Node<T>(val);
 
-        if (temp->back != nullptr)
+        if (temp != nullptr)
         {
-            newNode->back = temp->back;
-            temp->back->front = newNode;
-            temp->back = newNode;
-            newNode->front = temp;
+            head->back = newNode;
+            newNode->back = temp;
+            newNode->front = head;
+            temp->front = newNode;
         }
         else
         {
             head->back = newNode;
-            tail->front = newNode;
             newNode->front = head;
             newNode->back = tail;
+            tail->front = newNode;
         }
 
         Count++;
     }
 
-    // TODO
     void pop_front()
     {
-        Node<T> *temp = head;
+        Node<T> *temp = head->back;
 
-        if (temp->back != nullptr)
+        if (Count == 0)
         {
-            Count--;
-            cout << "\'" << val << "\' : deleted\n";
+            // there is not element
+            // delete unavailable
         }
         else
         {
-            cout << "Error Occured" << endl;
-            return;
+            temp->back->front = head;
+            head->back = temp->back;
+            delete temp;
+            Count--;
         }
     }
 
@@ -88,40 +89,42 @@ class Deque
 
     void push_back(T val)
     {
-        Node<T> *temp = tail;
-        Node<T> *newNode = new Node<T>();
-        newNode->data = val;
+        Node<T> *temp = tail->front; // last element
+        Node<T> *newNode = new Node<T>(val);
 
-        if (temp->front != nullptr)
-        // if(Count != 0)
+        if (temp != nullptr)
         {
-            temp->front->back = newNode;
-            temp->front = newNode;
-            newNode->back = temp;
-        }
-        else // Count = 0, 비어있는 상태
-        {
-            head->back = newNode;
-            temp->front = newNode;
+            temp->back = newNode;
             newNode->back = tail;
+            newNode->front = temp;
+        }
+        else
+        {
             newNode->front = head;
+            newNode->back = tail;
+            head->back = newNode;
+            tail->front = newNode;
         }
 
         Count++;
     }
 
-    // TODO need modify
     void pop_back()
     {
         Node<T> *temp = tail->front;
-        T val = temp->data;
-        tail->front = temp->front;
-        temp->front->back = tail;
 
-        delete temp;
+        if (Count == 0)
+        {
+            // Deque has no element
+        }
+        else
+        {
+            temp->front->back = tail;
+            tail->front = temp->front;
 
-        Count--;
-        cout << "\'" << val << "\' : deleted\n";
+            delete temp;
+            Count--;
+        }
     }
 
     T back()
