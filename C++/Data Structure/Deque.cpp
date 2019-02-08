@@ -1,7 +1,6 @@
 #include <iostream>
 
 /**
- *  TODO there is no error but, has logical error, I need to modify that
  *  * DEQUE implementation
  *  @param push_front / push_back / pop_front / pop_back / size / print / front / back
  */
@@ -97,6 +96,7 @@ class Deque
             temp->back = newNode;
             newNode->back = tail;
             newNode->front = temp;
+            tail->front = newNode;
         }
         else
         {
@@ -167,7 +167,6 @@ int main(int argc, char const *argv[])
          << " Back : " << deq->back() << "  "
          << "Size : " << deq->size() << endl;
 
-    // push_front의 문제
     deq->push_front(6);
     deq->push_front(5);
     deq->push_front(4);
@@ -177,11 +176,16 @@ int main(int argc, char const *argv[])
          << " Back : " << deq->back() << "  "
          << "Size : " << deq->size() << endl;
 
+    cout << "pop_back : " << deq->back() << endl;
     deq->pop_back();
     deq->print();
 
+    cout << "pop_front : " << deq->front() << endl;
     deq->pop_front();
     deq->print();
+    cout << "Front : " << deq->front() << "  "
+         << " Back : " << deq->back() << "  "
+         << "Size : " << deq->size() << endl;
 
     return 0;
 }
