@@ -1,7 +1,7 @@
-#include <vector>
 #include <algorithm>
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
 
 #define null 0
 
@@ -12,94 +12,62 @@ using namespace std;
  * * 이진 탐색 트리 : 각노드에 값이 있다. 노드의 왼쪽 서브트리는 노드보다 작은 값, 오른쪽 서브트리는 노드보다 큰 값
  */
 
-// template <typename T> class TreeNode{
-//     friend class tree<T>;
-//     private:
-//     T data;
-// };
+template <typename T>
+class avlTree;
 
-template <typename T> class tree
+template <typename T>
+class Node
+{
+    friend class avlTree<T>;
+
+  private:
+    T data;
+    Node<T> *left;
+    Node<T> *right;
+    Node<T> *parent;
+
+  public:
+    // constructor of the Node class
+    Node(T val = 0)
+    {
+        left = nullptr;
+        right = nullptr;
+        parent = nullptr;
+        data = val;
+    }
+};
+
+template <typename T>
+class avlTree
 {
   private:
-    tree<T>* root;
-    T *right;
-    T *left;
-    int data;
+    Node<T> *root;
+    int Count;
+
   public:
-    tree(T data = 0)
+    avlTree()
     {
-        root = new tree<T>(data);
+        root = new Node<T>();
+        Count = 0;
     }
 
-    tree(T data = 0, T *left = null, T *right = null)
+    void insert(T val)
     {
-        this->data = data;
-        this->left = left;
-        this->right = right;
-    }
+        Node<T> *newNode = new Node<T>(val);
+        Node<T> *temp = root;
 
-    void insertNode(tree<T> *node)
-    {
-        if (search(root, node->data) == null)
+        while (true)
         {
-            tree<T> *parent = null;
-            tree<T> *current = root;
-
-            while (current != null)
+            if(temp->left == nullptr)
             {
-                parent = current;
-                if (node->data < parent->data)
-                {
-                    current = current->left;
-                }
-                else
-                {
-                    current = current->right;
-                }
-            }
-
-            if (node->data < parent->data)
-            {
-                parent->data = node;
+                temp = temp->left;
             }
             else
             {
-                parent->right = node;
+                temp = temp->right;
             }
 
-            cout << "Node Inserted" << node->data << endl;
         }
-    }
-
-    tree<T> *search(tree<T> *current, T data)
-    {
-        if (current == null)
-            return null;
-        if (data == current->data)
-        {
-            return current;
-        }
-        else if (data < current->data)  //넣을 값이 현재 노드의 값보다 작을 경우
-        {
-            search(current->left, data);
-        }
-        else    //넣을 값이 현재 노드의 값보다 클 경우
-        {
-            search(current->right, data);
-        }
-    }
-
-    //TODO DeleteNode 구현
-    void deleteNode(tree<T> *node)
-    {
-        if(search(root, root->data) != null)
-        {
-
-        }
-    }
-
-    void visit(tree<T> *current){
-        cout<< current->data<<endl;
     }
 };
 
