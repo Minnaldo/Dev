@@ -1,40 +1,39 @@
 #include <iostream>
-#include <math.h>
 #include <string>
+#include <math.h>
+
+/**
+ *  * 곱하기의 수를 먼저 예측하는 것이 중요하다.
+ */
 
 using namespace std;
 
-long long answer;
+int answer;
 
-void funct(string array, int n, int starCount, int plusCount, long long Count)
+void funct(int n, int starCount, int plusCount)
 {
-    if (Count > n)
+    if ((log10(n) / log10(3)) < starCount) // log10(n) / log10(3) : '*'가 나올수 있는 최소 수
     {
         return;
     }
 
-    else if ((log10(n) / log10(3)) > starCount)
+    if (n > 3)
     {
-        return;
+        funct(n - 1, starCount, plusCount + 1);
+        funct(n / 3, starCount + 1, plusCount);
     }
-
-    if (Count == n && (starCount * 2) == plusCount)
+    else if (n == 3)
     {
         answer++;
         return;
     }
-    else if (starCount * 2 >= plusCount)
-    {
-        funct(array + "+", n, starCount, plusCount + 1, Count + 1);
-        funct(array + "*", n, starCount + 1, plusCount, Count * 3);
-    }
 }
 
-long long solution(int n)
+int solution(int n)
 {
     answer = 0;
 
-    funct("*", n, 1, 0, 3);
+    funct(n - 2, 1, 0);
 
     return answer;
 }
