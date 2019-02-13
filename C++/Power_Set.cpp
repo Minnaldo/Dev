@@ -2,6 +2,7 @@
 
 /** 부분 집합 Power_Set (http://swlock.blogspot.com/2016/03/power-set.html)
  *  * 부분 집합을 구하는 방법
+ *  NOTE need to review
  */
 
 using namespace std;

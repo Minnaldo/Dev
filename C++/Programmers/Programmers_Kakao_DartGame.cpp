@@ -3,6 +3,10 @@
 #include <iostream>
 #include <cmath>
 
+/** 다트 게임_프로그래머스 (https://programmers.co.kr/learn/courses/30/lessons/17682)
+ *
+ */
+
 using namespace std;
 
 int main(int argc, char const *argv[])
