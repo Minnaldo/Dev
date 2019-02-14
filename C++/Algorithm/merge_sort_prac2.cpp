@@ -1,5 +1,9 @@
 #include <iostream>
 
+/** TODO completion the code
+ *
+ */
+
 using namespace std;
 
 #define MAX 10
