@@ -1,40 +1,33 @@
+#include <cmath>
 #include <iostream>
-#include <math.h>
 #include <string>
 
 using namespace std;
 
-long long answer;
+int answer;
 
-void funct(string array, int n, int starCount, int plusCount, long long Count)
+void funct(int n, int maxStar, int maxPlus)
 {
-    if (Count > n)
+
+    if (maxStar < 0)
     {
         return;
     }
 
-    else if ((log10(n) / log10(3)) > starCount)
-    {
-        return;
-    }
-
-    if (Count == n && (starCount * 2) == plusCount)
+    if (n == 1)
     {
         answer++;
         return;
     }
-    else if (starCount * 2 >= plusCount)
-    {
-        funct(array + "+", n, starCount, plusCount + 1, Count + 1);
-        funct(array + "*", n, starCount + 1, plusCount, Count * 3);
-    }
+    funct(n / 3, maxStar - 1, maxPlus);
+    funct(n - 1, maxStar, maxPlus - 1);
 }
 
-long long solution(int n)
+int solution(int n)
 {
     answer = 0;
-
-    funct("*", n, 1, 0, 3);
+    int maxStar = (int)(log10((double)n) / log10(3.0)), maxPlus = maxStar * 2;
+    funct(n - 2, maxStar, maxPlus - 2);
 
     return answer;
 }
