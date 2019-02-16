@@ -32,4 +32,6 @@
 *.app
 Android*
 *.class
-C++/Client_Test.txt
+
+# Temporary File
+*.txt
