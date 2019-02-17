@@ -4,7 +4,7 @@
 #include <sstream>
 #include <vector>
 
-/** 가장 긴 증가하는 부분 수열 백준_11053 (https://www.acmicpc.net/problem/11053)
+/** 가장 긴 증가하는 부분 수열 백준_11053 ( https://www.acmicpc.net/problem/11053 )
  *  * 참조 : (http://seungkwan.tistory.com/8)
  *  NOTE
  */
@@ -23,13 +23,13 @@ int max(int a, int b)
 // L[i] = 길이 i인 증가하는 부분 수열을 만들 수 있는 마지막 원소 중 가장 작은 값
 // ==> L의 크기가 곧 현재까지 만들 수 있는 LIS의 길이이며, 처음에 빈 리스트 이용
 // L을 업데이트 하는 방법 ==> L이 비어있거나, 현재 L의 마지막 원소보다 here이 클 경우 --> L의 뒤에 here 추가
-//L이 버이있지 않거나, 현재 L의 마지막 원소보다 here이 작을 경우 --> L에서 here의 Lower Bound를 찾아서 그자리를 here로 바꾼다.
+//L이 비어있지 않거나, 현재 L의 마지막 원소보다 here이 작을 경우 --> L에서 here의 Lower Bound를 찾아서 그자리를 here로 바꾼다.
 int solution2(int n, int *arr)
 {
     int here, len;
     for (int i = 1; i <= n; i++)
     {
-        here = arr[i];  // here ==> 현재 원소
+        here = arr[i]; // here ==> 현재 원소
         auto pos = lower_bound(dp + 1, dp + len + 1, here);
         *pos = here;
         if (pos == dp + len + 1)
@@ -41,24 +41,24 @@ int solution2(int n, int *arr)
 int P[1001];
 void backtrace(int idx, int num)
 {
-    if(idx == 0)
+    if (idx == 0)
     {
         return;
     }
-    if(P[idx] == num)
+    if (P[idx] == num)
     {
-        backtrace(idx-1, num -1);
-        cout<<dp[idx]<<" ";
+        backtrace(idx - 1, num - 1);
+        cout << dp[idx] << " ";
     }
     else
     {
-        backtrace(idx-1,num);
+        backtrace(idx - 1, num);
     }
 }
 
 // O(N log N)의 시간복잡도를 가지는 알고리즘을 구현하기 위해
 // lower bound를 이용한다. ==> 정렬된 배열에서 어떠한 값 val의 lower bound란 배열을 정렬된 상태로 유지하면서, val이 삽입될 수 있는 위치들 중 가장 인덱스가 작은 것
-// lower bound는 이진 탐색을 통해 log N 시간에 구할 수 있음, C++에서는 lower bound가 구현되어 있음
+// lower_bound는 이분 탐색을 통해 log N 시간에 구할 수 있음, C++에서는 lower bound가 구현되어 있음
 // O(N^2)의 시간복잡도를 가짐
 int solution1(int n, int *arr)
 {
@@ -74,7 +74,8 @@ int solution1(int n, int *arr)
             }
         }
         dp[i] = here + 1;
-        ans = max(dp[i], ans);
+        // ans = max(dp[i], ans);
+        ans = dp[i] > ans ? dp[i] : ans;
     }
     return ans;
 }

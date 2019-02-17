@@ -2,7 +2,9 @@
 #include <iostream>
 
 /** 백준_2167 2차원 배열의 합 ( https://www.acmicpc.net/problem/2167 )
- *  * Dynamic Porgramming ???
+ *  * Dynamic Porgramming ==> prefix sum technition
+ *  * 부분 합 기법을 이용하여 동적 계획법 적용한다
+ *  * REVIEW find the prefix sum technition
  */
 
 using namespace std;
