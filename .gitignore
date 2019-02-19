@@ -36,3 +36,4 @@ Android*
 # Temporary File
 **/input.txt
 AndroidProject
+*.txt
