@@ -1,3 +1,5 @@
+#include <iostream>
+
 /** 타일 채우기 백준_2133 ( https://www.acmicpc.net/problem/2133 )
  *  * N이 홀수일 경우에는 채울 수 있는 방법이 없다 ==> dp[i] = 0 ( i가 홀수 일 때 )
  *  * 3x0을 채우는 방법 --> 안채우면 된다 = 1가지
@@ -6,8 +8,6 @@
  *  * 6부터 2씩 증가할때마다 2가지 방법이 늘어남 ==> dp[i] += 2
  *  REVIEW
  */
-
-#include <iostream>
 
 using namespace std;
 
