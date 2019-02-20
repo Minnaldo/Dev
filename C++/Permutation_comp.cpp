@@ -52,6 +52,7 @@ int main(int argc, char const *argv[])
     int permuCand[3] = {1, 2, 3}; // 12
     int arrSize = sizeof(permuCand) / sizeof(permuCand[0]);
 
+    // 한자리수 ~ 세자리수 순열을 만드는 함수
     for (int i = 1; i <= 3; i++)
     {
         permutation(permuCand, 0, arrSize, i);
