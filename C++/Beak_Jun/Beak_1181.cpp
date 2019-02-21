@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -7,8 +8,8 @@
  *  * algorithm의 sort와 람다식을 이용하여 정렬
  *  * 1 조건 : 길이가 짧은 것부터
  *  * 2 조건 : 길이가 같으면 사전순
- *  * 중복 입력은 하나만 출력한다
- *  ! 시간초과
+ *  * 중복 입력은 하나만 출력한다 --> 중복제거 : set 자료구조를 이용 / algorithm -> unique()이용
+ *  * unique 이용시에는 정렬을 한 후에 사용해야 한다
  */
 
 using namespace std;
@@ -19,20 +20,20 @@ int main(int argc, char const *argv[])
     int N;
     cin >> N;
     // string *arr = new string[N + 1];
-    vector<string> arr(N + 1);
+    vector<string> arr;
 
+    set<string> s;
+    string str;
     for (int i = 0; i < N; i++)
     {
-        cin >> arr[i];
+        cin >> str;
+        s.insert(str);
     }
 
-    // 중복 제거
-    for (int i = 0; i < arr.size(); i++)
+    auto itr = s.begin();
+    for (itr; itr != s.end(); itr++)
     {
-        if (count(arr.begin(), arr.end(), arr[i]) > 1)
-        {
-            arr.erase(find(arr.begin(), arr.end(), arr[i]));
-        }
+        arr.push_back(*itr);
     }
 
     // 조건에 맞춰 오름차순 정렬
@@ -46,12 +47,10 @@ int main(int argc, char const *argv[])
         return str1.size() < str2.size() ? true : false;
     });
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < arr.size(); i++)
     {
-        cout << arr[i] << " ";
+        cout << arr[i] << "\n";
     }
-
-    cout << endl;
 
     return 0;
 }
