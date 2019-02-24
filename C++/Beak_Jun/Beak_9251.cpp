@@ -5,6 +5,7 @@
  *  * 노트에 정리 필요 TODO
  *  TODO find that concept about the LCS
  *  Ref 1) https://mygumi.tistory.com/126, Ref 2) https://twinw.tistory.com/126
+ *  ./Beak_9251 정리 ==> LCS에 대한 정리가 되어있음
  */
 
 using namespace std;
