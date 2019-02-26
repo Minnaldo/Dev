@@ -1,56 +1,41 @@
-#include <algorithm>
 #include <iostream>
-#include <vector>
 
 /** 합 분해 백준_2225 ( https://www.acmicpc.net/problem/2225 )
- *  * 중복순열 이용 : 메모리 초과 --> 다른 방법이 필요하다
+ *  * 참조 : https://mygumi.tistory.com/135
+ *  REVIEW
  */
 
 using namespace std;
 
-int cnt, N;
+long long dp[201][201];
 
-int permutation(int *arr, int n, int r, int depth)
+void solution(int n, int k)
 {
-    if (depth == r)
+    for (int i = 1; i <= k; i++)
     {
-        int tmp = 0;
-        for (int i = 0; i < r; i++)
+        for (int j = 0; j <= n; j++)
         {
-            tmp += arr[i];
+            for (int l = 0; l <= j; l++)
+                dp[i][j] += (dp[i - 1][j - l]) % 1000000000;
         }
-        if (tmp == N)
-            return 1;
     }
-
-    for (int i = 0; i < n; i++)
-    {
-        arr[depth] = i;
-        cnt = (cnt % 1000000000) + permutation(arr, n, r, depth + 1);
-    }
-
-    return cnt % 1000000000;
-}
-
-int solution(int N)
-{
-    return 1;
 }
 
 int main(int argc, char const *argv[])
 {
-    int K;
-    // cin >> N >> K;
-    N = 20, K = 2;
-    int *arr = new int[N + 1];
+    ios::sync_with_stdio(false);
+    int N, K;
+    cin >> N >> K;
+
+    // K가 1일 경우, 0~N 경우의 수는 1이기 때문에 1로 초기화
     for (int i = 0; i <= N; i++)
     {
-        arr[i] = i;
+        dp[1][i] = 1;
     }
 
-    cout << permutation(arr, N + 1, K, 0) << endl;
+    solution(N, K);
 
-    cout << solution(N) << endl;
+    cout << dp[K][N] % 1000000000 << endl;
 
     return 0;
 }
