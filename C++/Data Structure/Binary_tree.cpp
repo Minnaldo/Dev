@@ -35,8 +35,8 @@ class Tree
   public:
     Tree()
     {
-        root = new Node<T>(NULL);
-        por = new Node<T>(NULL);
+        root = new Node<T>();
+        por = new Node<T>();
         por->left = root;
         root->parent = por;
         Count = 0;
@@ -56,12 +56,26 @@ class Tree
 
     int getSize() { return Count; }
 
-    void preorder() { preOrder(por->left); }
-    void inorder() { inOrder(por->left); }
-    void postorder() { postOrder(por->left); }
-    void levelTravel() { lvTraveling(por->left); }
-
-    void printNode(Node<T> *current) { cout << current->data << " "; }
+    void preorder()
+    {
+        preOrder(por->left);
+        cout << endl;
+    }
+    void inorder()
+    {
+        inOrder(por->left);
+        cout << endl;
+    }
+    void postorder()
+    {
+        postOrder(por->left);
+        cout << endl;
+    }
+    void levelTravel()
+    {
+        lvTraveling(por->left);
+        cout << endl;
+    }
 
     Node<T> getRoot()
     {
@@ -70,6 +84,30 @@ class Tree
 
     T getData(int nodeNum)
     {
+        queue<Node<T> *> q;
+        q.push(root);
+
+        while (!q.empty())
+        {
+            Node<T> *current = q.front();
+
+            if (current->Num == nodeNum)
+            {
+                return current->data;
+            }
+
+            if (current->left != nullptr)
+                q.push(current->left);
+            if (current->right != nullptr)
+                q.push(current->right);
+
+            q.pop();
+        }
+    }
+
+    T getData(Node<T> *current)
+    {
+        return current->data;
     }
 
   private:
@@ -77,20 +115,79 @@ class Tree
     Node<T> *root;
     Node<T> *por;
 
+    void printNode(Node<T> *current) { cout << current->data << " "; }
+
     void nodeDelete(Node<T> *current, T val, Node<T> *parent)
     {
         if (current->data == val)
         {
             // 오른쪽 자식노드를 부모노드로 하자
-            if (current->left != nullptr && current->right != nullptr)
+            // 리프노드일경우, 중간노드일경우
+            if (current->left == nullptr && current->right == nullptr) // when the current node is the leaf node
             {
+                if (current->data < parent->data)
+                    parent->left = nullptr;
+                else
+                    parent->right = nullptr;
 
+                delete current;
             }
-            else if(current->right == nullptr && current->left != nullptr){
+            else
+            {
+                // when the current node is not the leaf node
+                if (current->left != nullptr && current->right != nullptr)
+                {
+                    // 둘다 있을 경우
+                    Node<T> *tmp = current->right;
+                    while (tmp->left != nullptr)
+                    {
+                        tmp = tmp->left;
+                    }
 
-            }
-            else{
+                    tmp->left = current->left;
+                    current->left->parent = tmp;
 
+                    if (current->right->data > parent->data)
+                    {
+                        parent->right = current->right;
+                        current->right->parent = parent;
+                    }
+                    else
+                    {
+                        parent->left = current->left;
+                        current->left->parent = parent;
+                    }
+                }
+                else if (current->left != nullptr && current->right == nullptr)
+                {
+                    // 왼쪽만 잇을경우
+                    if (current->left->data > parent->data)
+                    {
+                        parent->right = current->left;
+                        current->left->parent = parent;
+                    }
+                    else
+                    {
+                        parent->left = current->left;
+                        current->left->parent = parent;
+                    }
+                }
+                else
+                {
+                    // 오른쪽 만 있을경우
+                    if (current->right->data > parent->data)
+                    {
+                        parent->right = current->right;
+                        current->right->parent = parent;
+                    }
+                    else
+                    {
+                        parent->left = current->right;
+                        current->right->parent = parent;
+                    }
+                }
+
+                delete current;
             }
         }
 
@@ -102,10 +199,19 @@ class Tree
 
     void nodeInsert(Node<T> *current, T val, Node<T> *parent)
     {
-        if (current == NULL)
+        if (current == nullptr)
         {
             current = new Node<T>(val);
             current->parent = parent;
+
+            if (val < parent->data)
+            {
+                parent->left = current;
+            }
+            else
+            {
+                parent->right = current;
+            }
         }
         if (val < current->data)
             nodeInsert(current->left, val, current);
@@ -168,5 +274,11 @@ class Tree
 
 int main(int argc, char const *argv[])
 {
+    Tree<int> t;
+    t.insertNode(1);
+    t.insertNode(2);
+    t.insertNode(3);
+    t.preorder();
+    cout << "tree size : " << t.getSize() << endl;
     return 0;
 }
