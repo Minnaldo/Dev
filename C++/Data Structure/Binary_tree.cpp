@@ -115,6 +115,18 @@ class Tree
     Node<T> *root;
     Node<T> *por;
 
+    Node<T> searchNode(Node<T> *current)
+    {
+        if(current == nullptr)
+            return current;
+        else
+        {
+            searchNode(current->left);
+            searchNode(current->right);
+        }
+
+    }
+
     void printNode(Node<T> *current) { cout << current->data << " "; }
 
     void nodeDelete(Node<T> *current, T val, Node<T> *parent)
