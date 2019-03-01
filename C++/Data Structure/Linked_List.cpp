@@ -4,8 +4,8 @@
  *  * 필요할 때마다 Node를 생성해 데이터를 저장하고 이들을 서로 연결한다.
  *  * Good_Notes -> 낙서 p.27
  *  * 각 노드에 인덱스 삽입? REVIEW
- *  TODO search function implementation
- *  TODO insert function re-implementation
+ *  TODO need to redesign the concept
+ *  @param insert(idx, val), insert (val), delete (idx), front, back, print, isempty, operator[], search, list print
  */
 
 using namespace std;
@@ -21,7 +21,7 @@ class Node
     Node()
     {
         next = nullptr;
-        data = -2000000000; // 기본 초기화 값
+        data = INT32_MIN; // int의 가장 작은값으로 초기화
     }
 
   private:
@@ -54,6 +54,11 @@ class Link
     void insert(T val)
     {
         insertNode(val);
+    }
+
+    void insert(int idx, T val)
+    {
+        insertNode(idx, val);
     }
 
     void deleteNode(T val)
@@ -98,7 +103,6 @@ class Link
         tail->next = nullptr;
     }
 
-    // TODO check this to exactly active
     ~Link()
     {
         Node<T> *temp = head;
@@ -106,9 +110,23 @@ class Link
         {
             Node<T> *temp1 = temp->next;
             delete temp;
-            temp = temp1->next;
+            temp = temp1;
         }
         delete tail;
+    }
+
+    // NOTE  operator overriding
+    // * 배열의 그것과 같다
+    T operator[](int idx)
+    {
+        Node<T> *tmp = head;
+
+        for (int i = 1; i <= idx; i++)
+        {
+            tmp = tmp->next;
+        }
+
+        return tmp->data;
     }
 
   private:
@@ -144,25 +162,65 @@ class Link
         temp->next = newNode;
         tail->next = newNode;
     }
+
+    void insertNode(int idx, T val)
+    {
+        Node<T> *preTmp = search(idx - 1);
+        Node<T> *tmp = search(idx);
+        Node<T> *newNode = new Node<T>();
+
+        newNode->data = val;
+        newNode->next = tmp;
+        preTmp->next = newNode;
+    }
+
+    Node<T> *search()
+    {
+        Node<T> *tmp = head->next;
+
+        while (tmp->next != nullptr)
+        {
+            tmp = tmp->next;
+        }
+
+        return tmp;
+    }
+    Node<T> *search(int idx)
+    {
+        Node<T> *tmp = head->next;
+
+
+        for (int i = 1; i <= idx; i++)
+        {
+            if (tmp->next != nullptr && tmp->next != tail)
+                tmp = tmp->next;
+        }
+        return tmp;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    Link<int> *link = new Link<int>();
+    Link<int> link;
+    //  = new Link<int>();
 
-    link->insert(8);
-    link->insert(9);
-    link->insert(10);
+    // link->insert(8);
+    // link->insert(9);
+    // link->insert(10);
 
-    cout << "Value in List : ";
-    link->printNode();
+    // cout << "Value in List : ";
+    // link->printNode();
 
-    cout << "List Size : " << link->size() << endl;
-    link->isEmpty();
+    // cout << "List Size : " << link->size() << endl;
+    // link->isEmpty();
 
-    link->deleteNode(9);
-    cout << link->size() << endl;
-    cout << "Value in List : ";
-    link->printNode();
+    // link->deleteNode(9);
+    // cout << link->size() << endl;
+    // cout << "Value in List : ";
+    // link->printNode();
+
+    link.insert(10);
+    link.insert(1, 20);
+    cout << link[1] << endl;
     return 0;
 }

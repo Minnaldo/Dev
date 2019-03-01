@@ -51,7 +51,8 @@ public class File_Server {
                 System.out.println("file Size : " + tmpSize);
                 // System.out.println(tmpSize);
 
-                // TODO find it that Arrays.fill();
+                // NOTE Arrays.fill(Object obj, Param);
+                // ex) Arrays.fill(msg, 'a') --> msg배열을 a 문자로 초기화
                 Arrays.fill(data, (byte) 0); // byte 배열 data의 모든 원소 0초기화
                 while (tmpSize > 0) {
                     // 실제 파일 전송, File io stream 이용 해 파일 읽고 sender로 보내기

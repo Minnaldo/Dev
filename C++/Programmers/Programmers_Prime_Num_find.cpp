@@ -8,7 +8,8 @@
  *  @param pNum : 소수 테이블, vec : 숫자 조합 케이스 저장
  *  REVIEW
  *  * 순열의 경우를 구한다. nP1 ~ nPn 까지, 이를 vec배열에 넣고, 중복 제거, 그리고 소수테이블과 비교하여 카운팅
- *  현재 코드는 최적화 버전
+ *  NOTE 1 정수 N이 소수인지 판별할 때, N을 2부터 sqrt(N)까지 나눠서 나누어 떨어지는지 확인한다.
+ *  NOTE 2 소수 테이블을 만들때 가장 좋은 방법은 에라토스테네스의 체를 이용하는 것
  */
 
 using namespace std;
@@ -28,17 +29,17 @@ void table(int max)
     {
         if (pNum[i] != 0)
         {
-            for (int j = i * 2; j <= max; j += i)
+            for (int j = i * 2; j <= max; j += i) //i만큼 증가하며 0으로 치환, 각 단계마다 i만큼 증가한다 -> i의 배수
                 pNum[j] = 0;
         }
     }
 }
 
-void swap(int *i, int *j)
+void swap(int &i, int &j)
 {
-    int tmp = *i;
-    *i = *j;
-    *j = tmp;
+    int tmp = i;
+    i = j;
+    j = tmp;
 }
 
 // nPk를 구하는 함수
@@ -60,9 +61,9 @@ void perm(int *arr, int depth, int n, int r)
 
     for (int i = depth; i < n; i++)
     {
-        swap(&arr[i], &arr[depth]);
+        swap(arr[i], arr[depth]);
         perm(arr, depth + 1, n, r);
-        swap(&arr[i], &arr[depth]);
+        swap(arr[i], arr[depth]);
     }
 }
 

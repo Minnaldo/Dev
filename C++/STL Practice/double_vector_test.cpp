@@ -1,5 +1,9 @@
-#include <vector>
 #include <iostream>
+#include <vector>
+
+/**
+ *  NOTE  2차원 벡터에서 행/렬 이터레이터 사용법
+ */
 
 using namespace std;
 
@@ -9,41 +13,25 @@ int main(int argc, char const *argv[])
 
     vector<vector<int>>::iterator citr = matrix.begin();
     vector<int>::iterator ritr = citr->begin();
-    int a = 0;
-    // for (size_t i = 0; i < count; i++)
-    // {
-    //     matrix.at()
-    // }
+    int a = 1;
 
-    // for(vector <vector <int> >::iterator i = matrix.begin(); i != matrix.end(); i++)
-    // {
-    //     for(vector <int>::iterator j = i->begin(); j != i->end(); j++)
-    //     {
-    //         *j = a;
-    //         a++;
-    //     }
-    // }
-
-    //FIXME: munmap_chunk(): invalid pointer      Aborted (core dumped)              에러 발생
-    for (citr; citr != matrix.end(); citr++)
+    for (citr = matrix.begin(); citr != matrix.end(); citr++)
     {
-        for (ritr; ritr != citr->end(); ritr++)
+        for (ritr = citr->begin(); ritr != citr->end(); ritr++)
         {
             *ritr = a;
             a++;
         }
     }
 
-    // for (int q = 0; q < matrix.size(); q++)
-    // {
-    //     for (int w = 0; w < matrix.size(); w++)
-    //     {
-    //         cout << matrix.at(q).at(w) << "  ";
-    //     }
-    //     cout << endl;
-    // }
-
-    // cout<< *(i->begin())<<endl;
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = 0; j < matrix.size(); j++)
+        {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     cout << endl
          << "matrix Size : " << matrix.size() << endl;

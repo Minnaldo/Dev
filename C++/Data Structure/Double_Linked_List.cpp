@@ -3,8 +3,7 @@
 /**
  *  * 노드를 삽입할 때, 정렬을 해서 삽입해야??
  *  * 탐색시 절반이 넘어가면, tail에서부터 탐색해 올 수 있음 ==> 성능에 이점
- *  * 각 노드에 인덱스 삽입? REVIEW
- *  TODO need destroyer
+ *  * 각 노드에 인덱스 삽입? TODO
  */
 
 using namespace std;
@@ -21,7 +20,7 @@ class Node
     {
         next = nullptr;
         prev = nullptr;
-        data = -2000000000;
+        data = INT32_MIN;
     }
 
   private:
@@ -40,6 +39,18 @@ class dLink
         tail->next = nullptr;
         head->next = tail;
         tail->prev = head;
+    }
+
+    ~dLink()
+    { // destructor
+        Node<T> *tmp = head;
+
+        while (tmp->next != nullptr)
+        {
+            Node<T> *tmpdel = tmp;
+            tmp = tmp->next;
+            delete tmpdel;
+        }
     }
 
     // 리스트 뒤쪽 끝단에 노드 삽입
@@ -133,15 +144,26 @@ class dLink
         return Count;
     }
 
-    Node<T>* getHead()
+    Node<T> *getHead()
     {
         return head;
     }
 
-    Node<T>* getTail()
+    Node<T> *getTail()
     {
         return tail;
     }
+
+    T front()
+    {
+        return head->next->data;
+    }
+
+    T back()
+    {
+        return tail->prev->data;
+    }
+
   private:
     Node<T> *head = new Node<T>();
     Node<T> *tail = new Node<T>();
@@ -167,6 +189,37 @@ class dLink
             return tmptail;
         }
     }
+
+    // REVIEW
+    Node<T> *search(int idx, T val)
+    {
+        int mid = Count / 2;
+
+        if (idx > mid)
+        {
+            // tail 부터 탐색
+            Node<T> *tmp = tail->prev;
+            int tmpidx = Count - idx;
+
+            for (int i = Count; i >= tmpidx; i--)
+            {
+                tmp = tmp->prev;
+            }
+            return tmp;
+        }
+        else
+        {
+            // head 부터 탐색
+            Node<T> *tmp = head->next;
+
+            for (int i = 1; i <= idx; i++)
+            {
+                tmp = tmp->next;
+            }
+
+            return tmp;
+        }
+    }
 };
 
 int main(int argc, char const *argv[])
@@ -179,16 +232,16 @@ int main(int argc, char const *argv[])
     dlink->insertNode(7);
     dlink->printNode();
 
-    dlink->insertNode(8, 7, 11);    // 중간 삽입
+    dlink->insertNode(8, 7, 11); // 중간 삽입
     dlink->printNode();
 
-    dlink->deleteNode(8);   // 중간 삭제
+    dlink->deleteNode(8); // 중간 삭제
     dlink->printNode();
 
-    dlink->deleteNode(9);   // 처음 삭제
+    dlink->deleteNode(9); // 처음 삭제
     dlink->printNode();
 
-    dlink->deleteNode(7);   // 마지막 삭제
+    dlink->deleteNode(7); // 마지막 삭제
     dlink->printNode();
     return 0;
 }

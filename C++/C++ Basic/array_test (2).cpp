@@ -1,7 +1,7 @@
 #include <iostream>
 
 /**
- *  REVIEW
+ *  NOTE this code is that generate the array by dynamic allocation
  */
 
 using namespace std;

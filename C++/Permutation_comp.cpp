@@ -4,8 +4,7 @@
 /** 순열_Permutation
  *  * nPr
  *  * 1 ~ r 자리수의 순열 구하기
- *  ? 스왑을 사용하는 이유 TODO
- *  NOTE it needs to review
+ *  REVIEW
  */
 
 using namespace std;

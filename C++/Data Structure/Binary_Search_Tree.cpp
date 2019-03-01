@@ -4,6 +4,7 @@
 /** 이진 탐색 트리 참조 (http://jizard.tistory.com/111)
  *  * 이진 탐색트리는 삽입하려는 값과 현재 노드의 값을 비교하여 노드를 추가하여 삽입하여야 한다.
  *  * root노드의 값을 무엇으로 설정할 것인가??
+ *  TODO redesign this structure
  */
 
 using namespace std;
