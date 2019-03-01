@@ -1,10 +1,8 @@
 #include <iostream>
 #include <queue>
 
-/** 이진 탐색 트리 참조 (http://jizard.tistory.com/111)
- *  * 이진 탐색트리는 삽입하려는 값과 현재 노드의 값을 비교하여 노드를 추가하여 삽입하여야 한다.
- *  * root노드의 값을 무엇으로 설정할 것인가??
- *  TODO redesign this structure
+/**
+ *  * Binary Search Tree (이진 탐색 트리)
  */
 
 using namespace std;
@@ -18,7 +16,7 @@ class Node
     friend class Tree<T>;
 
   public:
-    Node(T data = -2000000000)
+    Node(T data = INT32_MIN)
     {
         this->data = data;
         left = nullptr;
@@ -37,7 +35,7 @@ template <typename T>
 class Tree
 {
   private:
-    Node<T> *root = new Node<T>();
+    Node<T> *root;
     Node<T> *head = new Node<T>();
     int Count;
 
@@ -46,7 +44,8 @@ class Tree
         cout << current->data << " ";
     }
 
-    Node<T> *search(Node<T> *current, T data)
+    // * ver. recur
+    Node<T> *searchRecur(Node<T> *current, T data)
     {
         if (current == nullptr)
             return nullptr;
@@ -62,6 +61,11 @@ class Tree
         {
             search(current->right, data);
         }
+    }
+
+    // * ver. loop
+    bool searchLoop(T val)
+    {
     }
 
     // 전위순회 : 중 - 좌 - 우
@@ -101,6 +105,167 @@ class Tree
     // 레벨순회 : BFS로 구현 가능,
     void leveltraversal()
     {
+
+    }
+
+  public:
+    Tree()
+    {
+        head->left = root;
+        Count = 0;
+    }
+
+    // void remove(T val)
+    // {
+    //     Node<T> *delNode = root;
+    //     Node<T> *delParent = root->parent;
+
+    //     // FIXME why this code have error
+    //     while (delNode->data != val && delNode != nullptr)
+    //     {
+    //         delParent = delNode;
+    //         delNode = delNode->data > val ? delNode->left : delNode->right;
+    //     }
+
+    //     if (delNode == nullptr)
+    //     {
+    //         cout << "value is not in the tree" << endl;
+    //         return;
+    //     }
+
+    //     // 단말 노드일 경우
+    //     if (delNode->left == nullptr && delNode->right == nullptr)
+    //     {
+    //         if (delParent == head) // 부모노드가 head면 삭제하려는 노드는 루트노드
+    //         {
+    //             delete root;
+    //         }
+    //         else
+    //         {
+    //             if (delParent->left == delNode)
+    //                 delParent->left == nullptr;
+    //             else
+    //                 delParent->right == nullptr;
+    //             delete delNode;
+    //         }
+    //         Count--;
+    //         return;
+    //     }
+    //     // 하나의 서브트리를 가지는 경우
+    //     else if (delNode->right == nullptr || delNode->left == nullptr)
+    //     {
+    //         Node<T> *tmp = (delNode->right == nullptr) ? delNode->left : delNode->right; // 비어있지 않는 자식 노드를 리턴, 그냥 치환을 해버린다.
+    //         if (delParent == head)
+    //         {
+    //             root = tmp;
+    //         }
+    //         else
+    //         {
+    //             if (delParent->left == tmp)
+    //             {
+    //                 delParent->left = tmp;
+    //                 tmp->parent = delParent;
+    //             }
+    //             else
+    //             {
+    //                 delParent->right = tmp;
+    //                 tmp->parent = delParent;
+    //             }
+    //         }
+    //         Count--;
+    //         return;
+    //     }
+    //     else
+    //     {
+    //         // 오른쪽 서브트리의 가장 작은값을 가져온다
+    //         Node<T> *tmp = delNode->right;
+    //         Node<T> *tmpParent = delNode;
+    //         while (tmp->left != nullptr)
+    //         {
+    //             tmpParent = tmp;
+    //             tmp = tmp->left;
+    //         }
+
+    //         tmp->left = delNode->left;
+    //         delNode->left->parent = tmp;
+
+    //         delNode->right->parent = delParent;
+
+    //         if (delNode == delParent->left)
+    //             delParent->left = delNode->right;
+    //         else
+    //             delParent->right = delNode->right;
+
+    //         delete delNode;
+    //         Count--;
+    //     }
+    // }
+
+    void insert(T val)
+    {
+        if (root == nullptr)
+        {
+            root = new Node<T>(val);
+            root->parent = head;
+        }
+        else
+        {
+            Node<T> *tmp = root;
+            Node<T> *tmpParent;
+            while (tmp != nullptr)
+            {
+                if (tmp->data == val)
+                { // 중복된 값이 들어오는걸 체크하는 구문
+                    cout << val << " is exist in tree" << endl;
+                    return;
+                }
+                tmpParent = tmp;
+                tmp = tmp->data > val ? tmp->left : tmp->right;
+            }
+
+            tmp = new Node<T>(val);
+            tmp->parent = tmpParent;
+            (tmpParent->data > val ? tmpParent->left : tmpParent->right) = tmp;
+        }
+        Count++;
+    }
+
+    // 해당 원소가 있는지 없는지 확인해준다
+    bool search(T val)
+    {
+        Node<T> *tmp = root;
+
+        while (tmp != nullptr)
+        {
+            if (val == tmp->data)
+            {
+                return true;
+            }
+            parent = tmp;
+            tmp = tmp->data > val ? tmp->left : tmp->right;
+        }
+
+        return false;
+    }
+
+    void postOrder()
+    {
+        postorder(root);
+    }
+
+    void preOrder()
+    {
+        preorder(root);
+    }
+
+    void inOrder()
+    {
+        inorder(root);
+    }
+
+    // BFS와 구현 방법이 같다
+    void levelTraversal()
+    {
         Node<T> *current;
         queue<Node<T> *> treeQue;
         treeQue.push(root);
@@ -122,7 +287,17 @@ class Tree
         }
     }
 
-    int *ToArray()
+    int size()
+    {
+        return Count;
+    }
+
+    bool isEmpty()
+    {
+        return Count == 0 ? true : false;
+    }
+
+    int *treeToArray()
     {
         int *arr = new int[Count + 1];
         int idx = 1;
@@ -148,123 +323,44 @@ class Tree
 
         return arr;
     }
-
-  public:
-    Tree()
-    {
-        head->left = root;
-        root->parent = head;
-        Count = 0;
-    }
-
-    // FIXME can't input value in root node
-    void insertNode(T val)
-    {
-        Node<T> *temp = root;
-        Node<T> *newNode = new Node<T>();
-
-        if (temp->data == -2000000000)
-        {
-            root->data = val;
-        }
-        else
-        {
-            newNode->data = val;
-            while (true)
-            {
-                if (temp->data > val)
-                {
-                    if (temp->left == nullptr)
-                    {
-                        temp->left = newNode;
-                        newNode->parent = temp;
-                        cout << "Inserted : " << newNode->data << endl;
-                        break;
-                    }
-                    else
-                    {
-                        temp = temp->left;
-                    }
-                }
-                else if (temp->data < val)
-                {
-                    if (temp->right == nullptr)
-                    {
-                        temp->right = newNode;
-                        newNode->parent = temp;
-                        cout << "Inserted : " << newNode->data << endl;
-                        break;
-                    }
-                    else
-                    {
-                        temp = temp->right;
-                    }
-                }
-            }
-        }
-        Count++;
-    }
-
-    void search(T val)
-    {
-        search(root, val);
-    }
-
-    void postOrder()
-    {
-        postorder(root);
-    }
-
-    void preOrder()
-    {
-        preorder(root);
-    }
-
-    void inOrder()
-    {
-        inorder(root);
-    }
-
-    void levelTraversal()
-    {
-        leveltraversal();
-    }
-
-    int getNodeCount()
-    {
-        return Count;
-    }
-
-    int *bTreeToArray()
-    {
-        return ToArray();
-    }
 };
 
 int main(int argc, char const *argv[])
 {
     Tree<int> *tree = new Tree<int>(); //  트리 클래스 객체 생성
 
-    tree->insertNode(8);
-    tree->insertNode(10);
-    tree->insertNode(7);
-    tree->insertNode(5);
-    tree->insertNode(11);
+    tree->insert(8);
+    tree->insert(7);
+    tree->insert(9);
+    tree->insert(1);
+    tree->insert(2);
+    tree->insert(3);
+    tree->insert(11);
+    tree->insert(15);
+    tree->insert(20);
+    tree->insert(10);
 
     cout << "Level Traversal : ";
     tree->levelTraversal();
     cout << endl;
 
-    cout << "Node Quantity : " << tree->getNodeCount() << endl;
+    cout << "Node Quantity : " << tree->size() << endl;
 
-    int *arrayTree = tree->bTreeToArray();
-    int size = tree->getNodeCount();
-    // ? 잘 나온다, 그러나 sizeof를 통한 사이즈를 구하지 못한다
+    int *arrayTree = tree->treeToArray();
+    int size = tree->size();
+
+    cout << "Tree Array :: ";
     for (int i = 1; i <= size; i++)
     {
         cout << arrayTree[i] << " ";
     }
     cout << endl;
 
+    // tree->remove(30);
+    // tree->levelTraversal();
+    // tree->remove(20);
+    // tree->levelTraversal();
+    // tree->remove(1);
+    // tree->levelTraversal();
     return 0;
 }

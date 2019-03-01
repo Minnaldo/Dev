@@ -1,9 +1,10 @@
 #include <iostream>
 #include <queue>
 
-/**
+/** Binary_Tree :
  *  * 삽입 / 삭제 알고리즘 다시 생각 해보기
  *  * 각 노드별 자식노드 2개와 부모노드를 가리키는 포인터 변수 존재
+ *  * 자식노드의 인덱스 = 부모노드 인덱스 * 2 (왼쪽 자식 노드)/ (부모노드 인덱스 *2) +1 (오른쪽 자식 노드)
  */
 
 using namespace std;
@@ -17,8 +18,16 @@ class Node
     friend class Tree<T>;
 
   public:
-    Node(T val = 0)
+    Node(T val = INT32_MIN)
     {
+        parent = nullptr;
+        right = nullptr;
+        left = nullptr;
+        data = val;
+        Num = 0;
+    }
+
+    Node(){
         parent = nullptr;
         right = nullptr;
         left = nullptr;
