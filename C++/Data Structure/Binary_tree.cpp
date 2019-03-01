@@ -1,6 +1,11 @@
 #include <iostream>
 #include <queue>
 
+/**
+ *  * 삽입 / 삭제 알고리즘 다시 생각 해보기
+ *  * 각 노드별 자식노드 2개와 부모노드를 가리키는 포인터 변수 존재
+ */
+
 using namespace std;
 
 template <typename T>
@@ -115,121 +120,7 @@ class Tree
     Node<T> *root;
     Node<T> *por;
 
-    Node<T> searchNode(Node<T> *current)
-    {
-        if(current == nullptr)
-            return current;
-        else
-        {
-            searchNode(current->left);
-            searchNode(current->right);
-        }
-
-    }
-
     void printNode(Node<T> *current) { cout << current->data << " "; }
-
-    void nodeDelete(Node<T> *current, T val, Node<T> *parent)
-    {
-        if (current->data == val)
-        {
-            // 오른쪽 자식노드를 부모노드로 하자
-            // 리프노드일경우, 중간노드일경우
-            if (current->left == nullptr && current->right == nullptr) // when the current node is the leaf node
-            {
-                if (current->data < parent->data)
-                    parent->left = nullptr;
-                else
-                    parent->right = nullptr;
-
-                delete current;
-            }
-            else
-            {
-                // when the current node is not the leaf node
-                if (current->left != nullptr && current->right != nullptr)
-                {
-                    // 둘다 있을 경우
-                    Node<T> *tmp = current->right;
-                    while (tmp->left != nullptr)
-                    {
-                        tmp = tmp->left;
-                    }
-
-                    tmp->left = current->left;
-                    current->left->parent = tmp;
-
-                    if (current->right->data > parent->data)
-                    {
-                        parent->right = current->right;
-                        current->right->parent = parent;
-                    }
-                    else
-                    {
-                        parent->left = current->left;
-                        current->left->parent = parent;
-                    }
-                }
-                else if (current->left != nullptr && current->right == nullptr)
-                {
-                    // 왼쪽만 잇을경우
-                    if (current->left->data > parent->data)
-                    {
-                        parent->right = current->left;
-                        current->left->parent = parent;
-                    }
-                    else
-                    {
-                        parent->left = current->left;
-                        current->left->parent = parent;
-                    }
-                }
-                else
-                {
-                    // 오른쪽 만 있을경우
-                    if (current->right->data > parent->data)
-                    {
-                        parent->right = current->right;
-                        current->right->parent = parent;
-                    }
-                    else
-                    {
-                        parent->left = current->right;
-                        current->right->parent = parent;
-                    }
-                }
-
-                delete current;
-            }
-        }
-
-        if (current->data > val)
-            nodeDelete(current->left, val, current);
-        if (current->data < val)
-            nodeDelete(current->right, val, current);
-    }
-
-    void nodeInsert(Node<T> *current, T val, Node<T> *parent)
-    {
-        if (current == nullptr)
-        {
-            current = new Node<T>(val);
-            current->parent = parent;
-
-            if (val < parent->data)
-            {
-                parent->left = current;
-            }
-            else
-            {
-                parent->right = current;
-            }
-        }
-        if (val < current->data)
-            nodeInsert(current->left, val, current);
-        if (val > current->data)
-            nodeInsert(current->right, val, current);
-    }
 
     // 중 -> 좌 -> 우
     void preOrder(Node<T> *current)

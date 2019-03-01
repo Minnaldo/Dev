@@ -12,22 +12,11 @@ using namespace std;
 
 long long dp[10001][10001];
 
-// int min(int &a, int &b) { return a < b ? a : b; }
+int min(int &a, int &b) { return a < b ? a : b; }
 
 long long solution(int *arr, int n)
 {
-    int answer = 0;
 
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            int tmp = (j + 3) % n;
-            dp[j][i] = min(dp[j][i - 1] + dp[j + 1][i - 1], dp[j][i] + dp[j + 1][i]);
-        }
-    }
-
-    return answer;
 }
 
 int main(int argc, char const *argv[])
