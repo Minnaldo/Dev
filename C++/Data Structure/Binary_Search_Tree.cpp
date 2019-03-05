@@ -105,7 +105,6 @@ class Tree
     // 레벨순회 : BFS로 구현 가능,
     void leveltraversal()
     {
-
     }
 
   public:
@@ -115,91 +114,113 @@ class Tree
         Count = 0;
     }
 
-    // void remove(T val)
-    // {
-    //     Node<T> *delNode = root;
-    //     Node<T> *delParent = root->parent;
+    void remove(T val)
+    {
+        Node<T> *delNode = root;
+        Node<T> *delParent;
 
-    //     // FIXME why this code have error
-    //     while (delNode->data != val && delNode != nullptr)
-    //     {
-    //         delParent = delNode;
-    //         delNode = delNode->data > val ? delNode->left : delNode->right;
-    //     }
+        // 노드 탐색 부분
+        // FIXME why this code has error
+        // delNode->data != val
+        while (delNode != nullptr)
+        {
+            if (delNode->data == val)
+            {
+                break;
+            }
+            delParent = delNode;
+            delNode = delNode->data > val ? delNode->left : delNode->right;
+        }
 
-    //     if (delNode == nullptr)
-    //     {
-    //         cout << "value is not in the tree" << endl;
-    //         return;
-    //     }
+        if (delNode == nullptr)
+        {
+            cout << "value is not in the tree" << endl;
+            return;
+        }
 
-    //     // 단말 노드일 경우
-    //     if (delNode->left == nullptr && delNode->right == nullptr)
-    //     {
-    //         if (delParent == head) // 부모노드가 head면 삭제하려는 노드는 루트노드
-    //         {
-    //             delete root;
-    //         }
-    //         else
-    //         {
-    //             if (delParent->left == delNode)
-    //                 delParent->left == nullptr;
-    //             else
-    //                 delParent->right == nullptr;
-    //             delete delNode;
-    //         }
-    //         Count--;
-    //         return;
-    //     }
-    //     // 하나의 서브트리를 가지는 경우
-    //     else if (delNode->right == nullptr || delNode->left == nullptr)
-    //     {
-    //         Node<T> *tmp = (delNode->right == nullptr) ? delNode->left : delNode->right; // 비어있지 않는 자식 노드를 리턴, 그냥 치환을 해버린다.
-    //         if (delParent == head)
-    //         {
-    //             root = tmp;
-    //         }
-    //         else
-    //         {
-    //             if (delParent->left == tmp)
-    //             {
-    //                 delParent->left = tmp;
-    //                 tmp->parent = delParent;
-    //             }
-    //             else
-    //             {
-    //                 delParent->right = tmp;
-    //                 tmp->parent = delParent;
-    //             }
-    //         }
-    //         Count--;
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         // 오른쪽 서브트리의 가장 작은값을 가져온다
-    //         Node<T> *tmp = delNode->right;
-    //         Node<T> *tmpParent = delNode;
-    //         while (tmp->left != nullptr)
-    //         {
-    //             tmpParent = tmp;
-    //             tmp = tmp->left;
-    //         }
+        // 단말 노드일 경우
+        if (delNode->left == nullptr && delNode->right == nullptr)
+        {
+            if (delParent == head) // 부모노드가 head면 삭제하려는 노드는 루트노드
+            {
+                head->left = nullptr; // head가 root 노드를 가리키는 포인터 변수
+                delete root;
+            }
+            else
+            {
+                if (delParent->left == delNode)
+                {
+                    delParent->left = nullptr;
+                }
+                else
+                {
+                    delParent->right = nullptr;
+                }
 
-    //         tmp->left = delNode->left;
-    //         delNode->left->parent = tmp;
+                delete delNode;
+            }
+        }
+        // 하나의 서브트리를 가지는 경우
+        else if (delNode->right == nullptr || delNode->left == nullptr)
+        {
+            Node<T> *tmp = (delNode->right == nullptr) ? delNode->left : delNode->right; // 비어있지 않는 자식 노드를 리턴, 그냥 치환을 해버린다.
+            // 삭제할 노드가 루트노드 일 때
+            if (delParent == head)
+            {
+                root = tmp;
+                root->parent = delParent;
+                delParent->left = root;
+            }
+            else
+            {
+                // 삭제할 노드가 왼쪽 부모 노드의 왼쪽 노드
+                if (delNode == delParent->left)
+                {
+                    delNode = tmp;
+                    delParent->left = delNode;
+                    delNode->parent = delParent;
+                }
+                // 삭제할 노드가 부모 노드의 오른쪽 노드
+                else
+                {
+                    delNode = tmp;
+                    delParent->right = delNode;
+                    delNode->parent = delParent;
+                }
+            }
+        }
+        else
+        {
+            // 오른쪽 서브트리의 가장 작은값을 가져온다
+            Node<T> *tmp = delNode->right;
+            Node<T> *tmpParent = delNode;
+            while (tmp->left != nullptr)
+            {
+                tmpParent = tmp;
+                tmp = tmp->left;
+            }
 
-    //         delNode->right->parent = delParent;
+            tmp->left = delNode->left;
+            delNode->left->parent = tmp;
+            delNode->left = nullptr;
 
-    //         if (delNode == delParent->left)
-    //             delParent->left = delNode->right;
-    //         else
-    //             delParent->right = delNode->right;
+            tmp->parent = delParent;
 
-    //         delete delNode;
-    //         Count--;
-    //     }
-    // }
+            if (delNode == delParent->left)
+            {
+                delNode = tmp;
+                delParent->left = delNode;
+                delNode->parent = delParent;
+            }
+            else
+            {
+                delNode = tmp;
+                delParent->right = delNode;
+                delNode->parent = delParent;
+            }
+        }
+        Count--;
+    }
 
     void insert(T val)
     {
@@ -234,6 +255,7 @@ class Tree
     bool search(T val)
     {
         Node<T> *tmp = root;
+        Node<T> *parent;
 
         while (tmp != nullptr)
         {
@@ -356,11 +378,17 @@ int main(int argc, char const *argv[])
     }
     cout << endl;
 
-    // tree->remove(30);
-    // tree->levelTraversal();
-    // tree->remove(20);
-    // tree->levelTraversal();
-    // tree->remove(1);
-    // tree->levelTraversal();
+    tree->remove(30);
+    cout << "remove 30 :: ";
+    tree->levelTraversal();
+    cout << endl;
+    tree->remove(20);
+    cout << "remove 20 :: ";
+    tree->levelTraversal();
+    cout << endl;
+    tree->remove(1);
+    cout << "remove 1 :: ";
+    tree->levelTraversal();
+    cout << endl;
     return 0;
 }
