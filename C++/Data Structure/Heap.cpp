@@ -2,7 +2,7 @@
 #include <queue>
 
 /**
- *  * 최대 힙 Maximum_Heap
+ *  * 최소 힙 Minimum_Heap
  *  TODO code test
  */
 
