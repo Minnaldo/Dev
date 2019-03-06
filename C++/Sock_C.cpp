@@ -7,6 +7,7 @@
 #define PORT 9999
 
 /** * the source code that cs style network
+ *  * Synchronous Socket Programming
  *  * Client
  *  * LoopBack IP
  *  * Complete

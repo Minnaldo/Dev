@@ -7,6 +7,7 @@
 
 /** * the source code that cs style network
  *  * Server
+ *  * Synchronous Socket Programming
  *  * LoopBack IP
  *  * Complete
  *  * Socket(소켓 선언) -> Binding(IP Addr과 Socket을 결합) -> Listen(클라이언트의 접속 대기) -> Accept(클라이언트와 접속 수락) ==> behave

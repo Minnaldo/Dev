@@ -8,7 +8,7 @@
 /**
  *  * 텍스트 파일, 이미지 전송 성공
  *  * 파일 이름으로 파일 요청 후, 수신
- *  * 동기화 소켓 프로그래밍
+ *  * 동기식 소켓 프로그래밍
  *  TODO file information that used to define structure type
  *  TODO multiple client socket communication, use thread
  *  TODO 파일에 대한 동기화가 더 필요
