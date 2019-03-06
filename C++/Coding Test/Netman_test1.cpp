@@ -1,7 +1,7 @@
-#include <vector>
-#include <cmath>
 #include <chrono>
+#include <cmath>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -10,8 +10,6 @@ using namespace std;
  */
 
 vector<long long> arr;
-
-
 
 long long func(long long n)
 {
@@ -47,10 +45,10 @@ int main(int argc, char const *argv[])
 {
     long long n = 21;
     auto start = chrono::system_clock::now();
-    cout<<"Test 1 : " << solution(n) << "\t";
+    cout << "Test 1 : " << solution(n) << "\t";
     auto end = chrono::system_clock::now();
 
-    cout << "Duration : " << (float)(end - start).count()/CLOCKS_PER_SEC << " sec" << endl;
+    cout << "Duration : " << (float)(end - start).count() / CLOCKS_PER_SEC << " sec" << endl;
 
     return 0;
 }

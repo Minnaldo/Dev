@@ -15,21 +15,25 @@ int solution(int n)
     {
         for (int j = 0; j < 3; j++)
         {
+            int min0, min1, min2, max0, max1, max2;
             if (j == 0)
             {
-                min_ans += min(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]);
-                max_ans += max(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]);
+                min0 = min(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]);
+                max0 = max(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]);
             }
             if (j == 1)
             {
-                min_ans += min(arr[i][j] + arr[i + 1][j - 1], min(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]));
-                max_ans += max(arr[i][j] + arr[i + 1][j - 1], max(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]));
+                min1 = min(arr[i][j] + arr[i + 1][j - 1], min(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]));
+                max1 = max(arr[i][j] + arr[i + 1][j - 1], max(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j + 1]));
             }
             if (j == 2)
             {
-                min_ans += min(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j - 1]);
-                max_ans += max(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j - 1]);
+                min2 = min(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j - 1]);
+                max2 = max(arr[i][j] + arr[i + 1][j], arr[i][j] + arr[i + 1][j - 1]);
             }
+
+            min_ans = min(min0, min(min1, min2));
+            max_ans = max(max0, max(max1, max2));
         }
     }
 
