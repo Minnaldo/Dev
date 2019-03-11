@@ -1,6 +1,2 @@
-
-        if (A == stoi(n))
-        {
-            return cnt;
-        }
-    
+;
+    return 0;
