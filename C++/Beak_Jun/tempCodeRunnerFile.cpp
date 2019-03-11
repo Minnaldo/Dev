@@ -1,1 +1,1 @@
-0
+cout.setf(ios::fixed);
