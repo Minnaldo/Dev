@@ -4,28 +4,50 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    int N, answer, n;
+    int N, answer = 0, five, three;
     cin >> N;
-
-    answer = N / 5;
 
     if (N % 5 != 0)
     {
-        int tmp = 0;
-        while (N % 3 != 0)
+        five = N / 5;
+        int tmp = N % 5;
+        if (tmp % 3 == 0)
         {
-            answer--;
-            n -= 5 * answer;
-            tmp++;
+            three = tmp / 3;
         }
-
-        if (answer == 0 && n > 0 && n < 3)
-            answer = -1;
         else
-            answer += tmp;
+        {
+        }
+    }
+
+    if ((five * 5) + (three * 3) != N)
+    {
+        answer = -1;
+    }
+    else
+    {
+        answer = five + three
     }
 
     cout << answer << endl;
+
+    while (true)
+    {
+        if (five * 5 + three * 3 > N)
+        {
+            answer = -1;
+            break;
+        }
+
+        if (N == (five * 5) + (three * 3))
+        {
+            answer = five + three;
+            break;
+        }
+
+        five--;
+        three++;
+    }
 
     return 0;
 }
