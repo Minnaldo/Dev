@@ -1,81 +1,98 @@
-#include <string>
-#include <queue>
-#include <vector>
 #include <iostream>
+#include <queue>
 #include <stack>
+#include <string>
+#include <tuple>
+#include <vector>
 
 using namespace std;
 
 /**
  * * 여행경롤를 탐색하는 알고리즘
- * * DFS를 이용하자 (인접 리스트 DFS)
- * * BFS도 이용 가능할 듯
+ *  * 알고리즘 순서 ==> ICN으로 시작하는 티켓을 찾는다 (벡터에 저장이 좋을 듯) (BFS이용)
+ *  * 2) 티켓이 여러개면 티켓 도착지를 비교해 알파벳 순서로 사용
+ *  * 3) 갈 수 있는 티켓이 없을때 --> visit배열이 모두 true이면 끝, 아니면 pop
  * * LG CNS Code Monster와 비슷하다
  *  */
 
-queue<string>q;
-stack<string> s;
-vector<string> stopOver; //경유지를 저장할 벡터 배열
-bool visit[10000];       //방문 여부를 확인하는 배열
-int ticketQuantity;      //처음 들어오는 티켓의 갯수를 저장하기 위한 변수
-
-void dfs(string arrive, vector<vector<string>> ticket)
-{
-    stopOver.push_back(arrive);
-    string current = arrive;
-    for (int i = 0; i < ticketQuantity; i++)
-    {
-        if (!visit[i] && current == ticket[i][0])
-        {
-            visit[i] = true;
-            dfs(ticket[i][1], ticket);
-        }
-    }
-}
-
-
+bool visit[10000]; //방문 여부를 확인하는 배열
 
 vector<string> solution(vector<vector<string>> tickets)
 {
-    ticketQuantity = tickets.size();
-    string department;
-    int tmpIdx;
+    vector<string> answer;
+    string start = "ICN";
+    int tickSize = tickets.size();
+    vector <pair<string, int>> arrive;
+    stack<pair<string,int>> stops;
+    // stops.push(start);
+    // answer.push_back(start);
+    int tmpidx, size;
+    string tmp;
 
-    for(int i =0; i<ticketQuantity; i++)
+    while (!stops.empty())
     {
-        for(int j = i; j<ticketQuantity; i++)
+        string current = stops.top();
+
+        // 사용할 수 있는 티켓을 arrive 큐에 집어 넣음
+        for (int i = 0; i < tickets.size(); i++)
         {
-            if(tickets[i][0] == tickets[j][0] )
+            // cout << tickets[i][0] <<" "<< current << endl;
+            if (!visit[i] && tickets[i][0] == current)
             {
-                if(tickets[i][0].compare(tickets[j][0]) < 0 )
-                {
-                    department = tickets[i][0];
-                    tmpIdx = i;
-                }
-                else
-                {
-                    department = tickets[j][0];
-                    tmpIdx = j;
-                }
+                arrive.push_back(make_pair(tickets[i][1], i));
+                cout << " selected spot : " << tickets[i][1] << endl;
             }
         }
+
+        if (arrive.size() > 1)
+        {
+            size = arrive.size() - 1;
+            tmp = arrive.front().first;
+            tmpidx = arrive.front().second;
+            arrive.pop_back();
+
+            for (int i = 0; i < size; i++)
+            {
+                if (tmp.compare(arrive.front().first) > 0)
+                {
+                    tmp = arrive.front().first;
+                    tmpidx = arrive.front().second;
+                }
+                arrive.pop();
+            }
+
+            visit[tmpidx] = true;
+            answer.push_back(tmp);
+            stops.push(tmp);
+            // current = tmp;
+        }
+        else if (arrive.size() == 1)
+        {
+            tmpidx = arrive.front().second;
+            tmp = arrive.front().first;
+            visit[tmpidx] = true;
+            answer.push_back(tmp);
+            stops.push(tmp);
+        }
+        else
+        {
+            stops.pop();
+            answer.pop_back();
+            visit[tmpidx] = false;
+        }
+
+        cout << " tmp Idx :: " << tmpidx << endl;
     }
 
-    stopOver.push_back(department);
-    if(!visit[tmpIdx])
-    {
-        visit[tmpIdx] = true;
-        dfs(tickets[tmpIdx][1], tickets);
-    }
-
-    return stopOver;
+    return answer;
 }
 
 int main(int argc, char const *argv[])
 {
     vector<string> answer;
     vector<vector<string>> arr = {{"ICN", "JFK"}, {"HND", "IAD"}, {"JFK", "HND"}};
-    answer = solution(arr);
+    vector<vector<string>> arr2 = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL", "SFO"}};
+    answer = solution(arr2);
 
     for (int i = 0; i < answer.size(); i++)
     {
