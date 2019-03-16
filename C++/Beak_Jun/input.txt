@@ -1,19 +1,8 @@
-18
-babic
-keksic
-boric
-bukic
-sarmic
-balic
-kruzic
-hrenovkic
-beslic
-boksic
-krafnic
-pecivic
-klavirkovic
-kukumaric
-sunkic
-kolacic
-kovacic
-prijestolonasljednikovi
+3 4
+ohhenrie
+charlie
+baesangwook
+obama
+baesangwook
+ohhenrie
+clinton
