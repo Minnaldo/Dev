@@ -59,6 +59,8 @@ vector<string> solution(int totalTicket, vector<string> logs)
                         reqtime.erase[j];
                     }
                 }
+
+
             }
             else
             {
