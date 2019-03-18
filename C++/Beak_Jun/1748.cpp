@@ -7,18 +7,24 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    int N, ans = 0;
+    int N, ans = 0, beftmp;
     scanf("%d", &N);
 
-    for (int i = 1; i < 9; i++)
+    if (N < 10)
     {
-        int tmp = pow(10, i);
-        if (N / tmp > 0)
-            break;
-
-        ans += (N % tmp) * i;
+        ans = N;
     }
-
+    else
+    {
+        int n = N, tmp;
+        for (int i = 1; i < 9; i++)
+        {
+            tmp = pow(10, i);
+            if (n / tmp > 0)
+                ans += ((n % tmp) - pow(10, i - 1)) * i;
+                n -= pow(10, i - 1);
+        }
+    }
     printf("%d\n", ans);
 
     return 0;
