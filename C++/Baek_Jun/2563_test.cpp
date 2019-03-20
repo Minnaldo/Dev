@@ -14,9 +14,10 @@ int main(int argc, char const *argv[])
 
     int x, y, befx, befy;
     fs >> x >> y;
-    befx = x, befy = y;
+
     for (int a = 1; a < n; a++)
     {
+        befx = x, befy = y;
         fs >> x >> y;
 
         int tmpx = abs(befx - x), tmpy = abs(befy - y);
