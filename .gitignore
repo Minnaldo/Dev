@@ -33,7 +33,6 @@
 Android*
 *.class
 
-# Temporary File
+# Information File
 **/input.txt
 AndroidProject
-*.txt
