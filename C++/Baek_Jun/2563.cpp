@@ -1,33 +1,41 @@
+#include <fstream>
 #include <iostream>
-
-/** 알람 시계 백준_2884 ( https://www.acmicpc.net/problem/2884 )
- *
- */
 
 using namespace std;
 
+int arr[101][101];
+
 int main(int argc, char const *argv[])
 {
-    ios::sync_with_stdio(false);
-    int H, M;
-    cin >> H >> M;
+    fstream fs("input.txt");
+    int n, cnt = 0;
+    fs >> n;
 
-    if (H != 0)
+    for (int a = 0; a < n; a++)
     {
-        if (M > 45)
+        int x, y;
+        fs >> x >> y;
+
+        int xend = x + 10, yend = y + 10;
+
+        for (int i = x; i <= xend; i++)
         {
-            cout << H << " " << M - 45 << endl;
-        }
-        else
-        {
-            cout << H - 1 << " " << 60 - (45 - M) << endl;
+            for (int j = y; j <= yend; j++)
+            {
+                if (arr[i][j] == 1)
+                {
+                    arr[i][j] = 0;
+                    cnt--;
+                }
+                else
+                {
+                    arr[i][j] = 1;
+                    cnt++;
+                }
+            }
         }
     }
-    else
-    {
-        if (M <= 45)
-            cout << 23 << " " << 60 - (45 - M) << endl;
-    }
 
+    printf("%d\n", cnt);
     return 0;
 }
