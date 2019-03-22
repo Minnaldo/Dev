@@ -37,3 +37,5 @@ Android*
 # Information File
 **/input.txt
 AndroidProject
+*.ipch
+.vscode/ipch/
