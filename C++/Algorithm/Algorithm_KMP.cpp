@@ -56,6 +56,15 @@ vector<int> KMP(string pattern, string plainText)
 
 int main(int argc, char const *argv[])
 {
+    string str = "ABCEDABCEFQJDNVABRIDFNIABC";
+    string pattern = "ABCEF";
 
+    vector<int> ans = KMP(str, pattern);
+
+    int size = ans.size();
+    for (int i = 0; i < size; i++)
+    {
+        cout << ans[i] << endl;
+    }
     return 0;
 }

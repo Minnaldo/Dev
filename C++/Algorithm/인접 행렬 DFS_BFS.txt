@@ -1,0 +1,59 @@
+// 스택 DFS - 인접행렬
+	public static void dfs(int[][] a, boolean[] c, int v, boolean flag) {
+		Stack<Integer> stack = new Stack<>();
+		int n = a.length - 1;
+
+		stack.push(v);
+		c[v] = true;
+		System.out.print(v + " ");
+
+		while (!stack.isEmpty()) {
+			int vv = stack.peek();
+
+			flag = false;
+
+			for (int i = 1; i <= n; i++) {
+
+				if (a[vv][i] == 1 && !c[i]) {
+					stack.push(i);
+					System.out.print(i + " ");
+
+					c[i] = true;
+					flag = true;
+					break;
+				}
+
+			}
+
+			if (!flag) {
+				stack.pop();
+			}
+
+		}
+
+	}
+
+	// 큐 BFS - 인접행렬
+	public static void bfs(int[][] a, boolean[] c, int v) {
+		Queue<Integer> q = new LinkedList<>();
+		int n = a.length - 1;
+
+		q.add(v);
+		c[v] = true;
+
+		while (!q.isEmpty()) {
+
+			v = q.poll();
+			System.out.print(v + " ");
+			
+			for (int i = 1; i <= n; i++) {
+
+				if (a[v][i] == 1 && !c[i]) {
+					q.add(i);
+					c[i] = true;
+				}
+
+			}
+		}
+
+	}
