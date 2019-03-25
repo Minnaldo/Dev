@@ -1,95 +1,75 @@
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <queue>
-#include <stack>
+#include <vector>
 
 using namespace std;
 
-int chk[1001];
-int arr[1001][1001], print[10001], index;
+bool chk[10001], chk2[10001];
+// int arr[2][10001];
+vector<pair<int, int>> arr;
 
-void bfs(int start, int N)
-{
-    queue<int> q;
-    q.push(start);
-    chk[start] = 1;
-    int idx = 1;
-    while (!q.empty())
-    {
-        int current = q.front();
-        print[idx] = current;
-        idx++;
-        for (int i = 1; i <= N; i++)
-        {
-            if (chk[i] == 0 && arr[current][i] != 0)
-            {
-                q.push(i);
-                chk[i] = 1;
-            }
-        }
-        q.pop();
-    }
-    index = idx;
-}
+// void bfs(int start, int N)
+// {
+//     int current = start;
+//     queue<int> q;
+//     q.push(current);
+//     chk2[current] = true;
+//     printf("%d ", current);
+
+//     while (!q.empty())
+//     {
+//         current = q.front();
+//         for (int i = 1; i <= N; i++)
+//         {
+//             if (!chk2[i] && arr[current][i] == 1)
+//             {
+//                 printf("%d ", i);
+//                 q.push(i);
+//                 chk2[i] = true;
+//             }
+//         }
+//         q.pop();
+//     }
+// }
 
 void dfs(int start, int N)
 {
-    stack<int> s;
-    s.push(start);
-    chk[start] = true;
-    int current = s.top();
-    int idx = 1;
-    while (!s.empty())
+    int current = start;
+    chk[current] = true;
+    // printf("%d ", current);
+    for (int i = 0; i < N; i++)
     {
-        print[idx] = current;
-        idx++;
-        for (int i = 1; i <= N; i++)
+        if (!chk[i] && arr[i].first == current)
         {
-            if (chk[i] == 0 && arr[current][i] == 1)
-            {
-                s.push(i);
-                chk[i] = 1;
-                current = i;
-                break;
-            }
+            chk[i] = true;
+            printf("%d ", arr[i].first);
+            current = arr[i].second;
         }
-        s.pop();
     }
-    index = idx - 1;
-}
-
-void printarr()
-{
-    for (int i = 1; i <= index; i++)
-    {
-        if (i != index)
-            printf("%d ", print[i]);
-        else
-            printf("%d", print[i]);
-    }
-    printf("\n");
-    index = 0;
 }
 
 int main(int argc, char const *argv[])
 {
     fstream fs("input.txt");
-    ios::sync_with_stdio(false);
     int N, M, start;
+    // scanf("%d %d %d", &N, &M, &start);
     fs >> N >> M >> start;
 
+    int y, x;
     for (int i = 0; i < M; i++)
     {
-        int y, x;
+        // scanf("%d %d", &y, &x);
         fs >> y >> x;
-        arr[y][x] = 1;
-        arr[x][y] = 1;
+        arr.push_back(make_pair(y, x));
     }
 
+    sort(arr.begin(), arr.end());
+
     dfs(start, N);
-    printarr();
-    fill(chk, chk + M, 0);
-    bfs(start, N);
-    printarr();
+    printf("\n");
+    // bfs(start, N);
+    // printf("\n");
     return 0;
 }
