@@ -1,52 +1,55 @@
 #include <algorithm>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <queue>
 #include <vector>
 
+/** DFS와 BFS 백준_1260 ( https://www.acmicpc.net/problem/1260 )
+ *
+ */
+
 using namespace std;
 
-bool chk[10001], chk2[10001];
-// int arr[2][10001];
-vector<pair<int, int>> arr;
+bool chk[1001];
+vector<vector<int>> arr(1001);
 
-// void bfs(int start, int N)
-// {
-//     int current = start;
-//     queue<int> q;
-//     q.push(current);
-//     chk2[current] = true;
-//     printf("%d ", current);
-
-//     while (!q.empty())
-//     {
-//         current = q.front();
-//         for (int i = 1; i <= N; i++)
-//         {
-//             if (!chk2[i] && arr[current][i] == 1)
-//             {
-//                 printf("%d ", i);
-//                 q.push(i);
-//                 chk2[i] = true;
-//             }
-//         }
-//         q.pop();
-//     }
-// }
-
-void dfs(int start, int N)
+void dfs(int current)
 {
-    int current = start;
     chk[current] = true;
-    // printf("%d ", current);
-    for (int i = 0; i < N; i++)
+
+    printf("%d ", current);
+    for (int i = 0; i < arr[current].size(); i++)
     {
-        if (!chk[i] && arr[i].first == current)
+        if (!chk[arr[current][i]])
         {
-            chk[i] = true;
-            printf("%d ", arr[i].first);
-            current = arr[i].second;
+            dfs(arr[current][i]);
         }
+    }
+}
+
+void bfs(int start)
+{
+    memset(chk, false, sizeof(chk));
+    int current;
+    queue<int> q;
+    q.push(start);
+    chk[start] = true;
+
+    while (!q.empty())
+    {
+        current = q.front();
+        printf("%d ", current);
+        int size = arr[current].size();
+        for (int i = 0; i < size; i++)
+        {
+            if (!chk[arr[current][i]])
+            {
+                chk[arr[current][i]] = true;
+                q.push(arr[current][i]);
+            }
+        }
+        q.pop();
     }
 }
 
@@ -62,14 +65,16 @@ int main(int argc, char const *argv[])
     {
         // scanf("%d %d", &y, &x);
         fs >> y >> x;
-        arr.push_back(make_pair(y, x));
+        arr[y].push_back(x);
+        arr[x].push_back(y);
     }
 
-    sort(arr.begin(), arr.end());
+    for (int i = 1; i <= N; i++)
+        sort(arr[i].begin(), arr[i].end());
 
-    dfs(start, N);
+    dfs(start);
     printf("\n");
-    // bfs(start, N);
-    // printf("\n");
+    bfs(start);
+    printf("\n");
     return 0;
 }

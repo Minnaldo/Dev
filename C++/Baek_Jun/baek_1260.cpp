@@ -1,60 +1,80 @@
+#include <algorithm>
+#include <cstring> // NOTE purpose to use the memset function
 #include <iostream>
 #include <queue>
-#include <stack>
-#include <sstream>
+#include <vector>
+
+/** DFS와 BFS 백준_1260 ( https://www.acmicpc.net/problem/1260 )
+ *  NOTE  how to used the BFS and DFS algorithm in adjacency list
+ */
 
 using namespace std;
 
-bool visit[10000];
+bool chk[1001];
+vector<vector<int>> arr(1001);
 
-int DFS(int n, int **arr)
+// the DFS search that use recursive
+void dfs(int current)
 {
-    for (int i = 0; i < n; i++)
+    chk[current] = true;
+    printf("%d ", current);
+
+    int size = arr[current].size();
+    for (int i = 0; i < size; i++)
     {
-        if(!visit[i] && (arr[i][0] == n))
+        if (!chk[arr[current][i]])
         {
-            cout<<n<<" ";
-            DFS(arr[i][1], arr);
+            dfs(arr[current][i]);
         }
     }
-    return 0;
 }
 
-int BFS(int n, int **arr)
+void bfs(int start)
 {
+    memset(chk, false, sizeof(chk)); //NOTE this function is in the cstring header
+    int current;
     queue<int> q;
-    for (int i = 0; i < n; i++)
+    q.push(start);
+    chk[start] = true;
+
+    while (!q.empty())
     {
+        current = q.front();
+        printf("%d ", current);
+        int size = arr[current].size();
+        for (int i = 0; i < size; i++)
+        {
+            if (!chk[arr[current][i]])
+            {
+                chk[arr[current][i]] = true;
+                q.push(arr[current][i]);
+            }
+        }
+        q.pop();
     }
 }
 
 int main(int argc, char const *argv[])
 {
-    cin.tie(NULL);
-    cout.tie(NULL);
+    int N, M, start;
+    scanf("%d %d %d", &N, &M, &start);
 
-    stringstream ss;
-    string str = "4 5 1 1 2 1 3 1 4 2 4 3 4";
-    ss.str(str);
-
-    int N, M, V;
-    ss >> N >> M >> V;
-
-    int **arr = new int *[M];
+    int y, x;
     for (int i = 0; i < M; i++)
     {
-        arr[i] = new int[2];
-        for (int j = 0; j < 2; j++)
-        {
-            int tmp;
-            ss >> tmp;
-            arr[i][j] = tmp;
-        }
+        scanf("%d %d", &y, &x);
+        // NOTE make the adjancecy list, why do this that double push
+        // * y에 대한 데이터 x에 대한 데이터 두개를 넣는 이유 --> 무방향 그래프 이기 때문
+        arr[y].push_back(x);
+        arr[x].push_back(y);
     }
 
-    DFS(V, arr);
-    cout<<endl;
-    // BFS(V, arr);
+    for (int i = 1; i <= N; i++)
+        sort(arr[i].begin(), arr[i].end());
 
+    dfs(start);
+    printf("\n");
+    bfs(start);
+    printf("\n");
     return 0;
 }
