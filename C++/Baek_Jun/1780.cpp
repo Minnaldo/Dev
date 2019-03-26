@@ -3,7 +3,7 @@
 #include <iostream>
 
 /**
- *  TOOD need to more think
+ *  * 9개 칸 모두 돌 수 있는 방법은?
  */
 
 using namespace std;
@@ -14,46 +14,30 @@ void func(int **arr, int start, int end);
 
 void devide(int **arr, int start, int end)
 {
-    if (start <= end)
+    int dist = (end - start + 1) / 3;
+    if (dist >= 1)
     {
-        // 파티션이 잘못되었는데
-        int dist = (end - start + 1) / 3;
         func(arr, start, start + dist - 1);
-        func(arr, start + dist, start + dist + dist - 1);
-        func(arr, start + dist + dist, end);
+        func(arr, start + dist, start + (dist * 2) - 1);
+        func(arr, start + (dist * 2), end);
     }
 }
 
 void func(int **arr, int start, int end)
 {
-    int dist = (end - start + 1) / 3;
-    if (dist > 1)
+    int tmp = arr[start][start];
+    for (int i = start; i <= end; i++)
     {
-        int tmp = arr[start][start];
-        for (int i = start; i <= end; i++)
+        for (int j = start; j <= end; j++)
         {
-            for (int j = start; j <= end; j++)
+            if (tmp != arr[i][j])
             {
-                if (tmp != arr[i][j])
-                {
-                    devide(arr, start, end);
-                    return;
-                }
-            }
-        }
-
-        cnt[tmp + 1]++;
-    }
-    else
-    {
-        for (int i = start; i <= end; i++)
-        {
-            for (int j = start; j <= end; j++)
-            {
-                cnt[arr[i][j] + 1]++;
+                devide(arr, start, end);
+                return;
             }
         }
     }
+    cnt[tmp + 1]++;
 }
 
 int main(int argc, char const *argv[])

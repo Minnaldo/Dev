@@ -3,7 +3,10 @@
 #include <vector>
 
 /** 프린터 큐 백준_1966 ( https://www.acmicpc.net/problem/1966 )
- *
+ *  * pair 선언을 통해 현재 원하는 문서 표시 ( pair->second == 1 일 경우 원하는 문서 )
+ *  * 문제 요구조건에 따라 진행 -> find_if를 통해 큰값을 찾고, 있으면 push_back 후 erase
+ *  * 큰 값이 없으면 erase 하면서 ans 1 증가
+ *  * pair->second값이 1일 때 반복문을 종료하는데, 종료전 1을 해줘야 출력 순서가 됨
  */
 
 using namespace std;
@@ -50,6 +53,7 @@ int main(int argc, char const *argv[])
                     }
                     else
                     {
+                        // 1 증가를 안해주면 부족하게 됨
                         ans++;
                         break;
                     }
