@@ -37,4 +37,4 @@ Android*
 # Information File
 AndroidProject
 *.ipch
-.vscode/ipch/
+.vscode/
