@@ -49,13 +49,11 @@ int main(int argc, char const *argv[])
 {
     long long n;
     scanf("%lld", &n);
-    scanf("%lld", &arr[0]);
 
-    psum[0] = arr[0];
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         scanf("%lld", &arr[i]);
-        psum[i] = psum[i - 1] + arr[i];
+        psum[i] = arr[i] + (i == 0 ? 0 : psum[i - 1]);
     }
 
     printf("%lld\n", partialArray(0, n));
