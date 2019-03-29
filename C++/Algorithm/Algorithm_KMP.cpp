@@ -45,6 +45,7 @@ vector<int> KMP(string pattern, string plainText)
         }
         i++;
         j++;
+
         if (j == pTextSize)
         {
             next[j] = j;
