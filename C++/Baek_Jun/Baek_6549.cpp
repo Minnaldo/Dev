@@ -50,22 +50,19 @@ long long histo(long long *arr, int start, int end)
 
 int main(int argc, char const *argv[])
 {
-    fstream fs("input.txt");
     while (true)
     {
         long long ans = 0, n;
-        // scanf("%d", &n);
-        fs >> n;
+        scanf("%d", &n);
+
         if (n == 0)
             break;
         else
         {
             for (int i = 0; i < n; i++)
-                // scanf("%d", &arr[i]);
-                fs >> arr[i];
+                scanf("%d", &arr[i]);
 
-            ans = histo(arr, 0, n);
-            printf("%lld\n", ans);
+            printf("%lld\n", histo(arr, 0, n));
         }
     }
     return 0;
