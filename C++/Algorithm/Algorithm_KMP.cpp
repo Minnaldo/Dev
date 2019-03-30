@@ -10,45 +10,51 @@ using namespace std;
  */
 
 //  KMP pre-processing
+//  접두사와 접미사의 최대 일치길이를 구한다.
+//  i인덱스와 j인덱스의 문자열이 같으면 둘 다 증가, 아니면 i만 증가
 vector<int> preProcessing(string pattern)
 {
-    int i = 0, j = -1;
-    vector<int> next;
+    int j = 0; // j ==> 접두사의 길이 인덱스
     int pSize = pattern.size();
-    next.assign(pSize, -1);
-    while (i < pSize)
+    vector<int> fail(pSize, 0); // 실패함수 초기화, 점프할 칸의 수를 저장할 배열의 크기는 패턴의 크기와 같다.
+
+    //  i는 왜 1에서부터 시작을 해야하나??
+    //  i와 j가 같으면, 모든 문자열을 검사하게 되므로, 알고리즘이 의미가 없다
+    for (int i = 1; i < pSize; i++)
     {
-        while (j >= 0 && pattern[i] != pattern[j])
+        while (j > 0 && (pattern[i] != pattern[j])) // j인덱스의 문자와 i인덱스 문자가 다를 때
         {
-            next[j] = j;
+            j = fail[j - 1]; // 비교한 문자열이 다를경우 실패함수에 이전 인덱스의 값을 j 값으로 한다
         }
 
-        i++;
-        j++;
-        next[i] = j;
+        // 일치시, j인덱스의 값에 1을 더해 실패함수에 저장
+        if (pattern[j] == pattern[i])
+            fail[i] = ++j; // j++, fail[i] = j;
     }
 
-    return next;
+    return fail;
 }
 
-vector<int> KMP(string pattern, string plainText)
+vector<int> KMP(string plainText, string pattern)
 {
-    int i = 0, j = 0;
+    int j = 0;
     int pTextSize = plainText.size();
-    auto next = preProcessing(pattern);
+    int patternSize = pattern.size();
+    vector<int> fail = preProcessing(pattern);
     vector<int> answer;
-    while (i < pTextSize)
+    for (int i = 0; i < pTextSize; i++)
     {
-        while (j >= 0 && (pattern[j] != plainText[i]))
-        {
-            next[j] = j;
-        }
-        i++;
-        j++;
-        if (j == pTextSize)
-        {
-            next[j] = j;
-        }
+        while (j > 0 && pattern[j] != plainText[i])
+            j = fail[j - 1];
+
+        if (plainText[i] == pattern[j])
+            if (j == patternSize - 1)
+            {
+                printf("%d번재에서 찾았습니다.\n", i - patternSize + 2);
+                j = fail[j];
+            }
+            else
+                j++;
     }
 
     return answer;
@@ -57,9 +63,10 @@ vector<int> KMP(string pattern, string plainText)
 int main(int argc, char const *argv[])
 {
     string str = "ABCEDABCEFQJDNVABRIDFNIABC";
-    string pattern = "ABCEF";
+    string pattern = "abacaaba";
 
-    vector<int> ans = KMP(str, pattern);
+    vector<int> ans = preProcessing(pattern);
+    // vector<int> ans = KMP(str, pattern);
 
     int size = ans.size();
     for (int i = 0; i < size; i++)
