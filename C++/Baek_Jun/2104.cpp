@@ -1,11 +1,6 @@
 #include <fstream>
 #include <iostream>
 
-/**
- *  NOTE time out
- *  * 시간을 줄이려면 어떻게 해야할까?
- */
-
 using namespace std;
 
 long long arr[100000];
@@ -18,28 +13,17 @@ long long partialArray(long long start, long long end)
     if (start == end)
         return arr[start] * arr[start];
 
-    int mid = (end + start) / 2;
-    // 나눠진 부분
-    long long ret = max(partialArray(start, mid), partialArray(mid + 1, end));
+    // 양쪽에서 범위를 줄여가며 값을 가져온다
+    long long ret = max(partialArray(start + 1, end), partialArray(start, end - 1));
 
-    long long mul = 1000001, mul2 = 1000001;
-    long long sum = 0, sum2 = 0;
-
-    // 겹치는 부분 판단
+    long long mul = 1000001, sum = 0;
     for (int i = start; i < end; i++)
     {
-        for (int j = i; j < end; j++)
-        {
-            sum += arr[j];
-            mul = min(mul, arr[j]);
-        }
-        for (int j = end - 1; j > i; j--)
-        {
-            sum2 += arr[j];
-            mul2 = min(mul2, arr[j]);
-        }
-        ret = max(sum * mul, sum2 * mul2);
+        sum += arr[i];
+        mul = min(mul, arr[i]);
     }
+
+    ret = max(ret, sum * mul);
 
     return ret;
 }
@@ -55,7 +39,6 @@ int main(int argc, char const *argv[])
         // scanf("%lld", &arr[i]);
         fs >> arr[i];
 
-    long long ans = partialArray(0, n);
-    printf("%lld\n", ans);
+    printf("%lld\n", partialArray(0, n));
     return 0;
 }
