@@ -37,12 +37,12 @@ vector<int> preProcessing(string pattern)
 
 vector<int> KMP(string plainText, string pattern)
 {
-    int j = 0;
+    int j = 0;  // 패턴의 인덱스
     int pTextSize = plainText.size();
     int patternSize = pattern.size();
     vector<int> fail = preProcessing(pattern);
     vector<int> answer;
-    for (int i = 0; i < pTextSize; i++)
+    for (int i = 0; i < pTextSize; i++) // i ==> parent의 인덱스
     {
         while (j > 0 && pattern[j] != plainText[i])
             j = fail[j - 1];
