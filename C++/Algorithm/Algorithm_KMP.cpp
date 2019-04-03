@@ -44,7 +44,7 @@ vector<int> KMP(string plainText, string pattern)
     vector<int> answer;
     for (int i = 0; i < pTextSize; i++) // i ==> parent의 인덱스
     {
-        while (j > 0 && pattern[j] != plainText[i])
+        while (j > 0 && pattern[j] != plainText[i]) // 패턴과 문자열이 다를 때
             j = fail[j - 1];
 
         if (plainText[i] == pattern[j])
@@ -62,11 +62,11 @@ vector<int> KMP(string plainText, string pattern)
 
 int main(int argc, char const *argv[])
 {
-    string str = "ABCEDABCEFQJDNVABRIDFNIABC";
+    string str = "ababacabacaabacaaba";
     string pattern = "abacaaba";
 
-    vector<int> ans = preProcessing(pattern);
-    // vector<int> ans = KMP(str, pattern);
+    // vector<int> ans = preProcessing(pattern);
+    vector<int> ans = KMP(str, pattern);
 
     int size = ans.size();
     for (int i = 0; i < size; i++)
