@@ -26,14 +26,15 @@ void dijikstra(int start)
 
     visit[start] = true; // 방문 체크
 
-    for (int i = 0; i < number - 2; i++)    // 왜 number - 2 를 할까?
+    // N개 노드 중 마지막 노드와 처음노드를 제외한 나머지 노드를 탐색한다.
+    for (int i = 0; i < number - 2; i++)
     {
         int current;
         // 최소거리를 찾는다.
         int min = INT32_MAX;
-        for(int j =0; j<number; j++)
+        for (int j = 0; j < number; j++)
         {
-            if(arr[j] < min && !visit[j])
+            if (arr[j] < min && !visit[j])
             {
                 min = arr[i];
                 current = i;
@@ -42,11 +43,11 @@ void dijikstra(int start)
 
         visit[current] = true;
 
-        for (int j = 0; j < 6; j++)
+        for (int j = 0; j < number; j++)
         {
             if (!visit[j])
                 if (arr[current] + graph[current][j] < arr[j])
-                    arr[j] = arr[current] + graph[current][j];
+                    arr[j] = arr[current] + graph[current][j]; // 가중치 확인 후 갱신
         }
     }
 }
