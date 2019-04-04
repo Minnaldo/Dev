@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "/mnt/usr/include"
+                "/usr/include"
             ],
             "defines": [
                 "_DEBUG",

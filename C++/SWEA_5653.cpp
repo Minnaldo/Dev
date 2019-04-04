@@ -14,7 +14,8 @@ struct cell
     int y;
 };
 
-vector<vector<cell>> gridCell(650, vector<cell>(650)); // 초기 그리드 크기 800 x 800선언
+cell gridCell[700][700];
+// vector<vector<cell>> gridCell(700, vector<cell>(700)); // 초기 그리드 크기 800 x 800선언
 int dir[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 int n, m, k;
 
@@ -31,7 +32,7 @@ void cellConfig(cell &c, int life, int curtime, int y, int x)
 // 활성상태 확인 함수
 bool isActive(cell &curCell, int currentTime)
 {
-    if (curCell.activationTime <= currentTime && curCell.dieTime > currentTime)
+    if (curCell.activationTime <= currentTime && currentTime < curCell.dieTime)
         return true;
     return false;
 }
@@ -40,16 +41,27 @@ bool isActive(cell &curCell, int currentTime)
 // TODO
 void cellBreeding(cell &c, int curTime)
 {
-    for (int i = 0; i < 4; i++)
-    {
-        // 현재 세포에서 번식할 때 생기는 세포의 좌표
-        int ny = c.y + dir[i][0];
-        int nx = c.x + dir[i][1];
-        cell newCell;
-        cellConfig(newCell, c.life, curTime, ny, nx);
+    if (isActive(c, curTime - 1))
+        for (int i = 0; i < 4; i++)
+        {
+            int ny = c.y + dir[i][0];
+            int nx = c.x + dir[i][1];
+            cell newCell;
+            cellConfig(newCell, c.life, curTime, ny, nx);
 
-        // 번식할때의 조건을 명확하게 세워야 한다.
-    }
+            if (gridCell[ny][nx].life != 0)
+            {
+                if (gridCell[ny][nx].createTime == curTime) // 현재 단계에서 생성된 것인가?
+                {
+                    if (gridCell[ny][nx].life < newCell.life)
+                        gridCell[ny][nx] = newCell;
+                }
+            }
+            else
+            {
+                gridCell[ny][nx] = newCell;
+            }
+        }
 }
 
 int solution(int curTime)
@@ -58,11 +70,11 @@ int solution(int curTime)
     while (curTime <= k)
     {
         // start = 300 - curTime, end = 300 + curTime;
-        for (int i = 0; i < 650; i++)
+        for (int i = 0; i < 700; i++)
         {
-            for (int j = 0; j < 650; j++)
+            for (int j = 0; j < 700; j++)
             {
-                if (gridCell[i][j].life != 0 && gridCell[i][j].activationTime == curTime - 1)
+                if (gridCell[i][j].life != 0 && gridCell[i][j].activationTime + 1 == curTime)
                     cellBreeding(gridCell[i][j], curTime);
             }
         }
@@ -71,8 +83,8 @@ int solution(int curTime)
 
     int ans = 0;
     // k시간이 되면 결과 도출.
-    for (int i = 0; i < 650; i++)
-        for (int j = 0; j < 650; j++)
+    for (int i = 0; i < 700; i++)
+        for (int j = 0; j < 700; j++)
         {
             if (gridCell[i][j].createTime <= curTime && curTime < gridCell[i][j].dieTime)
                 ans++;
