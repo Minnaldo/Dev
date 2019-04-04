@@ -7,34 +7,29 @@ using namespace std;
 struct cell
 {
     int life = 0;
-    int createTime = 1001;
-    int activationTime;
-    int dieTime;
+    int createTime = 2000;
+    int activationTime = -1;
+    int dieTime = -1;
     int x;
     int y;
-    bool flag = false;
 };
 
 vector<vector<cell>> gridCell(650, vector<cell>(650)); // 초기 그리드 크기 800 x 800선언
 int dir[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 int n, m, k;
 
-cell cellConfig(int life, int curtime, int y, int x)
+void cellConfig(cell &c, int life, int curtime, int y, int x)
 {
-    cell c;
     c.life = life;
     c.createTime = curtime;
     c.activationTime = curtime + life;
     c.dieTime = curtime + (life * 2);
     c.y = y;
     c.x = x;
-    c.flag = true; // true =  세포 존재, false = 세포 없음
-
-    return c;
 }
 
 // 활성상태 확인 함수
-bool isActive(int currentTime, cell &curCell)
+bool isActive(cell &curCell, int currentTime)
 {
     if (curCell.activationTime <= currentTime && curCell.dieTime > currentTime)
         return true;
@@ -45,23 +40,16 @@ bool isActive(int currentTime, cell &curCell)
 // TODO
 void cellBreeding(cell &c, int curTime)
 {
-    if (isActive(curTime, c))
-        for (int i = 0; i < 4; i++)
-        {
-            int ny = c.y + dir[i][0];
-            int nx = c.x + dir[i][1];
+    for (int i = 0; i < 4; i++)
+    {
+        // 현재 세포에서 번식할 때 생기는 세포의 좌표
+        int ny = c.y + dir[i][0];
+        int nx = c.x + dir[i][1];
+        cell newCell;
+        cellConfig(newCell, c.life, curTime, ny, nx);
 
-            cell newCell = cellConfig(c.life, curTime, ny, nx);
-
-            if (gridCell[ny][nx].flag)
-            {
-                if (gridCell[ny][nx].createTime == curTime) // 동시 여부 판단
-                    if (gridCell[ny][nx].life < newCell.life)
-                        gridCell[ny][nx] = newCell;
-            }
-            else
-                gridCell[ny][nx] = newCell;
-        }
+        // 번식할때의 조건을 명확하게 세워야 한다.
+    }
 }
 
 int solution(int curTime)
@@ -69,26 +57,24 @@ int solution(int curTime)
     int start, end;
     while (curTime <= k)
     {
-        start = 300 - curTime, end = 300 + curTime;
-        for (int i = start; i < end + n; i++)
+        // start = 300 - curTime, end = 300 + curTime;
+        for (int i = 0; i < 650; i++)
         {
-            for (int j = start; j < end + m; j++)
+            for (int j = 0; j < 650; j++)
             {
-                if (gridCell[i][j].activationTime + 1 == curTime)
-                {
+                if (gridCell[i][j].life != 0 && gridCell[i][j].activationTime == curTime - 1)
                     cellBreeding(gridCell[i][j], curTime);
-                }
             }
         }
         curTime++;
     } // end of while
 
     int ans = 0;
-    // k시간이 되면 번식을 끝낸다.
-    for (int i = start; i < end + n; i++)
-        for (int j = start; j < end + m; j++)
+    // k시간이 되면 결과 도출.
+    for (int i = 0; i < 650; i++)
+        for (int j = 0; j < 650; j++)
         {
-            if (gridCell[i][j].createTime <= k && k < gridCell[i][j].dieTime)
+            if (gridCell[i][j].createTime <= curTime && curTime < gridCell[i][j].dieTime)
                 ans++;
         }
     return ans;
@@ -116,7 +102,8 @@ int main(int argc, char const *argv[])
                 fs >> tmp;
                 if (tmp != 0)
                 {
-                    cell c = cellConfig(tmp, 0, 300 + i, 300 + j);
+                    cell c;
+                    cellConfig(c, tmp, 0, 300 + i, 300 + j);
                     gridCell[300 + i][300 + j] = c;
                 }
             }
