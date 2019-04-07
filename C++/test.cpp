@@ -50,7 +50,19 @@ int main(int argc, char const *argv[])
     //     cout << endl;
     // }
 
-    cout << attachBlock(1, 4) << endl;
+    // cout << attachBlock(1, 4) << endl;
+    int idx = 0;
+    while (idx <= 10)
+    {
+
+        if (idx % 2 == 0)
+        {
+            cout << "2" << endl;
+            idx++;
+            continue;
+        }
+        idx++;
+    }
 
     return 0;
 }

@@ -10,7 +10,6 @@ struct wormhole
     int x = 0, y = 0;
 };
 
-int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 int arr[102][102] = {5};
 int n;
 // wormhole portal[5];
@@ -20,8 +19,7 @@ vector<pair<wormhole, wormhole>> portal(5);
 // 반대방향으로 가게되면 11을 리턴하고 현재까지 포인트의 -1의 2배만큼을 리턴
 int attachBlock(int block, int direction)
 {
-    int tmp;
-    switch (block)
+    switch (block) // block type
     {
     case 1:
         return (direction == 1 ? 3 : (direction == 2 ? 4 : (direction == 3 ? 2 : 1)));
@@ -32,12 +30,8 @@ int attachBlock(int block, int direction)
     case 4:
         return (direction == 1 ? 3 : (direction == 2 ? 1 : (direction == 3 ? 4 : 2)));
     case 5:
-        return direction + 2 >= 5 ? direction - 2 : direction + 2; // 반대방향으로 빠져나가는 경우
-    default:
-        return direction;
+        return (direction == 1 || direction == 3) ? (4 - direction) : (direction == 1 ? 4 : 1); // 반대방향으로 빠져나가는 경우
     }
-
-    return tmp;
 }
 
 int setNY(int direction, int cury)
@@ -59,75 +53,53 @@ int run(int startY, int startX, int direction) // 출발지점 좌표
 {
     int point = 0;
     int ndirection = direction;
-    int nx = setNX(direction, startX), ny = setNY(direction, startY);
+    int nx = setNX(ndirection, startX), ny = setNY(ndirection, startY);
 
     while (true)
     {
-        if ((nx == startX && ny == startY) || arr[ny][nx] == -1) // 블랙홀 or 시작점
+        if (arr[ny][nx] == 0)
         {
-            point++;
-            direction = attachBlock(arr[ny][nx], direction);
-            ny = dir[direction - 1][0];
-            nx = dir[direction - 1][1];
-            continue;
+            if (ny == startY && nx == startX) // 시작점, 현재까지의 점수를 반환한다.
+            {
+                return point;
+            }
+            else // 시작점 이외 아무것도 없는 블록, 방향 변화 없음
+            {
+                nx = setNX(ndirection, nx);
+                ny = setNY(ndirection, ny);
+            }
         }
-        else if (arr[ny][nx] == 5)
+        else
         {
-            ny = (portal[arr[ny][nx]].first.y == ny ? portal[arr[ny][nx]].second.y : portal[arr[ny][nx]].first.y);
-            nx = (portal[arr[ny][nx]].first.x == nx ? portal[arr[ny][nx]].second.x : portal[arr[ny][nx]].first.x);
-            continue;
-        }
-        else if (arr[ny][nx] != 0) // 웜홀과 벽
-        {
-            // 포인트를 획득해야 할 때, 벽돌 or 끝 벽
-            if ((arr[ny][nx] >= 1 && arr[ny][nx] <= 4) /*|| (ny == 0 || nx == 0 || ny == n + 1 || nx == n + 1)*/)
+            if (arr[ny][nx] == -1) // 블랙홀, 현재까지 점수를 반환한다
+            {
+                return point;
+            }
+            else if (1 <= arr[ny][nx] && arr[ny][nx] <= 5) // 블록
             {
                 point++;
-                ndirection = attachBlock(arr[ny][nx], ndirection);      // 블록 or 벽에 부딪힌 후의 방향 리턴
-                nx = setNX(ndirection, nx), ny = setNY(ndirection, ny); // 변경된 방향의 좌표
+                ndirection = attachBlock(arr[ny][nx], ndirection); // 다음 블록 타입, 현재 진행 방향
+                // 바뀐 방향에 따른 다음 블록의 좌표
+                ny = setNY(ndirection, ny);
+                nx = setNX(ndirection, nx);
             }
-            else if (6 <= arr[ny][nx] && arr[ny][nx] <= 10) // 웜홀 일 때, 위치만 바뀜
+            else if (6 <= arr[ny][nx] && arr[ny][nx] <= 10) // 웜홀
             {
-                int idx = arr[ny][nx] - 6;
-                if (portal[idx].first.x != 0)
-                    if (portal[idx].first.x == nx && portal[idx].first.y == ny)
-                    {
-                        nx = portal[idx].second.x;
-                        ny = portal[idx].second.y;
-                    }
-                    else
-                    {
-                        nx = portal[idx].first.x;
-                        ny = portal[idx].first.y;
-                    }
+                int woreholeIdx = arr[ny][nx] - 6; // 웜홀 저장 벡터의 인덱스
+                if (ny == portal[woreholeIdx].first.y && nx == portal[woreholeIdx].first.x)
+                {
+                    ny = portal[woreholeIdx].second.y;
+                    nx = portal[woreholeIdx].second.x;
+                }
+                else
+                {
+                    ny = portal[woreholeIdx].first.y;
+                    nx = portal[woreholeIdx].first.x;
+                }
             }
-            continue;
         }
-
-        nx = setNX(ndirection, nx);
-        ny = setNY(ndirection, ny);
-    } // end of while
+    }
 }
-
-// int run_recur(int y, int x, int direction, int starty, int startx, int point)
-// {
-//     int ny, nx, ndirection;
-//     if ((y == starty && x == startx) || arr[y][x] == -1)
-//     {
-//         return point;
-//     }
-//     else if (arr[y][x] >= 6 && arr[y][x] <= 10) // 웜홀 일 때
-//     {
-//         if (portal[arr[y][x]])
-//         {
-//         }
-//         else
-//         {
-//         }
-//     }
-
-//     run_recur(ny, nx, ndirection, starty, startx, point);
-// }
 
 int main(int argc, char const *argv[])
 {
