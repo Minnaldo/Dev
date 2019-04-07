@@ -5,14 +5,15 @@
 
 using namespace std;
 
-int arr[102][102];
-int n;
-
 struct wormhole
 {
     int x = 0, y = 0;
 };
 
+int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+int arr[102][102] = {5};
+int n;
+// wormhole portal[5];
 vector<pair<wormhole, wormhole>> portal(5);
 
 // 방향 바뀌는 경우 방향 리턴
@@ -23,17 +24,17 @@ int attachBlock(int block, int direction)
     switch (block)
     {
     case 1:
-        tmp = (direction == 1 ? 3 : (direction == 2 ? 4 : (direction == 3 ? 2 : 1)));
-        break;
+        return (direction == 1 ? 3 : (direction == 2 ? 4 : (direction == 3 ? 2 : 1)));
     case 2:
-        tmp = (direction == 1 ? 2 : (direction == 2 ? 4 : (direction == 3 ? 1 : 3)));
-        break;
+        return (direction == 1 ? 2 : (direction == 2 ? 4 : (direction == 3 ? 1 : 3)));
     case 3:
-        tmp = (direction == 1 ? 4 : (direction == 2 ? 3 : (direction == 3 ? 1 : 2)));
-        break;
+        return (direction == 1 ? 4 : (direction == 2 ? 3 : (direction == 3 ? 1 : 2)));
     case 4:
-        tmp = (direction == 1 ? 3 : (direction == 2 ? 1 : (direction == 3 ? 4 : 2)));
-        break;
+        return (direction == 1 ? 3 : (direction == 2 ? 1 : (direction == 3 ? 4 : 2)));
+    case 5:
+        return direction + 2 >= 5 ? direction - 2 : direction + 2; // 반대방향으로 빠져나가는 경우
+    default:
+        return direction;
     }
 
     return tmp;
@@ -64,11 +65,17 @@ int run(int startY, int startX, int direction) // 출발지점 좌표
     {
         if ((nx == startX && ny == startY) || arr[ny][nx] == -1) // 블랙홀 or 시작점
         {
-            return point;
+            point++;
+            direction = attachBlock(arr[ny][nx], direction);
+            ny = dir[direction - 1][0];
+            nx = dir[direction - 1][1];
+            continue;
         }
         else if (arr[ny][nx] == 5)
         {
-            return point * 2; // 현재까지의 점수의 2배 반환 ==> 어차피 시작점으로 돌아가게 됨
+            ny = (portal[arr[ny][nx]].first.y == ny ? portal[arr[ny][nx]].second.y : portal[arr[ny][nx]].first.y);
+            nx = (portal[arr[ny][nx]].first.x == nx ? portal[arr[ny][nx]].second.x : portal[arr[ny][nx]].first.x);
+            continue;
         }
         else if (arr[ny][nx] != 0) // 웜홀과 벽
         {
@@ -126,11 +133,12 @@ int main(int argc, char const *argv[])
 {
     fstream fs("input.txt");
     int t;
-    // scanf("%d", &t);
     fs >> t;
+    // scanf("%d", &t);
 
     for (int a = 1; a <= t; a++)
     {
+
         // scanf("%d", &n);
         fs >> n;
         int ans = 0;
