@@ -16,7 +16,7 @@ struct wormhole
 vector<pair<wormhole, wormhole>> portal(5);
 
 // 방향 바뀌는 경우 방향 리턴
-// TODO
+// 반대방향으로 가게되면 11을 리턴하고 현재까지 포인트의 -1의 2배만큼을 리턴
 int attachBlock(int block, int direction)
 {
     int tmp;
@@ -42,24 +42,21 @@ int attachBlock(int block, int direction)
 int setNY(int direction, int cury)
 {
     if (direction == 1)
-        cury -= 1;
+        return --cury;
     else if (direction == 3)
-        cury += 1;
-
-    return cury;
+        return ++cury;
 }
 int setNX(int direction, int curx)
 {
     if (direction == 2)
-        curx += 1;
+        return ++curx;
     else if (direction == 4)
-        curx -= 1;
-
-    return curx;
+        return --curx;
 }
 
-int run(int startY, int startX, int direction, int point) // 출발지점 좌표
+int run(int startY, int startX, int direction) // 출발지점 좌표
 {
+    int point = 0;
     int ndirection = direction;
     int nx = setNX(direction, startX), ny = setNY(direction, startY);
 
@@ -170,7 +167,7 @@ int main(int argc, char const *argv[])
             for (int j = 1; j <= n; j++)
                 if (arr[i][j] == 0)              // 비어있는 블록에서만 출발 가능
                     for (int d = 1; d <= 4; d++) // 비어있는 블록에서 출발 시, 4방향으로 출발
-                        ans = max(ans, run(i, j, d, 0));
+                        ans = max(ans, run(i, j, d));
 
         printf("#%d %d\n", a, ans);
     }
