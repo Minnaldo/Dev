@@ -1,7 +1,10 @@
-#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <vector>
+
+/** TODO
+ *  * 4번 케이스의 시간이 오래걸린다
+ */
 
 using namespace std;
 
@@ -10,13 +13,12 @@ struct wormhole
     int x = 0, y = 0;
 };
 
-int arr[102][102] = {5};
-int n;
-// wormhole portal[5];
-vector<pair<wormhole, wormhole>> portal(5);
+int dir[5][2] = {{0, 0}, {-1, 0}, {0, 1}, {1, 0}, {0, -1}}; // 1, 2, 3, 4 순으로 이동 방향 좌표
+int arr[102][102];
+vector<pair<wormhole, wormhole>> portal(6);
 
-// 방향 바뀌는 경우 방향 리턴
-// 반대방향으로 가게되면 11을 리턴하고 현재까지 포인트의 -1의 2배만큼을 리턴
+int max(int &a, int &b) { return a > b ? a : b; }
+
 int attachBlock(int block, int direction)
 {
     switch (block) // block type
@@ -30,75 +32,57 @@ int attachBlock(int block, int direction)
     case 4:
         return (direction == 1 ? 3 : (direction == 2 ? 1 : (direction == 3 ? 4 : 2)));
     case 5:
-        return (direction == 1 || direction == 3) ? (4 - direction) : (direction == 1 ? 4 : 1); // 반대방향으로 빠져나가는 경우
+        return (direction == 1 || direction == 3) ? (4 - direction) : (direction == 2 ? 4 : 2); // 반대방향으로 빠져나가는 경우
     }
-}
-
-int setNY(int direction, int cury)
-{
-    if (direction == 1)
-        return --cury;
-    else if (direction == 3)
-        return ++cury;
-}
-int setNX(int direction, int curx)
-{
-    if (direction == 2)
-        return ++curx;
-    else if (direction == 4)
-        return --curx;
 }
 
 int run(int startY, int startX, int direction) // 출발지점 좌표
 {
-    int point = 0;
+    int point = 0, ny, nx, nxtBlock;
     int ndirection = direction;
-    int nx = setNX(ndirection, startX), ny = setNY(ndirection, startY);
+    int curx = startX, cury = startY;
 
     while (true)
     {
-        if (arr[ny][nx] == 0)
+        ny = cury + dir[ndirection][0];
+        nx = curx + dir[ndirection][1];
+        nxtBlock = arr[ny][nx]; // 진해방향 다음칸의 블록
+
+        if (nxtBlock == -1 || (ny == startY && nx == startX)) // 시작점, 현재까지의 점수를 반환한다.
         {
-            if (ny == startY && nx == startX) // 시작점, 현재까지의 점수를 반환한다.
+            return point;
+        }
+        else if (1 <= nxtBlock && nxtBlock <= 5) // 블록
+        {
+            point++;
+            if (nxtBlock == 5)
+                return (point * 2) - 1;
+
+            ndirection = attachBlock(nxtBlock, ndirection); // 다음 블록 타입, 현재 진행 방향 => 다음 진행방향
+            // 바뀐 방향에 따른 다음 블록의 좌표
+            curx = nx;
+            cury = ny;
+        }
+        else if (6 <= nxtBlock && nxtBlock <= 10) // 웜홀
+        {                                         // 웜홀 앞에 블록이 ( 1~5 ) 있다면?
+            int woreholeIdx = nxtBlock - 6;       // 웜홀 저장 벡터의 인덱스
+            if (ny == portal[woreholeIdx].first.y && nx == portal[woreholeIdx].first.x)
             {
-                return point;
+                cury = portal[woreholeIdx].second.y;
+                curx = portal[woreholeIdx].second.x;
             }
-            else // 시작점 이외 아무것도 없는 블록, 방향 변화 없음
+            else
             {
-                nx = setNX(ndirection, nx);
-                ny = setNY(ndirection, ny);
+                cury = portal[woreholeIdx].first.y;
+                curx = portal[woreholeIdx].first.x;
             }
         }
         else
         {
-            if (arr[ny][nx] == -1) // 블랙홀, 현재까지 점수를 반환한다
-            {
-                return point;
-            }
-            else if (1 <= arr[ny][nx] && arr[ny][nx] <= 5) // 블록
-            {
-                point++;
-                ndirection = attachBlock(arr[ny][nx], ndirection); // 다음 블록 타입, 현재 진행 방향
-                // 바뀐 방향에 따른 다음 블록의 좌표
-                ny = setNY(ndirection, ny);
-                nx = setNX(ndirection, nx);
-            }
-            else if (6 <= arr[ny][nx] && arr[ny][nx] <= 10) // 웜홀
-            {
-                int woreholeIdx = arr[ny][nx] - 6; // 웜홀 저장 벡터의 인덱스
-                if (ny == portal[woreholeIdx].first.y && nx == portal[woreholeIdx].first.x)
-                {
-                    ny = portal[woreholeIdx].second.y;
-                    nx = portal[woreholeIdx].second.x;
-                }
-                else
-                {
-                    ny = portal[woreholeIdx].first.y;
-                    nx = portal[woreholeIdx].first.x;
-                }
-            }
+            cury = ny;
+            curx = nx;
         }
-    }
+    } // end of while
 }
 
 int main(int argc, char const *argv[])
@@ -110,20 +94,20 @@ int main(int argc, char const *argv[])
 
     for (int a = 1; a <= t; a++)
     {
-
+        int n;
         // scanf("%d", &n);
         fs >> n;
         int ans = 0;
 
-        for (int i = 0; i < 102; i++)
-            fill_n(arr[i], 102, 5); // 끝벽을 5로 만들기 위해
+        for (int i = 0; i <= n + 1; i++)
+            arr[i][0] = arr[i][n + 1] = arr[n + 1][i] = arr[0][i] = 5;
 
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
             {
                 // scanf("%d", &arr[i][j]);
                 fs >> arr[i][j];
-                if (arr[i][j] >= 6 && arr[i][j] <= 10) // 웜홀일 때
+                if (6 <= arr[i][j] && arr[i][j] <= 10) // 웜홀일 때
                 {
                     if (portal[arr[i][j] - 6].first.y == 0)
                     {
@@ -138,10 +122,14 @@ int main(int argc, char const *argv[])
                 }
             }
 
-        // for (int q = 0; q < portal.size(); q++)
-        // {
-        //     cout << portal[q].first.y << " " << portal[q].first.x << "   :::   " << portal[q].second.y << " " << portal[q].second.x << endl;
-        // }
+        for (int i = 0; i < n + 2; i++)
+        {
+            for (int j = 0; j < n + 2; j++)
+            {
+                cout << arr[i][j]<<" ";
+            }
+            cout << endl;
+        }
 
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
