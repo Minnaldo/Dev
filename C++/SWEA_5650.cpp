@@ -24,15 +24,15 @@ int attachBlock(int block, int direction)
     switch (block) // block type
     {
     case 1:
-        return (direction == 1 ? 3 : (direction == 2 ? 4 : (direction == 3 ? 2 : 1)));
+        return direction == 3 ? 2 : (direction == 4 ? 1 : 11);
     case 2:
-        return (direction == 1 ? 2 : (direction == 2 ? 4 : (direction == 3 ? 1 : 3)));
+        return direction == 1 ? 2 : (direction == 4 ? 3 : 11);
     case 3:
-        return (direction == 1 ? 4 : (direction == 2 ? 3 : (direction == 3 ? 1 : 2)));
+        return direction == 1 ? 4 : (direction == 2 ? 3 : 11);
     case 4:
-        return (direction == 1 ? 3 : (direction == 2 ? 1 : (direction == 3 ? 4 : 2)));
+        return direction == 2 ? 1 : (direction == 3 ? 4 : 11);
     case 5:
-        return (direction == 1 || direction == 3) ? (4 - direction) : (direction == 2 ? 4 : 2); // 반대방향으로 빠져나가는 경우
+        return 11;
     }
 }
 
@@ -59,6 +59,10 @@ int run(int startY, int startX, int direction) // 출발지점 좌표
                 return (point * 2) - 1;
 
             ndirection = attachBlock(nxtBlock, ndirection); // 다음 블록 타입, 현재 진행 방향 => 다음 진행방향
+            if (ndirection == 11)
+            {
+                return (point * 2) - 1;
+            }
             // 바뀐 방향에 따른 다음 블록의 좌표
             curx = nx;
             cury = ny;
@@ -122,14 +126,14 @@ int main(int argc, char const *argv[])
                 }
             }
 
-        for (int i = 0; i < n + 2; i++)
-        {
-            for (int j = 0; j < n + 2; j++)
-            {
-                cout << arr[i][j]<<" ";
-            }
-            cout << endl;
-        }
+        // for (int i = 0; i < n + 2; i++)
+        // {
+        //     for (int j = 0; j < n + 2; j++)
+        //     {
+        //         cout << arr[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
 
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
