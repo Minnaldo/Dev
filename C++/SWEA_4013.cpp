@@ -29,9 +29,9 @@ void rotation(int flag, int idx)
 
 void func()
 {
-    for (int i = 0; i < 4; i++)
+    for( int i = 0; i<4; i++ )
     {
-        tmpArr[i].first = magnet[i][2];
+        tmpArr[i].first =  magnet[i][2];
         tmpArr[i].second = magnet[i][6];
     }
 }
@@ -46,11 +46,11 @@ void change(int flag, int idx) // 0, 1, 2, 3
 
     flag = flag == 1 ? 0 : 1;
     if (idx + 1 < 4)
-        if (pre != tmpArr[idx - 1].second)
+        if (tmpArr[idx].first != tmpArr[idx-1].second)
             change(flag, idx - 1);
 
     if (idx - 1 > 0)
-        if (post != tmpArr[idx + 1].first)
+        if (tmpArr[idx].second != tmpArr[idx+1].first)
             change(flag, idx + 1);
 }
 
@@ -63,7 +63,7 @@ int solution()
         // cout << operation[1][i] << endl;
         int clwise = operation[i][1] == 1 ? 1 : 0;
 
-        // func();
+        func();
         change(clwise, mgIdx);
 
         // for (int j = 0; j < 4; j++)
