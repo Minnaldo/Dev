@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <deque>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -51,18 +52,27 @@ int main(int argc, char const *argv[])
     // }
 
     // cout << attachBlock(1, 4) << endl;
-    int idx = 0;
-    while (idx <= 10)
-    {
+    // int idx = 0;
+    // while (idx <= 10)
+    // {
 
-        if (idx % 2 == 0)
-        {
-            cout << "2" << endl;
-            idx++;
-            continue;
-        }
-        idx++;
-    }
+    //     if (idx % 2 == 0)
+    //     {
+    //         cout << "2" << endl;
+    //         idx++;
+    //         continue;
+    //     }
+    //     idx++;
+    // }
+
+    deque<int> dq = {1, 2, 3, 4, 5, 6};
+    int tmp = dq.front();
+    dq.pop_front();
+    cout << *dq.begin() << endl;
+    cout << *(dq.end() - 1) << endl;
+    dq.push_back(tmp);
+    cout << *dq.begin() << endl;
+    cout << *(dq.end() - 1) << endl;
 
     return 0;
 }

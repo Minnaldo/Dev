@@ -1,19 +1,22 @@
 #include <deque>
-#include <fstream>
 #include <iostream>
 #include <vector>
+
+/**
+ *  ! 배열 및 벡터 사용시 인덱스 확인 잘하기!
+ */
 
 using namespace std;
 
 int k;
-int operation[2][20];
-vector<deque<int>> magnet(4);
+int operation[20][2];
+vector<deque<int>> magnet(4, deque<int>(8));
 vector<pair<int, int>> tmpArr(4);
+bool visit[4];
 
 void rotation(int flag, int idx)
 {
-    int tmp;
-    if (flag == 1)
+    if (flag > 0)
     {
         int tmp = magnet[idx].back();
         magnet[idx].pop_back();
@@ -29,29 +32,40 @@ void rotation(int flag, int idx)
 
 void func()
 {
-    for( int i = 0; i<4; i++ )
-    {
-        tmpArr[i].first =  magnet[i][2];
-        tmpArr[i].second = magnet[i][6];
-    }
 }
 
+// ! 종료조건
 void change(int flag, int idx) // 0, 1, 2, 3
 {
+    // 인덱스가 벗어나면 종료
     if (idx < 0 || idx > 3)
         return;
 
-    int pre = magnet[idx][2], post = magnet[idx][6];
-    rotation(flag, idx);
+    if (!visit[idx])
+    {
+        visit[idx] = true; // 이번 단계에 회전을 했는지 안했는지 판단 함수
+        rotation(flag, idx);
 
-    flag = flag == 1 ? 0 : 1;
-    if (idx + 1 < 4)
-        if (tmpArr[idx].first != tmpArr[idx-1].second)
-            change(flag, idx - 1);
+        // 각 자석에 대해 회전 여부 설정
+        if (idx == 0)
+        {
+            if (tmpArr[idx].second != tmpArr[idx + 1].first)
+                change(-flag, idx + 1);
+        }
+        else if (idx == 3)
+        {
+            if (tmpArr[idx].first != tmpArr[idx - 1].second)
+                change(-flag, idx - 1);
+        }
+        else
+        {
+            if (tmpArr[idx].first != tmpArr[idx - 1].second)
+                change(-flag, idx - 1);
 
-    if (idx - 1 > 0)
-        if (tmpArr[idx].second != tmpArr[idx+1].first)
-            change(flag, idx + 1);
+            if (tmpArr[idx].second != tmpArr[idx + 1].first)
+                change(-flag, idx + 1);
+        }
+    }
 }
 
 int solution()
@@ -60,21 +74,17 @@ int solution()
     for (int i = 0; i < k; i++)
     {
         int mgIdx = operation[i][0] - 1;
-        // cout << operation[1][i] << endl;
-        int clwise = operation[i][1] == 1 ? 1 : 0;
+        int clwise = operation[i][1];
 
-        func();
+        for (int i = 0; i < 4; i++)
+        {
+            tmpArr[i].second = magnet[i][2];
+            tmpArr[i].first = magnet[i][6];
+        }
+
         change(clwise, mgIdx);
 
-        // for (int j = 0; j < 4; j++)
-        // {
-        //     for (int a = 0; a < 8; a++)
-        //     {
-        //         cout << magnet[j][a] << " ";
-        //     }
-        //     cout << endl;
-        // }
-        // cout << endl;
+        fill_n(visit, 4, false);
     }
 
     ans += magnet[0].front() == 1 ? 1 : 0;
@@ -86,37 +96,28 @@ int solution()
 
 int main(int argc, char const *argv[])
 {
-    fstream fs("input.txt");
-    // ios::sync_with_stdio(false);
     int T;
-    // scanf("%d", &T);
-    fs >> T;
+    scanf("%d", &T);
+
     for (int test_case = 1; test_case <= T; test_case++)
     {
         int ans = 0;
-        // scanf("%d", &k);
-        fs >> k;
+        scanf("%d", &k);
 
         // 자석 입력
         for (int i = 0; i < 4; i++)
         {
-            int tmp;
             for (int j = 0; j < 8; j++)
             {
-                // scanf("%d", &tmp);
-                fs >> tmp;
-                magnet[i].push_back(tmp);
+                scanf("%d", &magnet[i][j]);
             }
         }
 
         for (int i = 0; i < k; i++)
         {
-            int tmp;
             for (int j = 0; j < 2; j++)
             {
-                // scanf("%d", &tmp);
-                fs >> tmp;
-                operation[i][j] = tmp;
+                scanf("%d", &operation[i][j]);
             }
         }
 
