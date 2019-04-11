@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int ans, t, w, d, k, cnt;
+int ans, t, w, d, k, result;
 vector<vector<int>> film(13, vector<int>(20));
 
 int min(int &a, int &b) { return a > b ? a : b; }
@@ -33,11 +33,12 @@ bool func(vector<vector<int>> arr)
 }
 
 // @param type : film type (1 or 0)
-void dfs(vector<vector<int>> arr, int height)
+// 약품 처리 시 마다 판단을 하고 다음 단계로 넘어간다면???
+void dfs(vector<vector<int>> arr, int height, int cnt)
 {
     if (func(arr) && cnt > 0)
     {
-        cnt + 1;
+        result = result > cnt ? cnt : result;
         return;
     }
     // else
@@ -49,12 +50,12 @@ void dfs(vector<vector<int>> arr, int height)
 
     if (height < d)
     {
-        fill_n(arr[height], w, 1); // 한 줄을 type B 로 변경
-        dfs(arr, height + 1);
-        fill_n(arr[height], w, 0); // 한 줄을 type A 로 변경
-        dfs(arr, height + 1);
+        fill_n(arr[height].begin(), w, 1); // 한 줄을 type B 로 변경
+        dfs(arr, height + 1, cnt + 1);
+        fill_n(arr[height].begin(), w, 0); // 한 줄을 type A 로 변경
+        dfs(arr, height + 1, cnt + 1);
         arr[height].assign(tmparr.begin(), tmparr.end()); // 바꾼 배열 복구
-        dfs(arr, height + 1);
+        dfs(arr, height + 1, cnt + 1);
     }
 }
 
@@ -66,7 +67,7 @@ int main(int argc, char const *argv[])
 
     for (int tc = 1; tc <= t; tc++)
     {
-        ans = cnt = 0;
+        ans = result = 0;
 
         // scanf("%d %d %d", &d, &w, &k);
         fs >> d >> w >> k;
@@ -82,8 +83,8 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            ans = 1;
-            ans = min(ans, cnt);
+            dfs(film, 0, 1);
+            ans = result; // ! 이부분이 잘못된거같은데
         }
 
         printf("#%d %d\n", tc, ans);
