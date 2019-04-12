@@ -11,25 +11,33 @@ vector<vector<int>> film(13, vector<int>(20));
 int min(int &a, int &b) { return a > b ? a : b; }
 
 // 보호필름 확인 후 통과 가능하면 true, 아니면 false 반환
+// TODO
 bool func(vector<vector<int>> arr)
 {
     bool ret;
+    int len;
     for (int i = 0; i < w; i++)
     {
         int tmp = arr[0][i];
-        int len = 0;
+        len = 0;
         for (int j = 1; j < d; j++)
         {
             if (tmp == arr[j][i])
                 len++;
             else
+            {
                 len = 1;
+                tmp = arr[j][i];
+            }
         }
-
-        if (len < k)
-            return false;
     }
-    return true;
+
+    if (len >= k)
+        ret = true;
+    else
+        ret = ret ? true : false;
+
+    return ret;
 }
 
 // @param type : film type (1 or 0)
@@ -39,10 +47,9 @@ void dfs(vector<vector<int>> arr, int height, int cnt)
     if (func(arr) && cnt > 0)
     {
         result = result > cnt ? cnt : result;
+        // result = cnt;
         return;
     }
-    // else
-    //     cnt;
 
     // 바꾸기 전 상태 임시 저장
     vector<int> tmparr(w);
@@ -52,8 +59,10 @@ void dfs(vector<vector<int>> arr, int height, int cnt)
     {
         fill_n(arr[height].begin(), w, 1); // 한 줄을 type B 로 변경
         dfs(arr, height + 1, cnt + 1);
+
         fill_n(arr[height].begin(), w, 0); // 한 줄을 type A 로 변경
         dfs(arr, height + 1, cnt + 1);
+
         arr[height].assign(tmparr.begin(), tmparr.end()); // 바꾼 배열 복구
         dfs(arr, height + 1, cnt + 1);
     }
