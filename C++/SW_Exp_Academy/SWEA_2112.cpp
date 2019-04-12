@@ -27,12 +27,13 @@ bool isPass(vector<vector<int>> arr)
             else
                 len = 1;
 
-            if (len >= k)
+            if (len == k)
             {
                 passfail++;
                 break;
             }
-            if (i == d - k + 1 && arr[i][j] != arr[i - 1][j])
+
+            if (i == d - k && len < k && arr[i][j] != arr[i + 1][j])
                 return false;
         }
 
@@ -88,17 +89,17 @@ int main(int argc, char const *argv[])
             }
         }
 
-        if (k == 1 || isPass(film))
+        if (k == 1) //|| isPass(film)
         {
             ans = 0;
         }
         else
         {
-            dfs(film, 1, 0);
-            fill_n(film[0].begin(), w, 1);
-            dfs(film, 1, 0);
-            fill_n(film[0].begin(), w, 1);
-            dfs(film, 1, 0);
+            dfs(film, 0, 0);
+            // fill_n(film[0].begin(), w, 1);
+            // dfs(film, 1, 0);
+            // fill_n(film[0].begin(), w, 1);
+            // dfs(film, 1, 0);
             ans = result;
         }
 
