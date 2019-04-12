@@ -3,68 +3,63 @@
 #include <iostream>
 #include <vector>
 
+/**
+ *  ! 시간초과
+ */
+
 using namespace std;
 
 int ans, t, w, d, k, result;
 vector<vector<int>> film(13, vector<int>(20));
 
-int min(int &a, int &b) { return a > b ? a : b; }
-
 // 보호필름 확인 후 통과 가능하면 true, 아니면 false 반환
-// TODO
-bool func(vector<vector<int>> arr)
+bool isPass(vector<vector<int>> arr)
 {
-    bool ret;
-    int len;
-    for (int i = 0; i < w; i++)
+    int passfail = 0;
+    for (int j = 0; j < w; j++)
     {
-        int tmp = arr[0][i];
-        len = 0;
-        for (int j = 1; j < d; j++)
+        int len = 1;
+
+        for (int i = 1; i < d; i++)
         {
-            if (tmp == arr[j][i])
-                len++;
+            if (arr[i][j] == arr[i - 1][j])
+                len++; // 연속된 셀 타입의 길이 저장
             else
-            {
                 len = 1;
-                tmp = arr[j][i];
+
+            if (len >= k)
+            {
+                passfail++;
+                break;
             }
         }
+
+        if (j + 1 != passfail)
+            return false;
     }
 
-    if (len >= k)
-        ret = true;
-    else
-        ret = ret ? true : false;
-
-    return ret;
+    return true;
 }
 
-// @param type : film type (1 or 0)
-// 약품 처리 시 마다 판단을 하고 다음 단계로 넘어간다면???
-void dfs(vector<vector<int>> arr, int height, int cnt)
+void dfs(vector<vector<int>> arr, int depth, int cnt)
 {
-    if (func(arr) && cnt > 0)
+    if (result > 0 && cnt >= result)
+        return;
+    if (isPass(arr))
     {
-        result = result > cnt ? cnt : result;
-        // result = cnt;
+        result = result < cnt ? result : cnt;
         return;
     }
 
-    // 바꾸기 전 상태 임시 저장
-    vector<int> tmparr(w);
-    tmparr.assign(arr[height].begin(), arr[height].end());
-
-    if (height < d)
+    if (depth < d && cnt < result)
     {
-        fill_n(arr[height].begin(), w, 1); // 한 줄을 type B 로 변경
-        dfs(arr, height + 1, cnt + 1);
+        dfs(arr, depth + 1, cnt);
 
-        fill_n(arr[height].begin(), w, 0); // 한 줄을 type A 로 변경
-        dfs(arr, height + 1, cnt + 1);
+        fill_n(arr[depth].begin(), w, 1);
+        dfs(arr, depth + 1, cnt + 1);
 
-        arr[height].assign(tmparr.begin(), tmparr.end()); // 바꾼 배열 복구
-        dfs(arr, height + 1, cnt + 1);
+        fill_n(arr[depth].begin(), w, 0);
+        dfs(arr, depth + 1, cnt + 1);
     }
 }
 
@@ -76,24 +71,37 @@ int main(int argc, char const *argv[])
 
     for (int tc = 1; tc <= t; tc++)
     {
-        ans = result = 0;
+        ans = 0;
+        result = 9876;
 
         // scanf("%d %d %d", &d, &w, &k);
         fs >> d >> w >> k;
 
+        // int **tmparr = new int *[d];
         for (int i = 0; i < d; i++)
+        {
+            // tmparr[i] = new int[w];
             for (int j = 0; j < w; j++)
+            {
                 // scanf("%d", &film[i][j]);
                 fs >> film[i][j];
+                // tmparr[i][j] = film[i][j];
+            }
+        }
 
-        if (func(film)) // 아무 것도 안막고 바꿀 수 있으면 0 반환
+        if (k == 1)
+        {
+            printf("#%d %d\n", tc, 0);
+            continue;
+        }
+        else if (isPass(film))
         {
             ans = 0;
         }
         else
         {
-            dfs(film, 0, 1);
-            ans = result; // ! 이부분이 잘못된거같은데
+            dfs(film, 0, 0);
+            ans = result;
         }
 
         printf("#%d %d\n", tc, ans);

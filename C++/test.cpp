@@ -65,14 +65,16 @@ int main(int argc, char const *argv[])
     //     idx++;
     // }
 
-    deque<int> dq = {1, 2, 3, 4, 5, 6};
-    int tmp = dq.front();
-    dq.pop_front();
-    cout << *dq.begin() << endl;
-    cout << *(dq.end() - 1) << endl;
-    dq.push_back(tmp);
-    cout << *dq.begin() << endl;
-    cout << *(dq.end() - 1) << endl;
+    vector<int> vec1 = {1, 2, 3, 4, 5, 6};
+    vector<int> vec2 = {1, 1, 1, 1, 1, 1};
+
+    for (int i = 0; i < vec1.size(); i++)
+        cout << vec1[i] << " ";
+    cout << endl;
+    vec1.assign(vec2.begin(), vec2.end());
+    for (int i = 0; i < vec1.size(); i++)
+        cout << vec1[i] << " ";
+    cout << endl;
 
     return 0;
 }
