@@ -32,6 +32,8 @@ bool isPass(vector<vector<int>> arr)
                 passfail++;
                 break;
             }
+            if (i == d - k + 1 && arr[i][j] != arr[i - 1][j])
+                return false;
         }
 
         if (j + 1 != passfail)
@@ -43,8 +45,9 @@ bool isPass(vector<vector<int>> arr)
 
 void dfs(vector<vector<int>> arr, int depth, int cnt)
 {
-    if (result > 0 && cnt >= result)
+    if (cnt >= result)
         return;
+
     if (isPass(arr))
     {
         result = result < cnt ? result : cnt;
@@ -73,34 +76,29 @@ int main(int argc, char const *argv[])
     {
         ans = 0;
         result = 9876;
-
         // scanf("%d %d %d", &d, &w, &k);
         fs >> d >> w >> k;
 
-        // int **tmparr = new int *[d];
         for (int i = 0; i < d; i++)
         {
-            // tmparr[i] = new int[w];
             for (int j = 0; j < w; j++)
             {
                 // scanf("%d", &film[i][j]);
                 fs >> film[i][j];
-                // tmparr[i][j] = film[i][j];
             }
         }
 
-        if (k == 1)
-        {
-            printf("#%d %d\n", tc, 0);
-            continue;
-        }
-        else if (isPass(film))
+        if (k == 1 || isPass(film))
         {
             ans = 0;
         }
         else
         {
-            dfs(film, 0, 0);
+            dfs(film, 1, 0);
+            fill_n(film[0].begin(), w, 1);
+            dfs(film, 1, 0);
+            fill_n(film[0].begin(), w, 1);
+            dfs(film, 1, 0);
             ans = result;
         }
 
