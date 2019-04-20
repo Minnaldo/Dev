@@ -12,20 +12,26 @@ bool visit[2][10000];
 
 int solution(deque<deque<int>> dq)
 {
-    auto itr1 = dq[0].begin();
-    auto itr2 = dq[1].begin();
-
     for (int i = 0; i < n; i++)
     {
-
-        if (i == 0)
+        for (int j = 0; j < 2; j++)
         {
-        }
-        else if (i == n - 1)
-        {
-        }
-        else
-        {
+            int nxt, pre;
+            if (i == 0)
+            {
+                pre = n - 1;
+                nxt = i + 1;
+            }
+            else if (i == n - 1)
+            {
+                pre = i - 1;
+                nxt = 0;
+            }
+            else
+            {
+                pre = i - 1;
+                nxt = i + 1;
+            }
         }
     }
 }
