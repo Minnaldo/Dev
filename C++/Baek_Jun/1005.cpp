@@ -5,6 +5,7 @@
 
 /** ACM Craft 백준_1005
  *  * 목표 건물부터 내려오자, BFS?
+ *  ! 예외 조건!
  */
 
 using namespace std;
