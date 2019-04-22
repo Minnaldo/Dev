@@ -29,11 +29,6 @@ void rotation(int flag, int idx)
         magnet[idx].push_back(tmp);
     }
 }
-
-void func()
-{
-}
-
 // ! 종료조건
 void change(int flag, int idx) // 0, 1, 2, 3
 {

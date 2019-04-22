@@ -4,31 +4,42 @@
 
 using namespace std;
 
-int c, n, m;
-int map[10][10], dir[4][2] = {{-1, -1}, {0, -1}, {-1, 1}, {0, 1}};
+int c, n, m, ans;
+int map[10][10];
+int chks[7][2] = {{-1, -1}, {0, -1}, {1, -1}, {-1, 1}, {0, 1}, {1, 1}, {0, 0}};
+bool visit[10][10];
 
-int solution()
+int max(int &a, int &b) { return a > b ? a : b; }
+
+void chk(int cury, int curx)
 {
-    int cnt = 0;
-    int cnt2 = 0;
-
-    for (int i = 0; i < m; i++)
+    // visit[cury][curx] = true;
+    for (int i = 0; i < 7; i++)
     {
-        if (i % 2 == 0)
+        int ny = cury + chks[i][0];
+        int nx = curx + chks[i][1];
+        if (nx >= 0 && ny >= 0 && nx < m && ny < n)
         {
-            for (int j = 0; j < n; j++)
-                if (map[j][i] == 0)
-                    cnt++;
-        }
-        else
-        {
-            for (int j = 0; j < n; j++)
-                if (map[j][i] == 0)
-                    cnt2++;
+            visit[ny][nx] = true;
         }
     }
+}
 
-    return cnt > cnt2 ? cnt : cnt2;
+void dfs(int cury, int curx, int cnt)
+{
+    chk(cury, curx);
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (!visit[i][j] && map[i][j] == 0)
+            {
+                dfs(i, j, cnt + 1);
+            }
+        }
+    }
+    ans = max(ans, cnt);
 }
 
 int main(int argc, char const *argv[])
@@ -51,7 +62,18 @@ int main(int argc, char const *argv[])
             }
         }
 
-        int ans = solution();
+        ans = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (!visit[i][j] && map[i][j] == 0)
+                    dfs(i, j, 1);
+                memset(visit, false, sizeof(visit));
+            }
+        }
+
         printf("%d\n", ans);
 
         memset(map, -1, sizeof(map));
