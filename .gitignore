@@ -31,11 +31,9 @@
 *.exe
 *.out
 *.app
-Android*
 *.class
 
 # Information File
-AndroidProject
 */ipch
 .vscode/
-C++/Baek_Jun/input.txt
+**/input.txt
