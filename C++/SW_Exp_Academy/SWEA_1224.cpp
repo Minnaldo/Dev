@@ -3,9 +3,14 @@
 #include <string>
 #include <vector>
 
+/** 계산기3 SWEA_1224 ( https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14tDX6AFgCFAYD&categoryId=AV14tDX6AFgCFAYD&categoryType=CODE )
+ *  * 후위식을 계산할 때에는 피연산자를 스택에 저장하고, 연산자를 만날때마다 스택에서 데이터 두개를 꺼내 연산후 다시 삽입한다.
+ *  * 후위식을 만들 때는 연산자는 스택에 저장하고, 피연산자는 배열에 저장한다
+ *  * 스택 계산기를 만들어 푸는 문제
+ */
+
 using namespace std;
 
-// 후위식을 만들 때는 연산자는 스택에 저장하고, 피연산자는 배열에 저장한다
 vector<int> make_postfix(string str, int len)
 {
     stack<char> s;
@@ -77,7 +82,7 @@ vector<int> make_postfix(string str, int len)
 
     while (!s.empty())
     {
-        arr.push_back(s.top()-'0');
+        arr.push_back(s.top() - '0');
         s.pop();
     }
 
@@ -91,45 +96,37 @@ int calc(vector<int> arr)
     auto itr = arr.begin();
     for (itr; itr != arr.end(); itr++)
     {
-        if (*itr == '+' || *itr == '*')
+        if (*itr == -6 || *itr == -5)
         {
-            // char tmp1 = st.top();
-            // st.pop();
-            // char tmp2 = st.top();
-            // st.pop();
-
             int op1 = st.top();
             st.pop();
             int op2 = st.top();
             st.pop();
 
-            if (*itr == '+')
+            if (*itr == -5)
             {
                 int sum = op1 + op2;
-                // char tmpch = '0' + sum;
                 st.push(sum);
             }
             else
             {
                 int mul = op1 * op2;
-                // char tmpch = '0' + mul;
                 st.push(mul);
             }
         }
         else
         {
-            st.push(*itr - '\0');
+            st.push(*itr);
         }
     }
     int ret = st.top();
 
-    return st.top();
+    return ret;
 }
 
 int main(int argc, char const *argv[])
 {
-    freopen("input.txt", "r", stdin);
-    for (int i = 1; i <= 1; i++)
+    for (int i = 1; i <= 10; i++)
     {
         int len;
         cin >> len;
@@ -138,12 +135,8 @@ int main(int argc, char const *argv[])
 
         vector<int> arr = make_postfix(str, len);
 
-        for (int i = 0; i < arr.size(); i++)
-            cout << arr[i] << endl;
-        cout << endl;
-
-        // int ans = calc(arr);
-        // printf("#%d %d\n", i, ans);
+        int ans = calc(arr);
+        printf("#%d %d\n", i, ans);
     }
     return 0;
 }
