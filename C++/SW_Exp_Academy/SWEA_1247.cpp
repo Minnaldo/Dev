@@ -44,6 +44,7 @@ int solution(int curIdx, int sum)
             if (tmpdst > dst[curIdx][i])
             {
                 nxtIdx = i;
+                tmpdst = dst[curIdx][i];
             }
         }
     }
@@ -90,19 +91,13 @@ int main(int argc, char const *argv[])
             }
         }
 
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                cout << dst[i][j] << " ";
-            }
-            cout << endl;
-        }
+        visit[idx] = true;
+        int ans = solution(idx, tmpdst);
 
-        // visit[idx] = true;
-        // int ans = solution(idx, tmpdst);
+        printf("#%d %d\n", tc, ans);
 
-        // printf("#%d %d\n", tc, ans);
+        memset(visit, false, sizeof(visit));
+        arr.clear();
     }
 
     return 0;
