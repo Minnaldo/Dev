@@ -1,62 +1,52 @@
 #include <algorithm>
 #include <cmath>
-#include <cstring>
 #include <iostream>
 #include <vector>
 
 /**
- *
+ *  ! 시간을 줄이자, 인접행렬 -> 인접 리스트
  */
 
 using namespace std;
 
-int t, n, curMin, dst[10][10];
-bool visit[10];
+int t, n, dst[10][10], ans;
 vector<pair<int, int>> arr;
 pair<int, int> office, home;
+vector<vector<pair<int, int>>> map(10);
 
-void init()
+int min(int &a, int &b) { return a < b ? a : b; }
+
+void init() // 각 노드에서 모든 다른 노드까지의 거리를 계산하여 인접리스트 생성
 {
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < i; j++)
         {
-            if (i == j)
+            if (i != j)
             {
-                dst[i][j] = 0;
-            }
-            else
-            {
-                dst[i][j] = abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second);
+                map[i].push_back(make_pair(abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second), j));
             }
         }
     }
 }
 
-int solution(int curIdx, int sum)
+void solution(vector<bool> visit, int curIdx, int sum, int cnt)
 {
-    int nxtIdx = -1;
-    int tmpdst = 9999;
-    for (int i = 0; i < n; i++)
+    if (cnt == n)
     {
-        if (i != curIdx && !visit[i])
-        {
-            if (tmpdst > dst[curIdx][i])
-            {
-                nxtIdx = i;
-                tmpdst = dst[curIdx][i];
-            }
-        }
+        sum += (abs(arr[curIdx].first - home.first) + abs(arr[curIdx].second - home.second));
+        ans = min(ans, sum);
     }
 
-    if (nxtIdx != -1)
+    int size = map[curIdx].size();
+
+    for (int i = 0; i < size; i++)
     {
-        visit[nxtIdx] = true;
-        solution(nxtIdx, sum + dst[curIdx][nxtIdx]);
-    }
-    else
-    {
-        return sum += (abs(arr[curIdx].first - home.first) + abs(arr[curIdx].second - home.second));
+        int tmpSum = map[curIdx][i].first; // 거리 값
+        int idx = map[curIdx][i].second;   // 노드 번호
+        visit[idx] = true;
+        solution(visit, idx, sum + tmpSum, cnt + 1);
+        visit[idx] = false;
     }
 }
 
@@ -69,7 +59,7 @@ int main(int argc, char const *argv[])
     for (int tc = 1; tc <= t; tc++)
     {
         scanf("%d", &n);
-
+        ans = 987654321;
         scanf("%d %d", &office.first, &office.second);
         scanf("%d %d", &home.first, &home.second);
 
@@ -80,24 +70,29 @@ int main(int argc, char const *argv[])
         }
 
         init();
-        int idx = 0;
-        int tmpdst = abs(office.first - arr[0].first) + abs(office.second - arr[0].second);
-        for (int i = 1; i < n; i++)
-        {
-            if (abs(office.first - arr[i].first) + abs(office.second - arr[i].second) < tmpdst)
-            {
-                idx = i;
-                tmpdst = abs(office.first - arr[i].first) + abs(office.second - arr[i].second);
-            }
-        }
+        vector<bool> visit(n);
+        fill_n(visit.begin(), n, false);
 
-        visit[idx] = true;
-        int ans = solution(idx, tmpdst);
+        for (int i = 0; i < n; i++)
+        {
+            int tmpSum = abs(office.first - arr[i].first) + abs(office.second - arr[i].second); // 회사에서 첫번째 집까지의 거리
+            visit[i] = true;
+            solution(visit, i, tmpSum, 1);
+            visit[i] = false;
+        }
 
         printf("#%d %d\n", tc, ans);
 
-        memset(visit, false, sizeof(visit));
         arr.clear();
+
+        // for (int i = 0; i < n; i++)
+        // {
+        //     for (int j = 0; j < n; j++)
+        //     {
+        //         cout << dst[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
     }
 
     return 0;
