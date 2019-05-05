@@ -78,6 +78,7 @@ void DFS_in_adj_list(int start)
             }
         }
 
+        // back tracking
         if (!flag)
             s.pop();
     }
