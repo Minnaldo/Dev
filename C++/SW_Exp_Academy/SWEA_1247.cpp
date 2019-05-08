@@ -20,11 +20,16 @@ void init() // 각 노드에서 모든 다른 노드까지의 거리를 계산�
 {
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < i; j++)
+        for (int j = 0; j < n; j++)
         {
             if (i != j)
             {
-                map[i].push_back(make_pair(abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second), j));
+                // map[i].push_back(make_pair(abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second), j));
+                dst[i][j] = abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second);
+            }
+            else
+            {
+                dst[i][j] = 0;
             }
         }
     }
@@ -38,15 +43,21 @@ void solution(vector<bool> visit, int curIdx, int sum, int cnt)
         ans = min(ans, sum);
     }
 
-    int size = map[curIdx].size();
+    // int size = map[curIdx].size();
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < n; i++)
     {
-        int tmpSum = map[curIdx][i].first; // 거리 값
-        int idx = map[curIdx][i].second;   // 노드 번호
-        visit[idx] = true;
-        solution(visit, idx, sum + tmpSum, cnt + 1);
-        visit[idx] = false;
+        // int tmpSum = map[curIdx][i].first; // 거리 값
+        // int idx = map[curIdx][i].second;   // 노드 번호
+        int tmpSum = dst[curIdx][i];
+        int idx = i;
+
+        if (!visit[idx] && idx != curIdx)
+        {
+            visit[idx] = true;
+            solution(visit, idx, sum + tmpSum, cnt + 1);
+            visit[idx] = false;
+        }
     }
 }
 
@@ -84,15 +95,6 @@ int main(int argc, char const *argv[])
         printf("#%d %d\n", tc, ans);
 
         arr.clear();
-
-        // for (int i = 0; i < n; i++)
-        // {
-        //     for (int j = 0; j < n; j++)
-        //     {
-        //         cout << dst[i][j] << " ";
-        //     }
-        //     cout << endl;
-        // }
     }
 
     return 0;
