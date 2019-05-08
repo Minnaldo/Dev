@@ -1,17 +1,19 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <queue>
 #include <vector>
-
-/**
- *  ! 시간을 줄이자, 인접행렬 -> 인접 리스트
- */
 
 using namespace std;
 
-int t, n, dst[10][10], ans;
+/**
+ *  ! 조금 더 빠르게 가능 할 듯
+ */
+
+int t, n, ans;
 vector<pair<int, int>> arr;
 pair<int, int> office, home;
+vector<vector<pair<int, int>>> adj_list;
 
 int min(int &a, int &b) { return a < b ? a : b; }
 
@@ -23,14 +25,17 @@ void init() // 각 노드에서 모든 다른 노드까지의 거리를 계산�
         {
             if (i != j)
             {
-                // map[i].push_back(make_pair(abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second), j));
-                dst[i][j] = dst[j][i] = abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second);
-            }
-            else
-            {
-                dst[i][j] = 0;
+                adj_list[i].push_back(make_pair(j, abs(arr[i].first - arr[j].first) + abs(arr[i].second - arr[j].second)));
             }
         }
+    }
+
+    // 거리 순으로 정렬
+    for (int i = 0; i < n; i++)
+    {
+        sort(adj_list[i].begin(), adj_list[i].end(), [](pair<int, int> f, pair<int, int> s) {
+            return f.second < s.second ? true : false;
+        });
     }
 }
 
@@ -46,15 +51,16 @@ void solution(vector<bool> visit, int curIdx, int sum, int cnt)
         return;
     }
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < adj_list[curIdx].size(); i++)
     {
-        int tmpSum = dst[curIdx][i];
+        int tmpSum = adj_list[curIdx][i].second;
+        int idx = adj_list[curIdx][i].first;
 
-        if (!visit[i] && i != curIdx)
+        if (!visit[idx] && idx != curIdx)
         {
-            visit[i] = true;
-            solution(visit, i, sum + tmpSum, cnt + 1);
-            visit[i] = false;
+            visit[idx] = true;
+            solution(visit, idx, sum + tmpSum, cnt + 1);
+            visit[idx] = false;
         }
     }
 }
@@ -73,11 +79,11 @@ int main(int argc, char const *argv[])
         scanf("%d %d", &home.first, &home.second);
 
         arr.assign(n, pair<int, int>());
-        for (int i = 0; i < n; i++)
-        {
-            scanf("%d %d", &arr[i].first, &arr[i].second);
-        }
 
+        for (int i = 0; i < n; i++)
+            scanf("%d %d", &arr[i].first, &arr[i].second);
+
+        adj_list.assign(n, vector<pair<int, int>>());
         init();
         vector<bool> visit;
         visit.assign(n, false);
