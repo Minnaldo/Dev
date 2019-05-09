@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "C:\\Users\\alban\\AppData\\Local\\Packages\\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\\LocalState\\rootfs\\usr\\include",
-                "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um"
+                "C:\\Users\\alban\\Documents\\Dev\\C++\\Windows\\header"
             ],
             "defines": [
                 "_DEBUG",
