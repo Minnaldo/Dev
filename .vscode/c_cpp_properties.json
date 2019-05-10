@@ -3,8 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "C:\\Users\\alban\\AppData\\Local\\Packages\\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\\LocalState\\rootfs\\usr\\include",
-                "C:\\Users\\alban\\Documents\\Dev\\C++\\Windows\\header"
+                "C:\\Users\\alban\\AppData\\Local\\Packages\\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\\LocalState\\rootfs\\usr\\include"
             ],
             "defines": [
                 "_DEBUG",
