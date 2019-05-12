@@ -6,7 +6,7 @@ using namespace std;
 /** 연속합 백준_1912 (https://www.acmicpc.net/problem/1912)
  *  * 음수를 더하여도 최대가 될 수있는 경우가 생김
  *  * 점화식 dp[n] = n에서 나올 수 있는 연속합 중 최댓값
- *  ! dp[n-1] + arr[n] < 0 && dp[n-1] < 0 일 때, arr[n]을 더하는 것은 의미가 없다 ==> dp[m] = arr[n]
+ *  ! dp[n-1] + arr[n] < 0 && dp[n-1] < 0 일 때, arr[n]을 더하는 것은 의미가 없다 ==> dp[n] = arr[n]
  *  ! 이 외의 경우 기본적인 점화식은 dp[n] = dp[n-1] + arr[n]이 성립한다
  */
 
