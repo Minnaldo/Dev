@@ -83,7 +83,7 @@ int solution1(int n, int *arr)
 int main(int argc, char const *argv[])
 {
     ios::sync_with_stdio(false);
-    string str = "6 10 20 10 30 20 50"; //4
+    string str = "6 10 20 10 30 20 50";
     string str2 = "5 5 4 3 2 1";
     stringstream ss;
     ss.str(str2);
