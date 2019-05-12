@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int t, mj, fin, ans;
+int t, mj, fin, finidx, findst, ans;
 int arr[142]; // 인덱스(줄 번호) 번째 방까지 방의 갯수, 현재 줄에 있는 방의 수 = arr[idx] - arr[idx-1]
 
 int min(int &a, int &b) { return a < b ? a : b; }
@@ -47,6 +47,15 @@ void solution(int curRoomNum, int cnt, int idx)
 
     if (curRoomNum - fin < 0 && fin > arr[idx]) // 현재 방보다 보물이 밑줄에 있는 경우
     {
+        // int ldst = 0, rdst = 0;
+
+        // ldst = curRoomNum - arr[idx - 1] + 1;
+        // rdst = arr[idx] - curRoomNum;
+        // int finrdst = arr[finidx] - fin, finldst = fin - arr[finidx - 1] + 1;
+
+        if (cnt + (finidx - idx) > ans)
+            return;
+
         solution(curRoomNum + idx + 1, cnt + 1, idx + 1);
         solution(curRoomNum + idx, cnt + 1, idx + 1);
     }
@@ -98,6 +107,7 @@ int main(int argc, char const *argv[])
 
         scanf("%d %d", &mj, &fin);
         int idx = init(mj);
+        finidx = init(fin);
 
         solution(mj, 0, idx);
         printf("#%d %d\n", tc, ans);
