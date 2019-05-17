@@ -3,9 +3,10 @@
 
 /** Foyd-Warshall Alogrithm (플로이드 - 와샬 알고리즘)
  *  "거쳐가는 정점"을 기준으로 최단거리를 구한다!
+ *  다이나믹 프로그래밍을 활용한 알고리즘이다
  *  특징) 음수가중치를 갖는 엣지에 대해서도 계산이 가능하다 ( 단, 음수 사이클이 없는 그래프여야 한다 ) <-> 다익스트라 알고리즘과 다른 부분
  *  특징 2) multiple Source multiple destination 에 대하여 최단 경로를 계산
- *  TODO how to get shotest path, not value
+ *  TODO how to get path that minimum weight value, not value
  */
 
 using namespace std;
