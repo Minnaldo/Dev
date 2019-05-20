@@ -1,60 +1,46 @@
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
 
-int n, strsize, ans;
-vector<string> arr;
-vector<string> tmp;
+int n, ans;
+vector<int> arr, lis;
 
-bool solution(int k)
+int max(int &a, int &b) { return a > b ? a : b; }
+
+void solution()
 {
-    for (int j = 0; j < n; j++)
+    int sum;
+    for (int i = 0; i < n; i++)
     {
-        string tmpstr;
-        for (int i = k; i >= 0; k--)
+        if (lis.empty() || lis.back() < arr[i])
         {
-            tmpstr += arr[j][strsize - 1 - k];
-        }
-
-        if (find(tmp.begin(), tmp.end(), tmpstr) == tmp.end())
-        {
-            tmp.push_back(tmpstr);
+            lis.push_back(arr[i]);
         }
         else
         {
-            return false;
+            sum = 0;
+            auto itr = lower_bound(lis.begin(), lis.end(), arr[i]);
+            *itr = arr[i];
         }
     }
-
-    return true;
 }
 
 int main(int argc, char const *argv[])
 {
     freopen("input.txt", "r", stdin);
+    int tmp;
     scanf("%d", &n);
 
     for (int i = 0; i < n; i++)
     {
-        string str;
-        cin >> str;
-        arr.push_back(str);
+        scanf("%d", &tmp);
+        arr.push_back(tmp);
     }
 
-    strsize = arr[0].size();
-    ans = 1000;
-    for (int i = 0; i <= strsize; i++)
-    {
-        if (solution(i))
-        {
-            ans = min(ans, i);
-        }
-    }
-
-    printf("%d\n", ans);
+    solution();
+    cout << ans << endl;
 
     return 0;
 }
