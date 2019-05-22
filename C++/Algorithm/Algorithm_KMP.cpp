@@ -71,18 +71,20 @@ vector<int> KMP(string body, string pattern)
     //         else
     //             j++;
     // }
-    int i = 0;  // body의 인덱스
+    int i = 0; // body의 인덱스
     while (i < bodySize)
     {
         // 패턴과 본문이 다른 인덱스를 찾는다
-        while (j > 0 && pattern[j] != body[i]) // 패턴과 문자열이 다를 때
-            j = fail[j - 1];    // j = 패턴의 인덱스 pattern[j]부터 다시 찾기 시작한다.
+        while (j > 0 && body[i] != pattern[j]) // 패턴과 문자열이 다를 때
+            j = fail[j - 1];                   // j = 패턴의 인덱스 pattern[j]부터 다시 찾기 시작한다.
 
-        if (body[i] == pattern[j])  // 본문과 패턴의
-            if (j == patternSize - 1)   // j는 0부터 시작, if 문을 만족할 경우 본문에서 패턴과 일치하는 부분을 찾은게 됨
+        if (body[i] == pattern[j])    // 본문과 패턴의 문자가 일치할 때
+            if (j == patternSize - 1) // j는 0부터 시작, if 문을 만족할 경우 본문에서 패턴과 일치하는 부분을 찾은게 됨
             {
-                printf("%d번째에서 찾았습니다.\n", i - patternSize + 2);    // 인덱스가 0부터 시작이므로 + , 첫 시작부분을 포함해야하므로 또 +1 ==> +2를 해주어야 한다
-                j = fail[j];    // 다음 일치 부분을 찾기 위해 다음 일치지점부터 찾기 시작한다.
+                printf("%d번째에서 찾았습니다.\n", i - patternSize + 2); // 인덱스가 0부터 시작이므로 + , 첫 시작부분을 포함해야하므로 또 +1 ==> +2를 해주어야 한다
+                j = fail[j];                                             // 다음 일치 부분을 찾기 위해 다음 일치지점부터 찾기 시작한다.
+
+                answer.push_back(i - patternSize + 2);
             }
             else
                 j++;
