@@ -19,6 +19,7 @@ vector<int> preProcessing(string pattern)
     int j = 0; // j ==> 접두사의 길이 인덱스
     int pSize = pattern.size();
     vector<int> fail(pSize, 0); // 실패함수 초기화, 점프할 칸의 수를 저장할 배열의 크기는 패턴의 크기와 같다.
+    // 실패함수 (failure function) f[q] = MAX{k:k<q, P[0~k]가 P[0~q]의 접미어가 되는 k}
 
     //  i는 왜 1에서부터 시작을 해야하나??
     //  i와 j가 같으면, 모든 문자열을 검사하게 되므로, 알고리즘이 의미가 없다
@@ -41,9 +42,8 @@ vector<int> preProcessing(string pattern)
             j = fail[j - 1];
 
         if (pattern[j] == pattern[i])
-        {
-            fail[i] = ++j;
-        }
+            fail[i] = ++j;  // j는 이전 문자의 실패함수 값, 실패함수 값이 계속 증가한다면 일치하는 접미사가 있는 접두사의 길이가 증가한다는 뜻
+
         i++;
     }
 
