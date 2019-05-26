@@ -1,0 +1,13 @@
+인덱스 i, j
+
+i = 0에서 시작
+j = i+1에서 시작 (즉, 현재 상황에서 1이 된다)
+
+pattern 문자열에서 실패함수를 만든다고 할 때
+
+pattern[i] != pattern[j] 이면 j만 증가하고
+
+pattern[i] == pattenr[j] 이면 i와 j 둘다 1씩 증가한다. fail[i] = j+1 ( 접두사 인덱스에 1을 더한값을 fail[i]에 넣는다)
+
+
+pattern[i] != pattern[j] 일 때, i는 일치하지 않으면 이전 인덱스로 이동하며 비교를 한다

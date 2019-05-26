@@ -37,12 +37,13 @@ vector<int> preProcessing(string pattern)
     int i = 1;
     while (i < pSize)
     {
+        // 같지 않을때, j(접두사 인덱스)를 줄여가며, j가 0이 아니고 pattern[i] == pattern[j] 일때까지 줄여간다.
         while (j > 0 && (pattern[i] != pattern[j]))
             j = fail[j - 1];
 
         if (pattern[j] == pattern[i])
         {
-            fail[i] = ++j;
+            fail[i] = ++j; // fail[i] = j+1; j++;, 현재 j인덱스에 1을 더한 값을 fail함수의 값으로 쓴다(j의 인덱스가 최대 일치길이, j가 0부터 시작이기 때문에 1을 더해준다)
         }
         i++;
     }
