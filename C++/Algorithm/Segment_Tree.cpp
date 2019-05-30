@@ -31,6 +31,7 @@ int sum(int index, int start, int end, int left, int right)
     if (start >= left && right >= end)
         return tree[index];
     int mid = (start + end) / 2;
+    // 범위가 맞지않아 자식노드로 넘어가게 된다면, 나 자신을 반환하는것이 아닌 자식노드의 합을 반환해야한다.
     return sum(index * 2, start, mid, left, right) + sum(index * 2 + 1, mid + 1, end, left, right);
 }
 
