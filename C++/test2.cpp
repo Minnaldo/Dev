@@ -36,8 +36,9 @@ int main(int argc, char const *argv[])
 {
     vector<string> book = {"119", "97674223", "1195524421"};
     vector<string> book2 = {"123", "456", "789"};
+    vector<string> book3 = {"12", "123", "1235", "567", "88"};
 
-    bool ans = solution(book2);
+    bool ans = solution(book);
 
     if (ans)
     {
