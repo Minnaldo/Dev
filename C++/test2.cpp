@@ -15,7 +15,7 @@ bool solution(vector<string> phone_book)
     });
 
     int size = phone_book.size();
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size-1; i++)
     {
         string tmpStr = phone_book[i];
         for (int j = i + 1; j < size; j++)
