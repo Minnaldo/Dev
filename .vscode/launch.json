@@ -34,7 +34,7 @@
             ],
             "pipeTransport": {
                 "debuggerPath": "/usr/bin/gdb",
-                "pipeProgram": "C:/Windows/System32/bash.exe",
+                "pipeProgram": "C:/Windows/System32/wsl.exe",
                 "pipeArgs": [
                     "-c"
                 ],

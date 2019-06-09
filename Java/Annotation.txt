@@ -1,0 +1,7 @@
+Object 
+
+getClass() : 해당 인스턴스를 만들때 사용한 클래스의 정보를 리턴
+getDeclaredMethod("hello") : 클래스의 정보로 부터 "hello"의 메소드에 대한 정보를 구하라
+==> try{}catch(){}를 이용해 예외 처리
+
+method.isAnnotationPresent(Count100.class) : Count100 클래스에 어노테이션이 설정(적용)여부 리턴
