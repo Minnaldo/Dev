@@ -11,7 +11,7 @@ bool solution(vector<string> phone_book)
 
     // 문자열 길이로 오름차순 정렬
     sort(phone_book.begin(), phone_book.end(), [](string str1, string str2) -> bool {
-        str1.size() < str2.size() ? true : false;
+       return str1.size() < str2.size() ? true : false;
     });
 
     int size = phone_book.size();
