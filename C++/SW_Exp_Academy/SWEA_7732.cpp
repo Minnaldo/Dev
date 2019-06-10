@@ -9,26 +9,28 @@ using namespace std;
 // abs( meet - now )
 // meet < now --> 24:00:00 - now
 // else ( meet > now ) --> jsut doing
+int conv(string str)
+{
+    int ret = 0;
+    try
+    {
+        ret += stoi(str.substr(0, 2)) * 3600;
+        ret += stoi(str.substr(3, 2)) * 60;
+        ret += stoi(str.substr(6, 2));
+    }
+    catch (exception e)
+    {
+    }
+    return ret;
+}
 
 string solution(string now, string meet)
 {
     string ans = "";
+    int nTime = conv(now);
+    int mTime = conv(meet);
 
-    struct tm tm;
-    // strptime(now.c_str(), "%T", &tm);
-    // time_t t = mktime(&tm);
-    // strptime(meet.c_str(), "%T", &tm);
-    // time_t t2 = mktime(&tm);
-    tm.tm_hour = stoi(now.substr(0, 2));
-    tm.tm_min = stoi(now.substr(3, 2));
-    tm.tm_sec = stoi(now.substr(7, 2));
-    time_t t = mktime(&tm);
-    tm.tm_hour = stoi(meet.substr(0, 2));
-    tm.tm_min = stoi(meet.substr(3, 2));
-    tm.tm_sec = stoi(meet.substr(7, 2));
-    time_t t2 = mktime(&tm);
-
-    double diff = difftime(t2, t);
+    int diff = mTime - nTime;
 
     if (diff < 0)
         diff += (24 * 3600);
@@ -53,20 +55,15 @@ string solution(string now, string meet)
 
 int main(int argc, char const *argv[])
 {
-    freopen("input.txt", "r", stdin);
     int t = 1;
     scanf("%d", &t);
 
     for (int tc = 1; tc <= t; tc++)
     {
-        string ans = "";
         string now, meet;
-
-        // scanf("%s %s", &now, &meet);
         cin >> now >> meet;
 
-        ans = solution(now, meet);
-        cout << "#" << tc << " " << ans << endl;
+        cout << "#" << tc << " " << solution(now, meet) << endl;
     }
     return 0;
 }
