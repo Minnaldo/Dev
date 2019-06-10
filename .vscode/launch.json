@@ -8,10 +8,13 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileBasenameNoExtension}.out",
-            "args": [],
+            "program": "${fileDirname}/${fileBasenameNoExtension}.out",
+            "args": [
+                "-fThreading"
+            ],
+            "miDebuggerPath": "/usr/bin/gdb",
             "stopAtEntry": false,
-            "cwd": "./",
+            "cwd": "${cwd}",
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
