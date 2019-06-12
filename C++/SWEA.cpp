@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -6,12 +7,12 @@ using namespace std;
 
 int n, t, maxT, minT;
 int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-
+vector<int> tasty;
 int max(int &a, int &b) { return a > b ? a : b; }
 int min(int &a, int &b) { return a < b ? a : b; }
 
 // calculate a block of cheese
-int calc(vector<vector<int>> cheese, vector<vector<bool>> cpy)
+int calc(vector<vector<bool>> &cpy)
 {
     int ret = 0;
     auto visit = cpy;
@@ -21,7 +22,7 @@ int calc(vector<vector<int>> cheese, vector<vector<bool>> cpy)
         for (int j = 0; j < n; j++)
         {
             // bfs start
-            if (!visit[i][j] && cheese[i][j] != 0)
+            if (!visit[i][j])
             {
                 queue<pair<int, int>> q;
                 q.push(make_pair(i, j));
@@ -29,8 +30,7 @@ int calc(vector<vector<int>> cheese, vector<vector<bool>> cpy)
 
                 while (!q.empty())
                 {
-                    int cury = q.front().first;
-                    int curx = q.front().second;
+                    int cury = q.front().first, curx = q.front().second;
 
                     for (int k = 0; k < 4; k++)
                     {
@@ -39,7 +39,7 @@ int calc(vector<vector<int>> cheese, vector<vector<bool>> cpy)
 
                         if (ny >= 0 && nx >= 0 && ny < n && nx < n)
                         {
-                            if (!visit[ny][nx] && cheese[ny][nx] > 0)
+                            if (!visit[ny][nx])
                             {
                                 q.push(make_pair(ny, nx));
                                 visit[ny][nx] = true;
@@ -58,12 +58,12 @@ int calc(vector<vector<int>> cheese, vector<vector<bool>> cpy)
     return ret;
 }
 
-int solution(vector<vector<int>> cheese, vector<vector<bool>> visit)
+int solution(vector<vector<int>> &cheese, vector<vector<bool>> &visit)
 {
     int ans = 0;
 
     // the range of taste of cheese
-    for (int a = minT; a <= maxT; a++)
+    for (int a : tasty)
     {
         bool flag = false;
         for (int i = 0; i < n; i++)
@@ -73,15 +73,14 @@ int solution(vector<vector<int>> cheese, vector<vector<bool>> visit)
                 // The pairy eats the Cheese that is tasty level 'a'
                 if (cheese[i][j] == a)
                 {
-                    cheese[i][j] = 0;
                     visit[i][j] = true;
                     flag = true;
                 }
             }
         }
 
-        // if (flag)
-        ans = max(ans, calc(cheese, visit));
+        if (flag)
+            ans = max(ans, calc(visit));
     }
 
     return ans;
@@ -106,9 +105,14 @@ int main(int argc, char const *argv[])
         {
             for (int j = 0; j < n; j++)
             {
-                cin >> cheese[i][j];
-                maxT = max(maxT, cheese[i][j]);
-                minT = min(minT, cheese[i][j]);
+                int tmp;
+                cin >> tmp;
+                cheese[i][j] = tmp;
+                maxT = maxT > tmp ? maxT : tmp;
+                minT = minT < tmp ? minT : tmp;
+
+                if (find(tasty.begin(), tasty.end(), tmp) == tasty.end())
+                    tasty.push_back(tmp);
             }
         }
 
