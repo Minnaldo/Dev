@@ -79,7 +79,7 @@ int solution(string numbers)
 
 int main(int argc, char const *argv[])
 {
-    string number = "17";
+    string number = "17"; // ans : 3
     cout << solution(number) << endl;
     return 0;
 }
