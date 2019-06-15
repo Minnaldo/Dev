@@ -13,6 +13,8 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe",
             "externalConsole": false,
             "setupCommands": [
                 {
@@ -21,17 +23,6 @@
                     "ignoreFailures": true
                 }
             ],
-            "windows": {
-                "MIMode": "gdb",
-                "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
-            },
-            "linux": {
-                "MIMode": "gdb",
-                "miDebuggerPath": "/usr/bin/gdb"
-            },
-            "osx": {
-                "MIMode": "lldb"
-            }
         }
     ]
 }
