@@ -2,22 +2,23 @@
 #include <chrono>
 #include <iostream>
 #include <queue>
+#include <set>
 #include <vector>
 
 using namespace std;
 
 int n, t, res;
 int dir[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-vector<vector<bool>> visit(100, vector<bool>(100, false));
-vector<int> tasty(100, 0);
+vector<vector<int>> cheese(100, vector<int>(100, 0));
 
 int max(int &a, int &b) { return a > b ? a : b; }
-int min(int &a, int &b) { return a < b ? a : b; }
 
 // calculate a block of cheese
-int calc(vector<vector<int>> &cheese, int taste)
+int calc(int taste)
 {
     int ret = 0;
+
+    vector<vector<bool>> visit(n, vector<bool>(n, false));
 
     for (int i = 0; i < n; i++)
     {
@@ -59,34 +60,28 @@ int calc(vector<vector<int>> &cheese, int taste)
     return ret;
 }
 
-void dfs(vector<vector<int>> &cheese, int cury, int curx, int taste)
+// dp + dfs
+void calc2(int cury, int curx, int taste)
 {
-    for (int i = 0; i < 4; i++)
+    for(int i = 0 ; i < 4; i++)
     {
         int ny = dir[i][0] + cury;
         int nx = dir[i][1] + curx;
 
-        if (ny >= 0 && nx >= 0 && ny < n && nx < n)
-        {
-            if (cheese[ny][nx] > taste && !visit[ny][nx])
-            {
-                visit[ny][nx] = true;
-                dfs(cheese, ny, nx, taste);
-            }
-        }
+        if(cheese[ny][nx] > taste && !visit[ny][nx])
+            calc2(ny,nx,taste);
     }
-    res++;
 }
 
-int solution(vector<vector<int>> &cheese)
+int solution(vector<int> &tasty)
 {
     int ans = 0;
+
+    sort(tasty.begin(), tasty.end());
+    auto itr2 = unique(tasty.begin(), tasty.end());
     // the range of taste of cheese
-    for (int i = 0; i < 100; i++)
-    {
-        if (tasty[i] != 0)
-            ans = max(ans, calc(cheese, i));
-    }
+    for (auto itr = tasty.begin(); itr != itr2; itr++)
+        ans = max(ans, calc(*itr));
 
     return ans;
 }
@@ -95,40 +90,30 @@ int main(int argc, char const *argv[])
 {
     freopen("input.txt", "r", stdin);
     ios::sync_with_stdio(false);
-    cin >> t;
+    scanf("%d", &t);
 
     for (int tc = 1; tc <= t; tc++)
     {
         chrono::system_clock::time_point start = chrono::system_clock::now();
 
-        cin >> n;
-
-        vector<vector<int>> cheese(n, vector<int>(n));
+        scanf("%d", &n);
+        vector<int> tasty;
 
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
             {
                 int tmp;
-                cin >> tmp;
+                scanf("%d", &tmp);
                 cheese[i][j] = tmp;
 
-                if (tasty[tmp] != 0)
-                    tasty[tmp]++;
+                tasty.push_back(tmp);
             }
         }
 
-        // remve duplicated elements
-        // sort(tasty.begin(), tasty.end());
-        // tasty.erase(unique(tasty.begin(), tasty.end()), tasty.end());
-
-        std::cout << "#" << tc << " " << solution(cheese) << endl;
+        printf("#%d %d\n", tc, solution(tasty));
 
         std::cout << chrono::duration<double>(chrono::system_clock::now() - start).count() << " sec" << endl;
-
-        tasty.assign(100, 0);
-        for (vector<bool> vec : visit)
-            vec.assign(100, false);
     }
 
     return 0;
