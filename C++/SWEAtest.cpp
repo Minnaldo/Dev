@@ -1,31 +1,29 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <vector>
 
 using namespace std;
 
 int n, t;
 
-string solution(vector<pair<string, int>> &name)
+string solution(vector<pair<string, int>> name)
 {
+    // for (pair<string, int> &aa : name)
     for (int i = 0; i < n; i++)
     {
         string tmp = name[i].first;
-        name[i].second = unique(tmp.begin(), tmp.end()) - tmp.begin();
+        sort(tmp.rbegin(), tmp.rend());
+        tmp.erase(unique(tmp.begin(), tmp.end()), tmp.end());
+        name[i].second = tmp.back() != ' ' ? tmp.size() : tmp.size() - 1;
     }
 
     sort(name.begin(), name.end(), [](pair<string, int> p1, pair<string, int> p2) {
         if (p1.second > p2.second)
             return true;
         else if (p1.second == p2.second)
-        {
-            if (p1.first.compare(p2.first) < 0)
-            {
+            if (p1.first.compare(p2.first) <= 0)
                 return true;
-            }
-        }
         return false;
     });
 
@@ -35,23 +33,18 @@ string solution(vector<pair<string, int>> &name)
 int main(int argc, char const *argv[])
 {
     freopen("input.txt", "r", stdin);
-    scanf("%d", &t);
+    cin >> t;
 
     for (int tc = 1; tc <= t; tc++)
     {
-        scanf("%d", &n);
+        cin >> n;
         vector<pair<string, int>> name;
-        name.reserve(n);
 
-        stringstream ss;
-
-        // cin.ignore();
-        ss.ignore();
+        string tmp;
+        getline(cin, tmp); //  ??
         for (int i = 0; i < n; i++)
         {
-            string tmp;
-            // getline(cin, tmp);
-            ss.getline()
+            getline(cin, tmp);
             name.push_back(make_pair(tmp, 0));
         }
 
