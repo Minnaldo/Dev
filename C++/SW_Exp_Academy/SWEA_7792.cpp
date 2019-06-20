@@ -3,6 +3,10 @@
 #include <string>
 #include <vector>
 
+/** 반장선거 SWEA_7792 ( https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWsBNHuqMMADFARG&categoryId=AWsBNHuqMMADFARG&categoryType=CODE )
+ *
+ */
+
 using namespace std;
 
 int n, t;
@@ -12,7 +16,6 @@ string solution(vector<pair<string, int>> name)
     for (int i = 0; i < n; i++)
     {
         string tmp = name[i].first;
-
         while (find(tmp.begin(), tmp.end(), ' ') != tmp.end())
             tmp.erase(find(tmp.begin(), tmp.end(), ' '));
         sort(tmp.begin(), tmp.end());
@@ -35,23 +38,20 @@ string solution(vector<pair<string, int>> name)
 
 int main(int argc, char const *argv[])
 {
-    freopen("input.txt", "r", stdin);
-    scanf("%d", &t);
-
+	cin>>t;
     for (int tc = 1; tc <= t; tc++)
     {
-        scanf("%d", &n);
+        cin>>n;
         vector<pair<string, int>> name;
 
         string tmp;
-        getline(cin, tmp); //  ?? cin은 공백 또는 개행문자가 나오면 입력 받는것을 중지하는데 이 때, 공백 또는 개행문자를 버퍼에 그대로 나두기 때문에 해주어야 함
+        tmp.reserve(20);
+        getline(cin, tmp);
         for (int i = 0; i < n; i++)
         {
             getline(cin, tmp);
-
-            if (tmp.back() == ' ')
+            if(tmp.back() == ((char)13))
                 tmp.pop_back();
-
             name.push_back(make_pair(tmp, 0));
         }
 
