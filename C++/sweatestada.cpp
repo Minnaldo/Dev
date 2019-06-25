@@ -70,7 +70,7 @@ int dfs()
     return cnt;
 }
 
-void recur(int y, int x, vector<int> special)
+void recur(int y, int x, vector<int> special, vector<vector<bool>> visit, int cnt)
 {
     bool flag = false;
 
@@ -79,29 +79,32 @@ void recur(int y, int x, vector<int> special)
         int ny = y + dir[i][0];
         int nx = x + dir[i][1];
 
+        // 방문할 수 있는 명물이 있으면, 재귀함수 실행
         if (ny >= 0 && ny < r && nx >= 0 && nx < c)
         {
             if (!visit[ny][nx] && find(special.begin(), special.end(), map[ny][nx]) == special.end())
             {
+                flag = true;
                 visit[ny][nx] = true;
                 special.push_back(map[ny][nx]);
-                return recur(ny, nx, special);
+
+                recur(ny, nx, special, visit, cnt + 1);
+                visit[ny][nx] = false;
+                special.pop_back();
             }
         }
     }
 
+    // 더이상 길이 없을 때 빠져나와 지나간 수의 명물을 비교하여 answer에 넣는다.
     if (!flag)
-    {
-        int tmp = special.size();
-
-        answer = max(answer, tmp);
-    }
+        answer = max(answer, cnt);
 }
 
 int solution()
 {
     vector<int> aa;
-    recur(0, 0, aa);
+    vector<vector<bool>> visit(r, vector<bool>(c, false));
+    recur(0, 0, aa, visit, 0);
     return answer;
 }
 
