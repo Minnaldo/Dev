@@ -9,6 +9,9 @@ int solution(int n, vector<int> lost, vector<int> reserve)
 {
     int ans = n;
 
+sort(lost.begin(), lost.end());
+    sort(reserve.begin(), reserve.end());
+
     unordered_map<int, int> hmap;
 
     for (int aa : lost)
