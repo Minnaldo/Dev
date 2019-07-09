@@ -23,9 +23,9 @@ def import_corpus(filename):
     with open(filename) as file:
         # 텍스트 파일의 각 줄을 (단어, 빈도수) 꼴로 corpus에 저장합니다.
         for line in file:
+            line = line.strip()
             word, freq = line.split(',')
-            corpus.append((word, freq))
-
+            corpus.append((word.strip(), int(freq)))
 
     return corpus
 
@@ -41,15 +41,16 @@ def create_corpus(filenames):
     '''
     # 단어를 저장할 리스트를 생성합니다.
     words = []
-    print(filenames)
     # 여러 파일에 등장하는 모든 단어를 모두 words에 저장합니다.
-    # for filen in filenames:
-    #     with open(filen) as file:
-    #         for content in file:
-    #         # 이 때 문장부호를 포함한 모든 특수기호를 제거합니다. 4번째 줄에서 임포트한 punctuation을  이용하세요.
-    #             for symbol in punctuation:
-    #                 content = content.repalce(symbol,'')
-    #             words.append(content)
+    for name in filenames:
+        with open(name) as file:
+            content = []
+            for line in file:
+                content.extend(line.strip().split())
+            # 이 때 문장부호를 포함한 모든 특수기호를 제거합니다. 4번째 줄에서 임포트한 punctuation을  이용하세요.
+            for symbol in punctuation:
+                content = [word.replace(symbol,'') for word in content]
+            words.extend(content)
 
     # words 리스트의 데이터를 corpus 형태로 변환합니다. Counter() 사용 방법을 검색해보세요.
     corpus = Counter(words)
@@ -75,7 +76,7 @@ def most_frequent_words(corpus, number):
     >>> [('the', 6187927), ('of', 2941790)]
     '''
     # sorted(corpus, key=lambda pair: pair[1])[0]
-    return sorted(corpus, key=lambda pair: pair[1])[0]
+    return sorted(corpus, key=lambda pair: pair[1], reverse=True)[:number]
 
 
 def draw_frequency_graph(corpus):

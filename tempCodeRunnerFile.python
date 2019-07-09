@@ -1,30 +1,9 @@
-def analyze_text(words):
-    '''
-    문자열 원소의 첫 문자를 확인하고 해시태그, 멘션, 키워드로 분류합니다.
-    
-    >>> analyze_text(['안녕', '#엘리스', '토끼'])
-    ['안녕', '엘리스', '토끼'], ['엘리스'], ['토끼']
-    '''
-    
-    # 키워드, 해시태그, 멘션을 저장할 리스트를 각각 생성합니다.
-    keywords, hashtags, mentions = [], [], []
-    
-    # 리스트에 저장된 단어를 분류합니다.
-    for word in words:
-        # 해시태그일 경우 # 기호를 제외한 단어를 해시태그와 키워드 리스트에 추가합니다. 
-        if word.startswith('#'):
-            keywords.append(word[1:])
-            hashtags.append(word[1:])
-        
-        # 멘션일 경우 @ 기호를 제외한 단어를 멘션과 키워드 리스트에 추가합니다.
-        elif word.startswith('@'):
-            mentions.append(word[1:])
-            keywords.append(word[1:])
-        
-        # 해시태그와 멘션이 아닐 경우 단어를 키워드 리스트에 추가합니다. 
-        else:
-            keywords.append(word)
-        
-    return keywords, hashtags, mentions
+string = "            "
 
-print(analyze_text(['안녕', '#엘리스', '토끼', '@멘션']))
+print( "before:::" )
+print(string)
+
+string = string.strip()
+
+print( "after:::" )
+print(string)
