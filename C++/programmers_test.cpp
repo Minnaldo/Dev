@@ -19,36 +19,24 @@ string solution(string number, int k)
 
     for (int i = 0; i < size; i++)
     {
-        if (k > 1)
+        // n ~ n+k 이내에 arr[n]보다 큰 숫자를 만나면, arr[n]을 삭제
+        // for (int j = i + 1; j <= i + k - 1; j++)
+        // {
+        auto itr = lower_bound(arr.begin() + i + 1, arr.begin() + i + k, arr[i]);
+        if (itr != arr.end())
         {
-            // n ~ n+k 이내에 arr[n]보다 큰 숫자를 만나면, arr[n]을 삭제
-            for (int j = i + 1; j <= i + k - 1; j++)
-            {
-                if (arr[i] < arr[j])
-                {
-                    arr[i] = -1;
-                    k--;
-                    break;
-                }
-            }
+            arr[i] = -1;
+            k--;
         }
-        else if (k == 1)
-        {
-            auto itr = min_element(arr.begin(), arr.end(), [](int tmp, int tmp2) {
-                if (tmp >= 0 && tmp2 >= 0)
-                {
-                    return tmp < tmp2 ? true : false;
-                }
-            });
-            if (itr != arr.end())
-            {
-                *itr = -1;
-                k--;
-            }
-        }
-        else
+        // }
+
+        if (k == 0)
             break;
     }
+
+    for (int aa : arr)
+        cout << aa << " ";
+    cout << endl;
 
     for (int aa : arr)
     {
