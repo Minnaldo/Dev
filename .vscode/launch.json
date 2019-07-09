@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debbger",
+            "name": "Python Debuger",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -30,6 +30,6 @@
                     "ignoreFailures": true
                 }
             ],
-        }
+        },
     ]
 }
