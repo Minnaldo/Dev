@@ -15,6 +15,11 @@ def print_dict(dict):
     for i in dict:
         print(i)
 
+# 파이썬 map 내장 함수
+# map( @param1 규칙 함수, @param2 자료형 )
+#ex) 입력에서 공백을 제거한 후, int형으로 바꾸는 규칙을 적용해 list에 저장 후 N과 M에 해당 값 저장
+N, M = list(map(lambda x: int(x), input.split(" ")))
+
 
 # 파이썬의 print로 자료구조를 출력시 괄호 또한 같이 출력이 된다
 print(func(1, 2))
@@ -215,7 +220,8 @@ print(type(MyClass))
 # '-'로 연결하려면 ==> '-'.join(list)
 
 # 파이썬 람다함수
-add = lambda x, y: x + y   # lambda와 :사이 값 = 사용할 변수, x+y 리턴 값
+# lambda (변수) : (리턴 값)
+add = lambda x, y : x + y   # lambda와 :사이 값 = 사용할 변수, x+y 리턴 값
 
 
 # 파이썬 정규식
