@@ -19,7 +19,7 @@ def preprocess_data(filename):
         # 입력 받은 JSON 파일을 불러와 loaded에 저장합니다.
         loaded = file.read()
         # JSON 형식의 데이터에서 영화와 사용자 정보를 하나씩 가져옵니다.
-        diction = json.loads(loaded)
+        diction = json.loads(loaded)    # dictionary 구조
             # processed 딕셔너리에 title을 키로, user를 값으로 저장합니다.
         for title, user in diction.items():
             processed[int(title)] = user
@@ -40,8 +40,14 @@ def reformat_data(title_to_users):
     for title, user in title_to_users.items():
         # user_to_titles에 사용자 정보가 있을 경우 사용자의 영화 정보를 추가합니다. 이때 영화 정보는 리스트형으로 저장됩니다.
         for use in user:
-            user_to_titles[use] = [title]
+            if use in user_to_titles:    # 사용자 정보가 있을 경우
+                tmp = user_to_titles[use]
+                tmp.append(title)
+                user_to_titles[use] = tmp
             # user_to_titles에 사용자 정보가 있을 경우 사용자 정보와 영화 정보를 추가합니다. 이때 영화 정보는 리스트형으로 저장됩니다.
+            else:   # 사용자 정보가 없을 경우
+                user_to_titles[use] = [title]
+
     return user_to_titles
 
 
@@ -54,7 +60,7 @@ def get_closeness(title_to_users, title1, title2):
     '''
 
     # title_to_users를 이용해 title1를 시청한 사용자의 집합을 저장합니다.
-    title1_users = set(tittle_to_users[title1])
+    title1_users = set(title_to_users[title1])
     # title_to_users를 이용해 title2를 시청한 사용자의 집합을 저장합니다.
     title2_users = set(title_to_users[title2])
 
@@ -73,12 +79,13 @@ def predict_preference(title_to_users, user_to_titles, user, title):
     예로, 사용자A가 시청한 3개의 작품과 작품1의 유사도가 0.6, 0.4, 0.5일 때, 선호도 점수는 0.5입니다.
     '''
 
+    closeness = 0
     # user_to_titles를 이용해 user가 시청한 영화를 저장합니다.
-    titles = len(user_to_titles[user])
+    for titles in user_to_titles[user] :
+    # titles = len(user_to_titles[user])
     # get_closeness() 함수를 이용해 유사도를 계산합니다.
-    closeness = get_closeness(title_to_users, title1,)
-
-    return sum(closeness) / len(closeness)
+        closeness += get_closeness(title_to_users, title, titles)
+    return closeness / len(user_to_titles[user])
 
 
 def main():
