@@ -28,8 +28,7 @@ def main():
     plt.plot(year, grade2)
     plt.plot(year, grade3)
 
-    plt.savefig("image.svg", format="svg")
-    elice_utils.send_image("image.svg")
+    #plt.savefig("image.svg", format="svg") # 그래프 저장
 
 
 if __name__ == "__main__":
