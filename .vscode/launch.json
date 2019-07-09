@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python Debuger",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "C++ Debug",
             "type": "cppdbg",
             "request": "launch",
@@ -23,6 +30,6 @@
                     "ignoreFailures": true
                 }
             ],
-        }
+        },
     ]
 }

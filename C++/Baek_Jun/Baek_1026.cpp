@@ -22,7 +22,7 @@ int solution(int *a, int *b)
     sort(&b[1], &b[arr_size + 1], desc);
     for (int i = 1; i <= arr_size; i++)
     {
-        ret += (a[i]*b[i]);
+        ret += (a[i] * b[i]);
     }
     return ret;
 }
