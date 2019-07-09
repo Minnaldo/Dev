@@ -216,3 +216,10 @@ print(type(MyClass))
 
 # 파이썬 람다함수
 add = lambda x, y: x + y   # lambda와 :사이 값 = 사용할 변수, x+y 리턴 값
+
+
+# 파이썬 정규식
+# import re ==> re 라이브러리를 사용한다
+
+# 파이썬에서 엑셀로 저장하기
+# Openpyxl 라이브러리를 이용한다
