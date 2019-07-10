@@ -38,19 +38,21 @@ def preprocess_talks(src):
         reader = csv.reader(file, delimiter=',')
 
         for line in reader:
+            try:
                 talk = {
                     # 강의 평가는 참조 필요
                     'title': line[14],     # 강연의 제목
                     'speaker': line[6],   # 강연자의 이름
-                    'views': line[16],     # 조회수
-                    'comments': line[0],  # 댓글의 개수
-                    'duration': line[2],  # 강연 길이
-                    'languages': line[5], # 지원하는 언어의 수
-                    'tags': [ss for ss in line[13]],      # 관련 태그 (키워드)
-                    'ratings': [ss['name'] for ss in line[10]] ,   # 강의에 대한 평가
+                    'views': int(line[16]),     # 조회수
+                    'comments': int(line[0]),  # 댓글의 개수
+                    'duration': int(line[2]),  # 강연 길이
+                    'languages': int(line[5]), # 지원하는 언어의 수
+                    'tags': line[13],      # 관련 태그 (키워드)
+                    'ratings':  line[10],   # 강의에 대한 평가
                 }
                 talks.append(talk)
-                print(talk.values())
+            except:
+                pass
 
 
     return talks
@@ -90,38 +92,52 @@ def get_popular_tags(talks, n):
     return list(top_tags)
 
 
+# talks = [{}] 리스트 안에 딕셔너리
 def completion_rate_by_duration(talks):
     '''
     강의 길이에 따라 강의를 끝까지 들은 비율(완수도)이 어떻게 변화하는지 확인해 봅니다.
     강의를 끝까지 들은 비율은 (댓글 개수 / 조회수)에 비례한다고 가정합니다.
     '''
-    durations = talks['duration']
-    completion_rates = talks['comments']/talks['views']
-    scatter_plot(durations, completion_rates, durations, completion_rates)
+
+    durations = []
+    completion_rates = []
+
+    for dic in talks:
+        durations.append(dic['duration'])
+        completion_rates.append( dic['comments']/dic['views'])
+
+    scatter_plot(durations, completion_rates, '강의 길이', '완수도')
 
     return durations, completion_rates
 
 
+# talks is list
 def views_by_languages(talks):
     '''
     지원되는 언어의 수에 따라 조회수가 어떻게 변화하는지 확인해 봅니다.
     '''
-    languages = talks['languages']
-    views = talks['views']
-    scatter_plot(languages, views, languages, views)
+    languages = []
+    views = []
+    for dic in talks:
+        languages.append(dic['languages'])
+        views.append(dic['views'])
+
+    # languages = talks['languages']
+    # views = talks['views']
+    scatter_plot(languages, views, '언어의 수', '조회수')
 
     # 채점을 위해 결과를 리턴합니다.
     return views, languages
 
-# talks[0] --> dictionary
+# 값을 그냥 우겨넣는다
 def show_ratings(talk):
     '''
     강의에 대한 다양한 평가(rating)를 막대그래프로 표현합니다.
     각 키워드('fun', 'confusing' 등)별 숫자를 나타냅니다.
     '''
-    keywords = None
-    counts = None
-    bar_plot(keywords, counts, keywords, counts)
+    keywords = ['children', 'creativity']
+    counts = [10,20]
+    bar_plot(keywords, counts, '키워드', 'rating의 수')
 
     # 채점을 위해 결과를 리턴합니다.
     return keywords, counts
@@ -164,12 +180,10 @@ def bar_plot(x_ticks, y, x_label, y_label):
 def main():
     src = 'ted.csv'
     talks = preprocess_talks(src)
-    for tk in talks:
-        print(type(tk))
-    # print(get_popular_tags(talks, 10))
-    # completion_rate_by_duration(talks)
-    # views_by_languages(talks)
-    # show_ratings(talks[0])
+    print(get_popular_tags(talks, 10))
+    completion_rate_by_duration(talks)
+    views_by_languages(talks)
+    show_ratings(talks[0])
 
 
 if __name__ == "__main__":
