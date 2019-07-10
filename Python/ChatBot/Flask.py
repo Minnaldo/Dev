@@ -5,8 +5,7 @@ from bs4 import BeautifulSoup
 
 from flask import Flask, request, make_response, jsonify
 from slack import WebClient
-# from slackclient import SlackClient
-from slackeventsapi import SlackEventAdapter, WebClient
+from slackeventsapi import SlackEventAdapter
 
 app = Flask(__name__)
 
