@@ -81,10 +81,12 @@ def predict_preference(title_to_users, user_to_titles, user, title):
 
     closeness = 0
     # user_to_titles를 이용해 user가 시청한 영화를 저장합니다.
+    # closeness = [ get_closeness(title_to_users, title, titles) for titles in user_to_titles[user] ]   # 밑의 반복구문 대신 쓸 수 있다
     for titles in user_to_titles[user] :
     # titles = len(user_to_titles[user])
     # get_closeness() 함수를 이용해 유사도를 계산합니다.
         closeness += get_closeness(title_to_users, title, titles)
+
     return closeness / len(user_to_titles[user])
 
 

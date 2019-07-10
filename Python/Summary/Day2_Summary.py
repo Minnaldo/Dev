@@ -34,6 +34,7 @@ sorted(pairs, key=lambda pair: pair[1], reverse=True)  # 내림차순 정렬
 # import csv 필요
 # reader = csv.reader(file, delimiter=',') 로 comma 단위로 파일을 읽어온다
 # 반환은 리스트 타입
+# csv는 읽어오며 스트링(문자열) 로 읽어온다
 
 
 # 파이썬 람다함수의 자료구조화
@@ -52,3 +53,11 @@ long_books = filter(is_long, reader) # filter(조건 함수, 피연산자(데이
 # map (function_to_apply, list_of_inputs)
 # list의 element에 함수를 적용시켜 결과를 반환받고 싶을 때 사용
 map(get_title,long_books)
+
+# 파이썬 정규식 (regular expression)
+# import re 가 필요
+import re
+# 정규식 패턴에 맞춰 컴파일된 오브젝트를 patternObject에 저장
+patternObject = re.compile('\d+')   # compile() 괄호 안의 문자열은 정규식 패턴
+# 정규식 패턴 ==> 숫자 : { \d, \D (== ^\d), [0-9], [^0-9] }, 문자 : {\w}, 공백 : {\s}
+# + : 앞 패턴이 하나 이상 반복, * : 앞 패턴이 0개 이상 반복, a|b : a, b중 하나, ? : 앞 패턴이 하나이거나 없음
