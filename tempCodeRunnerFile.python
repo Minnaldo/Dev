@@ -1,9 +1,0 @@
-string = "            "
-
-print( "before:::" )
-print(string)
-
-string = string.strip()
-
-print( "after:::" )
-print(string)

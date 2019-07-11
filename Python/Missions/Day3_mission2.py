@@ -5,11 +5,12 @@ import urllib.request
 from bs4 import BeautifulSoup
 
 from flask import Flask
+from slack import WebClient
+from slackeventsapi import SlackEventAdapter
 
 
 SLACK_TOKEN = 'xoxb-678192724978-678367596163-D1vxSc3nPY8EdPgBKDGLcghI'
 SLACK_SIGNING_SECRET = 'c0b3981ed401aa916ce6d3363f7077ee'
-
 
 app = Flask(__name__)
 # /listening 으로 슬랙 이벤트를 받습니다.
