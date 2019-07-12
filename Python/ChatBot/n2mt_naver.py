@@ -13,14 +13,16 @@ target = ""
 text = "반갑습니다"
 
 
-def request_Translate(text):
-    encText = urllib.parse.quote(text)
-    data = "source=ko&target=en&text=" + encText
+def _translate(text, src='ko',target='en'):
 
-    params = {"source":"ko", "target"="en", "text"=text}
-    headers = {'Content-Type': 'application/json; charset=utf-8',"X-Naver-Client-Id": CLIENT_ID, "X-Naver-Client-Secret":CLIENT_SECRET}
+    text = ''.join(text)
 
-    response = requests.get(REQUEST_URL, params=param, headers=headers)
+    # print("korean is ")
+    # print(korean)
+    # params = {"source":"ko", "target":"en", "text":korean}
+    # headers = {'Content-Type': 'application/json; charset=utf-8',"X-Naver-Client-Id": CLIENT_ID, "X-Naver-Client-Secret":CLIENT_SECRET}
+
+    response = requests.post(REQUEST_URL, data={"source":src, "target":target, "text":text}, headers={"X-Naver-Client-Id": CLIENT_ID, "X-Naver-Client-Secret":CLIENT_SECRET})
 
     if response.status_code == 200:
         response_body = response.json()

@@ -1,4 +1,5 @@
 import sys
+import os
 import requests
 
 API_KEY = "f6d517b4-d539-44d6-a1bd-9cb6ba3bbd78"
@@ -8,12 +9,12 @@ CITY_DO = ""
 GU_GUN = ""
 DONG = ""
 
-# return value of lat and lon in tutple
+
 def get_location_in_text(text):
-    loc_list = text.split(' ')
-    CITY_DO = loc_list[0]
-    GU_GUN = loc_list[1]
-    DONG = loc_list[2]
+    # loc_list = text.split(' ')
+    CITY_DO = text[0]
+    GU_GUN = text[1]
+    DONG = text[2]
 
     headers = {'Content-Type': 'application/json; charset=utf-8',
                'appKey': API_KEY}
@@ -28,6 +29,10 @@ def get_location_in_text(text):
         print("성공적으로 GeoCode 응답을 받았습니다.")
         ret = (response.status_code, response_body["coordinateInfo"]["lat"],
                response_body["coordinateInfo"]["lon"])
+        print("location--------------------")
+        print(ret)
+        print("location--------------------")
+
         return ret
     else:
         pass

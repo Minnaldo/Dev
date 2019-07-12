@@ -1,18 +1,11 @@
 #-*- coding:utf-8 -*-
 import sys
+import os
 import requests
-import getcoding_sk as geo
-​
+import geocde_SK as geo
 
 API_KEY = "f6d517b4-d539-44d6-a1bd-9cb6ba3bbd78"
 REQUEST_URL = "https://apis.openapi.sk.com/weather/current/hourly"
-
-# 현재 날씨(시간별)
-url_hourly = url_weather+'current/hourly'
-# 현재 날씨(분별)
-url_minutely = url_weather+'current/minutely'
-# 간편 날씨 (어제, 오늘, 내일, 모레)
-url_summary = url_weather+'summary'
 
 def get_weather_in_hour(text):
 
@@ -21,12 +14,15 @@ def get_weather_in_hour(text):
     if STATUS_CODE == 200:
         headers = {'Content-Type': 'application/json; charset=utf-8','appKey': API_KEY}
         params = {"version":1 ,"lat":LAT,"lon":LON}
-        response = requests.get(REQUEST_URL, params=param, headers=headers)
+        response = requests.get(REQUEST_URL, params=params, headers=headers)
 
         if response.status_code == 200:
             response_body = response.json()
             print("성공적으로 Weather 응답을 받았습니다.")
-            ret = (response.status_code, response_body["coordinateInfo"]["lat"],response_body["coordinateInfo"]["lon"])
+
+            tmp_list = response_body["weather"]["hourly"]
+            ret = "*%s %s %s*의 날씨\n최저기온 : %s / 최고기온 : %s\n%s\n강수확률 %s %%" % (text[0], text[1], text[2], tmp_list[0]["temperature"]["tmin"], tmp_list[0]["temperature"]["tmax"],tmp_list[0]["sky"]["name"], tmp_list[0]["precipitation"]["sinceOntime"])
+            print(ret)
             return ret
         else:
             pass
