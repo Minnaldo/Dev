@@ -1,0 +1,6 @@
+typedef -> 사용자가 새로운 자료형의 이름을 선언할 수 있도록 해주는 명령문(예약어)
+ex) typedef double time_t; ==> time_t를 double형 대신 쓸 수 있음
+
+enum(나열형) -> 하나 이상의 정수형 상수를 원소로 갖는 집합
+ex) enum weekday{ sun, mon, tue, ...} day; ==> enum형을 갖는 day 변수
+--> 소스코드 작성시 가독력이 좋은 프로그램 작성을 위함 ( 숫자로 값을 지정하기 보단 Symbolic(상징적인) 문자를 사용하기 위함)

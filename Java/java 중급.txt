@@ -1,0 +1,18 @@
+자바
+래퍼 클래스 (wraapper class)
+기본형
+객체형? 참조형?
+자바 스레드?
+
+auto boxing : 자동적으로 객체형 타입에 맞게 기본형을 객체형으로 바꾸어준다.
+auto unboxing : auto boxing의 반대
+
+String 클래스의 + 연산은 내부적으로 String 객체를 만들어낸다. 반복문을 이용해 String객체 + "*"을 하면 연산이 매우 오래걸린다
+이를 해결하기 위해 append를 이용하면 훨씬 좋다
+
+Math 클래스는 private으로 선언되어 객체를 선언할 수는 없으나, static으로 선언되어 있어 아무데서나 사용 가능하다 (싱글톤 개념?)
+
+what is the getInstance() in java
+String aa = new String(); ==> 안되는 것인가?
+
+c++ wrapper
