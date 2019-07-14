@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Java",
+            "cwd": "${fileDirname}",
+            "type": "java",
+            "request": "launch",
+            "stopOnEntry": true,
+            "preLaunchTask": "build", // Runs the task created above before running this configuration
+            "jdkPath": "${env:JAVA_HOME}/bin", // You need to set JAVA_HOME enviroment variable
+            "startupClass": "${fileBasenameNoExtention}", // The class you want to run
+            "classpath": [
+                "${env:JAVA_HOME}/bin"
+            ] // Indicates the location of your .class files
+        },
+        {
             "name": "Python Debuger",
             "type": "python",
             "request": "launch",
@@ -29,7 +42,7 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ],
-        },
+            ]
+        }
     ]
 }
