@@ -5,15 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "Java Debugger",
-            "request": "launch",
-            "mainClass": "Java.${fileBasenameNoExtension}",
-            "console": "integratedTerminal",
-            "cwd": "C:\\Users\\alban\\Documents\\Dev",
-            "stopOnEntry": true,
-        },
-        {
             "name": "Python Debuger",
             "type": "python",
             "request": "launch",
