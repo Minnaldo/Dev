@@ -121,3 +121,34 @@ marr[1] = new Member();
 ```
 - Generic 제공
 다양한 타입의 객체들을 다루는 메서드나 컬렉션 클래스에 컴파일 시의 **타입 체크**를 해주는 기능이다
+
+
+#### 2차원 배열 (2D Array)
+```java
+    int [][] k = {{1,2,3,4,5,6,7,8},{2,3,4,5},{6,8}};
+    k.length;   // k의 row 수 ( 3 )
+
+    // colum 수를 얻으려면
+    for(int i = 0; i<k.length; i++)
+    {
+        System.out.println(k[i].length);    // k의 colum 수를 출력한다
+    }
+```
+<div>
+<center>
+<img src = "./img/2d_Array_structure.png" width="75%"><br>2D array structure in java</img>
+<center>
+</div>
+
+> Java에서 다차원 배열의 기본 형식은 **포인터 배열** 형식이다
+
+```java
+    int[][] arr = new int[3][]; // arr은 첫번째 칸만 가리킴, 뒷배열은 나중에 동적할당 해도 된다.
+    // 각각 다른 크기의 배열을 할당해도 상관이 없다. ==> 포인터 배열이기 때문에
+    arr[0] = new int[2];
+    arr[1] = new int[10];
+    arr[2] = new int[11];
+
+    // 다음 방식으로도 가능하다
+    int[][] arr3 = {{3,5,7},{12,25,66}};
+```
