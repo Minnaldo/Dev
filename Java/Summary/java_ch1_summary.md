@@ -51,10 +51,8 @@ int[] arr = {1,2,3}; // 배열 변수 arr 선언과 동시에 3개의 데이터�
 
 - Heap 영역
     - 동적할당 되는 데이터를 저장한다. (```new``` 키워드를 통해 생성되는 데이터)
-    - heap 영역은 자유롭게 늘어날 수 있다.
-
-
-![heap & stack](heap_structure.png)
+    - heap 영역은 자유롭게 늘어날 수 있다.<br><br>
+<img src = "./img/heap_structure.png" width="70%"><br>heap & stack structure in java</img>
 
 ## Java Shortcut Rule
 - 비트 연산자와 논리연사자의 차이에서 발생하는 현상이다
@@ -96,3 +94,30 @@ marr[1] = new Member();
 - heap 영역의 데이터들을 삭제해준다
 - 레퍼런스 값들을 이용하여 삭제를 한다
 
+### 얕은복사 / 깊은 복사
+- 얕은 복사 : 주소값만을 복사해온다.
+```java
+    int[] arr = {1,2,5,7};
+    int[] arr2 = new int[arr.length+1];
+    arr2 = arr; // 얕은 복사, arr2와 arr의 주소값이 같아진다
+```
+- 깊은 복사 : 주소가 아닌 데이터를 복사한다.
+    - 깊은 복사를 하려면?
+        - 값 복사 (value copy) or ```System.arraycopy()```를 사용한다
+```java
+    arr2[3] = arr[3];   // value copy(값 복사)
+
+    System.arraycopy(src, srcPos, dest, destPos, length);
+```
+
+
+#### Java 1.5 이후
+- for~each 기능 제공
+```java
+    // for문은 arr이 가지고 있는 길이만큼 반복하며, 인덱스가 아닌 값을 가져온다
+    for(int val : arr){
+        System.out.println(val);
+    }
+```
+- Generic 제공
+다양한 타입의 객체들을 다루는 메서드나 컬렉션 클래스에 컴파일 시의 **타입 체크**를 해주는 기능이다

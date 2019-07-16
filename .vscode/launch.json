@@ -5,13 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "CodeLens (Launch) - Solve",
-            "request": "launch",
-            "mainClass": "src.Solve",
-            "projectName": "Dev_a6c1ead4"
-        },
-        {
             "name": "Python Debuger",
             "type": "python",
             "request": "launch",
