@@ -30,7 +30,7 @@ class Solve {
         sc.close();
     }
 
-    public void dfs(int y, int x, int cnt) {
+    public static void dfs(int y, int x, int cnt) {
         for (int i = 0; i < 4; i++) {
             int ny = y + dir[i][0];
             int nx = x + dir[i][1];
