@@ -10,10 +10,10 @@ public class CheckPoint {
 		int height = sc.nextInt();
 		int weight = sc.nextInt();
 		int ans = weight + 100 - height;
-		System.out.println("ºñ¸¸¼öÄ¡´Â " + ans + "ÀÔ´Ï´Ù.");
+		System.out.println("ï¿½ñ¸¸¼ï¿½Ä¡ï¿½ï¿½ " + ans + "ï¿½Ô´Ï´ï¿½.");
 
 		if (ans > 0) {
-			System.out.println("´ç½ÅÀº ºñ¸¸ÀÌ±º¿ä");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ï¿½ï¿½");
 		}
 		
 		sc.close();

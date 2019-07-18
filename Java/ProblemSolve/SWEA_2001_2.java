@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 class swea_2001_2 {

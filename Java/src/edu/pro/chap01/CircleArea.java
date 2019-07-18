@@ -6,7 +6,7 @@ public class CircleArea {
 		double r = 5;
 		double pie = Math.PI;
 		double size = pie * Math.pow(r, 2);
-		System.out.printf("¹ÝÁö¸§ÀÌ 5CmÀÎ ¿øÀÇ ³ÐÀÌ´Â %.1fCm2 ÀÔ´Ï´Ù", size);
+		System.out.printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5Cmï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ %.1fCm2 ï¿½Ô´Ï´ï¿½", size);
 	}
 
 }
