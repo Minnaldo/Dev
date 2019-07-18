@@ -6,6 +6,7 @@ class swea_2001 {
 
         int t = sc.nextInt();
         for (int tc = 1; tc <= t; tc++) {
+            int ans = 0;
             int n = sc.nextInt();
             int m = sc.nextInt();
             int[][] map = new int[n][n];
