@@ -2,7 +2,7 @@ package edu.algo.day1;
 
 import java.util.Scanner;
 
-public class Solution {
+public class SWEA_7510 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int t = sc.nextInt();
@@ -16,7 +16,6 @@ public class Solution {
 
 				for (int j = i; sum < n; j++) {
 					sum += j;
-
 				}
 
 				if (sum == n)
