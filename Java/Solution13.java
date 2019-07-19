@@ -66,6 +66,7 @@ public class Solution13 {
                                 if (map[ny][nx] == 0) {
                                     flag = true;
                                     retMap[i][j] = 2;
+                                    break;
                                 }
                             }
                         }
