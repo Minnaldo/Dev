@@ -3,44 +3,52 @@ import java.util.*;
 public class SWEA_1859 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        try {
-            FileInputStream fis = new FileInputStream("input.txt");
-
-            int t = fis.read();
-
-            for (int tc = 1; tc <= t; tc++) {
-                long ans = 0;
-                int n = sc.nextInt();
-
-                long[] arr = new long[n];
-                long[] tmp = new long[n]; // 값들을 저장
-                for (int i = 0; i < n; i++) {
-                    arr[i] = sc.nextInt();
-                }
-
-                for (int i = n - 1; i >= 0; i--) {
-                    long sum = 0;
-                    for (int j = 0; j < i - 1; j++) {
-                        if (arr[i] > arr[j]) {
-                            sum += arr[i] - arr[j];
-                        }
-                    }
-                    tmp[i] = sum;
-                }
-
-                // 최댓값을 구한다
-                ans = tmp[0];
-                for (int i = 1; i < n; i++) {
-                    ans = ans > tmp[i] ? ans : tmp[i];
-                }
-
-                System.out.println("#" + tc + " " + ans);
+        int t = sc.nextInt();
+        for (int tc = 1; tc <= t; tc++) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            ArrayList<Integer> ans = new ArrayList<>(); // 답을 저장할 배열
+            ArrayList<Integer> tmpVal = new ArrayList<>();
+            // data input
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
             }
 
+            int pivot = arr[n - 1];
+            for (int i = n - 2; i >= 0; i--) {
+                if (pivot <= arr[i] || i == 0) {
+                    // 나머지 빼내서 계산
+                    int size = tmpVal.size();
+                    if (size > 0 && i != 0) {
+                        int tmpSum = 0;
+                        for (int k = 0; k < size; k++) {
+                            tmpSum += (pivot - tmpVal.get(k));
+                        }
+                        ans.add(tmpSum);
+                        tmpVal.clear();
+                    } else if (size > 0 && i == 0) {
+                        int tmpSum = 0;
+                        for (int k = 0; k < size; k++) {
+                            tmpSum += (pivot - tmpVal.get(k));
+                        }
+                        ans.add(tmpSum);
+                        tmpVal.clear();
+                    }
+                    pivot = arr[i];
+                } else {
+                    // 임시 배열에 저장
+                    tmpVal.add(arr[i]);
+                }
+            }
+
+            int ret = 0;
+            for (int val : ans) {
+                ret += val;
+            }
+
+            System.out.println("#" + tc + " " + ret);
+
             sc.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
