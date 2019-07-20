@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Merge_Sort {
+public class MergeSort {
 
     // 임시로 정렬된 값들을 저장할 배열
     static int[] tmp;

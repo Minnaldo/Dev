@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Merge_Sort_2 {
+public class MergeSort_2 {
 
     // 단순 임시배열에 불과하므로, sorted 배열을 그대로 썻다가는 문제가 생길 수 있다.
     static int[] sorted;

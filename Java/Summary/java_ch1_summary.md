@@ -30,7 +30,7 @@ int[] arr = {1,2,3}; // 배열 변수 arr 선언과 동시에 3개의 데이터�
 ```
 
 ### Java의 데이터 형태
-1. Primative Data
+1. Primitive Data
     - call by value 형태로 변수를 가져온다.
 1. User Defined Data (reference type)
     - 배열 / 클래스 / 인터페이스 가 있다.
