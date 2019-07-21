@@ -19,7 +19,7 @@ public class DigitTest1 {
 		
 		for (int i = 0; i < 10; i++) {
 			if (arr[i] != 0) {
-				System.out.println(i + " : " + arr[i] + "°³");
+				System.out.println(i + " : " + arr[i] + " ");
 			}
 		}
 
