@@ -1,48 +1,32 @@
 package edu.ssafy.chap01;
 
-import java.util.*;
+public class ShortCircuitTest {
 
-public class condition {
 	public static void main(String[] args) {
+		int x = 0;
+		int y = 0;
 
-		boolean bool = false; // booleanÀÇ ±âº»°ªÀº false
-
-		int a = 3;
-		// if
-//		if (a < 4 /* Á¶°Ç */) {
-//			System.out.println("A");
-//		}
-//		else if(a<7){
-//			System.out.println("B");
-//		}else {
-//			System.out.println("C");
-//		}
-
-		// switch
-		// ¿À·ÎÁö µ¿µîºñ±³¸¸ Áö¿ø
-		// ½Ç¼ö »ç¿ë ºÒ°¡, Á¤¼ö, ½Ç¼ö, ¹®ÀÚ, ¹®ÀÚ¿­ »ç¿ë °¡´É
-		Scanner sc = new Scanner(System.in);
-//		a = sc.nextInt();
-		String b = sc.next();
-		System.out.println(b);
-		switch (a/10) {
-		case 10:
-		case 9:
-			System.out.println("A");
-			break;
-		case 8:
-			System.out.println("B");
-			break;
-		case 7:
-			System.out.println("C");
-			break;
-		case 6:
-			System.out.println("D");
-			break;
-		default:
-			System.out.println("F");
-			break;
+		// bit and operator
+		// ë¹„íŠ¸ ì—°ì‚°ìžëŠ” ì•ž/ë’¤ condition ëª¨ë‘ ì‹¤í–‰ëœë‹¤ ==> xê°’ì´ ì¦ê°€í•¨
+		// ì•žìª½ì´ ì°¸ì´ë©´ ë’¤ìª½ condition ì‹¤í–‰, ì•žìª½ì´ ê±°ì§“ì´ë©´ ë’¤ìª½ condition ì‹¤í–‰ ì•ˆí•¨
+		// ì´ë¥¼ ì´ìš©í•´ conditionì„ í†µí•´ ë’¤ìª½ì— ë³µìž¡í•œ í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•˜ë„ë¡ í•  ìˆ˜ ìžˆìŒ
+		if ((2 > 5) & (x++ > y)) {
+			y++;
 		}
-		sc.close();
+
+		System.out.println("x = " + x + ",y = " + y);
+
+		x = 0;
+		y = 0;
+
+		// logical and operator
+		// ì•žìª½ì´ ê±°ì§“ì´ë‹ˆ ë’¤ìª½ì˜ ì¡°ê±´ì€ ì‹¤í–‰ì•ˆí•˜ê³  ë„˜ì–´ê°„ë‹¤
+		if((2>5)&&(x++>y))
+		{
+			y++;
+		}
+
+		System.out.println("x = " + x + ",y = " + y);
 	}
+
 }

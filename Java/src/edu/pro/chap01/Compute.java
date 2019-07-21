@@ -6,14 +6,14 @@ public class Compute {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		
+
 		int a = sc.nextInt();
 		int b = sc.nextInt();
-		
-		System.out.println("°ö="+(a*b));
-		System.out.println("¸ò="+(a/b));
-		
+
+		System.out.println("ê³±="+(a*b));
+		System.out.println("ëª«="+(a/b));
+
 		sc.close();
 	}
-	
+
 }

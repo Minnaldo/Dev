@@ -10,7 +10,7 @@ public class ArrayTest3 {
 		arr[1][0] = 33;
 		arr[1][1] = 44;
 		arr[1][2] = 55;
-		
+
 		for(int[] aa : arr)
 		{
 			for(int val : aa)
@@ -19,17 +19,17 @@ public class ArrayTest3 {
 			}
 			System.out.println();
 		}
-		
+
 		System.out.println("==========================");
-		
-		// ÀÚ¹ÙÀÇ ´ÙÂ÷¿ø¹è¿­¿¡¼­ ±âº» Çü½ÄÀÌ Æ÷ÀÎÅÍ ¹è¿­
-		int[][] arr2 = new int[3][];	// arr2 ´Â Ã¹¹øÂ° Ä­¸¸ °¡¸®Å°±â ¶§¹®¿¡, µŞ ¹è¿­Àº ³ªÁß¿¡ ¼±¾ğÇÏ¿©µµ µÈ´Ù
+
+		// ìë°”ì˜ ë‹¤ì°¨ì›ë°°ì—´ì—ì„œ ê¸°ë³¸ í˜•ì‹ì´ í¬ì¸í„° ë°°ì—´
+		int[][] arr2 = new int[3][];	// arr2 ëŠ” ì²«ë²ˆì§¸ ì¹¸ë§Œ ê°€ë¦¬í‚¤ê¸° ë•Œë¬¸ì—, ë’· ë°°ì—´ì€ ë‚˜ì¤‘ì— ì„ ì–¸í•˜ì—¬ë„ ëœë‹¤
 		arr2[0] = new int[2];
 		arr2[1] = new int[10];
 		arr2[2] = new int[11];
-		
+
 		int[][] arr3 = {{3,5,7},{12,25,66}};
-		
+
 		for(int i = 0; i< arr3.length; i++)
 		{
 			for(int j =0; j<arr3[0].length; j++)
@@ -37,15 +37,15 @@ public class ArrayTest3 {
 				System.out.println(arr3[i][j]);
 			}
 		}
-		
-		
+
+
 		int [][] k = {{1,2,3,4,5,6,7,8},{2,3,4,5},{6,8}};
-		
-		for(int i = 0; i<k.length; i++)	// row Å½»ö
+
+		for(int i = 0; i<k.length; i++)	// row íƒìƒ‰
 		{
-			for(int j = 0; j<k[i].length; j++)	// colum Å½»ö
+			for(int j = 0; j<k[i].length; j++)	// colum íƒìƒ‰
 			{
-				System.out.print(k[i][j]+" ");	
+				System.out.print(k[i][j]+" ");
 			}
 			System.out.println();
 		}

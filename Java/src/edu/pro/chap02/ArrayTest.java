@@ -2,17 +2,17 @@ package edu.ssafy.chap02;
 
 public class ArrayTest {
 	// Array
-	// Á¤ÀÇ : °°Àº µ¥ÀÌÅÍ Å¸ÀÔÀÇ ¼ø¼­Àû ³ª¿­(ÀÚ·á±¸Á¶Áß °¡Àå ºü¸¥ °Ë»öÀÌ °¡´ÉÇÏ´Ù)
-	// Æ¯Â¡ : ¼±¾ğ°ú µ¿½Ã¿¡ Å©±â°¡ °áÁ¤µÇ¾îÁö¸ç ÇÑ¹ø °áÁ¤µÈ Å©±â´Â º¯°æÇÒ ¼ö ¾ø´Ù
-	// ¹è¿­Àº »ı¼ºÇÏ¸é Å¸ÀÔ¿¡ µû¶ó ±âº»°ªÀ¸·Î ÃÊ±âÈ­
-	// Á¤¼ö = 0, ½Ç¼ö = 0.0, ¹®ÀÚ = \u0000, ³í¸® = false, ÂüÁ¶(reference) : null
+	// ì •ì˜ : ê°™ì€ ë°ì´í„° íƒ€ì…ì˜ ìˆœì„œì  ë‚˜ì—´(ìë£Œêµ¬ì¡°ì¤‘ ê°€ì¥ ë¹ ë¥¸ ê²€ìƒ‰ì´ ê°€ëŠ¥í•˜ë‹¤)
+	// íŠ¹ì§• : ì„ ì–¸ê³¼ ë™ì‹œì— í¬ê¸°ê°€ ê²°ì •ë˜ì–´ì§€ë©° í•œë²ˆ ê²°ì •ëœ í¬ê¸°ëŠ” ë³€ê²½í•  ìˆ˜ ì—†ë‹¤
+	// ë°°ì—´ì€ ìƒì„±í•˜ë©´ íƒ€ì…ì— ë”°ë¼ ê¸°ë³¸ê°’ìœ¼ë¡œ ì´ˆê¸°í™”
+	// ì •ìˆ˜ = 0, ì‹¤ìˆ˜ = 0.0, ë¬¸ì = \u0000, ë…¼ë¦¬ = false, ì°¸ì¡°(reference) : null
 	public static void main(String[] args) {
 		int kuk = 100, math = 80, eng = 50;
 		int sum = kuk + math + eng;
 		System.out.println(sum);
 		System.out.println("=================");
 
-		int[] jumsu = new int[3]; // int typeÀÇ ¹è¿­ ¼±¾ğ
+		int[] jumsu = new int[3]; // int typeì˜ ë°°ì—´ ì„ ì–¸
 		jumsu[0] = 100;
 		jumsu[1] = 80;
 		jumsu[2] = 50;
@@ -33,20 +33,20 @@ public class ArrayTest {
 		testFunc(jumsu);
 		System.out.println("main kuk : " + jumsu[0]);
 
-		Member m = new Member(); // Å¬·¡½º °´Ã¼(ÀÎ½ºÅÏ½º) »ı¼º
+		Member m = new Member(); // í´ë˜ìŠ¤ ê°ì²´(ì¸ìŠ¤í„´ìŠ¤) ìƒì„±
 		Member m2 = new Member();
 		Member m3 = new Member();
-		// marr Àº ÁÖ¼Ò°ªÀ» °®°Ô µÇ¹Ç·Î, 4Bytes °ø°£À» °®´Â´Ù
-		Member[] marr = new Member[3]; // Member typeÀÇ ¹è¿­ ¼±¾ğ
-		marr[0] = m;	// marr[0] ¿¡´Â mÀÇ ÁÖ¼Ò°¡ µé¾î°¡°Ô µÈ´Ù. (±»ÀÌ °´Ã¼¸¦ ³ÖÀ» ÇÊ¿ä°¡ ¾ø´Ù)
+		// marr ì€ ì£¼ì†Œê°’ì„ ê°–ê²Œ ë˜ë¯€ë¡œ, 4Bytes ê³µê°„ì„ ê°–ëŠ”ë‹¤
+		Member[] marr = new Member[3]; // Member typeì˜ ë°°ì—´ ì„ ì–¸
+		marr[0] = m;	// marr[0] ì—ëŠ” mì˜ ì£¼ì†Œê°€ ë“¤ì–´ê°€ê²Œ ëœë‹¤. (êµ³ì´ ê°ì²´ë¥¼ ë„£ì„ í•„ìš”ê°€ ì—†ë‹¤)
 		marr[1] = new Member();
 		marr[2] = new Member();
 	}
 
-	// ¹è¿­Àº call by reference ÀÌ¹Ç·Î ÇÔ¼ö ³»ÀÇ º¯È­°¡ ¿øº»¿¡ ¿µÇâÀ» ÁØ´Ù
+	// ë°°ì—´ì€ call by reference ì´ë¯€ë¡œ í•¨ìˆ˜ ë‚´ì˜ ë³€í™”ê°€ ì›ë³¸ì— ì˜í–¥ì„ ì¤€ë‹¤
 	public static void testFunc(int[] arr) {
 		System.out.println("testFunc kuk : " + --arr[0]);
-		System.out.println(arr.length); // °´Ã¼ ÇüÅÂ·Î ³Ñ¾î¿À¹Ç·Î, °´Ã¼ÀÇ ¸â¹ö ÇÔ¼ö¸¦ »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+		System.out.println(arr.length); // ê°ì²´ í˜•íƒœë¡œ ë„˜ì–´ì˜¤ë¯€ë¡œ, ê°ì²´ì˜ ë©¤ë²„ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.
 	}
 
 }

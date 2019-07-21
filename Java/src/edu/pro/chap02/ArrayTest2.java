@@ -2,23 +2,23 @@ package edu.ssafy.chap02;
 
 public class ArrayTest2 {
 	public static void main(String[] args) {
-		int[] arr = { 1, 3, 5, 7 }; // ¹è¿­ÀÇ ¼±¾ğ°ú ÃÊ±âÈ­
+		int[] arr = { 1, 3, 5, 7 }; // ë°°ì—´ì˜ ì„ ì–¸ê³¼ ì´ˆê¸°í™”
 //		System.out.println(arr.length);
 //		System.out.println(arr[2]);
 
 		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]); // i ´Â index °ª
+			System.out.println(arr[i]); // i ëŠ” index ê°’
 		}
 
-		int[] arr2 = new int[arr.length + 1]; // 5°³ ¹è¿­ ¼±¾ğ
-		
-		System.arraycopy(arr, 0, arr2, 0, arr.length);	// array ±íÀº º¹»ç
-		
+		int[] arr2 = new int[arr.length + 1]; // 5ê°œ ë°°ì—´ ì„ ì–¸
+
+		System.arraycopy(arr, 0, arr2, 0, arr.length);	// array ê¹Šì€ ë³µì‚¬
+
 		System.out.println();
 //		for (int i = 0; i < arr.length; i++) {
 //			System.out.println(arr2[i]);
 //		}
-		
+
 		for(int val : arr2)
 		{
 			System.out.println(val);
