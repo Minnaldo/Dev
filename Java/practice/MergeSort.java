@@ -1,3 +1,8 @@
+
+/**
+ *  정렬알고리즘 중 분할-정복 알고리즘인 병합정렬 알고리즘 구현
+ */
+
 import java.util.*;
 
 public class MergeSort {
@@ -31,6 +36,11 @@ public class MergeSort {
             for (int i = right; i <= end; i++) {
                 tmp[tmpIdx++] = arr[i];
             }
+        }
+
+        // 원 배열에 덮어 씌워 정렬을 완료한다
+        for (int i = 0; i <= end; i++) {
+            arr[i] = tmp[i];
         }
 
     } // 병합 완료

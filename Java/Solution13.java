@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * 금요 프로젝트 : 2차원 배열 활용 - 1
- *
+ *  부지 정보가 주어졌을 때, 가장 높은 빌딩의 높이를 구하는 문제
  */
 
 public class Solution13 {

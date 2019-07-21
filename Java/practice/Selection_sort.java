@@ -1,3 +1,9 @@
+/**
+ *  선택 정렬
+ *  원래의 배열 안에서 이루어지는 in-place sorting 방법 중 하나
+ *  배열 내에서 가장 큰값을 찾아 현재 위치와 바꾼다 (SWAP)
+ */
+
 import java.util.*;
 
 public class Selection_sort {

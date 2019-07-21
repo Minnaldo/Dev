@@ -1,3 +1,8 @@
+/** Gravity
+ *  상자가 쌓여있는 방을 회전하였을 때, 가장 높은 곳에서 떨어지는 상자는 어느 높이를 떨어지는지 알아내는 문제
+ */
+
+
 import java.util.*;
 
 public class gravity_2 {
