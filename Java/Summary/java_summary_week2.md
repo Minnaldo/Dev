@@ -200,3 +200,15 @@ modifier return_type method_name (parameter list){
 Java에서는 작성된 많은 class들을 분리하여 관리하기 위해 package를 사용한다. 파일관리의 폴더와 유사하다.
 반드시 class 파일 내에 자신 첫 라인에 package를 명시하고 있어야 하며, 한번만 정의해서 사용할 수 있다.
 
+
+## 상속 & 다형성 (Inheriance & Polymorphism)
+
+### 1. Inheritance
+class 설계 시 특정 class를 상속받아 그 class의 Data(변수)와 기능(method)를 사용할 수 있도록 한다.
+
+- Generalization
+    - 추출된 class의 공통적인 특성을 모아 super class로 정의할 수 있다.
+- Specialization
+    - 비슷한 속성과 기능을 가지고 있는 다른 class를 상속 받아 새로운 class를 정의할 수 있다.
+
+상속되는 클래스의 속성이나 기능을 선택적으로
