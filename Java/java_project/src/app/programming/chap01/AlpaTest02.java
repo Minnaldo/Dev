@@ -1,4 +1,4 @@
-package edu.ssafy.chap01;
+package app.programming.chap01;
 
 public class AlpaTest02 {
 	public static void main(String[] args) {

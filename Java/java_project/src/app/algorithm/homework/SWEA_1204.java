@@ -1,3 +1,5 @@
+package app.algorithm.homework;
+
 /**	최빈수 구하기
  *
  */

@@ -1,4 +1,4 @@
-# JAVA Chapter 1 Summary
+# JAVA Summary Week 1
 
 ## Java의 메모리 사용
 ### Java의 배열

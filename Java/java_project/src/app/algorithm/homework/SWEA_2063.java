@@ -1,3 +1,5 @@
+package app.algorithm.homework;
+
 /** 중간값 구하기
  *
  */

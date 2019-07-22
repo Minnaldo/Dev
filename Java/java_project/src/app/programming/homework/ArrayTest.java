@@ -1,9 +1,9 @@
-package com.ssafy.java;
+package app.programming.homework;
 
 import java.util.*;
 
 public class ArrayTest {
-	
+
 	static int[] arr;
 
 	public static void print() {
@@ -39,7 +39,7 @@ public class ArrayTest {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("ÀÔ·Â");
+		System.out.println("ï¿½Ô·ï¿½");
 		Scanner sc = new Scanner(System.in);
 		String str = sc.nextLine();
 
@@ -50,15 +50,15 @@ public class ArrayTest {
 			arr[idx] = Integer.parseInt(val); // string to int
 			idx++;
 		}
-		
+
 		print();
-		System.out.print("¹è¿­ÀÇ ÇÕ : ");
+		System.out.print("ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ : ");
 		total();
-		System.out.print("¹è¿­ÀÇ Æò±Õ : ");
+		System.out.print("ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ : ");
 		average();
-		System.out.print("¹è¿­ÀÇ ÃÖ¼Ò°ª : ");
+		System.out.print("ï¿½è¿­ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ : ");
 		minimum();
-		
+
 		sc.close();
 	}
 }

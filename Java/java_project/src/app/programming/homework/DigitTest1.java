@@ -1,4 +1,4 @@
-package com.ssafy.algo;
+package app.programming.homework;
 
 import java.util.*;
 

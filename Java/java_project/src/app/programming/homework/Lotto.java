@@ -1,4 +1,4 @@
-package com.ssafy.java;
+package app.programming.homework;
 
 import java.util.*;
 
@@ -7,13 +7,13 @@ public class Lotto {
 	public static void main(String[] args) {
 
 		int[] arr = new int[6];
-		System.out.println("·Î¶ÇÀÇ ÃÖ°í¼ýÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+		System.out.println("ï¿½Î¶ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 		Scanner sc = new Scanner(System.in);
 		int max = sc.nextInt();
 		int idx = 0;
 
 		while (idx < 6) {
-			// ÇöÀç ´Ü°è¿¡¼­ »ÌÈù °ª
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°è¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			int val = (int) (Math.random() * 100) % max + 1;
 
 			boolean flag = false;
@@ -29,9 +29,9 @@ public class Lotto {
 				idx++;
 			}
 		}
-		
+
 		Arrays.sort(arr);
-		
+
 		for (int val : arr) {
 			System.out.print(val+" ");
 		}

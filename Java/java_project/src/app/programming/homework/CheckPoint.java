@@ -1,4 +1,4 @@
-package edu.ssafy.chap01;
+package app.programming.homework;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class CheckPoint {
 		if (ans > 0) {
 			System.out.println("����� ���̱���");
 		}
-		
+
 		sc.close();
 	}
 }

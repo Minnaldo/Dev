@@ -1,4 +1,4 @@
-package edu.ssafy.chap02;
+package app.programming.chap02;
 
 public class Member {
 

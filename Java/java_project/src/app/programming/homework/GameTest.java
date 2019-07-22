@@ -1,20 +1,20 @@
-package edu.ssafy.chap01;
+package app.programming.homework;
 
 import java.util.Scanner;
 
 public class GameTest {
 	public static void main(String[] args) {
 
-		System.out.println(">> °¡À§¹ÙÀ§º¸ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù. ¾Æ·¡ º¸±â Áß ÇÏ³ª¸¦ °í¸£¼¼¿ä.");
-		System.out.println("1. 5ÆÇ 3½Â");
-		System.out.println("2. 3ÆÇ 2½Â");
-		System.out.println("3. 1ÆÇ 1½Â");
-		System.out.print("¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä. ");
-		
+		System.out.println(">> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.");
+		System.out.println("1. 5ï¿½ï¿½ 3ï¿½ï¿½");
+		System.out.println("2. 3ï¿½ï¿½ 2ï¿½ï¿½");
+		System.out.println("3. 1ï¿½ï¿½ 1ï¿½ï¿½");
+		System.out.print("ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½. ");
+
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();
 
-		// ÄÄÇ»ÅÍ¿Í »ç¿ëÀÚÀÇ ½Â¼ö¸¦ ±â·Ï
+		// ï¿½ï¿½Ç»ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		int com = 0, user = 0;
 		switch (num) {
 		case 1:
@@ -22,46 +22,46 @@ public class GameTest {
 				if (com >= 3 || user >= 3)
 					break;
 
-				System.out.print("°¡À§¹ÙÀ§º¸ Áß ÇÏ³ª ÀÔ·Â:");
+				System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½Ô·ï¿½:");
 				String usr = sc.next();
-				int aa = 0;	// »ç¿ëÀÚ°¡ ³½ °Í ÆÇ´Ü
+				int aa = 0;	// ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç´ï¿½
 				switch (usr) {
-				case "°¡À§":
+				case "ï¿½ï¿½ï¿½ï¿½":
 					aa = 1;
 					break;
-				case "ÁÖ¸Ô":
+				case "ï¿½Ö¸ï¿½":
 					aa = 2;
 					break;
-				case "º¸":
+				case "ï¿½ï¿½":
 					aa = 3;
 					break;
 				}
 				int cc = (int) (Math.random() * 3) + 1;
-								
-				// °¡À§¹ÙÀ§º¸ Ã¼Å©
+
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 				switch(aa) {
-				case 1:	// »ç¶÷ °¡À§
+				case 1:	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					switch(cc)
 					{
-					case 1: System.out.println("¹«½ÂºÎ!!!");break;
-					case 2: System.out.println("Á³½À´Ï´Ù!!!");com++;break;
-					case 3: System.out.println("ÀÌ°å½À´Ï´Ù!!!");user++;break;
+					case 1: System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");break;
+					case 2: System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");com++;break;
+					case 3: System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");user++;break;
 					}
 					break;
-				case 2:	// »ç¶÷ ¹ÙÀ§
+				case 2:	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					switch(cc)
 					{
-					case 1: System.out.println("Á³½À´Ï´Ù!!!");com++;break;
-					case 2: System.out.println("¹«½ÂºÎ!!!");break;
-					case 3: System.out.println("ÀÌ°å½À´Ï´Ù!!!");user++;break;
+					case 1: System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");com++;break;
+					case 2: System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");break;
+					case 3: System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");user++;break;
 					}
 					break;
-				case 3:	// »ç¶÷ º¸
+				case 3:	// ï¿½ï¿½ï¿½ ï¿½ï¿½
 					switch(cc)
 					{
-					case 1: System.out.println("Á³½À´Ï´Ù!!!");com++;break;
-					case 2: System.out.println("ÀÌ°å½À´Ï´Ù!!!");user++;break;
-					case 3: System.out.println("¹«½ÂºÎ!!!");break;
+					case 1: System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");com++;break;
+					case 2: System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");user++;break;
+					case 3: System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");break;
 					}
 					break;
 				}
@@ -73,66 +73,66 @@ public class GameTest {
 				if (com >= 2 || user >= 2)
 					break;
 
-				System.out.print("°¡À§¹ÙÀ§º¸ Áß ÇÏ³ª ÀÔ·Â:");
+				System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½Ô·ï¿½:");
 				String usr = sc.next();
-				int aa = 0;	// »ç¿ëÀÚ°¡ ³½ °Í ÆÇ´Ü
+				int aa = 0;	// ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç´ï¿½
 				switch (usr) {
-				case "°¡À§":
+				case "ï¿½ï¿½ï¿½ï¿½":
 					aa = 1;
 					break;
-				case "ÁÖ¸Ô":
+				case "ï¿½Ö¸ï¿½":
 					aa = 2;
 					break;
-				case "º¸":
+				case "ï¿½ï¿½":
 					aa = 3;
 					break;
 				}
 				int cc = (int) (Math.random() * 3) + 1;
 
-				// °¡À§¹ÙÀ§º¸ Ã¼Å©
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 				switch (aa) {
-				case 1: // »ç¶÷ °¡À§
+				case 1: // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					switch (cc) {
 					case 1:
-						System.out.println("¹«½ÂºÎ!!!");
+						System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");
 						break;
 					case 2:
-						System.out.println("Á³½À´Ï´Ù!!!");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 						com++;
 						break;
 					case 3:
-						System.out.println("ÀÌ°å½À´Ï´Ù!!!");
+						System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 						user++;
 						break;
 					}
 					break;
-				case 2: // »ç¶÷ ¹ÙÀ§
+				case 2: // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					switch (cc) {
 					case 1:
-						System.out.println("Á³½À´Ï´Ù!!!");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 						com++;
 						break;
 					case 2:
-						System.out.println("¹«½ÂºÎ!!!");
+						System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");
 						break;
 					case 3:
-						System.out.println("ÀÌ°å½À´Ï´Ù!!!");
+						System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 						user++;
 						break;
 					}
 					break;
-				case 3: // »ç¶÷ º¸
+				case 3: // ï¿½ï¿½ï¿½ ï¿½ï¿½
 					switch (cc) {
 					case 1:
-						System.out.println("Á³½À´Ï´Ù!!!");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 						com++;
 						break;
 					case 2:
-						System.out.println("ÀÌ°å½À´Ï´Ù!!!");
+						System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 						user++;
 						break;
 					case 3:
-						System.out.println("¹«½ÂºÎ!!!");
+						System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");
 						break;
 					}
 					break;
@@ -140,66 +140,66 @@ public class GameTest {
 			}
 			break;
 		case 3:
-			System.out.print("°¡À§¹ÙÀ§º¸ Áß ÇÏ³ª ÀÔ·Â:");
+			System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½Ô·ï¿½:");
 			String usr = sc.next();
-			int aa = 0; // »ç¿ëÀÚ°¡ ³½ °Í ÆÇ´Ü
+			int aa = 0; // ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç´ï¿½
 			switch (usr) {
-			case "°¡À§":
+			case "ï¿½ï¿½ï¿½ï¿½":
 				aa = 1;
 				break;
-			case "ÁÖ¸Ô":
+			case "ï¿½Ö¸ï¿½":
 				aa = 2;
 				break;
-			case "º¸":
+			case "ï¿½ï¿½":
 				aa = 3;
 				break;
 			}
 			int cc = (int) (Math.random() * 3) + 1;
 
-			// °¡À§¹ÙÀ§º¸ Ã¼Å©
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 			switch (aa) {
-			case 1: // »ç¶÷ °¡À§
+			case 1: // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				switch (cc) {
 				case 1:
-					System.out.println("¹«½ÂºÎ!!!");
+					System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");
 					break;
 				case 2:
-					System.out.println("Á³½À´Ï´Ù!!!");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 					com++;
 					break;
 				case 3:
-					System.out.println("ÀÌ°å½À´Ï´Ù!!!");
+					System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 					user++;
 					break;
 				}
 				break;
-			case 2: // »ç¶÷ ÁÖ¸Ô
+			case 2: // ï¿½ï¿½ï¿½ ï¿½Ö¸ï¿½
 				switch (cc) {
 				case 1:
-					System.out.println("Á³½À´Ï´Ù!!!");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 					com++;
 					break;
 				case 2:
-					System.out.println("¹«½ÂºÎ!!!");
+					System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");
 					break;
 				case 3:
-					System.out.println("ÀÌ°å½À´Ï´Ù!!!");
+					System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 					user++;
 					break;
 				}
 				break;
-			case 3: // »ç¶÷ º¸
+			case 3: // ï¿½ï¿½ï¿½ ï¿½ï¿½
 				switch (cc) {
 				case 1:
-					System.out.println("Á³½À´Ï´Ù!!!");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 					com++;
 					break;
 				case 2:
-					System.out.println("ÀÌ°å½À´Ï´Ù!!!");
+					System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½Ï´ï¿½!!!");
 					user++;
 					break;
 				case 3:
-					System.out.println("¹«½ÂºÎ!!!");
+					System.out.println("ï¿½ï¿½ï¿½Âºï¿½!!!");
 					break;
 				}
 				break;
@@ -207,7 +207,7 @@ public class GameTest {
 			break;
 		}
 
-		String str = (com != user) ? ((com > user) ? "### ÄÄÇ»ÅÍ ½Â!!!" : "### »ç¿ëÀÚ ½Â!!!") : "### ¹«½ÂºÎ!!!";
+		String str = (com != user) ? ((com > user) ? "### ï¿½ï¿½Ç»ï¿½ï¿½ ï¿½ï¿½!!!" : "### ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!!!") : "### ï¿½ï¿½ï¿½Âºï¿½!!!";
 		System.out.println(str);
 		sc.close();
 	}

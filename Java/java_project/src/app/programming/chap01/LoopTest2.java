@@ -1,4 +1,4 @@
-package edu.ssafy.chap01;
+package app.programming.chap01;
 
 public class LoopTest2 {
 
@@ -8,9 +8,9 @@ public class LoopTest2 {
 				System.out.println(i + " x " + j + " = " + i * j);
 			}
 		}
-		
+
 		System.out.println("----------------------------------------------------------------------");
-		
+
 		for(int i = 4; i>0; i--)
 		{
 			for(int j = i; j>0; j--)
@@ -19,7 +19,7 @@ public class LoopTest2 {
 			}
 			System.out.println();
 		}
-		
+
 	}
 
 }

@@ -1,3 +1,5 @@
+package app.algorithm.workshop;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

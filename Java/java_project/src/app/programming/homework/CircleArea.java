@@ -1,4 +1,4 @@
-package edu.ssafy.chap01;
+package app.programming.homework;
 
 public class CircleArea {
 

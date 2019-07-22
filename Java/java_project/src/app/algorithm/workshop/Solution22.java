@@ -1,3 +1,4 @@
+package app.algorithm.workshop;
 
 /**
  *  소금쟁이
