@@ -16,10 +16,9 @@ public class DigitTest1 {
 			arr[num / 10]++;
 		}
 
-		
 		for (int i = 0; i < 10; i++) {
 			if (arr[i] != 0) {
-				System.out.println(i + " : " + arr[i] + " ");
+				System.out.println(i + " : " + arr[i]);
 			}
 		}
 

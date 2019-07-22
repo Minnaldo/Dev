@@ -3,6 +3,15 @@
 ## 1. 객체 지향이란?
 SW의 모든 구성원이 객체(Object)로 구성되며, 객체들의 관계성으로 프로그램이 작동되는 것이다. 그렇기 때문에 객체를 만들기 위해 클래스를 만들기 위해 클래스를 이용하여 객체가 가져야할 구성요소를 설계하게 된다.
 
+### 1-1. OOP (Obejct Orientation Programming)
+|요소|Design|Object|
+|:---|:---:|:---:|
+|Abstraction (추상화)|class (Blueprint of the object)|object|
+|Encapsulation (캡슐화)|
+|Inheritance (상속)|
+|Polymorphism (다형성)|
+
+> 클래스는 시간이 지나도 변하지 않지만, 객체는 시간이 지나면 변할 수 있다.
 
 ## 2. class 구성과 object의 사용법
 - 클래스의 구조
@@ -42,6 +51,7 @@ ver = new ClassName();
 ```
 
 3. 객체의 사용
+- 객체에는 멤버변수만 있다.
 ```java
 ver.variable = value;
 ver.method();
@@ -70,6 +80,8 @@ class Hello{
 }
 ```
 - 자바 파일명이 ExName.java가 아니면 컴파일이 되지 않으며, 컴파일이 완료되면 각 클래스 이름의 .class파일이 생성된다.
+<p><img src="img/outer_class.png"></p>
+
 ```java
 // 클래스와 이너클래스 예
 // 이너클래스 작성시
@@ -78,6 +90,8 @@ public class ExName{
 }
 ```
 - 위 예제를 컴파일 하면 ExName.class와 ExName$Hello.class 파일이 생성된다.
+
+<p><img src="img/inner_class.png"></p>
 ---
 #### 자바의 import
 - 컴파일이 완료되면 import 구문은 없어진다.

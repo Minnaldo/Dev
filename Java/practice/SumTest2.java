@@ -1,7 +1,7 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-public class SumTest {
+public class SumTest2 {
     public static void main(String[] args) {
 
         long[] arr;
@@ -10,6 +10,7 @@ public class SumTest {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
         arr = new long[input + 1];
+
         long start = System.nanoTime();
 
         for (int i = 1; i <= input; i++) {
@@ -18,12 +19,12 @@ public class SumTest {
 
         long sum = 0;
         for (int i = 1; i <= input; i++) {
-            sum += arr[input] - arr[i];
+            for (int j = i; j <= input; j++) {
+                sum += arr[j];
+            }
         }
-        sum += arr[input];
 
         long end = System.nanoTime();
-
         System.out.println((end - start) / 1000000.0 + " ms\n");
 
         System.out.println(sum);
