@@ -5,20 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "CodeLens (Launch) - PersonMain",
-            "request": "launch",
-            "mainClass": "programming.chap04.PersonMain",
-            "projectName": "src"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - PersonMain",
-            "request": "launch",
-            "mainClass": "src.programming.chap04.PersonMain",
-            "projectName": "Dev_e6a2608b"
-        },
-        {
             "name": "Python Debuger",
             "type": "python",
             "request": "launch",
