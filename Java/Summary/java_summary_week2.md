@@ -410,3 +410,47 @@ cc.toString();
 
 Object Polymorphism은 reference Data type의 ***형 변환*** <br>
 **힙(heap)에 있는 것은 그대로 두고, 바라보는 타입만 바꾼다**    (a.k.a 장님 코끼리 만지는 이야기)
+
+상위클래스로 올라갈 수록 공통된 기능을 찾을 줄 알아야 한다.
+
+
+오버라이드 어노테이션 ( @Override )
+- 오버라이드 된 메소드를 사용자에게 명시해주는 것
+
+---
+**관리하는 클래스가 있는것이 좋다 (Manager Class)** <br>
+객체를 저장하고 관리
+
+> 객체지향프로그램 : 무언가를 고치기 위해, 전부를 고치는 것이 아닌 한가지만 고친다
+
+---
+### static 키워드
+객체를 생성하지 않고 사용할 수 있다.
+
+1. static이 붙을 수 있는 위치
+    - 멤버 변수 (Member Variable)
+    - 멤버 함수 (Memeber Method)
+    - 내부 클래스 (Inner Class)
+
+`static` 키워드가 붙은 변수/함수/이너 클래스는 클래스가 로딩될 때, `static Area`에 로딩이 되게 되며, 이는 heap영역에 객체에 할당되는 변수와는 다르다
+
+> `static variable`은 클래스 변수라 부르기도 한다
+
+"__클래스.변수명__" 으로 부를수 있고, 클래스의 객체를 통해 부를 수도 있다.
+```java
+class staticTest{
+    static int si;
+}
+----------------------------------------
+class anotherClass{
+    staticTest st = new staticTest();
+
+    // 밑으 둘은 같은 변수를 가리킨다
+    staticTest.si;
+    st.si;
+
+}
+```
+
+2. static 함수 내에서는 __객체변수/일반함수__ 를 사용할 수 없다. --> 객체를 만들어 사용하거나, `static으로 지정된 변수 및 함수`를 사용해야 한다<br><br>
+why?<br>static 멤버 함수/변수는 클래스 로딩시 메모리에 올라가는데 일반 함수/변수는 메모리에 올라와 있지 않은 상태이므로
