@@ -231,6 +231,9 @@ toString() method : java.lang.object 클래스에 정의되어 있다.
 > subclass가 superclass의 **모든것**을 물려받는 것
 >> 선택적으로 상속이 되지 않음, 무조건 모든것을 받아야한다 --> sub는 곧 super가 된다 ( sub is a super )
 
+> 상속 받은 경우, 자식 클래스를 인스턴스화 할때, 부모 클래스 객체를 먼저 생성한 후, 자식 클래스 객체를 생성한다
+>> super(); 이후 this();가 실행된다
+
 class 설계 시 특정 class를 상속받아 그 class의 Data(변수)와 기능 (method)를 사용할 수 있도록 한다.
 - Generalization
     - 추출된 class의 공통적인 특성을 모아 super class로 정의할 수 있다.
@@ -333,3 +336,71 @@ Private 접근 지정자의 경우,
 
 > 이름, 리턴값, 파라미터는 모두 같으나 함수의 body(구현부)가 달라지게 된다.
 
+<br>
+상속은 위로갈 수록 일반화(Generalization), 내려갈수록 구체화(Specialization)
+
+
+|Method Porlymorphism|Overriding|Overloading|
+|:---:|:---:|:---:|
+|Difference|`구현부(body)`만 다름|`return type`이 다르거나 `Parameter(변수의 갯수 or 변수의 타입)`이 다름|
+
+
+## 다형성 (Polymorphism)
+
+1. Method Polymorphism ( 메소드 다형성 )
+    - Overload와 Override : 다형성 중 method polymorphism을 구현한 예
+<br>
+2. Object Polymorphism ( 객체 다형성 )
+    - 객체를 바라보는 시각에 따라서 객체의 모양이 다르게 보인다
+    - 하나의 object가 다양하게 가질 수 있다
+```java
+// 업캐스팅
+Customer cc = new VipCustomer();    // no error --> VipCustomer객체를 Customer의 시각에서 본다
+// 가지고는 있지만 쓰지는 않겠다.
+```
+> 부모 클래스의 멤버(변수 및 메소드)를 사용하기위해 사용
+
+작은타입 -> 큰타입 : 업캐스팅
+큰타입 -> 작은타입
+
+Reference data type인 class는 primitive타입이 아니므로, 크기로 비교하는건 의미가 없다.
+그러므로, `상속(Inheritance)을 기반으로 형변환`을 한다.<br>
+==> 상속의 3번째 이유
+
+상속받은 클래스 -> 상속하는 클래스 : 업 캐스팅 -> 업캐스팅은 문제가 생길일이 없으므로, 오토캐스팅(auto-casting)이 된다.<br>
+단 원래의 멤버변수 및 함수(가지고 있는 것)은 쓰질 못하게 된다
+
+```java
+// 다운 캐스팅
+// Runtime error 발생 가능성
+VipCustomer vv = new Customer();    // error
+VipCustomer vv = (VipCustomer) new Customer();  // 명시적 형변환
+```
+---
+```java
+		Customer c = new Customer();
+		VipCustomer vc = new VipCustomer();	// 부모클래스의 생성자를 이용해 부모 클래스 객체를 생성한 후, 내 객체를 생성한다
+
+		Customer cc = new VipCustomer();	// 자동으로 형변환이 되며, new로 선언된 클래스의 타입을 따라가게 된다 --> cc 는 VipCustomer 타입이 된다.
+
+		VipCustomer vc = new Customer();	// 에러 발생, ()를 이용해 명시적 캐스팅 해주어야 함
+		VipCustomer vc = (VipCustomer)new Customer();	// 명시적 형변환, 단 에러 발생 (ClassCastException)
+```
+---
+모든 서브클래스는 슈퍼클래스가 될 수 있다.
+
+멤버 변수는 대표타입을 쫓아감
+```java
+
+Customer cc = new VipCustomer();
+System.out.println(cc.age); // ==> Customer에 저장된 값을 불러온다.
+// 대표타입이 Customer이기 때문에
+```
+
+```java
+// 대표 타입은 Customer가 되지만, 힙메모리 영역에는 VipCustomer 타입으로 들어가 있다.
+// 그래서 toString()을 불러도 VipCustomer의 toString을 불러오게 된다
+Customer cc = new VipCustomer();
+cc.toString();
+```
+> 새로운 클래스만 만들어 상속받고 오버라이딩을 하게 되면, 해당 유형의 모든 기능을 제공할 수 있게 된다
