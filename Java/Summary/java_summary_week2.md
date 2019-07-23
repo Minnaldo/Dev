@@ -352,7 +352,10 @@ Private 접근 지정자의 경우,
 <br>
 2. Object Polymorphism ( 객체 다형성 )
     - 객체를 바라보는 시각에 따라서 객체의 모양이 다르게 보인다
-    - 하나의 object가 다양하게 가질 수 있다
+    - 하나의 object가 다양한 형태를 가질 수 있다.
+    - Reference data type의 형변환 (reference data type : Array, Class, Interface)
+<br><br>
+
 ```java
 // 업캐스팅
 Customer cc = new VipCustomer();    // no error --> VipCustomer객체를 Customer의 시각에서 본다
@@ -404,3 +407,6 @@ Customer cc = new VipCustomer();
 cc.toString();
 ```
 > 새로운 클래스만 만들어 상속받고 오버라이딩을 하게 되면, 해당 유형의 모든 기능을 제공할 수 있게 된다
+
+Object Polymorphism은 reference Data type의 ***형 변환*** <br>
+**힙(heap)에 있는 것은 그대로 두고, 바라보는 타입만 바꾼다**    (a.k.a 장님 코끼리 만지는 이야기)
