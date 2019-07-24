@@ -6,10 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - MergeSort4",
+            "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "practice.MergeSort4",
-            "projectName": "Dev_a6c1ead4"
+            "mainClass": "${file}"
         },
         {
             "name": "Python Debuger",
