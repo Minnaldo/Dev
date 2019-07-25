@@ -1,3 +1,5 @@
+package hw_java_0723;
+
 public class Refrigerator extends Product {
 
     // Refrigerator의 특성
@@ -14,7 +16,7 @@ public class Refrigerator extends Product {
 
     @Override
     public String toString() {
-        return "Refrigerator { Product Number=" + super.getProductNum() +
+        return "hw_java_0723.Refrigerator { hw_java_0723.Product Number=" + super.getProductNum() +
                 ", Name=" + super.getName() +
                 ", Price=" + super.getPrice() +
                 ", Stock=" + super.getStock() +

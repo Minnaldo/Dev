@@ -1,3 +1,5 @@
+package hw_java_0723;
+
 public class TV extends Product {
 
     // TV의 특성
@@ -16,7 +18,7 @@ public class TV extends Product {
 
     @Override
     public String toString() {
-        return "TV { Product Number=" + super.getProductNum() +
+        return "hw_java_0723.TV { hw_java_0723.Product Number=" + super.getProductNum() +
                 ", Name=" + super.getName() +
                 ", Price=" + super.getPrice() +
                 ", Stock=" + super.getStock() +

@@ -1,3 +1,5 @@
+package hw_java_0723;
+
 public class Product {
     // 상품 공통정보를 담는 클래스
     private int productNum;
@@ -46,7 +48,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "hw_java_0723.Product{" +
                 "productNum=" + productNum +
                 ", name='" + name + '\'' +
                 ", price=" + price +

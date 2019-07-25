@@ -1,3 +1,5 @@
+package hw_java_0723;
+
 public class ProductMgr {
 
     /**
@@ -119,7 +121,7 @@ public class ProductMgr {
         return sum;
     }
 
-    // TV 화면 크기로 검색
+    // hw_java_0723.TV 화면 크기로 검색
     public String searchInch(int inch) {
         String tmp = "";
         for (int i = 0; i < idx; i++) {
