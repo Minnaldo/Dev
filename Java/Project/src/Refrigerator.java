@@ -1,5 +1,3 @@
-package bin;
-
 public class Refrigerator extends Product {
 
     // Refrigerator의 특성
@@ -16,7 +14,11 @@ public class Refrigerator extends Product {
 
     @Override
     public String toString() {
-        return "Refrigerator { Product Number=" + super.getProductNum() + ", Name=" + super.getName() + ", Price="
-                + super.getPrice() + ", Stock=" + super.getStock() + ", volume=" + volume + '}';
+        return "Refrigerator { Product Number=" + super.getProductNum() +
+                ", Name=" + super.getName() +
+                ", Price=" + super.getPrice() +
+                ", Stock=" + super.getStock() +
+                ", volume=" + volume +
+                '}';
     }
 }

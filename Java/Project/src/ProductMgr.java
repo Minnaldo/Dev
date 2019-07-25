@@ -1,5 +1,3 @@
-package bin;
-
 public class ProductMgr {
 
     /**
@@ -13,50 +11,71 @@ public class ProductMgr {
     /**
      * Product객체 배열의 최댓값
      */
-    int max = 10;
+    int max = 1;
 
     ProductMgr() {
-        parr = new Product[10];
+        parr = new Product[max];
     }
 
     public void addProduct(Product p) {
-        if (idx > max) {
+        if (idx < max) {
+            parr[idx++] = p;
+        } else {
             Product[] tmp = new Product[max * 2];
+            max *= 2;
             System.arraycopy(parr, 0, tmp, 0, parr.length);
             parr = tmp;
-            max *= 2;
-        } else {
-            parr[idx] = p;
-            idx++;
+//            addProduct(p);
+            parr[idx++] = p;
         }
     }
 
     public String searchAll() {
         String tmp = "";
-        for (int i = 0; i < idx; i++) {
-            tmp += parr[i].toString() + "\n";
+        if (idx > 0) {
+            for (int i = 0; i < idx; i++) {
+                tmp += parr[i].toString() + "\n";
+            }
+        } else {
+            tmp = "품목이 존재하지 않습니다.";
         }
 
         return tmp;
     }
 
     public String searchProductNum(int proNum) {
+        boolean flag = false;
+        String tmp = "";
         for (int i = 0; i < idx; i++) {
             if (parr[i].getProductNum() == proNum) {
-                return parr[i].toString();
+                flag = true;
+                tmp += parr[i].toString() + "\n";
             }
         }
-        return "찾는 물품이 없습니다";
+
+        if (!flag) {
+            return "찾는 물품이 없습니다";
+        } else {
+            return tmp;
+        }
+
     }
 
     // 상품명으로 부분검색 가능
     public String searchName(String name) {
+        boolean flag = false;
+        String tmp ="";
         for (int i = 0; i < idx; i++) {
             if (parr[i].getName().contains(name) || parr[i].getName().equals(name)) {
-                return parr[i].toString();
+                tmp += parr[i].toString()+"\n";
             }
         }
-        return "찾는 물품이 없습니다";
+
+        if (!false) {
+            return "찾는 물품이 없습니다";
+        } else {
+            return tmp;
+        }
     }
 
     public String searchTV() {
@@ -81,26 +100,24 @@ public class ProductMgr {
         return tmp;
     }
 
+    // TODO 이동을 시키니 문제가 생긴다
     public void delNum(int proNum) {
         for (int i = 0; i < idx; i++) {
-            if (parr[i].getPrice() == proNum) {
-                parr[i] = parr[idx];
-                idx--;
-                break;
+            if (parr[i].getProductNum() == proNum) {
+                parr[i] = parr[--idx];
             }
         }
     }
 
     public int getStockPriceSum() {
         int sum = 0;
-
         for (int i = 0; i < idx; i++) {
             sum += parr[i].getPrice();
         }
-
         return sum;
     }
 
+    //TODO
     public String searchInch(int inch) {
         String tmp = "";
         for (int i = 0; i < idx; i++) {
@@ -114,6 +131,7 @@ public class ProductMgr {
         return tmp;
     }
 
+    //TODO
     public String searchVol(int volum) {
         String tmp = "";
         for (int i = 0; i < idx; i++) {

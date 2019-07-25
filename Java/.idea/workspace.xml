@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b638ff25-81cf-43e6-85b8-06387db6d15e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ProductMgr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ProductTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Refrigerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/Algo_Summary_week1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/Java_IO_Classes.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/Java_Summary.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/Summary_elice.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/Thread_SharedInstance.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/2d_Array_structure.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/Big_O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/InputStream.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/OutputStream.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/heap_structure.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/inner_class.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/java_io_class.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/img/outer_class.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/java_lecture_Summary.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/java_summary_week1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Summary/java_summary_week2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/TV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/practice/Sum_test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/practice/merge_input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_project/src/app/programming/homework/ProductTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_project/src/app/programming/homework/Refrigerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_project/src/app/programming/homework/TV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MergeSort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ws_java_0723.zip" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1OTyJBhLx6OzRvFZ2wrb7Sm5P9d" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b638ff25-81cf-43e6-85b8-06387db6d15e" name="Default Changelist" comment="" />
+      <created>1564015806371</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1564015806371</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
