@@ -139,3 +139,28 @@ System.out.println(arr[idx]);   // 배열 출력
 traversalArr(arr,idx+1);
 ```
 <span>재귀함수를 이용한 배열 탐색</span>
+
+### 재귀함수를 이용한 부분집합 구하기
+```java
+public static void main(String[] args){
+    boolean[] sel = new boolean[3];
+    powerset(sel,0);
+}
+
+static void powerset(boolean[] sel, int idx){
+    // idx는 기저조건
+    if(idx == sel.length){
+        // 배열 길이만큼 탐색을 하였으므로, 출력 후 종료
+        System.out.println(Arrays.toString(sel));
+        return ;
+    }
+
+    // 각각의 상태로 분기해야 하므로, 바꾸고 다음 루틴으로 넘어간다.
+    sel[idx] = true;
+    powerset(sel,idx+1);
+    sel[idx] = false;
+    powerset(sel,idx+1);
+}
+```
+
+> **재귀함수를 전역변수와 함께 쓸 때, 전역변수 초기화에 주의한다!**

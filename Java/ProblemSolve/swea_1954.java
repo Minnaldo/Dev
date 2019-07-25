@@ -1,47 +1,50 @@
 import java.util.Scanner;
 
-class swea_1954 {
-    static int n = 0;
-    static int dir[][] = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } }; // 0, 1, 2, 3
-    static boolean visit[][];
-    // 막혔을 때 방향을 바꾼다
+public class SWEA_1954 {
 
-    public static void dfs(int[][] map, int x, int y, int dd, int cnt) {
-        map[y][x] = cnt;
-
-        int ny = y + dir[dd][0];
-        int nx = x + dir[dd][1];
-
-        if (ny >= 0 && nx >= 0 && ny < n && nx < n) {
-            if (!visit[ny][nx]) {
-                dfs(map, nx, ny, dd, cnt);
-            }
-        } else {
-            dd = (++dd) % 4;
-            ny = y + dir[dd][0];
-            nx = x + dir[dd][1];
-            dfs(map, x, y, dd, cnt);
-        }
-    }
+    static int dir[][] = { {}, { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
 
         for (int tc = 1; tc <= t; tc++) {
-            n = sc.nextInt();
-            int[][] map = new int[n][n];
-            visit = new boolean[n][n];
-            dfs(map, 0, 0, 0, 1);
-            System.out.println("#" + tc + " ");
+            int n = sc.nextInt();
+            int[][] ans = new int[n][n];
+            boolean[][] visit = new boolean[n][n];
 
-            for (int[] aa : dir) {
+            int cnt = 1;
+            int cy = 0;
+            int cx = 0;
+            int direction = 1;
+            ans[cy][cx] = cnt++;
+            visit[cy][cx] = true;
+            int baseVar = n * n;
+            while (cnt <= baseVar) {
+                int ny = cy + dir[direction][0];
+                int nx = cx + dir[direction][1];
+
+                if ((ny >= n || nx >= n || ny < 0 || nx < 0) || visit[ny][nx]) {
+                    direction = direction % 4 + 1;
+                } else if (ny >= 0 && nx >= 0 && ny < n && nx < n) {
+                    if (!visit[ny][nx]) {
+                        ans[ny][nx] = cnt;
+                        visit[ny][nx] = true;
+                        cy = ny;
+                        cx = nx;
+                        cnt++;
+                    }
+                }
+            }
+            System.out.println("#" + tc);
+            for (int[] aa : ans) {
                 for (int val : aa) {
-                    System.out.print(val);
+                    System.out.print(val + " ");
                 }
                 System.out.println();
             }
-
         }
+
+        sc.close();
     }
 }
