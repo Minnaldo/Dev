@@ -72,3 +72,70 @@
 2. 중앙 원소의 값과 찾고자 하는 목표 값을 비교한다
 3. 목표 값이 중앙 원소의 값보다 작으면 자료의 왼쪽 반에 대해서 새로 검색을 수행, 크다면 자료의 오른쪽 반에 대해 새로 검색을 수행
 4. 1~3의 과정을 반복
+
+
+## 재귀함수
+일반적인 반복문은 반복의 조건에 사용된 변수 중 하나가 반복할 명령문들 안에서 `조작`됨
+반복문은 조건이 맞으면 딸린 문장을 수행하고 다시 조건을 확인
+
+일반적인 재귀함수는 `기저영역` 이라고 해서, 특정 조건이 되면 함수를 종료시키는 조건문을 갖게 됨
+
+재귀적으로 자신을 호출할 때는, `기저영역`에서 검사되는 조건에 해당하는 값을 변화시키는게 일반적
+
+#### 재귀함수에서 누적 합 구하기
+재귀함수에서 호출 스택공간보다 하나 밖 영역에 변수를 만들어주어서 합을 누적하기
+```java
+
+public static void main(String[] args){
+    int n = 3;
+    static int sum = 0;
+    recur(n,0);
+}
+
+static void recur(int n){
+    if(n==0)
+        return;
+
+    sum += n;
+    System.out.println(n);
+    recur(n-1);
+}
+```
+<span>재귀함수를 이용한 누적합 : 전역변수 활용</span>
+```java
+public static void main(String[] args){
+    int n = 3;
+
+    recur(n,0);
+}
+
+static void recur(int n, int sum){
+    if(n==0){
+        System.out.println(sum);
+        return;
+    }
+    System.out.println(n);
+    recur(n-1, sum+n);
+}
+```
+<span> 재귀함수를 이용한 누적합2 : 인자값을 이용</span>
+
+
+```java
+public static void main(String[] args){
+    int[] arr = {1,2,3,4};
+    travrsalArr(arr,0);
+}
+
+// 변수로 인덱스값을 받는다
+static void travrsalArr(int[] arr, int idx){
+    // 배열의 길이만큼 탐색했으면 종료
+    if(idx == arr.length){
+        return;
+    }
+}
+
+System.out.println(arr[idx]);   // 배열 출력
+traversalArr(arr,idx+1);
+```
+<span>재귀함수를 이용한 배열 탐색</span>
