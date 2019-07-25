@@ -18,15 +18,17 @@ public class ProductMgr {
     }
 
     public void addProduct(Product p) {
-        if (idx < max) {
-            parr[idx++] = p;
-        } else {
-            Product[] tmp = new Product[max * 2];
-            max *= 2;
-            System.arraycopy(parr, 0, tmp, 0, parr.length);
-            parr = tmp;
+        if (isDuplicate(p)) {
+            if (idx < max) {
+                parr[idx++] = p;
+            } else {
+                Product[] tmp = new Product[max * 2];
+                max *= 2;
+                System.arraycopy(parr, 0, tmp, 0, parr.length);
+                parr = tmp;
 //            addProduct(p);
-            parr[idx++] = p;
+                parr[idx++] = p;
+            }
         }
     }
 
@@ -64,10 +66,10 @@ public class ProductMgr {
     // 상품명으로 부분검색 가능
     public String searchName(String name) {
         boolean flag = false;
-        String tmp ="";
+        String tmp = "";
         for (int i = 0; i < idx; i++) {
             if (parr[i].getName().contains(name) || parr[i].getName().equals(name)) {
-                tmp += parr[i].toString()+"\n";
+                tmp += parr[i].toString() + "\n";
             }
         }
 
@@ -104,7 +106,7 @@ public class ProductMgr {
     public void delNum(int proNum) {
         for (int i = 0; i < idx; i++) {
             if (parr[i].getProductNum() == proNum) {
-                parr[i] = parr[--idx];
+                parr[i] = parr[idx--];
             }
         }
     }
@@ -117,7 +119,7 @@ public class ProductMgr {
         return sum;
     }
 
-    //TODO
+    // TV 화면 크기로 검색
     public String searchInch(int inch) {
         String tmp = "";
         for (int i = 0; i < idx; i++) {
@@ -131,7 +133,7 @@ public class ProductMgr {
         return tmp;
     }
 
-    //TODO
+    // 냉장고 용량으로 검색
     public String searchVol(int volum) {
         String tmp = "";
         for (int i = 0; i < idx; i++) {
@@ -145,4 +147,16 @@ public class ProductMgr {
 
         return tmp;
     }
+
+    // 중복된 제품번호의 물품이 입력되면, 재고 수량을 합계
+    public boolean isDuplicate(Product p) {
+        for (int i = 0; i < idx; i++) {
+            if (parr[i].getProductNum() == p.getProductNum()) {
+                parr[i].setStock(parr[i].getStock() + p.getStock());
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
