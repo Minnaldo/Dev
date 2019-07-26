@@ -1,9 +1,9 @@
 package fri_project_2;
 
 public class MovieMgr {
-    private Movie[] movies = new Movie[100];
-    private int index = 0;
-    private int max = 100;
+    private Movie[] movies;
+    private int index;
+    private int max;
     private static MovieMgr mm = new MovieMgr();
 
     public static MovieMgr getInstance() {
@@ -13,6 +13,7 @@ public class MovieMgr {
     public MovieMgr() {
         this.index = 0;
         this.max = 100;
+        this.movies = new Movie[100];
     }
 
     public void add(Movie m) {

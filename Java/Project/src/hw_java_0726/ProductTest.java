@@ -1,4 +1,4 @@
-package hw_java_0723;
+package hw_java_0726;
 
 import java.util.Scanner;
 

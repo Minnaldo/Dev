@@ -1,4 +1,4 @@
-package hw_java_0723;
+package hw_java_0726;
 
 public class ProductMgr {
 
@@ -164,4 +164,16 @@ public class ProductMgr {
         return false;
     }
 
+    public int specificPriceSum(Product p) {
+        int sum = 0;
+
+        if (p instanceof TV) {
+            // TV 금액 합계만 계산
+
+        } else if (p instanceof Refrigerator) {
+            //냉장고 금액 합계만 계산
+        }
+
+        return sum;
+    }
 }
