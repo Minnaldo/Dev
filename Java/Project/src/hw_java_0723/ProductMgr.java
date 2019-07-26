@@ -164,4 +164,48 @@ public class ProductMgr {
         return false;
     }
 
+    public int getStockPrice(Product p) {
+        int stockSum = 0;
+        if (p instanceof TV) {
+            for (int i = 0; i < idx; i++) {
+                if (parr[i] instanceof TV) {
+                    stockSum += parr[i].getStock();
+                }
+            }
+        } else if (p instanceof Refrigerator) {
+            for (int i = 0; i < idx; i++) {
+                if (parr[i] instanceof Refrigerator) {
+                    stockSum += parr[i].getStock();
+                }
+            }
+        }
+
+        return stockSum;
+    }
+
+    public int getAvgInch() {
+        int inchSum = 0;
+        for (int i = 0; i < idx; i++) {
+            if (parr[i] instanceof TV) {
+                // 인치 값 가져오기
+                TV t = (TV) parr[i];
+                inchSum += t.getInch();
+            }
+        }
+        return inchSum;
+    }
+
+    public int getAvgVolume() {
+        int volSum = 0;
+        for (int i = 0; i < idx; i++) {
+            if (parr[i] instanceof Refrigerator) {
+                // 리터값 가져오기
+                Refrigerator ref = (Refrigerator) parr[i];
+                volSum += ref.getVolume();
+            }
+        }
+        return volSum;
+    }
+
+
 }
