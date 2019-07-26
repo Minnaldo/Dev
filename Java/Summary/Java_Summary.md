@@ -77,3 +77,59 @@ class Child{
 - 생성자의 이름이 클래스의 이름과 같다.
 - 생성자도 메소드이므로 오버로딩이 가능하다
     - 오버로딩? 이름은 같으나 리턴값 또는 매개변수 혹은 둘 모두가 다른 메소드
+
+
+### 클래스 다이어그램
+포함관계
+사용관계
+
+ObjectAid : UML 프로그램
+
+### 싱글턴(Singleton) 패턴
+- 디자인 패턴중 하나로 특정 클래스 객체를 단 하나만 만들 수 있도록 하는 구조
+    - 클래스 private으로 선언하고, 클래스내에서 private static 클래스객체를 생성한다.
+    - 앞서 생성한 변수에 getInstacne() ( a.k.a. Getter ) 메소드를 작성하여, 이를 통해 접근하도록 한다.
+    - `new` 키워드 사용을 제한하는 형태, 생성자는 타클래스에 접근 불가능으로 만드는 방법이다.
+```java
+// Thread-safe한 방법의 싱글턴 패턴
+// 프로그램 시작시 메모리에 적재되어 프로그램 종료시까지 하나의 객체만 이용한다.
+class Class{
+    // @param instance : the instance of Class
+    private static Class instance = new Class();
+    private Class(){}
+
+    // getter
+    public static Class getInstance(){
+        return instance;
+    }
+}
+
+// Thread-safe 하지 않은 방법
+// 해결하기 위해 synchronized 키워드를 사용 한다
+// synchronized : 스레드 동기화를 하는 키워드, 메소드 또는 변수에 lock을 걸어 스레드가 사용중에는 다른 스레드가 접근하지 못하게 하는 키워드
+class Class_2{
+    private static Class_2 instance; // 클래스의 인스턴스 변수
+    private Class_2(){}
+
+    // getter
+    public static Class_2 getInstance(){
+        if(instance == null)
+            instance = new Class_2();
+        return instance;
+    }
+}
+
+
+// 타 클래스에서 사용시
+class OtherClass{
+    // 타 클래스에서 getInstance로 불러도, 초기에 생성된 하나의 객체만 반환됨
+    // 메모리 효율성이 증대되고, 데이터의 일관성이 높아진다
+    Class cls = Class.getInstance();
+}
+```
+
+```java
+public synchronized void method(Thread t){
+    System.out.println(t.number+"번 스레드 입니다.");
+}
+```
