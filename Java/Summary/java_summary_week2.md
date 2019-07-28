@@ -366,6 +366,19 @@ Customer cc = new VipCustomer();    // no error --> VipCustomer객체를 Custome
 작은타입 -> 큰타입 : 업캐스팅
 큰타입 -> 작은타입
 
+
+```java
+Customer cc = new VipCustomer();    // Up Castring
+
+// print 메소드와 var 변수가 부모/자식 클래스 모두에 있다고 가정한다
+cc.print();
+System.out.println(cc.var);
+```
+
+> **위 예제에서 `메소드는 자식클래스의 메소드(OverRiding 됨)`를 `변수는 부모클래스의 변수`를 가져온다. 메소드가 오버라이딩 되지 않았다면, 자식클래스의 메소드는 `접근조차 불가`능해진다.**
+
+
+
 Reference data type인 class는 primitive타입이 아니므로, 크기로 비교하는건 의미가 없다.
 그러므로, `상속(Inheritance)을 기반으로 형변환`을 한다.<br>
 ==> 상속의 3번째 이유
@@ -411,7 +424,7 @@ cc.toString();
 Object Polymorphism은 reference Data type의 ***형 변환*** <br>
 **힙(heap)에 있는 것은 그대로 두고, 바라보는 타입만 바꾼다**    (a.k.a 장님 코끼리 만지는 이야기)
 
-상위클래스로 올라갈 수록 공통된 기능을 찾을 줄 알아야 한다.
+> 상위클래스로 올라갈 수록 공통된 기능을 찾을 줄 알아야 한다.
 
 
 오버라이드 어노테이션 ( @Override )

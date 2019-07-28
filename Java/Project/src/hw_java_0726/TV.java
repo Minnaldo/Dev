@@ -6,6 +6,9 @@ public class TV extends Product {
     private int inch;
     private String displayType;
 
+    TV() {
+    }
+
     public TV(int productNum, String name, int price, int stock, int inch, String displayType) {
         super(productNum, name, price, stock);
         this.inch = inch;

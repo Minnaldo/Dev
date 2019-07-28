@@ -1,7 +1,5 @@
 package hw_java_0723;
 
-import org.w3c.dom.ls.LSOutput;
-
 public class Product {
     // 상품 공통정보를 담는 클래스
     private int productNum;
@@ -16,7 +14,8 @@ public class Product {
         this.stock = stock;
     }
 
-
+    public Product() {
+    }
 
     public int getProductNum() {
         return productNum;

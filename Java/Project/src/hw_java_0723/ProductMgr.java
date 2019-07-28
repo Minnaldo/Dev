@@ -117,10 +117,11 @@ public class ProductMgr {
         System.out.println("삭제할 물품이 존재하지 않습니다.");
     }
 
+    // 재고 수량의 가격 합계를 리턴
     public int getStockPriceSum() {
         int sum = 0;
         for (int i = 0; i < idx; i++) {
-            sum += parr[i].getPrice();
+            sum += parr[i].getPrice() * parr[i].getStock();
         }
         return sum;
     }
@@ -163,5 +164,27 @@ public class ProductMgr {
         }
         return false;
     }
+
+
+    // 입력받은 항목의 재고 수량의 합계를 리턴
+    public int getStockSum(Product p) {
+        int stockSum = 0;
+        if (p instanceof TV) {
+            for (int i = 0; i < idx; i++) {
+                if (parr[i] instanceof TV) {
+                    stockSum += parr[i].getStock();
+                }
+            }
+        } else if (p instanceof Refrigerator) {
+            for (int i = 0; i < idx; i++) {
+                if (parr[i] instanceof Refrigerator) {
+                    stockSum += parr[i].getStock();
+                }
+            }
+        }
+
+        return stockSum;
+    }
+
 
 }

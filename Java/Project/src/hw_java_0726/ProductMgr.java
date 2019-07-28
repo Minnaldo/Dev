@@ -14,8 +14,14 @@ public class ProductMgr {
      * Product객체 배열의 최댓값
      */
     private int max = 10;
+    private static ProductMgr instance = new ProductMgr();
 
-    ProductMgr() {
+    // apply singleton patter
+    public static ProductMgr getInstance() {
+        return instance;
+    }
+
+    private ProductMgr() {
         parr = new Product[max];
     }
 
@@ -24,6 +30,7 @@ public class ProductMgr {
             if (idx < max) {
                 parr[idx++] = p;
             } else {
+                // Array doubling
                 Product[] tmp = new Product[max * 2];
                 max *= 2;
                 System.arraycopy(parr, 0, tmp, 0, parr.length);
@@ -120,7 +127,7 @@ public class ProductMgr {
     public int getStockPriceSum() {
         int sum = 0;
         for (int i = 0; i < idx; i++) {
-            sum += parr[i].getPrice();
+            sum += parr[i].getPrice() * parr[i].getStock();
         }
         return sum;
     }
@@ -166,14 +173,54 @@ public class ProductMgr {
 
     public int specificPriceSum(Product p) {
         int sum = 0;
-
         if (p instanceof TV) {
             // TV 금액 합계만 계산
-
+            for (int i = 0; i < idx; i++) {
+                sum += parr[i].getPrice() * parr[i].getStock();
+            }
         } else if (p instanceof Refrigerator) {
             //냉장고 금액 합계만 계산
+            for (int i = 0; i < idx; i++) {
+                sum += parr[i].getPrice() * parr[i].getStock();
+            }
         }
-
         return sum;
+    }
+
+    // 평균 인치수 출력
+    public int getAvgInches() {
+        int sum = 0;
+        int cnt = 0;
+        for (int i = 0; i < idx; i++) {
+            if (parr[i] instanceof TV) {
+                TV tv = (TV) parr[i];
+                sum += tv.getInch();
+                cnt++;
+            }
+        }
+        return sum / cnt;
+    }
+
+    public int getSumVolume() {
+        int sum = 0;
+        for (int i = 0; i < idx; i++) {
+            if (parr[i] instanceof Refrigerator) {
+                Refrigerator ref = (Refrigerator) parr[i];
+                sum += ref.getVolume();
+            }
+        }
+        return sum;
+    }
+
+    public Product[] searchNamePrice(String proName, int price) {
+        Product[] tmp = new Product[idx];
+        for (int i = 0; i < idx; i++) {
+            if (parr[i].getName().contains(proName)) {
+                if (parr[i].getPrice() < price) {
+                    tmp[i] = parr[i];
+                }
+            }
+        }
+        return tmp;
     }
 }

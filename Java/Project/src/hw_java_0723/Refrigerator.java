@@ -10,6 +10,9 @@ public class Refrigerator extends Product {
         this.volume = volume;
     }
 
+    public Refrigerator() {
+    }
+
     public int getVolume() {
         return volume;
     }
