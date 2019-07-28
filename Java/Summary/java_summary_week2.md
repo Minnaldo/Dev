@@ -340,7 +340,7 @@ Private 접근 지정자의 경우,
 상속은 위로갈 수록 일반화(Generalization), 내려갈수록 구체화(Specialization)
 
 
-|Method Porlymorphism|Overriding|Overloading|
+|Method Polymorphism|Overriding|Overloading|
 |:---:|:---:|:---:|
 |Difference|`구현부(body)`만 다름|`return type`이 다르거나 `Parameter(변수의 갯수 or 변수의 타입)`이 다름|
 
