@@ -19,6 +19,7 @@ public class MovieTest {
         System.out.println("<<< 영화 관리 프로그램 >>>");
         Scanner sc = new Scanner(System.in);
         MovieMgr mm = MovieMgr.getInstance();
+
         boolean exitFlag = false;
 
         while (!exitFlag) {

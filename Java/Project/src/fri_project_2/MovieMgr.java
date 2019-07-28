@@ -4,6 +4,7 @@ public class MovieMgr {
     private Movie[] movies;
     private int index;
     private int max;
+
     private static MovieMgr mm = new MovieMgr();
 
     public static MovieMgr getInstance() {
