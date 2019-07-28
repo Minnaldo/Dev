@@ -7,15 +7,21 @@ public class ProductTest {
     private static void printFunc() {
         System.out.println("이용하실 기능을 선택해주세요");
         System.out.println(
-                "  1 : 상품 추가" +
-                        "  2 : 전체 검색" +
-                        "  3 : 상품번호로 검색" +
-                        "  4 : 상품명으로 검색" +
-                        "  5 : TV만 검색" +
-                        "  6 : Refrigerator만 검색" +
-                        "  7 : 상품 번호로 삭제" +
-                        "  8 : 전체 상품 재고 합계" +
-                        "  0 :  프로그램종료");
+                "  1 : 상품 추가\n" +
+                        "  2 : 전체 검색\n" +
+                        "  3 : 상품번호로 검색\n" +
+                        "  4 : 상품명으로 검색\n" +
+                        "  5 : TV만 검색\n" +
+                        "  6 : Refrigerator만 검색\n" +
+                        "  7 : 상품 번호로 삭제\n" +
+                        "  8 : 전체 상품 재고 금액 합계\n" +
+                        "  9 : 용량 으로 냉장고 검색\n" +
+                        "  10 : 화면 크기로 TV 검색\n" +
+                        "  11 : 항목 재고 금액 출력\n" +
+                        "  12 : TV 평균 인치 출력\n" +
+                        "  13 : 냉장고 평균 용량 출력\n" +
+                        "  14 : 상품 번호와 가격으로 검색\n" +
+                        "  0 :  프로그램종료\n");
     }
 
     public static void main(String[] args) {

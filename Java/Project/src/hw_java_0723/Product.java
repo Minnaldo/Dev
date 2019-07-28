@@ -14,7 +14,8 @@ public class Product {
         this.stock = stock;
     }
 
-
+    public Product() {
+    }
 
     public int getProductNum() {
         return productNum;

@@ -117,10 +117,11 @@ public class ProductMgr {
         System.out.println("삭제할 물품이 존재하지 않습니다.");
     }
 
+    // 재고 수량의 가격 합계를 리턴
     public int getStockPriceSum() {
         int sum = 0;
         for (int i = 0; i < idx; i++) {
-            sum += parr[i].getPrice();
+            sum += parr[i].getPrice() * parr[i].getStock();
         }
         return sum;
     }
@@ -164,7 +165,9 @@ public class ProductMgr {
         return false;
     }
 
-    public int getStockPrice(Product p) {
+
+    // 입력받은 항목의 재고 수량의 합계를 리턴
+    public int getStockSum(Product p) {
         int stockSum = 0;
         if (p instanceof TV) {
             for (int i = 0; i < idx; i++) {
@@ -181,30 +184,6 @@ public class ProductMgr {
         }
 
         return stockSum;
-    }
-
-    public int getAvgInch() {
-        int inchSum = 0;
-        for (int i = 0; i < idx; i++) {
-            if (parr[i] instanceof TV) {
-                // 인치 값 가져오기
-                TV t = (TV) parr[i];
-                inchSum += t.getInch();
-            }
-        }
-        return inchSum;
-    }
-
-    public int getAvgVolume() {
-        int volSum = 0;
-        for (int i = 0; i < idx; i++) {
-            if (parr[i] instanceof Refrigerator) {
-                // 리터값 가져오기
-                Refrigerator ref = (Refrigerator) parr[i];
-                volSum += ref.getVolume();
-            }
-        }
-        return volSum;
     }
 
 

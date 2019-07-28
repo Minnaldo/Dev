@@ -127,7 +127,7 @@ public class ProductMgr {
     public int getStockPriceSum() {
         int sum = 0;
         for (int i = 0; i < idx; i++) {
-            sum += parr[i].getPrice();
+            sum += parr[i].getPrice() * parr[i].getStock();
         }
         return sum;
     }
@@ -176,12 +176,12 @@ public class ProductMgr {
         if (p instanceof TV) {
             // TV 금액 합계만 계산
             for (int i = 0; i < idx; i++) {
-                sum += parr[i].getPrice();
+                sum += parr[i].getPrice() * parr[i].getStock();
             }
         } else if (p instanceof Refrigerator) {
             //냉장고 금액 합계만 계산
             for (int i = 0; i < idx; i++) {
-                sum += parr[i].getPrice();
+                sum += parr[i].getPrice() * parr[i].getStock();
             }
         }
         return sum;
