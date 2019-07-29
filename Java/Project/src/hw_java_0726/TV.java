@@ -5,7 +5,7 @@ public class TV extends Product {
     // TV의 특성
     private int inch;
     private String displayType;
-
++
     TV() {
     }
 

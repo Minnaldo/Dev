@@ -133,3 +133,46 @@ public synchronized void method(Thread t){
     System.out.println(t.number+"번 스레드 입니다.");
 }
 ```
+
+자동 업캐스팅 됐을 때
+변수는 선언자 (지시자; 변수/데이터 타입) 메소드는 객체(heap영역의 객체 타입을 쫓아감) (new ~~())를 따라간다
+
+boolean 타입은 형변환이 되지 않는다.
+객체변수는 자동초기화기 일어난다.
+
+자식클래스가 생성될 때, 부모의 기본생성자(default constructor)가 호출되어진다. ( `super();`를 부른다)
+default constructor의 존재
+객체를 넣으면 - println에 객체를 설명하는 문자열이 출력( 오버라이딩 된, toString() ). 단, toString()이 오버라이딩이 되어있지 않다면, 객체의 해시값(주소값)이 출력되게 된다
+
+#### Java iterator
+자바의 컬렉션 프레임워크에서 컬렉션에 저장되어 있는 요소들을 읽어오는 방법을 표준화 하였는데, 그 중 하나가 Iterator이다.
+
+Iterator 인터페이스의 구성
+```java
+public interface Iterator{
+    boolean hasNext();  // 읽어올 요소가 남아있는지 확인하는 메소드 (return type : true/false)
+    Object next();  //  메소드는 읽어올 요소가 남아있는지 확인하는 메소드 (return type : true/false)
+    void remove();  // next로 읽어 온 요소를 삭제한다. next()를 호출한 다음에 remove()를 호출해야 한다.
+}
+```
+Iterator는 인터페이스이다. 이는, 이를 구현하는 클래스에서 세부사항이 구현되는 것이다.
+
+##### Iterator의 사용법
+아래는 iterator를 이용해 리스트에 있는 모든값을 가져오는 예제이다.
+```java
+ArrayList<Integer> list = new ArrayList<Integer>();
+
+for(Iterator<Integer> itr = list.iterator(); itr.hasNext();){
+    list.get(itr.next());
+}
+```
+---
+```java
+ArrayList<Integer> list = new ArrayList<Integer>();
+
+Iterator<Integer> itr = list.iterator();
+while(itr.hasNext()){
+    list.get(itr.next());
+}
+```
+iterator는 객체를 만들어 사용하기 때문에 느릴 수 밖에 없다. 그러므로 list의 size를 받아와서 사용하는 것이 좋다.
