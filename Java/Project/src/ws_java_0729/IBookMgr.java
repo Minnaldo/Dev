@@ -1,4 +1,4 @@
-package hw_java_0729;
+package ws_java_0729;
 
 import java.util.ArrayList;
 
@@ -14,4 +14,5 @@ public interface IBookMgr {
     ArrayList<Book> searchPrice(int price);  // 이하 가격 검색
     int priceSum();
     int priceAvg();
+    boolean isDuplicate(Book b);
 }

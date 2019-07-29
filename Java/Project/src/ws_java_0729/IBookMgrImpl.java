@@ -1,4 +1,4 @@
-package hw_java_0729;
+package ws_java_0729;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,12 @@ public class IBookMgrImpl implements IBookMgr {
 
     @Override
     public void add(Book b) {
-        barr.add(b);
+        if (isDuplicate(b)) {
+            System.out.println("중복되는 항목을 입력하셨습니다");
+        } else {
+            barr.add(b);
+        }
+        System.out.println("저장되었습니다.");
     }
 
     @Override
@@ -125,5 +130,15 @@ public class IBookMgrImpl implements IBookMgr {
             sum += b.getPrice();
         }
         return sum / barr.size();
+    }
+
+    @Override
+    public boolean isDuplicate(Book b) {
+        for (Book bb : barr) {
+            if (bb.getIsbn().equals(b.getIsbn())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-package hw_java_0729;
+package ws_java_0729;
 
 public class Book {
     private String isbn;
