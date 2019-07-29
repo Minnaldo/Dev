@@ -176,3 +176,78 @@ while(itr.hasNext()){
 }
 ```
 iterator는 객체를 만들어 사용하기 때문에 느릴 수 밖에 없다. 그러므로 list의 size를 받아와서 사용하는 것이 좋다.
+
+```java
+String str = new String("Hello");
+System.out.println(10+'a'+str); // 결과 : 107Hello
+// char는 숫자이므로 10 + 97 (a의 아스키코드 값) + Hello가 되어
+//107Hello가 된다
+```
+
+- String의 `==` 연산자는 주소값을 비교한다. 내용을 비교하고 싶다면 equals를 이용하여 비교한다
+
+```java
+//    str과 str2는 주소값이 다르다
+String str = new String("Hello");   // 새로운 String 객체를 생성(새로운 주소 할당; 힙에 생김)
+String str2 = new String("Hello");  // 새로운 String 객체를 생성(새로운 주소 할당; 힙에 생김)
+
+// str3과 str4는 literal Pool에 문자열이 생성된다
+// literal pool에 대한 설명은 밑에 있다
+String str3 = "Hello";
+String str4 = "Hello";
+
+// String의 == 는 주소를 비교한다
+// 내용을 비교하고 싶다면 .equals()를 사용한다
+if (str == str2) {
+    System.out.println("같다1");
+}
+if (str2 == str3) {
+    System.out.println("같다2");
+}
+if (str3 == str4) {
+    System.out.println("같다3");
+}
+if (str == str4) {
+    System.out.println("같다4");
+}
+```
+> 문자열의 합할 때 arraycopy를 이용하여 합친다
+String클래스는 문자열을 다룬다.
+
+```java
+// 앞의 str과 뒤의 str의 주소는 다르다
+// 문자의 배열이므로, 주소값이 달라진다
+str = str + str2;
+```
+<span>String 연산과 주소</span>
+```java
+String str = "Hello";
+StringBuilder sb = new StringBuilder(str);
+sb.append("a");
+
+System.out.println(sb.toString());  // 1
+System.out.println(str+"a");    // 2
+```
+> 1번보다 2번이 훨씬 더 빠르다
+
+#### literal pool
+문자열 객체가 담기는 메모리 공간
+JVM은 literal pool에 문자열이 없으면 생성하고, 있으면 그것을 가져다 쓴다.
+literal pool에 존재하는 문자열(객체)은 삭제되지 않는다.
+
+### Usage modifer
+
+- final<br>
+    마지막을 의미하며, 클래스 앞에 정의하여 `더이상 상속 받을수 없음`을 메소드 앞에 정의하여 `Overriding 할 수 없음`을, 변수 앞에 정의하여 `값 변경할 수 없음`을 즉, 상수임을 의미한다.
+
+    - class : 상속 받을 수 없음
+    - method : Override 할 수 없음
+    - variable : 상수로 정의
+
+|위치|비고|
+|:---:|:---:|
+|class|상속 받을 수 없음
+|method|Overriding 할 수 없음(메소드가 변형 될 수 업음)|
+|variable(변수)|값을 변경할 수 없음(상수화; const in c), 상수는 선언과 동시에 초기화가 필요하다(초기화 하지 않으면 에러)|
+
+> 클래스를 정의할 땐, 반대쪽을 생각하면 좋다.
