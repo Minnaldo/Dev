@@ -5,7 +5,17 @@ import java.util.Scanner;
 public class ProductTest {
 
     private static void printFunc() {
-        System.out.println("");
+        System.out.println("1. 상품 추가\n" +
+                "2. 전체 상품 검색\n" +
+                "3. 상품번호로 검색\n" +
+                "4. 상품명으로 검색(부분검색 지원)\n" +
+                "5. TV만 검색\n" +
+                "6. 냉장고만 검색\n" +
+                "7. 400L 이상의 냉장고만 검색\n" +
+                "8. 50inch 이상의 TV만 검색\n" +
+                "9. 상품 가격 변겅\n" +
+                "10. 상품 삭제\n" +
+                "11. 재고 상품 금액 합계");
     }
 
     public static void main(String[] args) {

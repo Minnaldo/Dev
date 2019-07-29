@@ -6,11 +6,11 @@ public class TV extends Product {
     @Override
     public String toString() {
         return "TV{" +
-                "ProductNum=" + super.getProNum() +
-                "Name=" + super.getName() +
-                "Price=" + super.getPrice() +
-                "Stock=" + super.getStock() +
-                "inch=" + inch +
+                "ProductNum=" + super.getProNum() +", \""+
+                "Name=" + super.getName() +", \""+
+                "Price=" + super.getPrice() +", \""+
+                "Stock=" + super.getStock() +", \""+
+                "inch=" + inch +"\""+
                 '}';
     }
 

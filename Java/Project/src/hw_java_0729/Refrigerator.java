@@ -14,12 +14,12 @@ public class Refrigerator extends Product {
 
     @Override
     public String toString() {
-        return "Refrigerator{" +
-                "ProductNum="+super.getProNum()+
-                "Name="+super.getName()+
-                "Price="+super.getPrice()+
-                "Stock="+super.getStock()+
-                "liters=" + liters +
+        return "Refrigerator{\"" +
+                "ProductNum="+super.getProNum()+", \""+
+                "Name="+super.getName()+", \""+
+                "Price="+super.getPrice()+", \""+
+                "Stock="+super.getStock()+", \""+
+                "liters=" + liters +"\""+
                 '}';
     }
 

@@ -126,9 +126,13 @@ public class ProductMgrImpl implements IProductMgr {
     @Override
     public void removeProduct(int proNum) {
         boolean flag = false;
-        for (Product p : parr) {
-            System.out.println("물품이 삭제되었습니다.");
-            flag = true;
+        for (int i = 0; i < parr.size(); i++) {
+            if (parr.get(i).getProNum() == proNum) {
+                parr.remove(i);
+                System.out.println("물품이 삭제되었습니다.");
+                flag = true;
+                break;
+            }
         }
         if (!flag)
             System.out.println("삭제하려는 물품이 없습니다.");
