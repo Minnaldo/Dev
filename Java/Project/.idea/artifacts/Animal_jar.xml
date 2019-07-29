@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Animal:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Animal_jar</output-path>
+    <root id="archive" name="Animal.jar">
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/Animal.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/AnimalTest.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/Bird.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/Frog.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/Human.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/Lion.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/chap06two/Superman.java" />
+    </root>
+  </artifact>
+</component>
