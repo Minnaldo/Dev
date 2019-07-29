@@ -111,13 +111,17 @@ public abstract class AbstracTest{
 `interface` 키워드를 사용한다
 
 - 상수(final)와 추상메소드 만으로 구현한다
-- 모든 메소드가 `추상 메소드`
+- 모든 메소드가 `추상 메소드`여야만 한다
+- super type으로 사용이 가능하다
+- 상속한 subclass들의 명세서 역할로 사용
 - 변수를 갖지 못하고, `상수`만 가질 수 있다. ( 변수는 모두 `final` 키워드를 붙여야 함; 자동으로 컴파일러가 final을 붙인다)
 - access modifier는 `public`만 가능함, 안쓰면 자동으로 작성되며, private, protected를 쓰면 에러가 발생
 - 모든 메소드가 추상메소드 이므로, `abstract` 키워드를 작성하지 않아도, 자동으로 `abstract` 키워드가 붙는다.
 - `new`키워드를 통한 객체화가 불가능하다
 
 > interface를 implements를 해도 상속(extends)를 받을 수 있다. 이렇게 여러개를 상속받을 수 있는것이 인터페이스의 가장 큰 장점이다
+
+클래스 상속만으로 기능을 한번에 불러오기 힘들때 인터페이스를 같이 사용하면 좋다
 
 ---
 
