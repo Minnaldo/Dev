@@ -68,7 +68,7 @@ public class BookMgrImpl implements IBookMgr {
         // file open
         ObjectInputStream ois = null;
         try {
-            ois = new ObjectInputStream(new FileInputStream("book.dat"));
+            ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("book.dat")));
             // 객체 저장을 위한 다운캐스팅
             Book o;
             while ((o = (Book) ois.readObject()) != null) {
@@ -96,7 +96,7 @@ public class BookMgrImpl implements IBookMgr {
         // file close and data save
         ObjectOutputStream oos = null;
         try {
-            oos = new ObjectOutputStream(new FileOutputStream("book.dat"));
+            oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("book.dat")));
             for (Book b : barr) {
                 oos.writeObject(b);
             }

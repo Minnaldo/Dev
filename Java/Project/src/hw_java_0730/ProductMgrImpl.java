@@ -55,7 +55,7 @@ public class ProductMgrImpl implements IProductMgr {
     public ArrayList<Product> searchName(String name) {
         ArrayList<Product> tmp = new ArrayList<>();
         for (Product p : pArr) {
-            if (p.getName().equals(name)) {
+            if (p.getName().contains(name)) {
                 tmp.add(p);
             }
         }

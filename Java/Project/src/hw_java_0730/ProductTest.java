@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class ProductTest {
     private static void printFunc() {
-        System.out.println("1. 상품 추가\n" +
+        System.out.println("<<<    사용할 기능을 선택해 주세요    >>>\n" +
+                "1. 상품 추가\n" +
                 "2. 전체 상품 검색\n" +
                 "3. 상품번호로 검색\n" +
                 "4. 상품명으로 검색(부분검색 지원)\n" +
@@ -24,18 +25,18 @@ public class ProductTest {
         boolean exitFlag = false;
 
 
-        try {
-            pm.add(new TV(100, "TV1", 10000, 10, 11));
-            pm.add(new TV(101, "TV2", 5000, 40, 45));
-            pm.add(new TV(102, "TV3", 50000, 50, 30));
-            pm.add(new Refrigerator(200, "REF1", 10000, 10, 30));
-            pm.add(new Refrigerator(201, "REF2", 15000, 10, 45));
-            pm.add(new Refrigerator(202, "REF3", 55000, 10, 200));
-            pm.add(new Refrigerator(205, "REF5", 10000, 15, 330));
-            pm.add(new TV(100, "TV1", 10000, 10, 10));  // 여기서 에러가 발생할 것
-        } catch (DuplicateException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            pm.add(new TV(100, "TV1", 10000, 10, 11));
+//            pm.add(new TV(101, "TV2", 5000, 40, 45));
+//            pm.add(new TV(102, "TV3", 50000, 50, 30));
+//            pm.add(new Refrigerator(200, "REF1", 10000, 10, 30));
+//            pm.add(new Refrigerator(201, "REF2", 15000, 10, 45));
+//            pm.add(new Refrigerator(202, "REF3", 55000, 10, 200));
+//            pm.add(new Refrigerator(205, "REF5", 10000, 15, 330));
+//            pm.add(new TV(100, "TV1", 10000, 10, 10));  // 여기서 에러가 발생할 것
+//        } catch (DuplicateException e) {
+//            e.printStackTrace();
+//        }
 
 
         while (!exitFlag) {
@@ -129,8 +130,10 @@ public class ProductTest {
                 case 0:
                     System.out.println("프로그램을 종료합니다");
                     pm.close();
+                    exitFlag = true;
                     break;
                 default:
+                    System.out.println("잘못 입력하셨습니다. 올바른 값을 입력해 주세요");
             }
         }
 
