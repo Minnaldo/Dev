@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class BookTest {
 
     private static void printFunc() {
-        System.out.println("1. 도서 입력\n" +
+        System.out.println("<<<    사용할 기능을 선택해 주세요    >>>\n" +
+                "1. 도서 입력\n" +
                 "2. 전체 도서 검색\n" +
                 "3. 도서 판매\n" +
                 "4. 도서 구매\n" +
@@ -16,7 +17,7 @@ public class BookTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         BookMgrImpl bm = BookMgrImpl.getInstacne();
-        ArrayList<Book> tmpArr = new ArrayList<>();
+
         boolean exitFlag = false;
 
         while (!exitFlag) {
@@ -42,7 +43,7 @@ public class BookTest {
                     }
                     break;
                 case 2: // search
-                    tmpArr = bm.search();
+                    ArrayList<Book> tmpArr = bm.search();
                     for (Book b : tmpArr)
                         System.out.println(b.toString());
                     System.out.println("검색이 끝났습니다.");

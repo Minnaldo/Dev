@@ -64,8 +64,9 @@ public class BookMgrImpl implements IBookMgr {
         try {
             ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("book.dat")));
             // 객체 저장을 위한 다운캐스팅
-            while (ois.available() != -1) {
-                tmp.add((Book) ois.readObject());
+            Book tmpB;
+            while ((tmpB = (Book) ois.readObject()) != null) {
+                tmp.add(tmpB);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
