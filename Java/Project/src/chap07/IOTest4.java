@@ -10,7 +10,7 @@ public class IOTest4 {
         try {
             fos = new FileOutputStream("sample3.txt");
             dos = new DataOutputStream(new BufferedOutputStream(fos));
-            dos.write(124); // int형 데이터로 넣었다.
+            dos.writeInt(256); // int형 데이터로 넣었다.
             dos.writeDouble(3.141592);
             dos.writeUTF("Hello SSaffy");
         } catch (FileNotFoundException e) {
