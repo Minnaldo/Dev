@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class BookMgrImpl implements IBookMgr {
-    private ArrayList<Book> barr;
+    private static ArrayList<Book> barr = new ArrayList<>();
     private static BookMgrImpl instacne = new BookMgrImpl();
 
     public static BookMgrImpl getInstacne() {
@@ -12,7 +12,7 @@ public class BookMgrImpl implements IBookMgr {
     }
 
     private BookMgrImpl() {
-        barr = open();
+        open();
     }
 
     @Override
@@ -64,31 +64,38 @@ public class BookMgrImpl implements IBookMgr {
         return sum;
     }
 
-    private ArrayList<Book> open() {
+    private static void open() {
         // file open
-        ArrayList<Book> tmp = new ArrayList<>();
+        ObjectInputStream ois = null;
         try {
-            ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("book.dat")));
+            ois = new ObjectInputStream(new FileInputStream("book.dat"));
             // 객체 저장을 위한 다운캐스팅
-            Book tmpB;
-            while ((tmpB = (Book) ois.readObject()) != null) {
-                tmp.add(tmpB);
+            Book o;
+            while ((o = (Book) ois.readObject()) != null) {
+                barr.add(o);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("파일을 찾을 수 없습니다.");
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } finally {
-            return tmp;
+            try {
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void close() {
         // file close and data save
+        ObjectOutputStream oos = null;
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("book.dat")));
+            oos = new ObjectOutputStream(new FileOutputStream("book.dat"));
             for (Book b : barr) {
                 oos.writeObject(b);
             }
@@ -98,6 +105,11 @@ public class BookMgrImpl implements IBookMgr {
             e.printStackTrace();
         } finally {
             System.out.println("데이터 저장이 완료되었습니다.");
+            try {
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

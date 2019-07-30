@@ -11,20 +11,20 @@ public class BookTest {
                 "2. 전체 도서 검색\n" +
                 "3. 도서 판매\n" +
                 "4. 도서 구매\n" +
-                "5. 총 재고 금액");
+                "5. 총 재고 금액\n" +
+                "0. 프로그램 종료");
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         BookMgrImpl bm = BookMgrImpl.getInstacne();
-
-        bm.add(new Book("ISBN", "title1", 10000, 10));
-        bm.add(new Book("ISBN1", "title2", 12000, 5));
-        bm.add(new Book("ISBN2", "title3", 15000, 13));
-        bm.add(new Magazine("ISBN01", "Magazine1", 13000, 1, 1));
-        bm.add(new Magazine("ISBN00", "Magazine2", 9000, 10, 2));
-        bm.add(new Magazine("ISBN03", "Magazine3", 15000, 11, 7));
-        bm.add(new Magazine("ISBN06", "Magazine6", 8000, 7, 12));
+//        bm.add(new Book("ISBN", "title1", 10000, 10));
+//        bm.add(new Book("ISBN1", "title2", 12000, 5));
+//        bm.add(new Book("ISBN2", "title3", 15000, 13));
+//        bm.add(new Magazine("ISBN01", "Magazine1", 13000, 1, 1));
+//        bm.add(new Magazine("ISBN00", "Magazine2", 9000, 10, 2));
+//        bm.add(new Magazine("ISBN03", "Magazine3", 15000, 11, 7));
+//        bm.add(new Magazine("ISBN06", "Magazine6", 8000, 7, 12));
 
 
         boolean exitFlag = false;
@@ -62,17 +62,21 @@ public class BookTest {
                     try {
                         bm.sell(sc.next().toUpperCase(), sc.nextInt());
                     } catch (QuantityException e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        System.out.println("책의 재고 수량이 부족합니다.");
                     } catch (ISBNNotFoundException e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        System.out.println("찾으시는 ISBN의 책을 찾을 수 없습니다.");
                     }
+
                     break;
                 case 4: // buy
                     System.out.println("책의 isbn과 구매 수량을 입력해주세요");
                     try {
                         bm.buy(sc.next().toUpperCase(), sc.nextInt());
                     } catch (ISBNNotFoundException e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        System.out.println("찾으시는 ISBN의 책을 찾을 수 없습니다.");
                     }
                     break;
                 case 5: // getTotalAmount

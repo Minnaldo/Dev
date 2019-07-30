@@ -1,9 +1,8 @@
-package hw_java_0729;
+package hw_java_0730;
 
 import java.util.Scanner;
 
 public class ProductTest {
-
     private static void printFunc() {
         System.out.println("1. 상품 추가\n" +
                 "2. 전체 상품 검색\n" +
@@ -30,18 +29,27 @@ public class ProductTest {
                     System.out.println("1. TV 추가, 2. 냉장고 추가, 0. 돌아가기");
                     switch (sc.nextInt()) {
                         case 1:
-                            System.out.println("\"제품번호,제품명,가격 정보, 재고수량, 화면크기\" 형식으로 입력해주세요");
-                            String[] tmp = sc.next().toUpperCase().replaceAll(" ", "").split(",");
-                            pm.add(new TV(Integer.parseInt(tmp[0]), tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3]), Integer.parseInt(tmp[4])));
+                            try {
+                                System.out.println("\"제품번호,제품명,가격 정보, 재고수량, 화면크기\" 형식으로 입력해주세요");
+                                String[] tmp = sc.next().toUpperCase().replaceAll(" ", "").split(",");
+                                pm.add(new TV(Integer.parseInt(tmp[0]), tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3]), Integer.parseInt(tmp[4])));
+                            } catch (DuplicateException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case 2:
-                            System.out.println("\"제품번호,제품명,가격 정보, 재고수량, 용량\" 형식으로 입력해주세요");
-                            String[] tmp1 = sc.next().toUpperCase().replaceAll(" ", "").split(",");
-                            pm.add(new Refrigerator(Integer.parseInt(tmp1[0]), tmp1[1], Integer.parseInt(tmp1[2]), Integer.parseInt(tmp1[3]), Integer.parseInt(tmp1[4])));
+                            try {
+                                System.out.println("\"제품번호,제품명,가격 정보, 재고수량, 용량\" 형식으로 입력해주세요");
+                                String[] tmp1 = sc.next().toUpperCase().replaceAll(" ", "").split(",");
+                                pm.add(new Refrigerator(Integer.parseInt(tmp1[0]), tmp1[1], Integer.parseInt(tmp1[2]), Integer.parseInt(tmp1[3]), Integer.parseInt(tmp1[4])));
+                            } catch (DuplicateException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case 0:
                             break;
                         default:
+                            System.out.println("잘못된 값을 입력했습니다. 올바른 값을 입력해 주세요");
                     }
                     break;
                 case 2:
@@ -51,8 +59,12 @@ public class ProductTest {
                     break;
                 case 3:
                     System.out.println("상품번호로 검색합니다. 검색하려는 상품의 번호를 입력해주세요");
-                    for (Product p : pm.searchProNum(sc.nextInt()))
-                        System.out.println(p.toString());
+                    try {
+                        for (Product p : pm.searchProNum(sc.nextInt()))
+                            System.out.println(p.toString());
+                    } catch (CodeNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 4:
                     System.out.println("상품명으로 검색합니다. 검색하려는 상품의 상품명을 입력해주세요");
@@ -70,14 +82,22 @@ public class ProductTest {
                         System.out.println(p.toString());
                     break;
                 case 7:
-                    System.out.println("400L 이상의 냉장고만 검색합니다");
-                    for (Product p : pm.searchUpTo400Liter())
-                        System.out.println(p.toString());
+                    try {
+                        System.out.println("400L 이상의 냉장고만 검색합니다");
+                        for (Product p : pm.searchUpTo400Liter())
+                            System.out.println(p.toString());
+                    } catch (ProductNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 8:
-                    System.out.println("50inch 이상의 TV만 검색합니다");
-                    for (Product p : pm.searchUpTo50inch())
-                        System.out.println(p.toString());
+                    try {
+                        System.out.println("50inch 이상의 TV만 검색합니다");
+                        for (Product p : pm.searchUpTo50inch())
+                            System.out.println(p.toString());
+                    } catch (ProductNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 9:
                     System.out.println("상품의 가격을 변경합니다. 상품번호와 바꿀 가격을 입력해주세요");

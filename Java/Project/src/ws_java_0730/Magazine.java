@@ -1,6 +1,8 @@
 package ws_java_0730;
 
-public class Magazine extends Book {
+import java.io.Serializable;
+
+public class Magazine extends Book implements Serializable {
     private int month;
 
     public Magazine() {
