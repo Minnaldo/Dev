@@ -27,8 +27,10 @@ public class BookMgrImpl implements IBookMgr {
 
     @Override
     public void sell(String isbn, int quantity) throws QuantityException, ISBNNotFoundException {
+        boolean flag = false;
         for (Book b : barr) {
             if (b.getIsbn().equals(isbn)) {
+                flag = true;
                 if (b.getQuantity() - quantity < 0) {
                     throw new QuantityException();
                 } else {
@@ -36,17 +38,21 @@ public class BookMgrImpl implements IBookMgr {
                 }
             }
         }
-        throw new ISBNNotFoundException();
+        if (!flag)
+            throw new ISBNNotFoundException();
     }
 
     @Override
     public void buy(String isbn, int quantity) throws ISBNNotFoundException {
+        boolean flag = false;
         for (Book b : barr) {
             if (b.getIsbn().equals(isbn)) {
+                flag = true;
                 b.setQuantity(b.getQuantity() + quantity);
             }
         }
-        throw new ISBNNotFoundException();
+        if (!flag)
+            throw new ISBNNotFoundException();
     }
 
     @Override

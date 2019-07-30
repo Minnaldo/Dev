@@ -18,6 +18,15 @@ public class BookTest {
         Scanner sc = new Scanner(System.in);
         BookMgrImpl bm = BookMgrImpl.getInstacne();
 
+        bm.add(new Book("ISBN", "title1", 10000, 10));
+        bm.add(new Book("ISBN1", "title2", 12000, 5));
+        bm.add(new Book("ISBN2", "title3", 15000, 13));
+        bm.add(new Magazine("ISBN01", "Magazine1", 13000, 1, 1));
+        bm.add(new Magazine("ISBN00", "Magazine2", 9000, 10, 2));
+        bm.add(new Magazine("ISBN03", "Magazine3", 15000, 11, 7));
+        bm.add(new Magazine("ISBN06", "Magazine6", 8000, 7, 12));
+
+
         boolean exitFlag = false;
 
         while (!exitFlag) {
