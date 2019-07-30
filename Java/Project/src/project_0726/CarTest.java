@@ -1,4 +1,4 @@
-package fri_project;
+package project_0726;
 
 import java.util.Scanner;
 

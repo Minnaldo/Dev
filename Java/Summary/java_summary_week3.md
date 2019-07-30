@@ -59,6 +59,11 @@ str.insert(int index, String newString);    // index에 newString 삽입
 ### Usage modifer
 #### static
 //TODO : summary about the static keyword
+
+- 멤버변수(member variables)
+- 멤버 메소드 (member method) : static method는 객체 생성 없이 사용되므로, 메서드 안에서 static 변수만 사용할 수 있다.
+- 멤
+
 ---
 #### final<br>
     마지막을 의미하며, 클래스 앞에 정의하여 `더이상 상속 받을수 없음`을 메소드 앞에 정의하여 `Overriding 할 수 없음`을, 변수 앞에 정의하여 `값 변경할 수 없음`을 즉, 상수임을 의미한다.
@@ -182,3 +187,130 @@ UnBoxing(언박싱) : wrapper class -> primivite type
 > 박싱/언박싱을 통해 primitive -> object / object->primitive의 변환이 편하게 바뀌었다.
 
 
+## Collection API
+Collection API는 객체들을 저장, 검색, 삭제하는 기능 등을 제공하는 클래스들의 집합
+
+- java.util.package에 정의되어 있다.
+- SET 계열, LIST 계열로 나뉜다.
+    - SET 계열 : 순서 X, 중복 X
+    - LIST 계열 : 순서 O, 중복 O
+
+![collection_structure_java](./img/collection_structure_java.png)
+
+Collection 클래스의 특징
+- add 메소드 존재 : Object 타입을 인자로 받는다.
+
+#### Set
+Set에 객체타입의 데이터를 넣을 때 `Comparable` 메소드를 구현해주어야 한다.<br>
+set은 데이터의 중복을 허용하지 않으므로 비교할 무언가가 필요한데, primitive타입이 아닌 reference 타입의 데이터는 `단순비교가 어렵다`.<br>
+그렇기 때문에, Set클래스는 `Comparable`을 이용하여 reference Type 데이터를 비교하고 set 객체에 넣으지 말지 결정하게 된다
+
+```java
+
+#### Map
+데이터 저장, 관리 시에 `검색을 보다 쉽게`하기 위해 구현된 클래스이다.
+- 객체를 `key`와 `value`로 구분하여 관리한다.
+- key를 통한 검색과 삭제를 쉽게 한다.
+- Collection 계열이 아니다.
+
+|멤버|기능|
+|:--:|:--|
+|put(key, value)|자료구조에 데이터 삽입|
+|get(key)|key에 맞는 데이터를 가져온다|
+|keySet()|key 모음을 가져온다|
+
+
+---
+
+## Generic (제너릭)
+클래스 선언(변수화) 시에 타입을 결정하게 만든다.<br>
+`Primitive` 타입 뿐 아니라 `UserDefined Type`(사용자 정의 타입; class 등) 또한 지정이 가능하다.<br>
+클래스 내에서 사용할 사용자 임의 타입을 만든다.
+
+```java
+// Generic class 안에서 I라는 타입을 씀
+// I의 타입은 정해지지 않았다.
+class Generic <I>{  // generic 클래스 선언부 I라는 타입을 선언
+}
+----------------------------------------------
+class GenericMain{
+    public static void main(String[] args) {
+        Generic<String> g = new Generic();  // Type을 String으로 쓰겠다.
+        Generic<Integer> g= new Generic();  // Type을 Integer로 쓰겠다.
+        // 꺽쇠괄호 안의 타입은 wrapper 클래스를 사용해야 한다.
+    }
+}
+```
+
+
+```java
+class Generic <I>{  // generic 클래스 선언부
+}
+class Sub extends Generic{
+    // 그냥 오버라이딩 할 경우 Object 타입으로 만들어진다
+}
+
+----------------------------------------------
+class Generic <I>{  // generic 클래스 선언부
+}
+class Sub extends Generic <String>{
+    // Generic의 I 타입을 String으로 받는다
+    // Generic의 메소드를 오버라이드시 String타입이 된다
+}
+```
+
+### Comparable 인터페이스
+primitive 타입이 아닌 타입의 정렬을 위해 사용된다 ( 특히 클래스 )
+
+인터페이스이므로 구현을 해야하고, 제너릭으로 구현되어 있기 때문에 타입을 지정해주어야 한다.
+
+Comparable 인터페이스를 구현하였으므로, Comaprable의 추상 메소드인 `cmopareTo(T t);` 메소드를 구현해주어야 한다.
+
+---
+
+## 클래스를 객체를 정렬한느 방법
+#### compareTo(T t)
+compareTo의 리턴값은 `1, 0` 또는 `-1` 이다.
+
+```java
+class Car implements Comparable<Car>{
+    // Comparable은 Car 타입을 비교한다
+    // CompareTo에서 비교 로직 구현 필요
+    // 반환값은 밑의 표와 같다.
+    @Override
+    public int compareTo(Car o){
+        if(파라미터1 < 파라미터2){
+            return 1;
+        }
+        return -1;
+    }
+}
+```
+
+|리턴 하는 값|결과|
+|:--:|:--|
+|음수 (-1)| 첫번째 파라미터 < 두번째 파라미터 |
+|0| 첫번째 파라미터 == 두번째 파라미터 |
+|양수 (1)| 첫번째 파라미터 > 두번째 파라미터 |
+
+
+#### comparator<T>
+```java
+// 익명클래스를 이용한 Comparator
+Comparator<Car> com = new Comparator<Car>(){
+    @Override
+    public int compare(Car o1, Car o2){
+        return o1.price - o2price;
+    }
+};
+
+Arrays.sort(cars, com); // 위의 compartor를 이용한 정렬
+```
+
+|리턴 하는 값|결과|
+|:--:|:--|
+|음수 (-1)| 첫번째 파라미터 < 두번째 파라미터 |
+|0| 첫번째 파라미터 == 두번째 파라미터 |
+|양수 (1)| 첫번째 파라미터 > 두번째 파라미터 |
+
+---

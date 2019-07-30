@@ -32,7 +32,9 @@ public class SWEA_1216 {
                                 len += 2;
                             } else {
                                 if (end - start > 1) {
-                                    break;
+                                    len = 0;
+                                    end--;
+                                    start = i;
                                 } else {
                                     ans = ans > len ? ans : len;
                                 }

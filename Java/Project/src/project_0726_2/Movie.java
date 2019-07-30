@@ -1,4 +1,4 @@
-package fri_project_2;
+package project_0726_2;
 
 public class Movie {
 
