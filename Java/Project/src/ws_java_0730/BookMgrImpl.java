@@ -83,7 +83,8 @@ public class BookMgrImpl implements IBookMgr {
 //            e.printStackTrace();
         } finally {
             try {
-                ois.close();
+                if (ois != null)
+                    ois.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

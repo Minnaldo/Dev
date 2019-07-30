@@ -22,6 +22,22 @@ public class ProductTest {
         Scanner sc = new Scanner(System.in);
         ProductMgrImpl pm = ProductMgrImpl.getInstance();
         boolean exitFlag = false;
+
+
+        try {
+            pm.add(new TV(100, "TV1", 10000, 10, 11));
+            pm.add(new TV(101, "TV2", 5000, 40, 45));
+            pm.add(new TV(102, "TV3", 50000, 50, 30));
+            pm.add(new Refrigerator(200, "REF1", 10000, 10, 30));
+            pm.add(new Refrigerator(201, "REF2", 15000, 10, 45));
+            pm.add(new Refrigerator(202, "REF3", 55000, 10, 200));
+            pm.add(new Refrigerator(205, "REF5", 10000, 15, 330));
+            pm.add(new TV(100, "TV1", 10000, 10, 10));  // 여기서 에러가 발생할 것
+        } catch (DuplicateException e) {
+            e.printStackTrace();
+        }
+
+
         while (!exitFlag) {
             printFunc();
             switch (sc.nextInt()) {
@@ -30,7 +46,7 @@ public class ProductTest {
                     switch (sc.nextInt()) {
                         case 1:
                             try {
-                                System.out.println("\"제품번호,제품명,가격 정보, 재고수량, 화면크기\" 형식으로 입력해주세요");
+                                System.out.println("\"제품번호, 제품명, 가격 정보, 재고수량, 화면크기\" 형식으로 입력해주세요");
                                 String[] tmp = sc.next().toUpperCase().replaceAll(" ", "").split(",");
                                 pm.add(new TV(Integer.parseInt(tmp[0]), tmp[1], Integer.parseInt(tmp[2]), Integer.parseInt(tmp[3]), Integer.parseInt(tmp[4])));
                             } catch (DuplicateException e) {
@@ -39,7 +55,7 @@ public class ProductTest {
                             break;
                         case 2:
                             try {
-                                System.out.println("\"제품번호,제품명,가격 정보, 재고수량, 용량\" 형식으로 입력해주세요");
+                                System.out.println("\"제품번호, 제품명, 가격 정보, 재고수량, 용량\" 형식으로 입력해주세요");
                                 String[] tmp1 = sc.next().toUpperCase().replaceAll(" ", "").split(",");
                                 pm.add(new Refrigerator(Integer.parseInt(tmp1[0]), tmp1[1], Integer.parseInt(tmp1[2]), Integer.parseInt(tmp1[3]), Integer.parseInt(tmp1[4])));
                             } catch (DuplicateException e) {
@@ -112,6 +128,7 @@ public class ProductTest {
                     break;
                 case 0:
                     System.out.println("프로그램을 종료합니다");
+                    pm.close();
                     break;
                 default:
             }

@@ -4,9 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ProductMgrImpl implements IProductMgr {
-    private static ProductMgrImpl instance = new ProductMgrImpl();
-
     private static ArrayList<Product> pArr = new ArrayList<>();
+    private static ProductMgrImpl instance = new ProductMgrImpl();
 
     public static ProductMgrImpl getInstance() {
         return instance;
@@ -19,7 +18,12 @@ public class ProductMgrImpl implements IProductMgr {
     @Override
     public void add(Product p) throws DuplicateException {
         if (isDuplicate(p)) {
-            throw new DuplicateException("이미 존재하는 상품입니다");
+            for (int i = 0; i < pArr.size(); i++) {
+                if (pArr.get(i).getNum() == p.getNum() || pArr.get(i).getName().equals(p.getName())) {
+                    pArr.get(i).setStock(pArr.get(i).getStock() + p.getStock());
+                }
+            }
+            throw new DuplicateException("이미 존재하는 상품입니다. 재고 수량은 합산됩니다.");
         } else {
             pArr.add(p);
 
@@ -158,30 +162,31 @@ public class ProductMgrImpl implements IProductMgr {
 
     private static void open() {
         ObjectInputStream ois = null;
-
         try {
             ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("product.dat")));
             Product p;
             while ((p = (Product) ois.readObject()) != null) {
                 pArr.add(p);
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
 //            e.printStackTrace();
             System.out.println("상품 정보를 찾지 못하였습니다.");
         } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
             System.out.println("상품 정보 클래스를 찾지 못하였습니다.");
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
-
             try {
-                ois.close();
+                if (ois != null)
+                    ois.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void close() {
+    public void close() {
         ObjectOutputStream oos = null;
 
         try {
