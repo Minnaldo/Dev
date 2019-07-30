@@ -1,7 +1,9 @@
 package chap07;
 
+import java.io.Serializable;
+
 // Data를 저장하는 클래스 Entity bean이라 한다
-public class Car implements Comparable<Car> {
+public class Car implements Comparable<Car>, Serializable {
     String num;
     int price;
 

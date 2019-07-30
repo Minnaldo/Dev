@@ -13,7 +13,7 @@ public class ExceptionTest2 {
             int res = div(sc.nextInt(), sc.nextInt());
         } catch (ArithmeticException e) {
             e.printStackTrace();
-        } catch (DataFormatException e) {
+        } catch (MyDataInputException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

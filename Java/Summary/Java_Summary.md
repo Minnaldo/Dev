@@ -257,3 +257,12 @@ literal pool에 존재하는 문자열(객체)은 삭제되지 않는다.
 
 
 > 업캐스팅 시 변수는 타입을, 메소드는 객체를 따라간다(new ~ 부분)
+
+
+String 선언시 문자 인코딩 타입 지정
+```java
+byte [] bytes = data.getBytes("utf-8"); // utf-8을 이용해 인코딩
+String str = new String(bytes, "ms949");    // ms949을 이용해 디코딩
+
+str = new String(bytes, "utf-8");   // utf-8을 이용해 디코딩
+```

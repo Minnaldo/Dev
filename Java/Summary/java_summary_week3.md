@@ -434,6 +434,7 @@ public class ExceptionTest2 {
         //
         int res = 0;
         if (b == 0) {
+            // java.lang.Throwable클래스를 상속받은 자식 클래스
             throw new DataFormatException();    // Exception instance를 만들어 호출한 곳에 에러를 보낸다.
         }
         // 에러가 발생한 코드의 다음 코드는 실행되지않고 메소드가 끝이 난다.
@@ -459,10 +460,17 @@ public class MyDataInputException extends Exception {   // Exception을 상속�
         System.out.println(errMsg);
     }
 }
-
+// throw new MyDataInputException(); 를 이용해 예외 처리가 가능하다
 ```
-
+> Exception을 상속받는 클래스만이 `catch(){}` 안에 들어갈 수 있다.
 Exception handling 처리시에 Overriding 되는 메서드라면 throws는
 - Super클래스의 메서드가 throws 하고 있는것을 `그대로 throws`할 수 있다.
 - Super 클래스의 메서드가 throws 하고 있는 것의 Sub Exception 클래스를 throws 할 수 있다.
 - Sub 클래스의 메서드에서 필요없다면 throws을 기술하지 않아도 된다.
+
+|throws|throw|
+|:--:|:--:|
+|메소드 내에서 상위블럭으로 예외를 던진다|현재 메소드에서 상위 메소드로 예외를 던진다|
+|자신이 예외를 처리하지 않고, 자신을 호출한 메소드에게 책임을 전가하는 것|실제로 exception을 throw할 때 사용하는 키워드|
+|전가|프로그래머의 판단에 따른 처리|
+|메소드 정의시 `throws`키워드를 추가하면, 해당 메소드를 `호출하는 곳에서 예외 처리`를 해야한다|강제로 예외를 발생시키는 경우 사용<br><br>throws예약어 뒤에는 java.lang.Throwable 클래스를 상속받는 자식클래스의 객체를 지정해야 한다|
