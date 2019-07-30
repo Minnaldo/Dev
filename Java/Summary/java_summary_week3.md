@@ -314,3 +314,155 @@ Arrays.sort(cars, com); // 위의 compartor를 이용한 정렬
 |양수 (1)| 첫번째 파라미터 > 두번째 파라미터 |
 
 ---
+
+
+## java.util
+### Caleandar
+시간을 기억하는 class이다.
+싱글톤 패턴이 적용되어 있다.
+- System.currentTimeMills(): long - 현재 시간을 1/1000 초로 long 타입으로 리턴한다.
+- 월의 시작은 0이다.
+- `MONTH`, `HOUR`, `MINUTE`, `SECOND`, `YEAR`, `DATE`는 상수로 지정되어 있어 `클래스이름.변수`로 호출 할 수 있다.
+
+
+---
+---
+
+## Exception과 IO
+오류 : 에러와 예외로 나뉨
+
+에러 : 무조건적인 수정의 대상
+- 컴파일 에러 : 컴파일 시 발생하는 에러
+- 런타임 에러 : 실행시 발생하는 에러
+<br>
+* Error class (java.lang에 존재)
+    - Fatal situation (serious error)
+    - Unchecked exceptions (RuntimeException을 제외한 모든 Exception)
+    - Not excepted to attempt recovery
+    - 치명적 오류로 SW적으로 복구 불가능
+    - Compiler가 체크하지 않는다.
+
+예외 : 항상 발생하지 않음(특정상황에서 발생), 프로그램 처리중 기대되지 않는 상황<br>
+
+* Exception class (java.lang에 존재)
+    - 정확한 프로그램
+    - 예외가 발생할지 모르는 상황을 체크해 준다.(Compiler)
+    - 예외가 발생하더라도 프로그램을 중단시키지 않고, 복구하여 프로그램을 지속적으로 실행 할 수 있도록 한다.
+    - `file not found`, `DB connection failure` 등
+
+
+|Unchecked Exception|Cheked Exception|
+|:--:|:--:|
+||`try-catch`를 이용한 exception handling 필요|
+
+![Exception Tree](./img/Exception_tree.png) <span>Exception structure</span>
+
+## Exception handling
+정확한 코드의 프로그램이 예기치 않는 에러가 발생할지도모르는 상황을 체크하여 에러로 인해 프로그램이 중단되는 것을 막는다.
+Exception Handling을 하지 않으면 Compile 되지 않는다.
+
+1. `try-catch` 블록으로 감싼다.
+```java
+try{
+    // 예외가 발생할지도 모르는 문장
+}catch(XxxException e){ // Exception class
+    // 예외 발생시 복구 코드
+}
+```
+2. 여러 가지 예외가 발생할 경우는 `catch 블록을 여러개 정의`한다.
+```java
+try{
+    // 예외가 발생할지도 모르는 문장
+}catch(XxxException e){
+    // 예외 발생시 복구 코드
+}catch(YyyException e){
+    // 예외 발생시 복구 코드
+}
+```
+3. 예외 발생 여부와 관계 없이 마지막으로 `꼭 수행해야할 문장`이 있다면 `finally` 블록을 구현한다.
+```java
+try{
+    // 예외가 발생할지도 모르는 문장
+}catch(XxxException e){
+    // 예외 발생시 복구 코드
+}finally{
+    // 꼭 수행해야 할 문장
+}
+```
+4. 마지막으로 꼭 수행해야 할 문장이 있을 경우 finally 블록을 구현한다. 그러나 catch 블록이 없기 때문에 `예외가 발생하면 프로그램은 중단`된다.
+```java
+try{
+
+}finally{
+    // 꼭 수행해야 할 문장
+}
+```
+5. Declare Exception : 예외를 처리하지 않고, 호출한 메서드에게 예외처리를 넘겨버릴 수 있다. 호출한 메서드에게 처리 중 예외가 발생했음을 알리기 위해 사용된다
+
+throws : 예외가 발생할 경우 처리를 호출한 쪽으로 넘기는 방법
+
+```java
+public void method_name() throws XxxException{
+    ...
+    //예외가 발생할지도 모르는 문장
+    ...
+}
+```
+호출한 메서드는 반드시 예외처리를 수행해야 한다.<br>
+생성자에서 예외를 호출한 쪽으로 넘기면, 반드시 객체 생서이에 예외처리를 해주어야 한다.
+
+```java
+public class ExceptionTest2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            // 메소드에서 예외를 넘겨받는 코드
+            int res = div(sc.nextInt(), sc.nextInt());
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        } catch (DataFormatException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // throws를 통해 div함수를 호출한 쪽에 에러를 넘겨준다.
+    // ArithmeticException 발생 가능성 : 0으로 나눌 때
+    static int div(int a, int b) throws ArithmeticException, DataFormatException {
+        // throws에는 여러개 Exception class가 들어갈 수 있다.
+        //
+        int res = 0;
+        if (b == 0) {
+            throw new DataFormatException();    // Exception instance를 만들어 호출한 곳에 에러를 보낸다.
+        }
+        // 에러가 발생한 코드의 다음 코드는 실행되지않고 메소드가 끝이 난다.
+        res = a / b;
+        return res;
+    }
+}
+```
+```java
+// exception 클래스 만들기
+// User defined Exception ( Customize Exception class)
+public class MyDataInputException extends Exception {   // Exception을 상속받아주어야 한다.
+    String errMsg;
+
+    public MyDataInputException() {
+    }
+
+    public MyDataInputException(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public void showError() {
+        System.out.println(errMsg);
+    }
+}
+
+```
+
+Exception handling 처리시에 Overriding 되는 메서드라면 throws는
+- Super클래스의 메서드가 throws 하고 있는것을 `그대로 throws`할 수 있다.
+- Super 클래스의 메서드가 throws 하고 있는 것의 Sub Exception 클래스를 throws 할 수 있다.
+- Sub 클래스의 메서드에서 필요없다면 throws을 기술하지 않아도 된다.
