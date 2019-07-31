@@ -205,7 +205,6 @@ Set에 객체타입의 데이터를 넣을 때 `Comparable` 메소드를 구현�
 set은 데이터의 중복을 허용하지 않으므로 비교할 무언가가 필요한데, primitive타입이 아닌 reference 타입의 데이터는 `단순비교가 어렵다`.<br>
 그렇기 때문에, Set클래스는 `Comparable`을 이용하여 reference Type 데이터를 비교하고 set 객체에 넣으지 말지 결정하게 된다
 
-```java
 
 #### Map
 데이터 저장, 관리 시에 `검색을 보다 쉽게`하기 위해 구현된 클래스이다.
@@ -218,7 +217,7 @@ set은 데이터의 중복을 허용하지 않으므로 비교할 무언가가 �
 |put(key, value)|자료구조에 데이터 삽입|
 |get(key)|key에 맞는 데이터를 가져온다|
 |keySet()|key 모음을 가져온다|
-
+<br>
 
 ---
 
@@ -226,6 +225,8 @@ set은 데이터의 중복을 허용하지 않으므로 비교할 무언가가 �
 클래스 선언(변수화) 시에 타입을 결정하게 만든다.<br>
 `Primitive` 타입 뿐 아니라 `UserDefined Type`(사용자 정의 타입; class 등) 또한 지정이 가능하다.<br>
 클래스 내에서 사용할 사용자 임의 타입을 만든다.
+
+> `Generic`의 타입으로 기본형을 쓸 때, `Wrapper Class`를 사용해야 한다.
 
 ```java
 // Generic class 안에서 I라는 타입을 씀
@@ -237,7 +238,7 @@ class GenericMain{
     public static void main(String[] args) {
         Generic<String> g = new Generic();  // Type을 String으로 쓰겠다.
         Generic<Integer> g= new Generic();  // Type을 Integer로 쓰겠다.
-        // 꺽쇠괄호 안의 타입은 wrapper 클래스를 사용해야 한다.
+        // 꺽쇠괄호 안의 Generic 타입은 wrapper 클래스를 사용해야 한다.
     }
 }
 ```
@@ -268,7 +269,7 @@ Comparable 인터페이스를 구현하였으므로, Comaprable의 추상 메소
 
 ---
 
-## 클래스를 객체를 정렬한느 방법
+## 클래스를 객체를 정렬하는 방법
 #### compareTo(T t)
 compareTo의 리턴값은 `1, 0` 또는 `-1` 이다.
 

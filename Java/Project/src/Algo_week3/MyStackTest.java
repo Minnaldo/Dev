@@ -13,6 +13,8 @@ public class MyStackTest {
         int sel = sc.nextInt();
         if (sel == 1) {
             try {
+                // FileInputStream은 소스(근원지)에 바로 연결되어 있다고 해서, Source Stream이라고 한다.
+                // 밑의 코드는 data.dat(소스, 근원지) 에 연결되어 있는 Source Stream이다
                 ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("data.dat")));
                 stack = (MyStack) ois.readObject();
             } catch (IOException e) {
@@ -33,10 +35,14 @@ public class MyStackTest {
 
             switch (sel) {
                 case 1:
+                    System.out.println("삽입할 값을 입력해 주세요");
+                    stack.push(sc.nextInt());
                     break;
                 case 2:
+                    stack.pop();
                     break;
                 case -1:
+                    System.out.println("프로그램을 종료합니다");
                     break;
                 case 0:
                     try {
