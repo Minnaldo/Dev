@@ -1,3 +1,8 @@
+
+/**
+ *  초심자의 회문 검사
+ */
+
 import java.util.*;
 
 public class SWEA_1989 {
@@ -18,6 +23,7 @@ public class SWEA_1989 {
                 size /= 2;
             }
 
+            // 회문 검사부분
             for (int i = 0; i < size; i++) {
                 if (str.charAt(i) != str.charAt(str.length() - (i + 1))) {
                     ans = 0;

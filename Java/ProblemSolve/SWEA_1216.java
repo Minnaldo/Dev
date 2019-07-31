@@ -15,11 +15,11 @@ public class SWEA_1216 {
                     map[i] = sc.next();
                 }
 
-                for (String aa : map) {
-                    System.out.println(aa);
-                }
+                // for (String aa : map) {
+                // System.out.println(aa);
+                // }
 
-                // System.out.println("start!");
+                System.out.println("start!");
                 // 100 개의 string을 돈다
                 for (int a = 0; a < 8; a++) {
                     // 앞쪽 인덱스 고정
@@ -34,34 +34,46 @@ public class SWEA_1216 {
                     int front = 0;
                     int back = 7;
 
-                    int start = front;
-                    int end = back;
-                    int len = 0;
-                    while (start <= end) {
-                        // 회문일 조건
-                        if (end - start == 2 || end == start) {
-                            ans = ans > len ? ans : len;
-                            break;
+                    // int start = front;
+                    // int end = back;
+                    // int len = 0;
+
+                    for (int j = 0; j < back; j++) {
+                        // 현재 문자열의 길이
+                        int size = (back - j + 1);
+                        if (size % 2 == 0) {
+                            size = size / 2 + 1;
+                            // System.out.println("짝수");
+                        } else {
+                            size = size / 2;
+                            // System.out.println("홀수");
                         }
 
-                        if (str.charAt(start) == str.charAt(end)) {
-                            end--;
-                            start++;
-                            len += 2;
-                        } else {
-                            len = 0;
-                            start = ++front;
-                            end = back;
+                        boolean flag = false;
+
+                        for (int i = j; i < size; i++) {
+                            if (str.charAt(i) != str.charAt(str.length() - (i + 1))) {
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        if (!flag) {
+                            System.out.print("회문  + " + size);
+                            ans = ans > size ? ans : size;
+                            // System.out.printf(" ans :%3d size :%3d", ans, size);
                         }
                     }
-
+                    System.out.println();
                 }
 
                 System.out.println("#" + tc + " " + ans);
             }
 
             sc.close();
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             e.printStackTrace();
         }
 
