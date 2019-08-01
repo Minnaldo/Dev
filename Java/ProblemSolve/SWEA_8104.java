@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SWEA8104 {
+public class SWEA_8104 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
@@ -9,11 +9,13 @@ public class SWEA8104 {
             int k = sc.nextInt();
 
             if (n == 1) {
+
                 System.out.print("#" + tc + " ");
                 for (int i = 1; i < k; i++) {
                     System.out.print(i + " ");
                 }
                 System.out.println(k);
+
             } else {
                 int sum = 0;
                 for (int a = 1; a <= n; a += 2) {
@@ -35,6 +37,7 @@ public class SWEA8104 {
                 System.out.println(sum + "\t" + tmpSum);
 
                 System.out.print("#" + tc + " ");
+                // 출력부
                 for (int i = 0; i < k - 1; i++) {
                     System.out.print(sum + " ");
                 }

@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class Make_postfixNotation_2 {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         Stack<Character> s = new Stack<>();
         ArrayList<Character> arr = new ArrayList<>();
@@ -20,31 +21,32 @@ public class Make_postfixNotation_2 {
                 // c 가 연산자 및 괄호 일때
                 if (c == '(') {
                     s.push(c);
-                } else if (c == '*' || c == '/') {
-                    if (!s.empty())
-                        if (s.peek() != '+' || s.peek() != '-') {
-                            arr.add(s.pop());
-                        }
+                } else if (c == '*') {
+                    while (!s.empty() && s.peek() != '+' && s.peek() != '(') {
+                        arr.add(s.pop());
+                    }
                     s.push(c);
-                } else if (c == '+' || c == '-') {
-                    while (s.peek() != '(') {
+                } else if (c == '+') {
+                    while (!s.empty() && s.peek() != '(') {
                         arr.add(s.pop());
                     }
-                } else {
+                    s.push(c);
+
+                } else if (c == ')') {
                     // c가 닫는괄호일때
-                    while (s.peek() != '(') {
+                    while (!s.empty() && s.peek() != '(') {
                         arr.add(s.pop());
                     }
-                    s.pop(); // 여는괄호 제거
+
+                    if (!s.empty() && s.peek() == '(') {
+                        s.pop();
+                    }
                 }
             }
-
-            while (!s.empty()) {
-                arr.add(s.pop());
-            }
-
         }
-        System.out.println(s.toString());
+        while (!s.empty()) {
+            arr.add(s.pop());
+        }
         sc.close();
     }
 }
