@@ -6,7 +6,7 @@ import java.util.Stack;
 public class BrackChecker {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str = sc.next();
+        String str = "()()()()()()()()()";
         Stack<Character> s = new Stack<>();
 
         for (int i = 0; i < str.length(); i++) {

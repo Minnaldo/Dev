@@ -308,7 +308,7 @@ Comparator<Car> com = new Comparator<Car>(){
 Arrays.sort(cars, com); // 위의 compartor를 이용한 정렬
 ```
 
-|리턴 하는 값|결과|
+|리턴 값|결과|
 |:--:|:--|
 |음수 (-1)| 첫번째 파라미터 < 두번째 파라미터 |
 |0| 첫번째 파라미터 == 두번째 파라미터 |
