@@ -6,6 +6,7 @@ import java.util.Collections;
 
 public class ContactMgr implements IContactMgr {
 
+
     private ArrayList<Contact> arr;
     private static ContactMgr instance = new ContactMgr();
 
@@ -29,7 +30,6 @@ public class ContactMgr implements IContactMgr {
 
     public void fileOpen() {
         ObjectInputStream ois = null;
-
         try {
             ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("contact.dat")));
             arr = (ArrayList<Contact>) ois.readObject();
