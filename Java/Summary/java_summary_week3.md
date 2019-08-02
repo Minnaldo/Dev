@@ -354,7 +354,8 @@ Arrays.sort(cars, com); // 위의 compartor를 이용한 정렬
 
 |Unchecked Exception|Cheked Exception|
 |:--:|:--:|
-||`try-catch`를 이용한 exception handling 필요|
+|컴파일러가 에러를 체크하지 않고, 주로 실행중 발생하는 예외|JVM에서 컴파일시 에러를 체크한다고해서 Checked Exception 이라고 함|
+|Checked 예외와 달리 try-catch를 강제하지 않음, 조건문이나 유효성 검증을 통해 충분히 피할 수 있기 때문<br>ex) `if(value != null)`문으로 NullPointerException을 피하는 경우|`try-catch`를 이용한 exception handling 필요|
 
 ![Exception Tree](./img/Exception_tree.png) <span>Exception structure</span>
 
