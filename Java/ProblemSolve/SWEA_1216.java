@@ -6,12 +6,12 @@ public class SWEA_1216 {
         try (FileInputStream fis = new FileInputStream("input.txt")) {
             Scanner sc = new Scanner(fis);
 
-            for (int tc = 1; tc <= 1; tc++) {
+            for (int tc = 1; tc <= 10; tc++) {
                 int ans = 0;
                 int tmpTc = sc.nextInt();
                 int size = 100;
                 String[] map = new String[size];
-
+                // String str = sc.next();
                 for (int i = 0; i < size; i++) {
                     map[i] = sc.next();
                 }
@@ -28,58 +28,58 @@ public class SWEA_1216 {
                         // i는 시작지점 인덱스
                         int start = i;
                         int len = 0;
-                        // System.out.println(size - 1);
+
                         // 뒤쪽을 가리키는 변수 j
                         for (int j = size - 1; j >= 0; j--) {
                             if (str.charAt(start) == str.charAt(j)) {
                                 if (j == start) {
+                                    // 홀수 길이 회문 발견
                                     int tmp = len * 2 + 1;
                                     ans = ans > tmp ? ans : tmp;
-                                    break;
                                 } else if (j - 1 == start) {
-                                    int tmp = len * 2;
+                                    // 짝수 길이 회문 발견
+                                    int tmp = (len + 1) * 2;
                                     ans = ans > tmp ? ans : tmp;
-                                    break;
                                 } else {
+                                    // 회문이 아니면
                                     len++;
-                                    // start++;
+                                    if (start <= j)
+                                        start++;
                                 }
                             } else {
                                 len = 0;
-                                if (start < size)
-                                    start++;
+                                start = i;
                             }
 
                         }
+
                     }
                 }
-                System.out.println(ans + " st");
                 // 세로열 탐색
-                for (int k = 0; k < size; k++) {
+                for (int k = 0; k < map.length; k++) {
                     for (int i = 0; i < size; i++) {
                         // i는 시작지점 인덱스
                         int start = i;
                         int len = 0;
                         // 뒤쪽을 가리키는 변수 j
                         for (int j = size - 1; j >= 0; j--) {
-                            if (map[i].charAt(k) == map[j].charAt(k)) {
-                                if (j == start) {
+                            if (map[start].charAt(k) == map[j].charAt(k)) {
+                                if (j - 1 == start) {
+                                    // 짝수 길이 회문 발견
+                                    int tmp = (len + 1) * 2;
+                                    ans = ans > tmp ? ans : tmp;
+                                } else if (j == start) {
+                                    // 홀수 길이 회문 발견
                                     int tmp = len * 2 + 1;
                                     ans = ans > tmp ? ans : tmp;
-                                    break;
-                                } else if (j - 1 == start) {
-                                    int tmp = len * 2;
-                                    ans = ans > tmp ? ans : tmp;
-                                    break;
                                 } else {
                                     len++;
-                                    // if (start < j)
-                                    // start++;
+                                    if (start <= j)
+                                        start++;
                                 }
                             } else {
                                 len = 0;
-                                // if (start < j)
-                                // start++;
+                                start = i;
                             }
 
                         }
@@ -87,9 +87,12 @@ public class SWEA_1216 {
                 }
 
                 System.out.println("#" + tc + " " + ans);
+
             }
             sc.close();
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             e.printStackTrace();
         }
 
