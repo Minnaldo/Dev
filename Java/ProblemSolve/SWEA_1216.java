@@ -3,13 +3,13 @@ import java.io.*;
 
 public class SWEA_1216 {
     public static void main(String[] args) {
-        try (FileInputStream fis = new FileInputStream("sample.txt")) {
+        try (FileInputStream fis = new FileInputStream("input.txt")) {
             Scanner sc = new Scanner(fis);
 
             for (int tc = 1; tc <= 1; tc++) {
                 int ans = 0;
                 int tmpTc = sc.nextInt();
-                int size = 8;
+                int size = 100;
                 String[] map = new String[size];
 
                 for (int i = 0; i < size; i++) {
@@ -42,7 +42,7 @@ public class SWEA_1216 {
                                     break;
                                 } else {
                                     len++;
-                                    start++;
+                                    // start++;
                                 }
                             } else {
                                 len = 0;
