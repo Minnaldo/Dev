@@ -77,9 +77,10 @@ public class BookMgrImpl implements IBookMgr {
         } catch (FileNotFoundException e) {
 //            e.printStackTrace();
             System.out.println("파일을 찾을 수 없습니다.");
-        } catch (IOException e) {
-//            e.printStackTrace();
         } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+            System.out.println("도서 정보 클래스를 찾지 못하였습니다.");
+        } catch (IOException e) {
 //            e.printStackTrace();
         } finally {
             try {
@@ -107,7 +108,8 @@ public class BookMgrImpl implements IBookMgr {
         } finally {
             System.out.println("데이터 저장이 완료되었습니다.");
             try {
-                oos.close();
+                if (oos != null)
+                    oos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -175,7 +175,7 @@ public class ProductMgrImpl implements IProductMgr {
 //            e.printStackTrace();
             System.out.println("상품 정보 클래스를 찾지 못하였습니다.");
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } finally {
             try {
                 if (ois != null)
@@ -199,11 +199,12 @@ public class ProductMgrImpl implements IProductMgr {
 //            e.printStackTrace();
             System.out.println("저장 중 문제가 생겼습니다.");
         } finally {
-            try {
-                oos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            if (oos != null)
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 
