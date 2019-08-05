@@ -17,7 +17,7 @@ public class BrackCheckerTest {
     @After
     public void tearDown() throws Exception {
         end = System.nanoTime();
-        System.out.println("프로그램 수행 시간 : "+ (double)(end-start)/1000000000 +" sec");
+        System.out.println("Process Time : "+ (double)(end-start)/1000000000 +" sec");
     }
 
     @Test
