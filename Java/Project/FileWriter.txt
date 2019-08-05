@@ -1,2 +1,0 @@
-File Writer test
-파일 출력 테스트

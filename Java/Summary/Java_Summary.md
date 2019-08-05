@@ -288,3 +288,15 @@ str = new String(bytes, "utf-8");   // utf-8을 이용해 디코딩
 - 추상메소드는 해당 인터페이스가 다른 인터페이스로부터 상속을 받았지만, `Overriding 할 수 없다` ==> 인터페이스는 body({})를 가지는 일반 메서드를 포함할 수 없기 때문
 - 그러므로 상속을 받은 자식 인터페이스를 구현(implements)하는 `일반 클래스에서 부모 인터페이스와 자식인터페이스의 추상 메서드들을 모두 Overriding(재정의)`해야 합니다
 
+
+### 미구현메소드 오버라이드
+> 자바의 interface 또한 객체화가 가능하다
+```java
+// 미구현 메소드 오버라이드
+Runnable r = new Runnable(){
+    @Override
+    public void run(){
+        System.out.println("Thread run!");
+    }
+};
+```

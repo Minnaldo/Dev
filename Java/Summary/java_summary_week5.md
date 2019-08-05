@@ -172,3 +172,178 @@ public void method(){
     // do something - 공유 데이터와 무관한 작업
 }
 ```
+
+- look pool<br>
+    synchronized 블록을 실행하면서 lock을 획득하지 못한 스레드는 lock이 객체에 돌아오기 전까지 실행할 수 없는 BLOCKED 상태가 된다. BLOCKED 객체는 lock pool에서 대기하고 있다가. 객체의 lock이 반납되면 다시 RUNNABLE 상태로 변경 후 다시 실행 될 수 있다.
+    ![Thread Lock](./img/Thread_Lock.png)
+
+3. wait()와 notify(), notifyAll()<br>
+멀티 스레드 환경에서 synchronized를 사용하면서 비 효율성이라는 문제가 발생한다. 이런 비효율성을 `wait()`와 `notify()`, `notifyAll()` 메서드를 통해 보완할 수 있다.
+
+|메서드 명|선언부와 설명|
+|---|:--|
+|wait()|public final void wait() throws InterruptedException|
+||다른 스레드가 notify(), notifyAll()을 호출하기 전까지 현재 스레드를 WAITING 상태로 유지한다.|
+|notify()|public final native void notify()|
+||이 객체의 락이 필요한 스레드 하나를 WAITING 상태에서 RUNNABLE로 변경 한다.|
+|notifyAll()|public final native void notifyAll()|
+||이 객체의 락이 필요한 모든 스레드를 WAITING 상태에서 RUNNABLE로 변경 한다.|
+
+메서드 호출시 주의점은 wait() 메서드는 `반드시 synchronized 영역`에서 호출되어야 하며 notify()나 notifyAll()은 `객체의 락을 소유한 스레드가 호출`해야 한다. 그렇지 않을 경우 `illegalMonitorStateException`이 발생한다.
+
+```java
+// wait() - notify()를 적용한 프로그램
+public class NotiAccount extends Account{
+    public NotiAccount(int balance){
+        super(balance);
+    }
+
+    @Override
+    public synchronized int withdraw(int money){
+        String threadName = Thread.currentThread().getName();
+
+        if(balance >= money){
+            try{
+                Thread.sleep(100);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            balance -= money;
+            System.out.println(threadName +":출금, 잔액:"+balance);
+        }else{
+            System.out.println(threadName+":잔액 부족 출금 불가로 wait 호출");
+            try{
+                this.wait();
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+        return balance;
+    }
+
+    @Override
+    public synchronized int deposit(int money){
+        String threadName = Thread.currentThread().getName();
+        balance += money;
+        this.notifyAll();
+        System.out.println(threadName +":입금, 잔액:"+balance);
+        return balance;
+    }
+
+}
+```
+```java
+Thread th = new Thread(new Runnable(){
+    @Override
+    public void run(){
+        this.hashcode();    // 1
+    }
+});
+
+th.hashcode();  // 2
+// 1 과 2 는 다르다
+
+Thread th1 = new Thread(){
+    @Override
+    public void run(){
+        this.hashcode();    // 3
+    }
+};
+th1.hashcode(); // 4
+// 3과 4는 같다
+```
+
+## Network
+1. 네트워크 개요
+    1. 네트워크 프로그래밍
+    네트워크란 서버와 클라이언트간 스트림을 통해서 데이터를 교환하는 프로그래밍이다.
+
+    자바에서 IP 주소를 다루기 위해서는 InetAddress클래스를 사용한다.
+
+|메서드|설명|
+|---|:---|
+|static InetAddress getByAddress (byte[] addr)|addr에 해당하는 InetAddress 리턴|
+|static InetAddress getLocalHost()|로컬 컴퓨터의 InetAddress 리턴|
+|static InetAddress getByName(String host)|도메인 명(host)를 통해 InetAddress 리턴|
+|String getHostName()|서버의 도메인 이름 반환|
+|String getHostAddress()|서버의 IP 주소 반환|
+
+```java
+InetAddress ssafy = InetAddress.getByName("edu.ssafy.com");
+System.out.println(ssafy.getHostAddress()); // 서버의 IP주소
+
+InetAddress local = InetAddress.getByAddreess(new byte[]{(byte)192,(byte)168,1,(byte)100});
+System.out.println(local.getHostName());    // 서버의 호스트 이름
+```
+1. 소켓 프로그래밍
+> 네트워크 프로그램도 결국 앞서 학습했던 I/O의 한 종류<br>
+
+입력과 출력의 양 끝단을 노드라고 하는데 네트워크 프로그래밍에서 `노드를 소켓이라`고 부른다. 이 소켓에서 각각 InputStream과 OutputStream을 생성해서 통신하게 되낟.
+
+java에서는 java.net 패키지를 통해서 TCP(Transmission Control Protocol)와 UDP(User Datagram Protocol) 방식의 네트워크 프로그래밍을 지원한다.
+
+![SC Structure](./img/TCP_action_sc_Structure.png)
+
+```java
+// SC network
+public class ServerConnect{
+    public static void main(String[] args){
+        try(ServerSocket ss = new ServerSocket(6547)){
+            System.out.println("[Server is ready]");
+
+            while(true){
+                try (Socket socket = ss.accept()){
+                    // socket 종료 -> input, output 까지 자동 종료
+
+                    System.out.printf("client접속:%s%n",socket.getInetAddress());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()),"UTF-8");
+
+                    bw.write(socket.getInetAddress().getHostName()+"님 성함은?");
+                    bw.newLine();
+                    bw.flush();
+
+                    String line = br.readLine();
+                    System.out.println(line);
+                    bw.write(line+"님 반갑습니다");
+                    bw.nextLine();
+                    bw.flush();
+                }catch(IOException e){
+                    System.out.println("통신 오류");
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+```java
+public class ClienConnect{
+    public static void main(String[] args){
+        String serverIp = "localhost";
+        Socket socket = null;
+        Scanner scanner = new Scanner(System.in);
+        try{
+            socket = new Socket(serverIp,6547);
+            BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),"UTF-8"));
+            System.out.println(br.readLine());
+            bw.write(scanner.nextLine());
+            bw.newLine();
+            bw.flust();
+            System.out.println(br.readLine());
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            // 관련 자원 close : scanner, reader, writer, socket
+        }
+    }
+}
+```
+![TCP Communication on Thread](./img/TCP_Communication_on_Thread.png)
+<span>Thread를 이용한 싱글 유저 네트워크 프로그래밍</span>
+
+![](./img/Multi_user_TCP_Communication.png)
+<span>Thread를 이용한 멀티 유저 네트워크 프로그래밍</span>
+
