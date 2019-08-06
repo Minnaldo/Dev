@@ -62,7 +62,6 @@ str.insert(int index, String newString);    // index에 newString 삽입
 
 - 멤버변수(member variables)
 - 멤버 메소드 (member method) : static method는 객체 생성 없이 사용되므로, 메서드 안에서 static 변수만 사용할 수 있다.
-- 멤
 
 ---
 #### final<br>
