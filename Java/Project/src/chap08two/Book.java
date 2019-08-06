@@ -3,6 +3,7 @@ package chap08two;
 import java.io.Serializable;
 
 public class Book implements Serializable {
+
     private String isbn;
     private String title;
     private int price;

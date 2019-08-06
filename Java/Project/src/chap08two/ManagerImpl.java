@@ -70,11 +70,11 @@ public class ManagerImpl implements IManager {
             public void run() {
                 try {
                     ObjectOutputStream oos = null;
-                    Socket socket = new Socket("localhost", 8080);
+                    Socket socket = new Socket("192.168.24.125", 7000);
                     oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
                     oos.writeObject(list);
                     oos.flush();
-                    oos.close();
+//                    oos.close();
                     System.out.println("서버로 전송 성공");
                 } catch (IOException e) {
                     e.printStackTrace();
