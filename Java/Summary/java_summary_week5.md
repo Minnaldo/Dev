@@ -359,3 +359,16 @@ input은 Server나 Client 모두, 무한루프를 돌아야한다.
 
 클라이언트에서 스트림을 in/out 순서로 하였으면, 서버에서는 반대로 out/in 순서로 스트림을 열어야 한다.<br>
 닫는 순서에는 상관 없지만 맞춰주면 좋다.
+
+```java
+// Server Side
+
+```
+
+
+## XML
+### XML의 정의
+- 고정된 태그를 가진 형식이 아니라 사용자가 직접 태그를 정의할 수 있는 확장이 가능한 Markup Languagte이다.
+- 다른 언어를 기술하기 위한 Meta Language로 SGML의 확장(Extensiblity), 구조(Structure), 검증(Validation)특성을 계승하였다.
+- 단순하고, 매우 유연성 있는 Text형식을 지원하는 언어이다.
+
