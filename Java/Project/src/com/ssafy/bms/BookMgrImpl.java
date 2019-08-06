@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class BookMgrImpl implements IBookMgr {
-    private static int saveCount = 0;
-    private static String rmTitle;
+    private int saveCount = 0;
+    private String rmTitle;
     List<Book> list = new ArrayList<>();
     Map<String, Integer> map = new HashMap<>();
     // Singleton pattern
@@ -28,7 +28,7 @@ public class BookMgrImpl implements IBookMgr {
             ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("books.dat")));
             list = (List<Book>) ois.readObject();
         } catch (FileNotFoundException e) {
-            System.err.println(this.getClass() + ": 파일을 찾을 수 없습니다.");
+//            e.getMessage();
         } catch (IOException e) {
         } catch (ClassNotFoundException e) {
         } finally {
@@ -67,18 +67,13 @@ public class BookMgrImpl implements IBookMgr {
     public void add(Book b) throws DuplicateException {
         // 중복 체크후 중복이 있다면 에러 throw 아니면 집어넣기
         // 도서번호로 중복체크를 한다.
-        boolean flag = false;
         for (Book bb : list) {
             if (bb.getIsbn().equals(b.getIsbn())) {
-                flag = true;
                 throw new DuplicateException();
             }
         }
 
-        if (!flag) {
-            list.add(b);
-        }
-
+        list.add(b);
     }
 
     @Override
@@ -203,11 +198,13 @@ public class BookMgrImpl implements IBookMgr {
         return ans.toString();
     }
 
-    public static int getSaveCount() {
+    @Override
+    public int getSaveCount() {
         return saveCount;
     }
 
-    public static String getRmTitle() {
+    @Override
+    public String getRmTitle() {
         return rmTitle;
     }
 

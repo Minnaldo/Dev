@@ -141,7 +141,7 @@ public class BookMain {
         // 구현하세요.
         try {
             mgr.delete(isbn);
-
+            System.out.println(mgr.getRmTitle()+"도서가 삭제 되었습니다.");
         } catch (RecordNotFoundException e) {
         }
 
@@ -153,6 +153,7 @@ public class BookMain {
         // 구현하세요.
         mgr.save();
         // TODO:
+        System.out.println(mgr.getSaveCount() + "개의 정보를 저장하였습니다.");
         System.out.println("도서 정보를 저장하였습니다.");
     }
 
