@@ -11,6 +11,7 @@ public class SWEA_2806 {
                 int n = sc.nextInt();
 
                 int[][] map = new int[n][n];
+                boolean[][] visit = new boolean[n][n];
 
                 // 경우의 수를 구해야 한다.
                 // 모든 칸을 돌며 첫 퀸을 하나씩 둔다.
