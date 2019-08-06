@@ -364,7 +364,7 @@ input은 Server나 Client 모두, 무한루프를 돌아야한다.
 // Server Side
 
 ```
-
+---
 
 ## XML
 ### XML의 정의
@@ -372,3 +372,95 @@ input은 Server나 Client 모두, 무한루프를 돌아야한다.
 - 다른 언어를 기술하기 위한 Meta Language로 SGML의 확장(Extensiblity), 구조(Structure), 검증(Validation)특성을 계승하였다.
 - 단순하고, 매우 유연성 있는 Text형식을 지원하는 언어이다.
 
+Well-formed Document
+- 구문이 일반적인 규칙을 따른다는 의미를 말하며, HTML과 달리 구문의 체크가 까다롭다.
+- 일반적인 규칙
+    - Case Sensitive : 대/소문자 구별
+    - Closing Tags : 닫는태그가 무조건 있어야 함
+    - No Overlapping Tags : 태그가 겹치면 안됨
+    - Root Element : 하나의 문서에는 문서 전체를 감싸는 태그가 있어야 한다.
+    - Attribute:name='value' or name ='value'
+    - 모든 마크업은 시작 태그가 닫히기 전에 속성을 부여할 수 있다.
+    - 형태 : key="value", value는 항상 ""(쌍따옴표)로 감싸야 한다.
+
+Valid Documentation
+- xml문서가 schema에 맞게 되어 있는지를 검사하게 된다. 먼저 적정형식(well-formed)을 따르고 있는지 검사하고, 다음으로 DTD의 구조에 대한 규정을 다르고 있는지를 검사하게 된다.
+- 즉, Valid 문서는 well-formed 문서이면서 DTD나 Schema에 정의된 형식에 맞는 문서를 말한다.
+
+- XML 문서 타입선언
+```xml
+<?xml version="1,0" encoding="euc-kr" standalone="yes"?>
+```
+- Element 시작과 끝 태그
+    - XML문서의 가장 기초를 구성하는
+    - 태그명을 숫자로 시작하면 안됨
+    - 태그명 사이에 공백이 있으면 안됨
+    - <빈태그/>에서 /다음에 공백이 있으면 안됨
+
+|설명|작성법|
+|---|:---|
+|시작 태그 | <태그이름>|
+|끝 태그 | </태그이름>|
+|빈 태그 | <태그이름/>|
+
+- Attribute
+```xml
+<태그이름 속성="속성값">
+...
+</태그이름>
+```
+- 주석 : 주석의 내용의 크기는 제한이 없고, 여러 줄에 걸쳐 작성가능
+```xml
+<!-- 주석부분 -->
+```
+
+- 처리 지시문(PI) : 외부프로그램을 사용할 수 있는 방법
+```xml
+<!NOTATION myfabapp system "file://mydir/fbapp.exe">
+<?myfabapp do_this ?>
+```
+- CDATA 세션 : 모든 텍스트가 마크엄이 아닌 문자 데이터로 해석되기 원할 때 사용
+```xml
+<comparison>
+    <less> <![CDATA[2<3]]>> </less>
+    <greater <![CDATA[4>2]]> </greater>
+</comparison>
+```
+
+- Namespace가 필요한 이유
+    - XML은 tag이름을 사용자가 정할 수 있기 때문에 여러 문서에서 요소(태그) 이름이 동일해질 수 있다. 문서들을 동시에 처리하고자 할 때 이름이 중복될 수 있다.
+```xml
+<root>
+    <part>      <!--자동차의 part-->
+        <hood color="blue"/>
+        <windshield tint="no"/>
+    </part>
+    <part id="part1">   <!--책의 part-->
+        <title>Star Trek Episode 16 - l, Borg</title>
+        <summary>...</summary>
+    </part>
+</root>
+```
+
+#### Namespace란?
+- Collection of names
+- name은 URI에 의해 구별
+- 여러개의 document에 포함된 element와 attribute 구별 수단
+- 접두사 사용
+- 고유값을 네임스페이스에 넣는다.
+```xml
+<!-- namespace는 URI를 사용하는데, 보통 회사의 url을 사용한다 -->
+<root xmlns:car="http://www.carpro.co.kr"
+        xmlns:book="http://www.bookstre.com">
+```
+
+##### Namespace Declarations
+- Namespace를 사용하기 위해선 선언을 우선적으로 해야 한다.
+- Element의 attribute로 선언한다. Root 요소에서 선언해도 좋고 하위노드에서 해도 좋다.
+- Attribute 이름은 반드시 `xmlns` 또는 `xmlns:` 로 시작
+- xmlns : 를 사용할 경우, 다음에 오는 이름은 prefix라고 하며 URI와 관련되어야 한다.
+
+
+#### xml 파서의 종류
+- DOM parser : Tree형태로 되어있음, 문서 전체가 메모리에 올라가 있으며 수정이 쉽다. 허나 메모리 소모량이 많은 단점이 있으며, 속도가 느리다는 단점이 있다.
+- SAX parser : 수정이 불가하다 (Read Only)
