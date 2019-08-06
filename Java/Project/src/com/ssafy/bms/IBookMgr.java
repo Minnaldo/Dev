@@ -34,6 +34,8 @@ public interface IBookMgr {
 	/** 등록된 도서명 중 가장 많이 나타나는 단어를 검색하여 리턴하는 메서드 */
 	public  String   countWord();
 
+	void send();
+
 	String getRmTitle();
 
 	int getSaveCount();

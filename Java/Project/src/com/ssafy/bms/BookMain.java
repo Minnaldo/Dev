@@ -47,6 +47,9 @@ public class BookMain {
                 case 10:
                     m.countWord();
                     break;
+                case 11:
+                    m.send();
+                    break;
             }// end switch
 
         } // end while
@@ -66,7 +69,8 @@ public class BookMain {
         System.out.println("7. 도서 정보 파일 저장");
         System.out.println("8. 도서 정보 파일로 부터 읽어오기");
         System.out.println("9. ISBN으로 정렬해서 목록보기");
-        System.out.println("10.도서명 중 가장 빈도수 높은 단어 구하기");
+        System.out.println("10. 도서명 중 가장 빈도수 높은 단어 구하기");
+        System.out.println("11. 도서 정보 서버로 전송");
         System.out.println("0. 종료");
         System.out.println("원하는  번호를 선택 하세요.");
         result = Integer.parseInt(s.nextLine());
@@ -141,7 +145,7 @@ public class BookMain {
         // 구현하세요.
         try {
             mgr.delete(isbn);
-            System.out.println(mgr.getRmTitle()+"도서가 삭제 되었습니다.");
+            System.out.println(mgr.getRmTitle() + "도서가 삭제 되었습니다.");
         } catch (RecordNotFoundException e) {
         }
 
@@ -180,6 +184,11 @@ public class BookMain {
         // 구현하세요.
 
         System.out.println("가장 많이 나온 단어는 : \"" + mgr.countWord() + "\"입니다.");
+    }
+
+    public void send() {
+        mgr.send();
+
     }
     /*
      * public void sortTitle() { System.out.println(">>>>>>>>  도서이름로 정렬하기 ");

@@ -1,7 +1,10 @@
 package com.ssafy.bms;
 
 import java.io.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.*;
+import java.util.logging.SocketHandler;
 
 public class BookMgrImpl implements IBookMgr {
     private int saveCount = 0;
@@ -37,7 +40,6 @@ public class BookMgrImpl implements IBookMgr {
                     System.out.println("읽기 완료");
                     ois.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -196,6 +198,23 @@ public class BookMgrImpl implements IBookMgr {
         }
 
         return ans.toString();
+    }
+
+    @Override
+    public void send() {
+        ObjectOutputStream oos = null;
+        Socket socket = null;
+        try {
+            socket = new Socket("localhost", 9090);
+            oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            oos.writeObject(list);
+            oos.flush();
+            oos.close();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
