@@ -13,7 +13,7 @@
 |CPU 사용률 향상|컨텍스트 스위칭 비용 발생|
 |작업의 분리로 응답성 향상|스레드 제어의 어려움|
 |자원의 공유를 통한 효율성 증대|
-
+---
 ## 스레드 생성과 수행
 1. 스레드 생성<br>
 스레드는 일반적으로 `Runnable 인터페이스를 구현`하는 방법과 `Thread 클래스를 상속`받는 2가지 방법으로 만들 수 있다.
@@ -94,11 +94,11 @@ public class SimpleThreadTest{
 ![Thread Memory Structure in java](./img/thread_mem_structure.png)
 
 3. 스레드의 상태와 제어<br>
-    **1. 스레드의 상태**<br> - 스레드의 상태 값ㅇs Thread 내부에 State라는 enum으로 정의되어 있으며, 스레드 객체의 getState()메서드를 이용해서 확인할 수 있다.
+    **1. 스레드의 상태**<br> - 스레드의 상태 값은 Thread 내부에 State라는 enum으로 정의되어 있으며, 스레드 객체의 `getState()`메서드를 이용해서 확인할 수 있다.
 
 |enum 상수|설명|
 |:--|:--|
-|NEW|스레드 객체ㅏ 생성되 후 아직 start()가 호출되지 않은 상태|
+|NEW|스레드 객체가 생성되 후 아직 start()가 호출되지 않은 상태|
 |RUNNABLE|JVM 선택에 의해 실행 가능한 상태|
 |BLOCKED|사용하려는 객체의 모니터 락이 풀릴 때까지 기다리는 상태|
 |WAITING|sleep(), wait(), join() 등에 의해 정해진 시간 없이 대기중인 상태|
@@ -252,7 +252,7 @@ Thread th1 = new Thread(){
 th1.hashcode(); // 4
 // 3과 4는 같다
 ```
-
+---
 ## Network
 1. 네트워크 개요
     1. 네트워크 프로그래밍
@@ -347,3 +347,7 @@ public class ClienConnect{
 ![](./img/Multi_user_TCP_Communication.png)
 <span>Thread를 이용한 멀티 유저 네트워크 프로그래밍</span>
 
+
+> 클라이언트가 여러개가 된다면 -> 여러개를 핸들링할 무언가가 필요함
+
+그렇다면, accept()하는 스레드가 요청을 처리하면 안된다. 즉, 스레드를 설정해 `연결된 소켓을 넘겨`준다

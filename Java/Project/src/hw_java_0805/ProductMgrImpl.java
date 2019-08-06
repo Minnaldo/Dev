@@ -170,12 +170,13 @@ public class ProductMgrImpl implements IProductMgr {
             while ((p = (Product) ois.readObject()) != null) {
                 pArr.add(p);
             }
+            System.out.println("상품 정보를 성공적으로 불러들였습니다.");
         } catch (FileNotFoundException e) {
 //            e.printStackTrace();
-            System.out.println("상품 정보를 찾지 못하였습니다.");
+            System.err.println("상품 정보를 찾지 못하였습니다.");
         } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
-            System.out.println("상품 정보 클래스를 찾지 못하였습니다.");
+            System.err.println("상품 정보 클래스를 찾지 못하였습니다.");
         } catch (IOException e) {
 //            e.printStackTrace();
         } finally {

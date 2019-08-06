@@ -28,16 +28,17 @@ public class ProductTest {
 
 
         try {
-            pm.add(new TV(100, "TV1", 10000, 10, 11));
-            pm.add(new TV(101, "TV2", 5000, 40, 45));
-            pm.add(new TV(102, "TV3", 50000, 50, 30));
             pm.add(new Refrigerator(200, "REF1", 10000, 10, 30));
             pm.add(new Refrigerator(201, "REF2", 15000, 10, 45));
             pm.add(new Refrigerator(202, "REF3", 55000, 10, 200));
             pm.add(new Refrigerator(205, "REF5", 10000, 15, 330));
-            pm.add(new TV(100, "TV1", 10000, 10, 10));  // 여기서 에러가 발생할 것
+//            pm.add(new TV(100, "TV1", 10000, 10, 10));  // 여기서 에러가 발생할 것
+            pm.add(new TV(100, "TV1", 10000, 10, 11));
+            pm.add(new TV(101, "TV2", 5000, 40, 45));
+            pm.add(new TV(102, "TV3", 50000, 50, 30));
         } catch (DuplicateException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.err.println("이미 존재하는 상품입니다. 다시 확인하고 입력해 주세요");
         }
 
 
