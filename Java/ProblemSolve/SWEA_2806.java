@@ -17,6 +17,12 @@ public class SWEA_2806 {
                 // 모든 칸을 돌며 첫 퀸을 하나씩 둔다.
                 //  이어서 다음칸에 퀸을 놓을수 있는 경우의 수를 센다.
 
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+
+                    }
+
+                }
 
 
                 System.out.println("#" + tc + " " + ans);

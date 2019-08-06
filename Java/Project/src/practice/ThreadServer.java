@@ -16,7 +16,7 @@ public class ThreadServer {
                     public void run() {
 
                     }
-                })
+                });
             }
         } catch (IOException e) {
             e.printStackTrace();
