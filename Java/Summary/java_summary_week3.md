@@ -62,7 +62,6 @@ str.insert(int index, String newString);    // index에 newString 삽입
 
 - 멤버변수(member variables)
 - 멤버 메소드 (member method) : static method는 객체 생성 없이 사용되므로, 메서드 안에서 static 변수만 사용할 수 있다.
-- 멤
 
 ---
 #### final<br>
@@ -222,7 +221,7 @@ set은 데이터의 중복을 허용하지 않으므로 비교할 무언가가 �
 ---
 
 ## Generic (제너릭)
-클래스 선언(변수화) 시에 타입을 결정하게 만든다.<br>
+클래스 객체화(변수화) 시에 타입을 결정하게 만든다.<br>
 `Primitive` 타입 뿐 아니라 `UserDefined Type`(사용자 정의 타입; class 등) 또한 지정이 가능하다.<br>
 클래스 내에서 사용할 사용자 임의 타입을 만든다.
 

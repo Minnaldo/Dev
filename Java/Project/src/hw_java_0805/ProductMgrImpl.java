@@ -1,6 +1,8 @@
-package hw_java_0730;
+package hw_java_0805;
 
 import java.io.*;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class ProductMgrImpl implements IProductMgr {
@@ -168,12 +170,13 @@ public class ProductMgrImpl implements IProductMgr {
             while ((p = (Product) ois.readObject()) != null) {
                 pArr.add(p);
             }
+            System.out.println("상품 정보를 성공적으로 불러들였습니다.");
         } catch (FileNotFoundException e) {
 //            e.printStackTrace();
-            System.out.println("상품 정보를 찾지 못하였습니다.");
+            System.err.println("상품 정보를 찾지 못하였습니다.");
         } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
-            System.out.println("상품 정보 클래스를 찾지 못하였습니다.");
+            System.err.println("상품 정보 클래스를 찾지 못하였습니다.");
         } catch (IOException e) {
 //            e.printStackTrace();
         } finally {
@@ -186,26 +189,32 @@ public class ProductMgrImpl implements IProductMgr {
         }
     }
 
+    // 스레드를 이용한 파일 저장
     public void close() {
-        ObjectOutputStream oos = null;
-
-        try {
-            oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("product.dat")));
-            for (Product p : pArr) {
-                oos.writeObject(p);
-            }
-            System.out.println("저장이 완료되었습니다.");
-        } catch (IOException e) {
-//            e.printStackTrace();
-            System.out.println("저장 중 문제가 생겼습니다.");
-        } finally {
-            if (oos != null)
+        Thread saveThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ObjectOutputStream oos = null;
                 try {
-                    oos.close();
+                    oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("product.dat")));
+                    for (Product p : pArr) {
+                        oos.writeObject(p);
+                    }
+                    System.out.println("저장이 완료되었습니다.");
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("저장 중 문제가 생겼습니다.");
+                } finally {
+                    if (oos != null)
+                        try {
+                            oos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                 }
-        }
+            }
+        });
+
+        saveThread.start();
     }
 
     @Override
@@ -215,5 +224,39 @@ public class ProductMgrImpl implements IProductMgr {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void send() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Product> tmp = new ArrayList<>();
+                // TV만 추가
+                for (Product p : pArr) {
+                    if (p instanceof TV) {
+                        tmp.add(p);
+                    }
+                }
+                // 냉장고만 추가
+                for (Product p : pArr) {
+                    if (p instanceof Refrigerator) {
+                        tmp.add(p);
+                    }
+                }
+                try (Socket socket = new Socket("localhost", 8080)) {
+                    ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                    oos.writeObject(tmp);
+
+                    oos.flush();
+                    oos.close();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
     }
 }

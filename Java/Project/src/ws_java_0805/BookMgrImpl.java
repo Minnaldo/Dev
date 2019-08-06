@@ -1,6 +1,7 @@
-package ws_java_0730;
+package ws_java_0805;
 
 import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class BookMgrImpl implements IBookMgr {
@@ -112,6 +113,37 @@ public class BookMgrImpl implements IBookMgr {
                     oos.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    // BookClient를 이용해 저장된 도서 정보를 서버에 전송
+    @Override
+    public void send() {
+        BookClient bs = new BookClient();
+        bs.start();
+    }
+
+    // 도서 정보를 서버로 전달
+    public class BookClient extends Thread {
+        @Override
+        public void run() {
+            ObjectOutputStream oos = null;
+            Socket socket = null;
+            try {
+                socket = new Socket("localhost", 8080);
+                oos = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                oos.writeObject(barr);
+                oos.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("도서 정보를 서버에 저장하였습니다.");
             }
         }
     }
