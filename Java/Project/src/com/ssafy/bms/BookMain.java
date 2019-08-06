@@ -141,6 +141,7 @@ public class BookMain {
         // 구현하세요.
         try {
             mgr.delete(isbn);
+
         } catch (RecordNotFoundException e) {
         }
 

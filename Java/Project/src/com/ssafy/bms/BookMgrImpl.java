@@ -207,6 +207,9 @@ public class BookMgrImpl implements IBookMgr {
         return saveCount;
     }
 
+    public static String getRmTitle() {
+        return rmTitle;
+    }
 
     private class pair {
         String name;
