@@ -304,3 +304,12 @@ Runnable r = new Runnable(){
 > 매니저 클래스 등에서는 콘솔 출력을 하면 안된다 --> 콘솔에 종속적이 됨
 
 네트워크를 구현할 때, 전송 또는 받는 쪽에서 Exception을 던져주어, 에러의 이유를 알게 하는 것이 좋다.
+
+## ArrayList 합성하기
+ArrayList의 멤버 함수인 addAll()을 이용하면 된다
+```java
+ArrayList<Integer> arr = new ArrayList<>();
+ArrayList<Integer> arr2 = new ArrayList<>();
+
+arr.addAll(arr2);
+```
