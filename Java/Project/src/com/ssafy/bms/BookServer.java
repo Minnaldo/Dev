@@ -15,6 +15,7 @@ public class BookServer {
 
     private static void go() throws IOException, ClassNotFoundException {
         ssocket = new ServerSocket(9090);
+        System.out.println("서버는 기다리는 중");
         client = ssocket.accept();
         // 클라이언트의 입력을 받는 스트림
         ois = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
