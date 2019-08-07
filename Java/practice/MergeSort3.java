@@ -59,7 +59,7 @@ public class MergeSort3 {
     public static void main(String[] args) {
 
         // the data in input.txt : 9 3 5 1 2 4 10 8 6 7
-        try (FileInputStream fis = new FileInputStream("merge_input.txt")) {
+        try (FileInputStream fis = new FileInputStream("sort_input.txt")) {
             Scanner sc = new Scanner(fis);
 
             int n = sc.nextInt();

@@ -46,7 +46,7 @@ public class MergeSort4 {
 
     public static void main(String[] args) {
 
-        try (FileInputStream fis = new FileInputStream("merge_input.txt")) {
+        try (FileInputStream fis = new FileInputStream("sort_input.txt")) {
             Scanner sc = new Scanner(fis);
             int n = sc.nextInt();
             int[] arr = new int[n];
