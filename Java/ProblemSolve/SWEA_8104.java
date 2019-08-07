@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+//TODO
+// 왜 틀리는 걸까?
+
 public class SWEA_8104 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -8,42 +11,19 @@ public class SWEA_8104 {
             int n = sc.nextInt();
             int k = sc.nextInt();
 
-            if (n == 1) {
+            int k2 = k * 2;
+            int sum = 0;
 
-                System.out.print("#" + tc + " ");
-                for (int i = 1; i < k; i++) {
-                    System.out.print(i + " ");
+            for (int i = 1; i <= n; i++) {
+                if (i % 2 == 0) {
+                    sum += (k2 * (i / 2));
+                } else {
+                    sum += (k2 * (i / 2) + 1);
                 }
-                System.out.println(k);
-
-            } else {
-                int sum = 0;
-                for (int a = 1; a <= n; a += 2) {
-                    if (a == 1) {
-                        sum += 1;
-                    } else if (a == 3) {
-                        sum += (2 * k);
-                    } else {
-                        sum += k;
-                    }
-                }
-                int tmpSum = 0;
-                int cnt = 2;
-                for (int a = 2; a <= n; a += 2) {
-                    tmpSum += (cnt++ * k);
-                }
-                sum += tmpSum;
-
-                System.out.println(sum + "\t" + tmpSum);
-
-                System.out.print("#" + tc + " ");
-                // 출력부
-                for (int i = 0; i < k - 1; i++) {
-                    System.out.print(sum + " ");
-                }
-                System.out.println(sum);
             }
-
+            System.out.print("#" + tc);
+            for (int i = 0; i < k; i++)
+                System.out.print(" " + sum);
         }
         sc.close();
     }
