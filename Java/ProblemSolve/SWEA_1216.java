@@ -49,6 +49,7 @@ public class SWEA_1216 {
                             } else {
                                 len = 0;
                                 start = i;
+                                j = size-1;
                             }
 
                         }
@@ -80,6 +81,7 @@ public class SWEA_1216 {
                             } else {
                                 len = 0;
                                 start = i;
+                                j = size-1;
                             }
 
                         }
