@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ *  TODO
+ *
+ */
+
 public class SWEA_2806 {
     static int[][] dir = { { 1, -1 }, { 1, 0 }, { 1, 1 } };
     static int n, ans;
@@ -82,9 +87,9 @@ public class SWEA_2806 {
         for (int q = 0; q < n; q++) {
             for (int j = 0; j < n; j++) {
                 if (visit[q][j]) {
-                    System.out.print(1 + " ");
+                    System.out.print("O ");
                 } else {
-                    System.out.print(0 + " ");
+                    System.out.print("X ");
                 }
             }
             System.out.println();

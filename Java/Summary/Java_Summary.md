@@ -331,3 +331,7 @@ bw.write("HelloWorld\n");   // 개행시 와일드카드("\n")로 해주어야 �
 bw.flush();
 bw.close();
 ```
+
+## 2차원배열의 순회
+- 지그재그 순회
+![2차원 배열 지그재그 순회](./img/2D_Array_travasal.png)
