@@ -313,3 +313,21 @@ ArrayList<Integer> arr2 = new ArrayList<>();
 
 arr.addAll(arr2);
 ```
+
+## 빠르게 입력 받기
+#### Sacanner 보다 빠르게 입력받는 방법
+```java
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+// String line = br.readLine();
+StringTokenizer st = new StrinTokenizer(br.readLine());
+int t = Integer.parseInt(st.nextToken());
+```
+
+## 빠르게 출력 하기
+#### println 보다 빠르게 출력하기
+```java
+BufferedWriter bw = new BufferedWriter(new OutputStream(System.out));
+bw.write("HelloWorld\n");   // 개행시 와일드카드("\n")로 해주어야 한다.
+bw.flush();
+bw.close();
+```
