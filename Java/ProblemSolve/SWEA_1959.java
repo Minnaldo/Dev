@@ -1,8 +1,3 @@
-/**
- *
- *  * 곱의 합과 합의 곱은 같을까?
- */
-
 import java.util.Scanner;
 
 public class SWEA_1959 {
@@ -14,6 +9,9 @@ public class SWEA_1959 {
             int n = sc.nextInt();
             int m = sc.nextInt();
 
+            int max = n > m ? n : m;
+            int min = n < m ? n : m;
+
             int[] A = new int[n];
             int[] B = new int[m];
 
@@ -24,10 +22,14 @@ public class SWEA_1959 {
                 B[i] = sc.nextInt();
             }
 
-            int mvidx = Math.abs(m-n);
+            int mvidx = max - min;
 
-            for(int i = 0; i<mvidx; i++){
-
+            for (int i = 0; i <= mvidx; i++) {
+                int tmpSum = 0;
+                for (int idx = i; idx < mvidx + i; idx++) {
+                    tmpSum += A[idx] + B[idx];
+                }
+                ans = ans > tmpSum ? ans : tmpSum;
             }
 
             System.out.println("#" + tc + " " + ans);
