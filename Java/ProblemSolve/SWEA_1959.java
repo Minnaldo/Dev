@@ -1,3 +1,4 @@
+
 /**
  *
  *  * 곱의 합과 합의 곱은 같을까?
@@ -14,21 +15,19 @@ public class SWEA_1959 {
             int n = sc.nextInt();
             int m = sc.nextInt();
 
-            int[] A = new int[n];
-            int[] B = new int[m];
+            int max = n > m ? n : m;
+            int min = n < m ? n : m;
 
-            for (int i = 0; i < n; i++) {
+            int[] A = new int[max];
+            int[] B = new int[min];
+
+            for (int i = 0; i < max; i++) {
                 A[i] = sc.nextInt();
             }
-            for (int i = 0; i < m; i++) {
+            for (int i = 0; i < min; i++) {
                 B[i] = sc.nextInt();
             }
 
-            int mvidx = Math.abs(m-n);
-
-            for(int i = 0; i<mvidx; i++){
-
-            }
 
             System.out.println("#" + tc + " " + ans);
         }
