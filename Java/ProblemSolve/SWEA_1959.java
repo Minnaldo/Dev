@@ -15,10 +15,13 @@ public class SWEA_1959 {
             int[] A = new int[n];
             int[] B = new int[m];
 
-            for (int i = 0; i < n; i++) {
+            int[] A = new int[max];
+            int[] B = new int[min];
+
+            for (int i = 0; i < max; i++) {
                 A[i] = sc.nextInt();
             }
-            for (int i = 0; i < m; i++) {
+            for (int i = 0; i < min; i++) {
                 B[i] = sc.nextInt();
             }
 
