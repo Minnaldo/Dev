@@ -9,7 +9,6 @@ public class SWEA_2005 {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         for(int tc = 1; tc<=t; tc++){
-            int ans = 0;
             int n = sc.nextInt();
 
             int[][] arr = new int[n+1][n+1];
