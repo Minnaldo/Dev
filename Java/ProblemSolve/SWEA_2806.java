@@ -2,12 +2,12 @@ import java.io.*;
 import java.util.*;
 
 /**
- *  TODO
+ * TODO
  *
  */
 
 public class SWEA_2806 {
-    static int[][] dir = { { 1, -1 }, { 1, 0 }, { 1, 1 } };
+    static int[][] dir = { { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, -1 }, { 0, 1 } };
     static int n, ans;
 
     public static void func(boolean[][] visit, int y, int x) {
@@ -24,7 +24,7 @@ public class SWEA_2806 {
         }
 
         // 방문 체크 배열에 퀸을 놓지 못하는곳 체크하기
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             for (int j = 0; j < n + 4; j++) {
                 int ny = y + dir[i][0] * j;
                 int nx = x + dir[i][1] * j;
@@ -57,7 +57,7 @@ public class SWEA_2806 {
             boolean[][] zeroVisit = new boolean[10][10];
 
             for (int i = 0; i < n; i++) {
-                for (int a = 0; a < 3; a++) {
+                for (int a = 0; a < 5; a++) {
                     for (int b = 0; b < n + 4; b++) {
                         int ny = 0 + dir[a][0] * b;
                         int nx = i + dir[a][1] * b;
