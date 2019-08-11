@@ -4,7 +4,7 @@ the header file that i used
 
 #include <string>   - to_string
 #include <vector>
-#include <algorithm>    -> pair, Lowerbound
+#include <algorithm>    -> pair, Lowerbound, find, Upperbound
 #include <iostream>
 #include <cmath>    -> abs(),
 #include <chrono>

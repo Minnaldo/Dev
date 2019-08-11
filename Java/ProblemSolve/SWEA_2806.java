@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * TODO
+ * TODO use another data structure
  *
  */
 
