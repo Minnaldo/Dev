@@ -1,14 +1,8 @@
-import java.io.FileInputStream;
 import java.util.Scanner;
-
-/** TODO
- * 가랏 RC 카! 가속도와 속도의 관계?
- */
 
 public class SWEA_1940 {
     public static void main(String[] args) {
-        try (FileInputStream fis = new FileInputStream("input.txt")) {
-            Scanner sc = new Scanner(fis);
+            Scanner sc = new Scanner(System.in);
             int t = sc.nextInt();
             for (int tc = 1; tc <= t; tc++) {
                 int ans = 0;
@@ -16,12 +10,15 @@ public class SWEA_1940 {
                 int speed = 0;
 
                 for (int i = 0; i < n; i++) {
-                    int sw = sc.nextInt(), tmp = sc.nextInt();
+                    int sw = sc.nextInt();
+                    int tmp = 0;
                     if (sw == 1) {
                         // 가속
+                        tmp = sc.nextInt();
                         speed += tmp;
                     } else if (sw == 2) {
                         // 감속
+                        tmp = sc.nextInt();
                         speed = speed < tmp ? 0 : speed - tmp;
                     }
                     ans += speed;
@@ -31,9 +28,5 @@ public class SWEA_1940 {
             }
 
             sc.close();
-            fis.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
