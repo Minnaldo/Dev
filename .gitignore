@@ -40,3 +40,6 @@
 
 # Submodule
 /Android
+
+# Object Folder
+**/out
