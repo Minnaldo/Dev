@@ -1,7 +1,7 @@
 import java.io.FileInputStream;
 import java.util.Scanner;
 
-/**
+/** TODO
  * 가랏 RC 카! 가속도와 속도의 관계?
  */
 
