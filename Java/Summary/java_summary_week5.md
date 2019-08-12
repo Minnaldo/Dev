@@ -464,3 +464,12 @@ Valid Documentation
 #### xml 파서의 종류
 - DOM parser : Tree형태로 되어있음, 문서 전체가 메모리에 올라가 있으며 수정이 쉽다. 허나 메모리 소모량이 많은 단점이 있으며, 속도가 느리다는 단점이 있다.
 - SAX parser : 수정이 불가하다 (Read Only)
+
+### Xml API (SAX and DOM)
+
+|SAX|DOM|
+|:-:|:-:|
+|Serial access mechanism|Random access mechanism|
+|Event-driven|Tree mechanism|
+|Fastest and least memory-intensive mechanism|Less programming than SAX|
+|Searchble only|Can modify, replace, add, delete|
