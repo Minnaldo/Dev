@@ -6,7 +6,7 @@ import java.io.*;
 public class N_Queen {
 
     static int ans, n;
-    static int[][] dir = { { 1, -1 }, { 1, 0 }, { 1, 1 } };
+    static int[][] dir = { { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, -1 }, { 0, 1 } };
 
     public static void func(boolean[][] visit, int curY, int curX) {
         if (curY + 1 == n) {
@@ -16,13 +16,13 @@ public class N_Queen {
             return;
         }
 
-        System.out.println("=========방문 전========");
+        System.out.println("==========방문 전========");
         printer(visit);
-        System.out.println("========================");
+        System.out.println("==========================");
 
         // 방문 체크 구문
         // 현재 좌표에 퀸을 놓음으로써 이 후의 라인에서 퀸을 놓지 못하는 곳을 체크
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             for (int j = 0; j < n + 4; j++) {
                 int ny = curY + (dir[i][0] * j);
                 int nx = curX + (dir[i][1] * j);
@@ -32,9 +32,8 @@ public class N_Queen {
         }
         boolean[][] tmp = cpyArr(visit);
 
-
-
         Queue<Pair> q = new LinkedList<>();
+
         for (int i = 0; i < n; i++) {
             if (!visit[curY + 1][i]) {
                 // 다음 줄 에서 갈 수 있는 좌표를 큐에 저장
@@ -50,9 +49,9 @@ public class N_Queen {
             // 돌아오면 원래 상태로 배열 복구
             visit = tmp;
 
-            System.out.println("=========방문 후========");
+            System.out.println("**********방문 후**********");
             printer(visit);
-            System.out.println("========================");
+            System.out.println("**************************");
         }
     }
 
