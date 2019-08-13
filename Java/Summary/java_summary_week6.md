@@ -29,7 +29,10 @@ Member[] array = gson.fromJson(jsonString, Member[].class)// Member[] 형태로 
 ```
 
 ## MYSQL
-```mysql
+```sql
+-- 데이터베이스 안의 테이블의 구조를 본다
+desc (테이블 명);
+
 create table ssafytb(name varchar(10, age int, addr varchar(100),tel varchar(20))); -- ssafytb라는 이름으로 테이블 생성
 
 -- 데이터 삽입
@@ -50,13 +53,65 @@ drop table ssafytb;
 ```
 
 SQL은 colum데이터에 대한 사칙연산이 가능하다
-```mysql
+```sql
 select salery * 12 ;
 -- colum에 별칭을 할당할 수 있다.   as 키워드 사용
 select salery * 12 as 연봉;
 -- 결과 정렬
 -- where절이 끝난 후,
 order by (colum 명) (desc);
+```
+
+```sql
+group by ( key )    -- key를 기준으로 group를 만든다
+having condition    -- group by로 집계한 후에 조건을 판단
+```
+
+```sql
+# SELECT 문의 실행 순서
+select Projection   -- 5th
+from Table  -- 1st
+where condition = condition -- 2nd
+group by    -- 3rd
+having      -- 4th
+order by    -- 6th
+```
+
+```sql
+# tip
+-- 부서별 급여합,평균 급여합이 3천 이상인부서만
+SELECT
+    deptno, SUM(sal) AS 합, AVG(sal)
+FROM
+    emp
+WHERE 1 -- 쓰는 이유, where절이 필요 없는 문제이나, 이후 where절에 추가를 해야할 경우가 생길경우 이 밑으로 and를 사용가능하다
+        -- 이 때 and 문이 필요가 없어졌을 때, 주석처리 하기 편하다 (현장에서 자주 쓴다)
+GROUP BY deptno
+HAVING SUM(sal) >= 10000
+ORDER BY deptno;
+```
+
+```sql
+# 다중 group by 조건
+SELECT
+    job, deptno, SUM(sal), AVG(sal)
+FROM
+    emp
+WHERE
+    1
+GROUP BY job , deptno	-- job으로 grouping 이후 depno로 grouping
+ORDER BY JOB;
+```
+
+```sql
+# with rollup : 마지막 한 줄에 소계를 추가한다
+SELECT
+    job, SUM(sal), AVG(sal)
+FROM
+    emp
+WHERE
+    1
+    group by job with rollup;	-- with rollup을 할 경우 전체의 합과 평균을 한줄 더 추가해줌
 ```
 
 ## JDBC API
