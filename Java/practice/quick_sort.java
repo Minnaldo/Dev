@@ -13,30 +13,35 @@ public class quick_sort {
     }
 
     private static void quicksort(int[] arr, int start, int end) {
-        if (start < end) {
+        if (start <= end) {
             int part = partition(arr, start, end);
             partition(arr, start, part - 1);
-            partition(arr, part, end);
+            partition(arr, part + 1, end);
         }
     }
 
     private static int partition(int[] arr, int start, int end) {
+        int left = start, right = end;
         // 배열의 중간에 있는 값을 피벗으로 설정
-        int pivot = arr[(start + end) / 2];
+        int pivot = (start + end) / 2;
 
-        while (start <= end) {
-            while (arr[start] < pivot)
-                start++;
-            while (arr[end] > pivot)
-                end++;
-            if (start <= end) {
-                swap(arr, start, end);
-                start++;
-                end--;
+        while (left < right) {
+            while (arr[left] < arr[pivot] && left <= right) {
+                left++;
+            }
+            while (arr[right] > arr[pivot] && left <= right) {
+                right--;
+            }
+            if (left <= right) {
+                swap(arr, left, right);
+                left++;
+                right--;
             }
         }
 
-        return start;
+        swap(arr, left, pivot);
+
+        return left;
     }
 
     public static void main(String[] args) {
@@ -44,7 +49,7 @@ public class quick_sort {
         System.out.println("==================================정렬 전==================================");
         System.out.println(Arrays.toString(arr));
         quicksort(arr);
-        System.out.println("==================================정렬 전==================================");
+        System.out.println("==================================정렬 후==================================");
         System.out.println(Arrays.toString(arr));
 
     }

@@ -1,0 +1,59 @@
+﻿-- 08-12 workshop start --
+use ssafydb;
+#16
+select avg(sal), max(sal), min(sal), count(ename)
+from emp
+group by deptno
+having deptno = 10;
+
+#17
+select deptno, job, count(ename)
+from emp
+group by deptno, job
+order by deptno;
+
+
+#18
+select job, count(ename)
+from emp
+group by job
+having count(ename) >= 4;
+
+-- 08-12 workshop end --
+
+
+-- 08-13 workshop start --
+#1
+create table wsTB(isbn char(8) primary key, title varchar(50) Not null, author varchar(10) not null,
+publisher varchar(15) not null, price int not null, description varchar(200));
+
+#2
+insert into wsTB values('123-1-14','Java와 coffee', 'diana','자바닷컴',8000,'삶의 즐거움');
+insert into wsTB(isbn,title,author,publisher,price) values('555-23-2','AI와 미래', '김현주','미래닷컴',20000);
+insert into wsTB values('123-2-15','Java와 놀기', '김태희','자바닷컴',22000,'Java 정복');
+insert into wsTB values('123-6-24','Java와 알고리즘', '서민규','자바닷컴',20000,'성능 업!!');
+insert into wsTB(isbn,title,author,publisher,price) values('423-5-36','IoT세상', '이세준','미래닷컴',25000);
+
+#3
+update wsTB set price = (price * 0.9);
+select isbn,title,author,publisher,price, description
+ from wsTB;
+
+#4
+update wsTB set price = price * 0.8
+where title like '%Java%';
+select isbn,title,author,publisher,price, description
+from wsTB;
+
+#5
+delete from wsTB
+where title like '%Java%'
+and price <10000;
+select isbn,title,author,publisher,price, description
+from wsTB;
+
+
+#6
+select publisher, count(title), sum(price), avg(price)
+from wsTB
+group by publisher;

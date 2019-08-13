@@ -134,10 +134,10 @@ group by job, deptno;
 
 -- 1열 부서, 1행 업무가 나오고 급여합을 구하기
 select ifnull(deptno, '합계')
-	,sum(case when job='president'then sal end) ifnull(president,0) as president
-    ,sum(case when job='clerk'then sal end) as clerk
-    ,sum(case when job='manager'then sal end) as manager
-    ,sum(case when job='analyst'then sal end) as analyst
-    ,sum(case when job='salesman'then sal end) as salesman    
+	,ifnull(sum(case when job='president'then sal end),0) as president
+    ,ifnull(sum(case when job='clerk'then sal end),0) as clerk
+    ,ifnull(sum(case when job='manager'then sal end),0) as manager
+    ,ifnull(sum(case when job='analyst'then sal end),0) as analyst
+    ,ifnull(sum(case when job='salesman'then sal end),0)as salesman
 from emp
 group by deptno with rollup;

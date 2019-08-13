@@ -29,6 +29,13 @@ Member[] array = gson.fromJson(jsonString, Member[].class)// Member[] 형태로 
 ```
 
 ## MYSQL
+
+어떠한 데이터를 저장하는가? (==> 데이터베이스가 나온 이유)<br>
+- **나중에 찾아 쓸** 데이터를 저장한다
+- 나중에 **찾아보기 쉽게** 저장해야 한다.
+- 여러개의 데이터를 저장할 때는 **각각의 데이터가 구별**되어야 한다
+- 제약조건이 필요함 --> primary key ( 해당 column을 unique하게 만든다 )
+
 ```sql
 -- 데이터베이스 안의 테이블의 구조를 본다
 desc (테이블 명);
@@ -59,7 +66,7 @@ select salery * 12 ;
 select salery * 12 as 연봉;
 -- 결과 정렬
 -- where절이 끝난 후,
-order by (colum 명) (desc);
+order by (column 명) (desc);
 ```
 
 ```sql
@@ -113,6 +120,36 @@ WHERE
     1
     group by job with rollup;	-- with rollup을 할 경우 전체의 합과 평균을 한줄 더 추가해줌
 ```
+### 트랜잭션 ( Transaction )
+
+DB에서의 명령어 수행 단위이며, MySQL Workbench에서는 자동으로 begin과 commit을 해준다
+DML 명령어(update, insert, delete 등)를 사용하면, DML을 실행한 transaction이 table의 lock을 갖게되며, 다른 transaction은 조회만 수행이 가능하다.
+
+|명령어|작동|
+|:--:|:--:|
+|begin|Transaction의 시작|
+|commit|Transaction 시작 후, 수정된 사항을 실제 DB에 적용|
+|rollback|현재까지 수정 사항을 지우고 원래대로 돌아간다|
+|savepoint (savepoint 이름)|rollback시 돌아올 수 있는 지점을 설정한다|
+
+transaction은 begin을 했으면, commit 또는 rollback을 꼭 해주어야 에러 없는 작동이 가능하다.
+
+save point를 이용하면, rollback to를 이용 할 수 있다. (게임의 임시 저장 지점이라 생각하면 편하다)
+```sql
+begin;
+-- insert a
+-- insert b
+-- insert c
+savepoint aaa;
+-- insert 1
+-- insert 2
+-- insert 3
+rollback to aaa;    -- insert 1, 2, 3 수정내용은 버려진다
+```
+
+#### 자바와 사용할 때
+try문 끝에서 commit (db에 적용)
+catch문 에서 rollback (수정사항 초기화)
 
 ## JDBC API
 JDBC(Java Database Connectivity)는 Java 응용프로그램이 관계형 데이터베이스에 접속하기 위한 Java Standard API이다.
