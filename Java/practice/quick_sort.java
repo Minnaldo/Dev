@@ -13,7 +13,7 @@ public class quick_sort {
     }
 
     private static void quicksort(int[] arr, int start, int end) {
-        if (start <= end) {
+        if (start < end) {
             int part = partition(arr, start, end);
             partition(arr, start, part - 1);
             partition(arr, part + 1, end);
@@ -26,16 +26,16 @@ public class quick_sort {
         int pivot = (start + end) / 2;
 
         while (left < right) {
-            while (arr[left] < arr[pivot] && left <= right) {
+            while (arr[left] <= arr[pivot] && left <= end) {
                 left++;
             }
-            while (arr[right] > arr[pivot] && left <= right) {
+            while (arr[right] > arr[pivot]) {
                 right--;
             }
-            if (left <= right) {
+            if (left < right) {
                 swap(arr, left, right);
-                left++;
-                right--;
+                // left++;
+                // right--;
             }
         }
 

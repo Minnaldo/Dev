@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.parser.JSONParser;
 
 public class SimpleJSonWriter {
 

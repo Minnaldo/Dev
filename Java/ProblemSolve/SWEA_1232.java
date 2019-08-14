@@ -2,66 +2,54 @@ import java.io.FileInputStream;
 import java.util.*;
 
 /**
- *  TODO
+ * TODO
  */
 
 public class SWEA_1232 {
 
     static int n;
-    static Stack<Integer> oper;
+    static Stack<Double> oper;
     static StringBuilder sb;
-    static boolean[] visit;
     static String[] arr;
 
     // idx <= current index
     public static void recur(int idx) {
-        int chidx = idx * 2;
-        if (chidx <= n && !visit[chidx]) {
-            recur(chidx);
-        }
-        if (chidx + 1 <= n && !visit[chidx + 1]) {
-            recur(chidx + 1);
-            // 문자일 때
-            sb.append(arr[idx] );
-            // if (isStringtoInteger(arr[idx]))
-            // oper.add(Integer.parseInt(arr[idx]));
-            // else
-            // oper.add(calc(arr[idx]));
-            visit[idx] = true;
-        } else {
-            // 숫자일 때
-            sb.append(arr[idx] );
-            // if (isStringtoInteger(arr[idx]))
-            // oper.add(Integer.parseInt(arr[idx]));
-            // else
-            // oper.add(calc(arr[idx]));
-            visit[idx] = true;
-        }
+        if (idx > n)
+            return;
+
+        // 왼쪽
+        recur(idx * 2);
+        // 오른쪽
+        recur(idx * 2 + 1);
+        // 판단 후 그에 맞는 연산
+        sb.append(arr[idx]).append(" ");
     }
 
-    public static int calc(String str) {
-        int af = oper.pop(), bf = oper.pop();
-        int ret = 0;
-        switch (str.charAt(0)) {
-        case '-':
+    public static void calc(String str) {
+        double af = oper.pop(), bf = oper.pop();
+        double ret = 0;
+        switch (str) {
+        case "-":
             ret = bf - af;
             break;
-        case '+':
+        case "+":
             ret = bf + af;
             break;
-        case '/':
+        case "/":
             ret = bf / af;
             break;
-        case '*':
+        case "*":
             ret = bf * af;
             break;
+        default:
+            System.out.println("error");
         }
-        return ret;
+        oper.add(ret);
     }
 
     public static boolean isStringtoInteger(String str) {
         try {
-            Integer.parseInt(str);
+            Double.parseDouble(str);
             return true;
         } catch (Exception e) {
             return false;
@@ -71,9 +59,8 @@ public class SWEA_1232 {
     public static void main(String[] args) {
         try (FileInputStream fis = new FileInputStream("input.txt")) {
             Scanner sc = new Scanner(fis);
-            for (int tc = 1; tc <= 5; tc++) {
+            for (int tc = 1; tc <= 10; tc++) {
                 n = sc.nextInt();
-                visit = new boolean[n + 1];
                 arr = new String[n + 1];
 
                 sc.nextLine();
@@ -84,12 +71,23 @@ public class SWEA_1232 {
                 oper = new Stack<>();
                 sb = new StringBuilder();
                 recur(1);
-
-                System.out.print("#" + tc + " ");
                 System.out.println(sb.toString());
+                // StringTokenizer st = new StringTokenizer(sb.toString());
+                // while (st.hasMoreTokens()) {
+                // String tmp = st.nextToken();
+                // // System.out.print(tmp + " ");
+                // if (isStringtoInteger(tmp)) {
+                // // 피연산자 일 때
+                // oper.add(Double.parseDouble(tmp));
+                // } else if (!isStringtoInteger(tmp)) {
+                // // 연산자 일 때
+                // calc(tmp);
+                // }
+                // }
 
-                // int ans = oper.pop();
-                // System.out.println("#" + tc + " " + ans);
+                int ans = 0;
+                // int ans = (int) Math.ceil(oper.pop());
+                System.out.println("#" + tc + " " + ans);
             }
             sc.close();
         } catch (Exception e) {
