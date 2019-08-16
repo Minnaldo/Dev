@@ -1,60 +1,68 @@
-
-/**
- *  * 적용 아이디어 : 골인지점에서 역으로 찾아나간다
- *  * DFS를 적용
- */
-
-import java.io.FileInputStream;
-import java.util.Scanner;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class SWEA_1210 {
-    static int[][] dir = { { 0, -1 }, { 0, 1 }, { -1, 0 } }; // 좌, 우, 상
+
+    static ArrayList<Integer> arr;
+    static int n = 100, ans;
+    static StringTokenizer st;
+
+    static void solution(int[][] map, int y, int x, int arIdx) {
+        for (int i = y; i >= 0; i--) {
+            if (x - 1 >= 0 && map[i][x - 1] == 1) {
+                x = arr.get(--arIdx);
+            } else if (x + 1 < n && map[i][x + 1] == 1) {
+                x = arr.get(++arIdx);
+            }
+            // System.out.println(x);
+        }
+
+        ans = x;
+    }
 
     public static void main(String[] args) {
-
         try (FileInputStream fis = new FileInputStream("input.txt")) {
-            Scanner sc = new Scanner(fis);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+
             for (int tc = 1; tc <= 10; tc++) {
-                int ans = 0;
+                ans = 0;
+                int t = Integer.parseInt(br.readLine());
+                int[][] map = new int[n][n];
 
-                int ttmpc = sc.nextInt();
-                int[][] map = new int[100][100];
-                boolean[][] visit = new boolean[100][100];
-                int goalX = 0, goalY = 0;
-                // init, get input
-                for (int i = 0; i < 100; i++) {
-                    for (int j = 0; j < 100; j++) {
-                        map[i][j] = sc.nextInt();
-                        // 골인지점을 찾는다
+                int gx = 0;
+                for (int i = 0; i < n; i++) {
+                    st = new StringTokenizer(br.readLine());
+                    for (int j = 0; j < n; j++) {
+                        map[i][j] = Integer.parseInt(st.nextToken());
                         if (map[i][j] == 2) {
-                            goalY = i;
-                            goalX = j;
+                            gx = j;
                         }
                     }
                 }
-                int cx = goalX;
-                int cy = goalY;
-                while (cy > 0) {
 
-                    for (int i = 0; i < 3; i++) {
-                        int ny = cy + dir[i][0];
-                        int nx = cx + dir[i][1];
-
-                        if (ny >= 0 && nx >= 0 && ny < 100 && nx < 100) {
-                            if (!visit[ny][nx] && map[ny][nx] > 0) {
-                                visit[ny][nx] = true;
-                                cy = ny;
-                                cx = nx;
-                            }
-                        }
+                arr = new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                    if (map[0][i] == 1) {
+                        arr.add(i);
                     }
                 }
-                ans = cx;
+                solution(map, 99, gx, arr.indexOf(gx));
+
                 System.out.println("#" + tc + " " + ans);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    class Pair {
+        int first, second;
+
+        Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
     }
 }
