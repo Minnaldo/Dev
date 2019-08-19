@@ -7,7 +7,7 @@ public class SWEA_1873 {
     static int h, w;
 
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             int t = Integer.parseInt(br.readLine());
 
             for (int tc = 1; tc <= t; tc++) {
@@ -75,7 +75,6 @@ public class SWEA_1873 {
                     }
                 }
 
-
                 // 마지막 탱크 위치 표시
                 switch (tank.dir) {
                 case 0:
@@ -91,7 +90,6 @@ public class SWEA_1873 {
                     map[tank.y][tank.x] = '>';
                     break;
                 }
-
 
                 System.out.print("#" + tc + " ");
                 // print
