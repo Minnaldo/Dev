@@ -6,6 +6,12 @@ import java.util.StringTokenizer;
 
 public class SWEA_7227 {
 
+    static void vectorSum(Pair[] arr){
+        for (int i = 0; i < arr.length; i++) {
+
+        }
+    }
+
     static void combi(Pair[] arr, int n, int r, Pair[] sel, int idx) {
         if (r == idx) {
             for (int i = 0; i < sel.length; i++) {
