@@ -2,7 +2,7 @@ import java.io.*;
 
 public class SWEA_7584 {
 
-    static StringBuilder sb;
+    static StringBuilder sb = new StringBuilder("0"); // p0
 
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -10,24 +10,20 @@ public class SWEA_7584 {
             for (int tc = 1; tc <= t; tc++) {
 
                 int n = Integer.parseInt(br.readLine());
-                sb = new StringBuilder("0"); // p0
 
-                StringBuilder sb2 = null;
-                for (int i = 0; i < n; i++) {
-                    sb2 = new StringBuilder(sb);
+                int k = (int) ((n) / 2 + 0.5);
+
+                for (int i = 0; i < 3000; i++) {
+                    char[] ch = new StringBuilder(sb).reverse().toString().toCharArray();
                     sb.append("0");
-                    for (int j = 0; j < sb2.length(); j++) {
-                        if (sb2.charAt(j) == '0') {
-                            sb.append("1");
-                        } else {
-                            sb.append("0");
-                        }
+                    for (int j = 0; j < ch.length; j++) {
+                        sb.append(ch[j] == '1' ? 0 : 1);
                     }
-                    sb2.setLength(0);
                 }
+
                 System.out.println(sb.toString());
 
-                char ans = sb.charAt(n-1);
+                char ans = sb.charAt(n - 1);
                 System.out.println("#" + tc + " " + ans);
             }
         } catch (Exception e) {
