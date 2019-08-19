@@ -3,63 +3,78 @@
  *  ! 메모리 초과
  */
 
+import java.io.*;
 import java.util.*;
 
 public class Baek_6603 {
 
     static HashSet<String> permu = new HashSet<>();
 
-    public static void swap(int[] arr, int a, int b) {
-        int tmp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = tmp;
-    }
-
-    public static void perm(int[] arr, int depth, int n, int r) {
-        // 6개의 수를 뽑는다
-        if (depth == r) {
-            // print
-            int[] tmp = new int[r];
-            System.arraycopy(arr, 0, tmp, 0, r);
-            Arrays.sort(tmp);
-            String str = "";
-            for (int val : tmp) {
-                str += val + " ";
+    static void combi(int[] arr, int n, int[] sel, int idx) {
+        // 기저사례
+        if (idx == sel.length) {
+            Arrays.sort(sel);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < sel.length - 1; i++) {
+                sb.append(sel[i]).append(" ");
             }
-            permu.add(str.trim());
+            sb.append(sel[sel.length - 1]);
+            permu.add(sb.toString());
+            return;
+        }
+        if (n == arr.length) {
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            swap(arr, i, depth);
-            perm(arr, depth + 1, n, r);
-            swap(arr, i, depth);
-        }
+        sel[idx] = arr[n];
+        combi(arr, n + 1, sel, idx + 1);
+        combi(arr, n + 1, sel, idx);
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            int k = 0;
+            while (true) {
+                // k = sc.nextInt();
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                k = Integer.parseInt(st.nextToken());
+                if (k == 0) {
+                    return;
+                }
+                int[] arr = new int[k];
+                for (int i = 0; i < k; i++) {
+                    arr[i] = Integer.parseInt(st.nextToken());
+                }
 
-        int k = 0;
-        while (true) {
-            k = sc.nextInt();
-            if (k == 0) {
-                return;
-            }
-            int[] arr = new int[k];
-            for (int i = 0; i < k; i++) {
-                arr[i] = sc.nextInt();
-            }
+                // 6개를 고르는 조합
+                // perm(arr, 0, k, 6);
+                combi(arr, 0, new int[6], 0);
+                ArrayList<String> finans = new ArrayList<>(permu);
+                Collections.sort(finans, new Comparator<String>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        o1 = o1.replaceAll(" ", "");
+                        o2 = o2.replaceAll(" ", "");
 
-            // 6개를 고르는 조합
-            perm(arr, 0, k, 6);
-            ArrayList<String> finans = new ArrayList<>(permu);
-            Collections.sort(finans);
+                        for (int i = 0; i < o1.length(); i++) {
+                            if (o1.charAt(i) - o2.charAt(i) < 0) {
+                                return -1;
+                            } else if (o1.charAt(i) - o2.charAt(i) > 0) {
+                                return 1;
+                            }
+                        }
+                        return 0;
+                    }
+                });
 
-            for (String val : finans) {
-                System.out.println(val);
+                for (String val : finans) {
+                    System.out.println(val);
+                }
+                System.out.println();
             }
-            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

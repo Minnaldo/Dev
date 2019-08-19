@@ -75,6 +75,7 @@ public class SWEA_1873 {
                     }
                 }
 
+
                 // 마지막 탱크 위치 표시
                 switch (tank.dir) {
                 case 0:
@@ -90,6 +91,7 @@ public class SWEA_1873 {
                     map[tank.y][tank.x] = '>';
                     break;
                 }
+
 
                 System.out.print("#" + tc + " ");
                 // print
@@ -144,6 +146,9 @@ public class SWEA_1873 {
                 tank.y = y;
                 tank.x = x;
             }
+        } else {
+            tank.y = y;
+            tank.x = x;
         }
         tank.dir = ndir;
         return tank;
@@ -151,7 +156,7 @@ public class SWEA_1873 {
 
     static class Tank {
         int y, x;
-        int dir; // 1 : up, 2 : right, 3 : down, 4 : left
+        int dir; // 1 : up, 2 : down, 3 : left, 4 : right
 
         Tank() {
         }
