@@ -463,13 +463,33 @@ Valid Documentation
 
 #### xml 파서의 종류
 - DOM parser : Tree형태로 되어있음, 문서 전체가 메모리에 올라가 있으며 수정이 쉽다. 허나 메모리 소모량이 많은 단점이 있으며, 속도가 느리다는 단점이 있다.
-- SAX parser : 수정이 불가하다 (Read Only)
+- SAX parser : 수정이 불가하다 (Read Only), Event Driven 방식
 
 ### Xml API (SAX and DOM)
 
 |SAX|DOM|
-|:-:|:-:|
-|Serial access mechanism|Random access mechanism|
+|:--|:--|
+|Serial access mechanism (한줄씩 읽어나간다)|Random access mechanism|
 |Event-driven|Tree mechanism|
 |Fastest and least memory-intensive mechanism|Less programming than SAX|
 |Searchble only|Can modify, replace, add, delete|
+
+
+### SAXParser
+MyHandler는 DefaultHandler를 상속받는다.<br>
+DefaultHandler에는 5가지의 메소드가 존재한다.
+- startDocument() : 문서를 처음 읽을 때
+- endDocument() : 문서를 모두 읽었을 때
+- startElement() : start태그가 호출 되었을 때
+- endElement() : end 태그가 호출 되엇을 때
+- characters() : start/end 태그와 text(Contents) 태그가 호출될 때 한번씩 호출 ( 모든 상황에서 호출 )
+
+### DOMParser
+DOM은 트리구조로 메모리에 올린다.
+
+- DomParser Node의 구성
+    |Node 이름|설명|
+    |:--:|---|
+    |Element|태그의 내용을 가져온다|
+    |Text|태그 사이의 데이터(Contents)를 가져온다|
+    |Attribute|시작 태그내 속성의 값을 가져온다.|
