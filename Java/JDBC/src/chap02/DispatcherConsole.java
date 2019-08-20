@@ -96,49 +96,49 @@ public class DispatcherConsole {
         });
     }
 
-//    private void search() {
-//        System.out.println("검색할 번호를 입력하세요.");
-//        int num = sc.nextInt();
-//        CustomerVO vo = man.queryCustomer(num);
-//        System.out.println(vo);
-//    }
-//
-//    private void list() {
-//        for (CustomerVO vo : man.queryCustomer()) {
-//            System.out.println(vo);
-//        }
-//    }
-//
-//    private void delete() throws SQLException {
-//        System.out.println("삭제할 번호를 입력하세요.");
-//        man.deleteCostumer(sc.nextInt());
-//        list();
-//    }
-//
-//    private void update() throws SQLException {
-//        System.out.println("업데이트할 번호를 입력하세요");
-//        int num = sc.nextInt();
-//        System.out.println("업데이트할 이름을 입력하세요");
-//        String name = sc.next();
-//        System.out.println("업데이트할 나이를 입력하세요");
-//        int age = sc.nextInt();
-//        System.out.println("업데이트할 주소를 입력하세요");
-//        String addr = sc.next();
-//        man.updateCustomer(num, name, age, addr);
-//        list();
-//    }
-//
-//    private void insert() {
-//        System.out.println("이름을 입력하세요");
-//        String name = sc.next();
-//        System.out.println("나이를 입력하세요");
-//        int age = sc.nextInt();
-//        System.out.println("주소를 입력하세요");
-//        String addr = sc.next();
-//
-//        man.insertCustomer(name, age, addr);
-//        list();
-//    }
+    private void search() {
+        System.out.println("검색할 번호를 입력하세요.");
+        int num = sc.nextInt();
+        CustomerVO vo = man.queryCustomer(num);
+        System.out.println(vo);
+    }
+
+    private void list() {
+        for (CustomerVO vo : man.queryCustomer()) {
+            System.out.println(vo);
+        }
+    }
+
+    private void delete() throws SQLException {
+        System.out.println("삭제할 번호를 입력하세요.");
+        man.deleteCustomer(sc.nextInt());
+        list();
+    }
+
+    private void update() throws SQLException {
+        System.out.println("업데이트할 번호를 입력하세요");
+        int num = sc.nextInt();
+        System.out.println("업데이트할 이름을 입력하세요");
+        String name = sc.next();
+        System.out.println("업데이트할 나이를 입력하세요");
+        int age = sc.nextInt();
+        System.out.println("업데이트할 주소를 입력하세요");
+        String addr = sc.next();
+        man.updateCustomer(num, name, age, addr);
+        list();
+    }
+
+    private void insert() {
+        System.out.println("이름을 입력하세요");
+        String name = sc.next();
+        System.out.println("나이를 입력하세요");
+        int age = sc.nextInt();
+        System.out.println("주소를 입력하세요");
+        String addr = sc.next();
+
+        man.insertCustomer(name, age, addr);
+        list();
+    }
 
 
     public static void main(String[] args) {
