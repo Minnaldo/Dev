@@ -9,6 +9,7 @@ public class JDBCTest4 {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/testDB?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "ssafy", "ssafy");
 
+        // PreparedStatement를 이용한 동적바인딩
         String str = "insert into customer(name, address) values(?, ?)";
         PreparedStatement pst = con.prepareStatement(str);
         pst.setString(1, "홍길동");

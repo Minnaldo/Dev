@@ -31,6 +31,7 @@ public class DBManager {
     }
 
     public boolean insertCustomer(String name, int age, String addr) {
+        // 동적 바인딩 방식을 이용함
         String str = "insert into customer(name, age, addr) values(?, ?, ?)";
         boolean res = false;
         try {
