@@ -30,13 +30,14 @@ public class SWEA_5356 {
                 }
 
                 // for (int j = 0; j < 5; j++) {
-                //     for (int i = 0; i < 15; i++) {
-                //         System.out.print(ch[j][i]);
-                //     }
-                //     System.out.println();
+                // for (int i = 0; i < 15; i++) {
+                // System.out.print(ch[j][i]);
+                // }
+                // System.out.println();
                 // }
 
-
+                String ans = sb.toString();
+                System.out.println("ans = " + ans);
                 System.out.println("#" + tc + " " + sb.toString().replaceAll(" ", ""));
             }
         } catch (Exception e) {
