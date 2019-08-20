@@ -22,16 +22,9 @@ public class CustomerMain {
 //            for (CustomerVO vo : man.queryCustomer()) {
 //                System.out.println(vo.toString());
 //            }
-        } catch (SQLException e) {
-//            e.printStackTrace();
-            System.err.println("Connection Error");
         } finally {
             if (man != null) {
-                try {
-                    man.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                man.close();
             }
         }
     }

@@ -38,6 +38,7 @@ insert into student (num, name, addr, gender, dno) values ('20190103','송골매
 insert into department (dno, dname, loc) values ('10','java','303');
 insert into department (dno, dname, loc) values ('20','database','302');
 insert into department (dno, dname, loc) values ('30','python','301');
+insert into department (dno, dname, loc) values('40','c++','300');
 
 select * from student;
 select * from department;
@@ -48,7 +49,7 @@ values ('20190913','골뱅이','광산구','남', null);
 
 -- null값은 들어가지만(null은 비교할수 없기때문에 foreign key에 영향을 받지 않는다), department.dno에 없는 데이터는 데이터가 삽입되지 않는다.
 insert into student(num, name,addr, gender, dno)
-values ('20190919','강냉이','광산구','남', 40);
+values ('20190919','강냉이','광산구','남', 30);
 
 select * from student a, department b
 where a.dno = b.dno;
@@ -100,3 +101,20 @@ ORDER BY ename;
 
 -- outer join
 select * from emp;
+
+-- 이너조인에서는 데이터 참조 무결성이 깨지지 않았다는 전제 하에, 자식테이블에 있는 갯수만큼 나오게 된다
+select a.num, a.name, a.age, a.gender, b.dname, b.loc
+from student a, department b
+where a.dno = b.dno;
+
+
+select * from department;
+
+-- 학과 위치가 301인 학과의 학생 정보를 구하세요
+select dno from department where loc='301';
+select * from student where dno = '30';
+
+-- 위의 두 쿼리를 합친다
+select *
+from student
+where dno = (select dno from department where loc='301');
