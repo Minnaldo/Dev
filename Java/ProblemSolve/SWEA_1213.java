@@ -10,11 +10,12 @@ public class SWEA_1213 {
                 StringBuilder sb = new StringBuilder(br.readLine());
 
                 int idx = 0;
-                while (true) {
-                    idx = sb.indexOf(str, idx);
+                while (idx != -1) {
+                    idx = sb.indexOf(str, idx + 1);
+                    ans++;
                 }
 
-                System.out.println("#" + tc + " " + ans);
+                System.out.println("#" + tc + " " + (ans - 1));
             }
         } catch (Exception e) {
             e.printStackTrace();
