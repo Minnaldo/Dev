@@ -50,8 +50,8 @@ public class PermutationwithRepetition {
         arr[idx2] = tmp;
     }
 
-    // 중복순열을 만들까?
-    static void permutation(int[] arr, int n, int[] result) {
+    // 중복순열
+    static void repetition_permutation(int[] arr, int n, int[] result) {
         if (n == result.length) {
             System.out.println(Arrays.toString(result));
             return;
@@ -60,7 +60,7 @@ public class PermutationwithRepetition {
         // 재귀 호출을 어떻게 해야 중복순열이 만들어질까?
         for (int i = 0; i < arr.length; i++) {
             result[n] = arr[i];
-            permutation(arr, n + 1, result);
+            repetition_permutation(arr, n + 1, result);
         }
     }
 }

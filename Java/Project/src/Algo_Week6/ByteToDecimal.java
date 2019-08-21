@@ -12,14 +12,6 @@ public class ByteToDecimal {
             arr[i] = Character.digit(str.charAt(i), 10);
         }
 
-        for (int i = 0; i < n; i += 7) {
-            int sum = 0;
-            for (int j = i + 6; j >= i; j--) {
-                sum += arr[j] * Math.pow(2, j%7);
-            }
-            System.out.print(sum + " ");
-        }
-        System.out.println();
         int start = 0;
         int end = 7;
         while (end <= str.length()) {
