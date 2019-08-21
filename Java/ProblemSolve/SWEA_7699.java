@@ -14,6 +14,8 @@ public class SWEA_7699 {
     static int ans, r, c;
     static int[][] dir = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
+    // TODO
+    // 백트래킹을 구현하여 시간을 줄일 수 있다.
     static void recur(char[][] map, boolean[] visit, int y, int x, int cnt) {
 
         boolean flag = false;
