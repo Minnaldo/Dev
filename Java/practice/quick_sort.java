@@ -25,24 +25,23 @@ public class quick_sort {
         // 배열의 중간에 있는 값을 피벗으로 설정
         int pivot = (start + end) / 2;
 
-        while (left < right) {
-            while (arr[left] <= arr[pivot] && left <= end) {
+        while (left <= right) {
+            while (arr[left] <= arr[pivot]) {
                 left++;
             }
-            while (arr[right] > arr[pivot]) {
+            while (arr[right] >= arr[pivot]) {
                 right--;
             }
             if (left < right) {
                 swap(arr, left, right);
-                // left++;
-                // right--;
             }
         }
 
         swap(arr, left, pivot);
 
-        return left;
+        return pivot;
     }
+
 
     public static void main(String[] args) {
         int[] arr = { 2, 0, 1, 6, 8, 5, 6, 3, 4, 9, 7 };
