@@ -13,6 +13,7 @@ import org.w3c.dom.NodeList;
 
 public class MyDOMParser {
 
+    // xml파일의 링크를 받아 데이터를 분석후 리턴한다
     public ArrayList<Check> getContent(String url) {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

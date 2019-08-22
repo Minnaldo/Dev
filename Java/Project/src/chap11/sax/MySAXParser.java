@@ -1,6 +1,7 @@
 package chap11.sax;
 
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
@@ -27,8 +28,10 @@ public class MySAXParser {
             // 예제에서, result.xml을 가져와 파싱을 하는 것
             // xml파일과 핸들러를 할당
             // 핸들러는 DefaultHandler 클래스를 상속받는다
-            parser.parse(new URL(url).openConnection().getInputStream(), handler);
+//            parser.parse(new URL(url).openConnection().getInputStream(), handler);
+            parser.parse(new File(url), handler);
             // xml 파싱 후 처리된 데이터를 리턴해준다.
+
             return list;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -44,13 +47,17 @@ public class MySAXParser {
         public void characters(char[] ch, int start, int length)
                 throws SAXException {
             super.characters(ch, start, length);
+//            System.out.println("Characters == ch  ::::  "+ch);
             sb.append(ch, start, length);
+            String str = new String(ch, start, length);
+            System.out.println("str :: " + str);
         }
 
         @Override
         public void endElement(String uri, String localName, String name)
                 throws SAXException {
             super.endElement(uri, localName, name);
+            // 현재 ch는 Check 객체
             if (this.ch != null) {
                 if (name.equalsIgnoreCase("Clean")) {
                     ch.setClean(sb.toString().trim());
@@ -79,7 +86,7 @@ public class MySAXParser {
             sb = new StringBuilder();
         }
 
-		// stat태그에는 속성값이 들어 갈 수 있다.
+        // stat태그에는 속성값이 들어 갈 수 있다.
         // start태그가 끝나기전에 속성값을 읽어야 함
         @Override
         public void startElement(String uri, String localName, String name,

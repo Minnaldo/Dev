@@ -11,14 +11,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class DomParser {
 
 
-    public void getContent(String url) {
+    public ArrayList<Check> getContent(String url) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         ArrayList<Check> list = new ArrayList<>();
         try {
@@ -63,7 +62,7 @@ public class DomParser {
                 // 리스트에 처리된 객체를 삽입
                 list.add(check);
             }
-
+            return list;
         } catch (
                 ParserConfigurationException e) {
             e.printStackTrace();
@@ -72,6 +71,7 @@ public class DomParser {
         } catch (SAXException e) {
             e.printStackTrace();
         }
+
 
         return list;
     }
