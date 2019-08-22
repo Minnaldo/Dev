@@ -11,19 +11,24 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class MySAXParser {
+    // 데이터를 저장할 변수
     ArrayList<Check> list;
 
     public ArrayList<Check> getContent(String url) {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
             // SAXParserFactory에서 SAXParser를 가져온다
+            // SAXParser 할당
             SAXParser parser = factory.newSAXParser();
             // 핵심
 
             MyHandler handler = new MyHandler();
             // 주소로 접속해 inputstream을 가져온다 ==> 서버에서 데이터를 가져와 파싱을 한다.
             // 예제에서, result.xml을 가져와 파싱을 하는 것
+            // xml파일과 핸들러를 할당
+            // 핸들러는 DefaultHandler 클래스를 상속받는다
             parser.parse(new URL(url).openConnection().getInputStream(), handler);
+            // xml 파싱 후 처리된 데이터를 리턴해준다.
             return list;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -69,6 +74,7 @@ public class MySAXParser {
         @Override
         public void startDocument() throws SAXException {
             super.startDocument();
+            // 문서 시작시 데이터를 저장할 객체를 선언해준다
             list = new ArrayList<Check>();
             sb = new StringBuilder();
         }
