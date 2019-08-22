@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class SWEA_2806 {
+public class N_Queen {
 
     static int[][] dir = { { -1, -1 }, { -1, 0 }, { -1, 1 } };
     static int N, ans;
