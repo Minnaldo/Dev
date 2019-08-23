@@ -10,7 +10,7 @@ public class Combination {
     }
 
     /**
-     * 조합 Combination
+     * 조합 (Combination) nCr : 순서에 상관없이 r개를 뽑는 경우의 수
      *
      * @param arr 숫자를 뽑을 원본 배열...
      * @param idx 원본 배열을 탐색하는 인덱스
@@ -60,6 +60,15 @@ public class Combination {
             perm_re(arr, sel, k + 1);
         }
     }
+
+    /**
+     * 순열(Permutation) nPr : n개중 r개를 중복없이 순서에 맞게 고르는 경우의 수
+     *
+     * @param arr
+     * @param sel
+     * @param k
+     * @param visit
+     */
 
     static void perm(int[] arr, int[] sel, int k, boolean[] visit) {
         if (k == sel.length) {

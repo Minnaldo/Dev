@@ -10,7 +10,9 @@ public class powerset_Sum_recur {
             return;
         }
 
-        recur(arr, idx+1, sum+arr[idx]);
-        recur(arr, idx+1, sum);
+        // 선택 한것
+        recur(arr, idx + 1, sum + arr[idx]);
+        // 선택 안한 것
+        recur(arr, idx + 1, sum);
     }
 }
