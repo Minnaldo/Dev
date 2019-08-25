@@ -6,14 +6,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
+            "name": "Java Debugging",
             "request": "launch",
-
-            "classPaths": [
-                "${workspaceFolder}\\Java\\out"
-            ],
-            "mainClass": "${fileBasenameNoExtension}"
+            "mainClass": "${file}"
         },
+
         {
             "name": "Python Debuger",
             "type": "python",

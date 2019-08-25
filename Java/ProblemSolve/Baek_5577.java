@@ -32,18 +32,19 @@ public class Baek_5577 {
                 }
             }
 
-            if (cnt > 3) {
-                System.out.println("i= " + i);
-                for (int j = i; j < i + cnt; j++)
+            if (cnt + 1 > 3) {
+                // System.out.println("i=" + i);
+                for (int j = i; j < i + cnt; j++) {
+                    System.out.println("j=" + j);
                     arr.remove(j);
-                cnt = 0;
+                }
                 i = 0;
             } else {
                 i++;
             }
+            System.out.println(arr.toString());
         }
 
-        System.out.println(arr.toString());
         int fin = arr.size();
         ans = ans < fin ? ans : fin;
     }
@@ -57,7 +58,7 @@ public class Baek_5577 {
                 arr.add(Integer.parseInt(br.readLine()));
             }
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 5; i < 6; i++) {
                 int initVal = arr.get(i);
                 if (initVal == 1) {
                     arr.set(i, 2);
