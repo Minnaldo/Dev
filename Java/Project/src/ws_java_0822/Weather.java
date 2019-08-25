@@ -1,6 +1,7 @@
 package ws_java_0822;
 
 public class Weather {
+    private int seq;
     private int hour;
     private double temp;
     private String wfKor;
@@ -16,10 +17,19 @@ public class Weather {
         this.reh = reh;
     }
 
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
     @Override
     public String toString() {
         return "Weather{" +
-                "hour=" + hour +
+                "seq=" + seq +
+                ", hour=" + hour +
                 ", temp=" + temp +
                 ", wfKor='" + wfKor + '\'' +
                 ", reh=" + reh +
