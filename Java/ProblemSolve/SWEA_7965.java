@@ -12,11 +12,11 @@ public class SWEA_7965 {
 
         if (y % 2 == 0) {
             // 짝수
-            long tmp = pow(x, y / 2);
+            long tmp = pow(x, y / 2)%1000000007;
             return (tmp * tmp)%1000000007;
         } else {
             // 홀수
-            long tmp = pow(x, (y - 1) / 2);
+            long tmp = pow(x, y/ 2)%1000000007;
             return (tmp * tmp * x)%1000000007;
         }
     }
@@ -29,7 +29,7 @@ public class SWEA_7965 {
                 BigInteger bi = new BigInteger("1");
                 for (int i = 2; i <= n; i++) {
                     // ans += (pow(i, i));
-                    bi = bi.add(BigInteger.valueOf((pow(i, i))));
+                    bi = bi.add(BigInteger.valueOf((pow(i, i)%1000000007)));
                     bi = bi.mod(BigInteger.valueOf(1000000007));
                 }
 
