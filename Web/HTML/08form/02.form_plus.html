@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Form Example</title>
+</head>
+
+<body>
+	<!-- action : 갈 서버의 주소, method : 전송 방식 -->
+	<form action="../jsp/plus_form.jsp" method="post">
+		<!-- form안에 들어가는 markup tag -->
+		<input type="text" name="op1" value="0" />
+		+
+		<input type="text" name="op2">
+		<input type="submit" value="=" />
+		<input type="text" name="result" readonly="readonly" />
+		<!-- from내의 input에 삽입한 값들을 지워준다 -->
+		<input type="reset" value="clear" />
+	</form>
+</body>
+
+</html>

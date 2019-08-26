@@ -9,21 +9,11 @@ public class Baek_5577 {
 
     static int ans, n;
 
-    // dfs를 이용해 같은 문자열의 길이를 탐색한다
-    static int dfs(ArrayList<Integer> arr, int cnt, int idx) {
-        if (arr.get(idx) != arr.get(idx + 1)) {
-            return cnt;
-        }
-        return dfs(arr, cnt + 1, idx + 1);
-    }
-
     static void func(ArrayList<Integer> arr, boolean[] visit) {
         int i = 0;
+
         while (i < arr.size() - 3) {
             int cnt = 0;
-            // if (arr.get(i) == arr.get(i + 1))
-            // cnt = dfs(arr, 0, i);
-
             for (int a = i; i < arr.size() - 1; a++) {
                 if (arr.get(a) == arr.get(a + 1)) {
                     cnt++;
@@ -32,17 +22,16 @@ public class Baek_5577 {
                 }
             }
 
+            // 왜 안지워 지는 겨 ?
             if (cnt + 1 > 3) {
-                // System.out.println("i=" + i);
-                for (int j = i; j < i + cnt; j++) {
-                    System.out.println("j=" + j);
-                    arr.remove(j);
+                int rmIdx = i;
+                for (int j = i; j <= i + cnt; j++) {
+                    arr.remove(rmIdx);
                 }
                 i = 0;
             } else {
                 i++;
             }
-            System.out.println(arr.toString());
         }
 
         int fin = arr.size();
@@ -50,7 +39,7 @@ public class Baek_5577 {
     }
 
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             n = Integer.parseInt(br.readLine());
             ans = 987654321;
             ArrayList<Integer> arr = new ArrayList<>();
@@ -58,7 +47,7 @@ public class Baek_5577 {
                 arr.add(Integer.parseInt(br.readLine()));
             }
 
-            for (int i = 5; i < 6; i++) {
+            for (int i = 0; i < n; i++) {
                 int initVal = arr.get(i);
                 if (initVal == 1) {
                     arr.set(i, 2);
