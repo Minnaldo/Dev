@@ -4,7 +4,7 @@ import java.util.*;
 public class Baek_16922 {
 
     static int n;
-    static int[] arr = { 1, 5, 10, 50 };
+    static int[] arr = { 5, 10, 50 };
     static HashSet<Integer> set;
 
     static void recur(int idx, int sum, int num) {
@@ -13,7 +13,7 @@ public class Baek_16922 {
             set.add(sum);
             return;
         }
-// TODO : need backtarck
+
         if (num >= 50) {
             recur(idx + 1, sum + 50, num);
         }
@@ -30,12 +30,12 @@ public class Baek_16922 {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             n = Integer.parseInt(br.readLine());
             int ans = 0;
-            // arr = new int[21][4];
             set = new HashSet<>();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
                 recur(0, 0, arr[i]);
             ans = set.size();
+            System.out.println(set.toString());
             System.out.println(ans);
 
         } catch (Exception e) {

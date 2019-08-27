@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- cacading (절차지향적인): 따로 선언한 태그에는 속성이 적용되지 않는다 -->
+	<!-- css를 외부파일로 만들어놓고 link하는 방법 -->
+	<link href="../css/usingcss.css" rel="stylesheet" type="text/css" />
+	<!-- head태그안에  stylesheet 지정 -->
+	<!-- style의 타입이 css임을 나타냄 -->
+	<style type="text/css">
+		/* body selector */
+		body {
+			background: yellow;
+			height: 70em;
+		}
+
+		/* * (all) : 모든 태그에 속성을 주게 된다 */
+		* {
+			border: 1px dotted #ffff00;
+		}
+
+		/* selector : body내의 p태그를 선택한다 */
+		p {
+			color: blue;
+			background: gray;
+		}
+
+		/* #aaa : id가 aaa인 태그를 선택 */
+		#aaa {
+			color: red;
+		}
+
+		#bbb {
+			font-size: 3em;
+		}
+
+		/* 클래스는 . 으로 표시함 */
+		.ccc {
+			font-size: 5em;
+		}
+	</style>
+	<title>CSS Define Example</title>
+</head>
+
+<body>
+	<!-- 마크업 안에 style을 부여하는 방식은 옛날 방식 -->
+	<!-- inline css -->
+	<!-- class : 여러 마크업이 동시에 가질 수 있다. -->
+	<!-- id : 하나의 마크업만이 가질 수 있다. -->
+	<p id="aaa" class="ccc">am I red or blue?</p>
+	<p class="ccc">am I red or blue?</p>
+	<p style="color: red; font-size: 30px;">am I black?</p>
+</body>
+
+</html>

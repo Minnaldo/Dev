@@ -21,7 +21,6 @@ public class Baek_5577 {
                     break;
                 }
             }
-
             // 왜 안지워 지는 겨 ?
             if (cnt + 1 > 3) {
                 int rmIdx = i;
@@ -39,7 +38,7 @@ public class Baek_5577 {
     }
 
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
             n = Integer.parseInt(br.readLine());
             ans = 987654321;
             ArrayList<Integer> arr = new ArrayList<>();
