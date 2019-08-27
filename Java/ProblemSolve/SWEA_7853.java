@@ -5,6 +5,13 @@ public class SWEA_7853 {
 
     static HashSet<String> set;
 
+    static void recur(StringBuilder sb, int idx) {
+        if (sb.length() == idx) {
+            set.add(sb.toString());
+            return;
+        }
+    }
+
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
             int t = Integer.parseInt(br.readLine());
