@@ -1,10 +1,14 @@
 import java.io.*;
 import java.util.StringTokenizer;
 
+/**
+ *  영식이와 친구들
+ */
+
+
 public class Baek_1592 {
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             StringTokenizer st = new StringTokenizer(br.readLine());
 
             int n = Integer.parseInt(st.nextToken());
@@ -13,31 +17,37 @@ public class Baek_1592 {
 
             int[] arr = new int[n];
             int idx = 0;
+            arr[idx] = 1;
             while (true) {
-                if (arr[idx] == 5) {
+
+                if (arr[idx] == m) {
                     break;
                 }
-                if ((idx + 1) % 2 == 0) {
-                    // 오른쪽으로, 반시계 방향
-                    idx += l;
-                    idx %= n;
-                } else {
-                    // 왼쪽으로, 시계 방향
-                    if (idx > l) {
+
+                // 받은 횟수가 짝수번
+                if (arr[idx] % 2 == 0) {
+                    // 반시계 방향
+                    if (idx >= l) {
                         idx -= l;
                     } else {
                         idx = n - (l - idx);
                     }
+                } else {
+                    // 시게방향
+                    idx += l;
+                    if (idx >= n)
+                    idx = (idx % n);
                 }
+                System.out.println("idx=" + idx);
                 arr[idx]++;
             }
             StringBuilder sb = new StringBuilder();
+            int sum = 0;
             for (int i = 0; i < n; i++) {
-                sb.append(arr[i]).append(" ");
+                sum += arr[i];
             }
 
-            bw.write(sb.toString().trim());
-            bw.flush();
+            System.out.println(sum-1);
         } catch (Exception e) {
             e.printStackTrace();
         }
