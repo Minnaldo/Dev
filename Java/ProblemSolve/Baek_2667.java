@@ -1,16 +1,15 @@
-package tmp;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
-public class 단지2667 {
+/**
+ * 	맵에서 영역의 갯수와 각 영역의 크기를 구하는 문제
+ */
+
+public class Baek_2667 {
 	static int[][] dir = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
 	public static void main(String[] args) {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
 
 			int n = Integer.parseInt(br.readLine());
 
@@ -27,6 +26,7 @@ public class 단지2667 {
 						int sum = 1;
 						Queue<Pair> q = new LinkedList<>();
 						q.add(new Pair(i, j));
+						visit[i][j] = true;
 						while (!q.isEmpty()) {
 							int y = q.peek().first;
 							int x = q.peek().second;
@@ -48,13 +48,14 @@ public class 단지2667 {
 					}
 				}
 			}
-			
+
+			System.out.println(arr.size());
 			Collections.sort(arr);
-			int size = arr.size()-1;
-			for(int i = 0; i<size; i++) {
+			int size = arr.size() - 1;
+			for (int i = 0; i < size; i++) {
 				System.out.println(arr.get(i));
 			}
-			System.out.println(arr.get(arr.size()-1));
+			System.out.println(arr.get(arr.size() - 1));
 
 		} catch (Exception e) {
 		}
