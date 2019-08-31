@@ -1,56 +1,62 @@
 import java.io.*;
 import java.util.*;
-
-// TODO
+/**
+ * * 인접 행렬을 만들어서 bfs를 이용한다
+ */
 
 public class SWEA_1238 {
 
+    static boolean[] visit;
+    static int[][] map;
+
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
-            for (int tc = 1; tc <= 1; tc++) {
+            for (int tc = 1; tc <= 10; tc++) {
                 StringTokenizer st = new StringTokenizer(br.readLine());
                 int n = Integer.parseInt(st.nextToken());
                 int start = Integer.parseInt(st.nextToken());
                 int ans = 0;
-                int cnt = 0;
-                ArrayList<ArrayList<Pair>> arr = new ArrayList<>();
-                boolean[] visit = new boolean[n];
+                map = new int[101][101];
+                visit = new boolean[101];
                 st = new StringTokenizer(br.readLine());
-
-                for (int i = 0; i < n; i++) {
-                    arr.add(new ArrayList<Pair>());
-                }
 
                 for (int i = 0; i < (n / 2); i++) {
                     int y = Integer.parseInt(st.nextToken());
                     int x = Integer.parseInt(st.nextToken());
-                    arr.get(y).add(new Pair(x, 0));
+                    // y에서 x로 가는길이 있으면 1
+                    map[y][x] = 1;
                 }
 
-                Queue<Pair> q = new LinkedList<>();
-                q.add(new Pair(start, 1));
+                Queue<Integer> q = new LinkedList<>();
+                q.add(start);
                 visit[start] = true;
-
+                HashMap<Integer, Integer> hmap = new HashMap<>();
+                hmap.put(start, 1);
                 while (!q.isEmpty()) {
-                    int caller = q.peek().first;
-                    int len = q.peek().second;
-                    System.out.println(len);
-                    for (int i = 0; i < arr.get(caller).size(); i++) {
-                        if (!visit[arr.get(caller).get(i).first]) {
-
-                            arr.get(caller).set(i, new Pair(i, len + 1));
-                            // arr.get(caller).get(i).second++;
-                            q.add(arr.get(caller).get(i));
-                            visit[arr.get(caller).get(i).first] = true;
+                    int current = q.poll();
+                    // 우선은 100까지 돌자
+                    for (int i = 1; i <= 100; i++) {
+                        if (map[current][i] == 1) {
+                            if (!visit[i]) {
+                                // 연락할 수 있고
+                                // 연락을 한적이 없을 때
+                                q.add(i);
+                                hmap.put(i, hmap.get(current) + 1);
+                                visit[i] = true;
+                            }
                         }
                     }
-
-                    q.poll();
                 }
 
-                for (int i = 0; i < arr.size(); i++) {
-                    for (int j = 0; j < arr.get(i).size(); j++) {
-                        ans = cnt > arr.get(i).get(j).second ? ans : arr.get(i).get(j).first;
+                int max = 0;
+                for (Integer key : hmap.keySet()) {
+                    int seq = hmap.get(key);
+                    max = max > seq ? max : seq;
+                }
+
+                for (Integer key : hmap.keySet()) {
+                    if (hmap.get(key) == max) {
+                        ans = ans > key ? ans : key;
                     }
                 }
 

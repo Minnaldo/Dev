@@ -29,7 +29,6 @@ public class WeatherDAO2 {
     }
 
     public List<Weather> getWeatherList() {
-        System.out.println("start sax parser");
         SAXParserFactory sFactory = SAXParserFactory.newInstance();
         try {
             SAXParser parser = sFactory.newSAXParser();
@@ -40,7 +39,7 @@ public class WeatherDAO2 {
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        return list;
+        return null;
     }
 
     public class MyHandler extends DefaultHandler {
@@ -51,9 +50,8 @@ public class WeatherDAO2 {
         @Override
         public void startDocument() throws SAXException {
             super.startDocument();
-            list = new ArrayList<>();
+            list = new ArrayList<Weather>();
             sb = new StringBuilder();
-            System.out.println("start document");
         }
 
         @Override
@@ -67,6 +65,11 @@ public class WeatherDAO2 {
             // 시작 태그를 찾으면 데이터 저장 객체를 초기화 해주고
             // 태그의 attribute를 저장하려면 저장해준다
             // 태그의 속성값을 가져오려면, attributes.getValue(input the index value)를 하면 된다
+            if (qName.equalsIgnoreCase("data")) {
+                w = new Weather();
+                // 속성중 seq를 이름으로 갖는 속성의 값을 가져온다
+                w.setSeq(Integer.parseInt(attributes.getValue(0)));
+            }
         }
 
         @Override

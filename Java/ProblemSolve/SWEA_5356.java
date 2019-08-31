@@ -8,29 +8,31 @@ public class SWEA_5356 {
                 StringBuilder sb = new StringBuilder();
 
                 char[][] ch = new char[5][15];
-
+                int maxlen = 0;
                 for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < sb.length(); j++) {
-                        ch[i][j] = ' ';
-                    }
+                    ch[i] = br.readLine().toCharArray();
+                    maxlen = maxlen > ch[i].length ? maxlen : ch[i].length;
                 }
 
                 for (int i = 0; i < 5; i++) {
-                    sb.append(br.readLine());
-                    for (int j = 0; j < sb.length(); j++) {
-                        ch[i][j] = sb.charAt(j);
+                    sb.append(ch[i]);
+                    if (ch[i].length < maxlen) {
+                        for (int j = 0; j < maxlen - ch[i].length; j++) {
+                            sb.append('*');
+                        }
                     }
+                    ch[i] = sb.toString().toCharArray();
                     sb.setLength(0);
                 }
 
-                for (int i = 0; i < 15; i++) {
+                for (int i = 0; i < ch[0].length; i++) {
                     for (int j = 0; j < 5; j++) {
-                        sb.append(ch[j][i]);
+                        if (ch[j][i] != '*')
+                            sb.append(ch[j][i]);
                     }
                 }
 
-
-                System.out.println("#" + tc + " " + ans);
+                System.out.println("#" + tc + " " + sb.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();

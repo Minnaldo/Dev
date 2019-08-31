@@ -5,11 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/Web/HTML"
+        },
+        {
             "type": "java",
+<<<<<<< HEAD
             "name": "Java Debugger",
+=======
+            "name": "Java Debugging",
+>>>>>>> master
             "request": "launch",
             "mainClass": "${file}"
         },
+
         {
             "name": "Python Debuger",
             "type": "python",

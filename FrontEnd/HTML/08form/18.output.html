@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Output</title>
+	<script type="text/javascript">
+		function resCalc() {
+			numA = document.getElementById("numA").value;
+			numB = document.getElementById("numB").value;
+			document.getElementById("result").value = Number(numA) + Number(numB);
+		}
+	</script>
+</head>
+
+<body>
+	<form>
+		<input name="numa" type="number">
+		+
+		<input name="numb" type="number">
+		=
+		<!-- 나온 결과물을 보여준다 -->
+		<output name="result" onforminput="value=numa.valueAsNumber + numb.valueAsNumber"></output>
+	</form>
+</body>
+
+</html>
