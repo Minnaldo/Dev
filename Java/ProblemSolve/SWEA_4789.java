@@ -9,15 +9,18 @@ public class SWEA_4789 {
                 StringBuilder sb = new StringBuilder(br.readLine());
                 int size = sb.length();
                 int tmpSum = Character.digit(sb.charAt(0), 10);
-
-                for (int i = 1; i < size; i++) {
+                int cnt = 0;
+                for (int i = 0; i < size; i++) {
                     int tmp = Character.digit(sb.charAt(i), 10);
-                    if (tmpSum < i) {
-                        ans++;
-                        tmpSum += 1;
-                    } else
-                        tmpSum += tmp;
+                    if (tmp == 0) {
+                        // flag = false;
+                        cnt++;
+                    }
+                    tmpSum += tmp;
                 }
+
+                if (size > tmpSum)
+                    ans = size - tmpSum + 1;
 
                 System.out.println("#" + tc + " " + ans);
             }
