@@ -17,7 +17,6 @@ public class SWEA_6900 {
                 for (int i = 0; i < n; i++) {
                     st = new StringTokenizer(br.readLine());
                     arr[i] = new Pair(st.nextToken(), Integer.parseInt(st.nextToken()));
-                    System.out.println(arr[i].number + "     " + arr[i].price);
                 }
 
                 for (int i = 0; i < m; i++) {
