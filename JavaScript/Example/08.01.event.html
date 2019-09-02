@@ -6,23 +6,34 @@
 	<title>new document</title>
 	<script type="text/javascript">
 		function theFnc() {
-			alert("javascript");
+			alert("javascript!!!!!!!!!");
 		}
 
 		function theFnc2() {
-			alert("javascript2");
+			alert("javascript2!!!!!!!!!!!!");
 		}
 
+		// 윈도우가 로드될 때 실행
+		// onload : 객체가 다 만들어지고 화면에 보여지기 전에
 		window.onload = function () {
 			var myBtn = document.getElementById("btn1");
 			console.log(myBtn);
 
+			// 함수 호출에 괄호를 작성하지 않아도 되는 이유 : onclick은 클릭했을때 리턴값을 보여주는 것이 아니라, 이벤트가 발생했을 때 '함수가 실행'되어야 하기 때문에
+			// event : onclick , event listener : theFnc
 			myBtn.onclick = theFnc;
 			//myBtn.onclick = theFnc2;
+			// 최근의 이벤트 방식
+			// 하향식이 capturing : true, 상향식 bubbling : false
+			myBtn.addEventListener("click", theFnc, true);
 		}
 
 		function aa() {
+			// 자바스크립트에서 html 노드를 찾는 방법
+			// id는 중복되지 않으므로, 그에 해당하는 객체가 나온다
 			var btn = document.getElementById('btn1');
+			// btns 무조건 배열이다. 태그는 여러개가 있을 수 있기 때문에
+			var btns = document.getElementsByTagName('');
 			console.log(btn);
 		}
 	//window.document.getElementsByTagName(tagName)
@@ -36,6 +47,7 @@
 
 	<button id="btn1">버튼1</button>
 	<br />
+	<!-- 옛날 방식 -->
 	<button id="btn2" onclick="theFnc2()">버튼2</button>
 </body>
 
