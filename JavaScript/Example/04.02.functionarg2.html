@@ -1,25 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
 
-function c(){
-	console.log('function c');
-}
+		function c() {
+			console.log('function c');
+		}
 
-var a = function(b){
-	b();
-}
+		var a = function (b) {
+			// 변수 b에 할당되어 있는 함수를 실행함
+			b();
+		}
 
-a(c);
+		// 인자로 함수를 넘길 수 있다.
+		// 출력 : function c
+		a(c);
 
-</script>
+	</script>
 </head>
+
 <body>
 
 </body>
+
 </html>
-
-

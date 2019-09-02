@@ -1,28 +1,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
 
-var a = function(p1, p2){
-	console.log(p1+","+p2);
-	if(!arguments.length){
-		console.log("no args");
-	}else{
-		console.log(arguments.length);
-		for(var i=0;i<arguments.length;i++){
-			console.log(arguments[i]);
-		}	
-	}
-}
-a();
-a(1,2,3,4,5);
-</script>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+
+		var a = function (p1, p2) {
+			console.log(p1 + "," + p2);
+			// arguments : 호출할 때 입력한 인자가 담긴다
+			// 들어온 값을 배열로 처리할 수 있다.
+			if (!arguments.length) {
+				console.log("no args");
+			} else {
+				console.log(arguments.length);
+				for (var i = 0; i < arguments.length; i++) {
+					console.log(arguments[i]);
+				}
+			}
+		}
+		// undefined 타입 : 선언은 되었으나 값이 들어가지 않을 때
+		// 호출할 때 인자값을 안주어도 에러가 발생하지 않는다
+		a();
+		a(1, 2, 3, 4, 5);
+	</script>
 </head>
+
 <body>
 
 </body>
+
 </html>
-
-

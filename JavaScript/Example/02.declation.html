@@ -7,7 +7,10 @@
 var i = 10;
 //var k = "10";
 function a(){
+	// var 키워드를 사용하면 영역체크까지 하겠다.
+	// var를 사용하지 않으면 전역변수로 선언하게 된다.
 	var j = 20;
+	// k는 전역변수로 hoisting 된다
 	k = "30";
 	alert(i + j + k);
 }

@@ -17,19 +17,21 @@ public class Baek_8979 {
                 st = new StringTokenizer(br.readLine());
                 arr[i] = new Tuple(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
                         Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+
+                arr[i].score = arr[i].gold*100 + arr[i].silver*10 + arr[i].bronze;
             }
 
             Arrays.sort(arr, new Comparator<Tuple>() {
 
                 @Override
                 public int compare(Tuple t1, Tuple t2) {
-                    if (t1.gold > t2.gold) {
+                    if (t1.gold >= t2.gold) {
                         return -1;
                     } else if (t1.gold == t2.gold) {
-                        if (t1.silver > t2.silver) {
+                        if (t1.silver >= t2.silver) {
                             return -1;
                         } else if (t1.silver == t2.silver) {
-                            if (t1.bronze > t2.bronze) {
+                            if (t1.bronze >= t2.bronze) {
                                 return -1;
                             }
                         }
@@ -38,7 +40,9 @@ public class Baek_8979 {
                 }
             });
 
-
+            for (Tuple t : arr) {
+                System.out.println(t.toString());
+            }
 
             for (int i = 0; i < n; i++) {
                 if (arr[i].number != k) {
@@ -56,13 +60,18 @@ public class Baek_8979 {
     }
 
     static class Tuple {
-        int gold, silver, bronze, number;
+        int gold, silver, bronze, number, score;
 
         Tuple(int gold, int silver, int bronze, int number) {
             this.gold = gold;
             this.silver = silver;
             this.bronze = bronze;
             this.number = number;
+        }
+
+        @Override
+        public String toString() {
+            return this.gold + ", " + this.silver + ", " + this.bronze + ", " + this.number;
         }
     }
 }
