@@ -7,12 +7,17 @@
 	<script type="text/javascript">
 
 		function aa() {
+			// 함수 안에 함수가 들어갈 수 있음 : 함수는 객체이므로
 			function inaa() {
 				console.log('inaa');
 			}
+			// 자바스크립트는 배열로 리턴이 가능함
+			// 값을 여러개 리턴함
 			return [3, 4];
 		}
 
+		// 클로저 : 리턴타입을 함수로 함
+		// 이를 이용해 캡슐화(encapsulation)가 가능하다
 		var va = aa();
 		console.log(va[0] + " : " + va[1]);
 
@@ -25,8 +30,12 @@
 				console.log('inbb');
 			}
 
+			// 함수를 리턴함
+			// 함수 자체를 리턴하였다.
 			return [inaa, inbb];
 		}
+
+		// vb의 첫번째에는 inaa, 두번째에는 inbb가 들어가 있다.
 		var vb = bb();
 		vb[0]();
 		vb[1]();

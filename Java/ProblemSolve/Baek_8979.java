@@ -13,46 +13,26 @@ public class Baek_8979 {
             int k = Integer.parseInt(st.nextToken());
             Tuple[] arr = new Tuple[n];
 
+            int score = 0;
             for (int i = 0; i < n; i++) {
                 st = new StringTokenizer(br.readLine());
                 arr[i] = new Tuple(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
                         Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
-                arr[i].score = arr[i].gold*100 + arr[i].silver*10 + arr[i].bronze;
-            }
+                arr[i].score = arr[i].gold * 100 + arr[i].silver * 10 + arr[i].bronze;
 
-            Arrays.sort(arr, new Comparator<Tuple>() {
-
-                @Override
-                public int compare(Tuple t1, Tuple t2) {
-                    if (t1.gold >= t2.gold) {
-                        return -1;
-                    } else if (t1.gold == t2.gold) {
-                        if (t1.silver >= t2.silver) {
-                            return -1;
-                        } else if (t1.silver == t2.silver) {
-                            if (t1.bronze >= t2.bronze) {
-                                return -1;
-                            }
-                        }
-                    }
-                    return 1;
+                if (k - 1 == i) {
+                    score = arr[i].score;
                 }
-            });
-
-            for (Tuple t : arr) {
-                System.out.println(t.toString());
             }
 
             for (int i = 0; i < n; i++) {
-                if (arr[i].number != k) {
+                if(arr[i].score > score){
                     ans++;
-                } else {
-                    break;
                 }
             }
 
-            System.out.println(ans);
+            System.out.println(ans+1);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,11 +47,6 @@ public class Baek_8979 {
             this.silver = silver;
             this.bronze = bronze;
             this.number = number;
-        }
-
-        @Override
-        public String toString() {
-            return this.gold + ", " + this.silver + ", " + this.bronze + ", " + this.number;
         }
     }
 }
