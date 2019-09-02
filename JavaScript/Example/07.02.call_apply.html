@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript">
+
+        var Person = function (name) {
+            this.name = name;
+        }
+        var Apple = function (apple) {
+            this.name = apple;
+        }
+
+        Person.prototype.getName = function () {
+            return this.name;
+        }
+
+        var p1 = new Person('lee');
+        var app = new Apple("사과");
+        console.log(p1.getName())
+        console.log(p1.getName.call(app));
+        // apply : 다른 객체의 함수를 적용시킨다
+        // p1의 getname이라는 함수를 app이라는 객체에 적용 시킨다
+        console.log(p1.getName.apply(app));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

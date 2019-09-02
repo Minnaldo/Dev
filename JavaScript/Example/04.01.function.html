@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<script>
+		function test() {
+			document.write("aaaaa");
+		}
+		test();
+
+		// 호출부가 선언부보다 앞에 있어도 된다.
+		a();
+		// 함수는 주소로 실행
+		function a() {
+			console.log("a()");
+		}
+
+		// b가 아직 function인지 아닌지 확정되지 않았음
+		// 그러므로 미리 실행되면 에러 발생
+		//b();
+		// 변수에 함수의 주소를 할당
+		// 변수(); 로 함수를 실행
+		var b = function () {
+			console.log("b()");
+		}
+
+		// 함수 호출이 아닌 변수만 부르면 function(){....}이 출력
+		//console.log(b);
+
+		// 함수의 멤버로 함수를 집어넣음 (js에서 함수는 객체) --> 객체로 생각하자
+		// a객체(함수) 에 c라는 변수를 만들게 된 것( 변수에 여러가지가 들어갈 수 있다. )
+		// 그러므로 함수(객체) 안에 함수(객체)가 들어갈 수 있게 된다.
+		// a의 멤버 접근 '.' 으로 c를 가져옴
+		a.c = function () {
+			console.log("c()");
+		}
+
+
+		///a();
+		//b();
+		a.c();	// c만 나오게 됨
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>

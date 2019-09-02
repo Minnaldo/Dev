@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		// 1급 함수 : 함수를 선언과 동시에 실행
+		// 함수 전체를 소괄호로 쌓은 뒤, 바로 호출을 한다.
+		var module = (function () {
+			var i = 0;
+
+			function increment() {
+				i = i + 1;
+			}
+
+			function getCount() {
+				increment();
+				return i;
+			}
+
+			return {
+				count: getCount
+			}
+
+		})();
+		console.log(module.count());
+	</script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

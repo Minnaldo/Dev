@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+
+		function a() {
+			console.log("function a()");
+			var b = function (f) {
+				console.log("function a > b()")
+				f();
+			};
+			return b;
+		};
+
+		function b() {
+			console.log("function b()");
+		}
+
+		// 내부 함수 function b
+		var c = a();
+		c(b);
+
+		//c.b = function(){
+		//	console.log('c.b');
+		//}
+		//c.b();
+
+		a.b();
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>

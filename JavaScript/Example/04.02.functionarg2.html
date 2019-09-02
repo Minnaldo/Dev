@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+
+		function c() {
+			console.log('function c');
+		}
+
+		var a = function (b) {
+			// 변수 b에 할당되어 있는 함수를 실행함
+			b();
+		}
+
+		// 인자로 함수를 넘길 수 있다.
+		// 출력 : function c
+		a(c);
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
