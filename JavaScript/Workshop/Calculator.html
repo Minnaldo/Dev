@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+
+    <script type="text/javascript">
+
+        // 결과를 계산한다
+        function calculate() {
+            var a = document.getElementById('ret').value;
+            var ret = eval(a);
+            document.getElementById('ret').value = ret;
+            var addResult = document.createElement('li');
+            addResult.appendChild(document.createTextNode(a + ' = ' + ret));
+            document.getElementById('history').appendChild(addResult);
+        }
+
+        function init() {
+            var ret = document.getElementById('ret');
+            ret.value = '0.0';
+            ret.style.color = "gray";
+        }
+
+        function btnFunc() {
+            var val = document.getElementById("ret").value;
+            if (val == '0.0') {
+                document.getElementById("ret").value = this.value;
+            } else {
+                document.getElementById("ret").value = document.getElementById("ret").value + ' ' + this.value;
+            }
+
+        }
+
+        window.onload = function () {
+            var btns = document.getElementsByClassName('nbtn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", btnFunc, true);
+            }
+
+            document.getElementById('calret').addEventListener("click", calculate, true);
+            document.getElementById('ce').addEventListener('click', init, true);
+            document.getElementById('div').addEventListener('click', function () {
+                var before = document.getElementById('ret').value;
+                document.getElementById('ret').value = before + ' ' + this.value;
+
+            });
+            document.getElementById('plus').addEventListener('click', function () {
+                var before = document.getElementById('ret').value;
+                document.getElementById('ret').value = before + ' ' + this.value;
+            });
+            document.getElementById('minus').addEventListener('click', function () {
+                var before = document.getElementById('ret').value;
+                document.getElementById('ret').value = before + ' ' + this.value;
+            });
+            document.getElementById('mul').addEventListener('click', function () {
+                var before = document.getElementById('ret').value;
+                document.getElementById('ret').value = before + ' ' + this.value;
+            });
+        }
+
+
+
+    </script>
+    <style>
+        .nbtn {
+            float: left;
+            width: 50px;
+            height: 40px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .btn {
+            float: left;
+            width: 50px;
+            height: 40px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        #calc {
+            width: 250px;
+        }
+
+        #history {
+            font-weight: bold;
+        }
+
+        #histories {
+            clear: both;
+        }
+
+        input {
+            text-align: right;
+            font-size: 20px;
+            width: 250px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <input id="ret" value="0.0" style="color: gray"></input>
+    </p>
+    <p id="calc">
+        <button class="nbtn" value="7">7</button>
+        <button class="nbtn" value="8">8</button>
+        <button class="nbtn" value="9">9</button>
+        <button class="btn" id="plus" value="+">+</button>
+        <button class="nbtn" value="4">4</button>
+        <button class="nbtn" value="5">5</button>
+        <button class="nbtn" value="6">6</button>
+        <button class="btn" id="minus" value="-">-</button>
+        <button class="nbtn" value="1">1</button>
+        <button class="nbtn" value="2">2</button>
+        <button class="nbtn" value="3">3</button>
+        <button class="btn" id="mul" value="*">*</button>
+        <button class="nbtn" value="0">0</button>
+        <button class="btn" id="ce" value="CE">CE</button>
+        <button class="btn" id="calret" value="=">=</button>
+        <button class="btn" id="div" value="/">/</button>
+    </p>
+    <p id='histories'>
+        <br />
+        <h2> 결과 이력</h2>
+        <ol id="history" />
+    </p>
+</body>
+
+</html>

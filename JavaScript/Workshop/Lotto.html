@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lotto</title>
+    <script>
+        function pickNumber() {
+            function pick() {
+                var arr = [];
+                while (arr.length < 5) {
+                    var pick = Math.floor((Math.random() * 45) + 1);
+                    var flag = false;
+                    for (var j = 0; j < arr.length; j++) {
+                        if (arr[j] === pick)
+                            flag = true;
+                    }
+
+                    if (!flag) {
+                        arr.push(pick);
+                    }
+                }
+                return arr;
+            }
+
+            var nums = pick();
+            nums.sort(function compare(a, b) {
+                return a - b;
+            });
+
+
+            for (var i = 0; i < 5; i++) {
+                var btn = document.createElement('button');
+                btn.appendChild(document.createTextNode(nums[i]));
+                btn.style.backgroundColor = "yellow";
+                btn.style.borderRadius = "60px";
+                btn.style.color = 'black';
+                btn.style.fontSize = "30px";
+                btn.style.margin="20px";
+
+                var add = document.getElementById('numbers');
+                add.appendChild(btn);
+            }
+        }
+
+        window.onload = pickNumber;
+
+    </script>
+    <style>
+        #numbers {
+            background-color: skyblue;
+            width: 700px;
+            height: 200px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <h3><b>대박을 기원합니다~~</b></h3>
+    </p>
+    <p id="numbers">
+
+    </p>
+</body>
+
+</html>
