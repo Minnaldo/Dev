@@ -1,25 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
-<script type="text/javascript">
-$(function(){
-	
-	$('li').each(function(idx){
-		$(this).text( $(this).text() +"-"+ idx);
-	});
-});
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			// each는 배열에서 쓰인다
+			// for문을 한번에 실행해준다 --> 각 요소마다 함수를 실행해줌
+			$('li').each(function (idx) {
+				$(this).text($(this).text() + "-" + idx);
+			});
+		});
+	</script>
 </head>
+
 <body>
-<ul>
-	<li>a</li>
-	<li>b</li>
-	<li>c</li>
-	<li>d</li>
-	<li>e</li>
-</ul>
+	<ul>
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+		<li>d</li>
+		<li>e</li>
+	</ul>
 </body>
+
 </html>

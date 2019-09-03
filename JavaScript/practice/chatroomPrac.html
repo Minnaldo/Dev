@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatroom</title>
+    <style>
+        div {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .chatList {
+            width: 200px;
+            height: 500px;
+            border: 1px;
+            border-color: black;
+            border-style: solid;
+            overflow: scroll;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        let chatcnt = 0;
+
+        var send = function () {
+            var input = $('#typing').val();
+            $('.chatList').append('<div class="chat">' + input + '</div>');
+            chatcnt++;
+            $('#typing').val("");
+        }
+
+        $(function () {
+            $('#send').on('click', send);
+            // 인풋창에서 enterkey keydown시 전송
+            $('#typing').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    send();
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="chatList">
+    </div>
+    <p>
+        <div>
+            <input id="typing">
+
+            </input>
+        </div>
+        <div>
+            <button id="send">
+                전송
+            </button>
+        </div>
+    </p>
+</body>
+
+</html>

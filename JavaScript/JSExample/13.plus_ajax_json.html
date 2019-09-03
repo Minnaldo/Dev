@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Ajax(xml) Plus-Example</title>
-<script type="text/javascript">
-	function execute() {
-		var op1 = document.getElementById('op1').value;
-		var op2 = document.getElementById('op2').value;
-		var url = './jsp/plus_json.jsp?op1=' + op1 + '&op2=' + op2;
 
-		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var json = xhr.responseText;
-				//var res = eval('('+ json +')');
-				var res = JSON.parse(json);
-				//var str = JSON.stringify(value)
-				document.getElementById('result').value = res.result;
+<head>
+	<title>Ajax(xml) Plus-Example</title>
+	<script type="text/javascript">
+		function execute() {
+			var op1 = document.getElementById('op1').value;
+			var op2 = document.getElementById('op2').value;
+			var url = './jsp/plus_json.jsp?op1=' + op1 + '&op2=' + op2;
+
+			xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					//  서버에서 json객체를 문자열 형태로 보내줌
+					var json = xhr.responseText;
+					//var res = eval('('+ json +')');	// Json 객체로 파싱
+					var res = JSON.parse(json);		// Json 객체로 파싱, 라이브러리 추가 필요
+					//var str = JSON.stringify(value)
+					document.getElementById('result').value = res.result;
+				}
 			}
+			xhr.open('GET', url, true);
+			xhr.send();
 		}
-		xhr.open('GET', url, true);
-		xhr.send();
-	}
-</script>
+	</script>
 </head>
+
 <body>
 	<input type="text" id="op1" /> +
 	<input type="text" id="op2">
 	<input type="button" id="exe" value="=" onclick="execute()">
 	<input type="text" id="result" readonly="readonly" />
 </body>
+
 </html>
