@@ -60,5 +60,10 @@ var init=function(){
 // 아래는 모두 init을 window.onload 시점에 실행하는 코드이다.
 jQuery(document).ready(init);
 jQuery(init);
+// $ 는 jQuery를 줄인 것
 $(init);
+```
+
+jQuery Selector
+```javascript
 ```
