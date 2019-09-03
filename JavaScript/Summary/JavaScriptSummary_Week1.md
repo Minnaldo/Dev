@@ -35,3 +35,30 @@ console.log(b);
 // c()
 // function(){ console.log("b()"); }
 ```
+
+### 일급함수
+```javascript
+// 일급함수 실행 1
+test(function(){console.log('this is fist function')});
+// 일급함수 실행 2
+function
+```
+
+
+### queryselector
+```javascript
+// 클래스 abc의 색상을 빨간색으로 바꾼다
+document.querySelector('.abc').style.color = 'red';
+```
+
+## jQuery
+
+```javascript
+var init=function(){
+    alert("1111");
+}
+// 아래는 모두 init을 window.onload 시점에 실행하는 코드이다.
+jQuery(document).ready(init);
+jQuery(init);
+$(init);
+```
