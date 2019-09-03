@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator_with_JQuery</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('input').val("0.0");
+            $('input').css('color', 'gray');
+
+            $('.nbtn').on('click', function () {
+                $('input').css('color', 'black');
+                var cur = $('input').val();
+                if (cur == "0.0") {
+                    $('input').val($(this).val());
+                } else {
+                    $('input').val($('input').val() + " " + $(this).val());
+                }
+            });
+
+            $('#ce').on('click', function () {
+                $('input').val("0.0");
+                $('input').css('color', 'gray');
+            });
+
+            $('.op').on('click', function () {
+                $('input').val($('input').val() + " " + $(this).val());
+            });
+
+            $('#calret').on('click', function () {
+                var result = eval($('input').val());
+                $('.history').append("<li>" + $('input').val() + "=" + result + "</li>");
+                $('input').val(result);
+            });
+        });
+    </script>
+    <style>
+        .nbtn {
+            float: left;
+            width: 50px;
+            height: 40px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .btn {
+            float: left;
+            width: 50px;
+            height: 40px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        #calc {
+            width: 250px;
+        }
+
+        #history {
+            font-weight: bold;
+        }
+
+        #histories {
+            clear: both;
+        }
+
+        input {
+            text-align: right;
+            font-size: 20px;
+            width: 250px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <input id="ret"></input>
+    </p>
+    <p id="calc">
+        <button class="nbtn" value="7">7</button>
+        <button class="nbtn" value="8">8</button>
+        <button class="nbtn" value="9">9</button>
+        <button class="nbtn" id="plus" value="+">+</button>
+        <button class="nbtn" value="4">4</button>
+        <button class="nbtn" value="5">5</button>
+        <button class="nbtn" value="6">6</button>
+        <button class="nbtn" id="minus" value="-">-</button>
+        <button class="nbtn" value="1">1</button>
+        <button class="nbtn" value="2">2</button>
+        <button class="nbtn" value="3">3</button>
+        <button class="nbtn" id="mul" value="*">*</button>
+        <button class="nbtn" value="0">0</button>
+        <button class="btn" id="ce" value="CE">CE</button>
+        <button class="btn" id="calret" value="=">=</button>
+        <button class="nbtn" id="div" value="/">/</button>
+    </p>
+    <p id='histories'>
+        <br />
+        <h2> 결과 이력</h2>
+        <ol id="history" />
+    </p>
+</body>
+
+</html>

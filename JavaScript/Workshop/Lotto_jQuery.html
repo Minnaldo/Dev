@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lotto</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(function () {
+            let arr = [];
+            while (arr.length < 5) {
+                var pick = Math.floor((Math.random() * 45) + 1);
+                var flag = false;
+                for (var j = 0; j < arr.length; j++) {
+                    if (arr[j] === pick)
+                        flag = true;
+                }
+
+                if (!flag) {
+                    arr.push(pick);
+                }
+            }
+            console.log(arr);
+            arr.sort(function compare(a, b) {
+                return a - b;
+            });
+
+            for (var i = 0; i < 5; i++) {
+                var btn = $("<p class='picked'>" + arr[i] + "</p>");
+                $('#numbers').append(btn);
+            }
+            $('.picked').css('background-color', 'yellow').css('borderRadius', '50px').css('margin', "10px").css('fontSize', '35px').css('width', '50px').css('height', '50px').css('font-weight', 'bold').css('display', 'inline-block');
+
+            $('#numbers').css('background-color', 'skyblue').css('width', '650px').css('height', '200px').css('text-align', 'center').css('vertical-align', 'center');
+        });
+
+    </script>
+</head>
+
+<body>
+    <p>
+        <h3><b>대박을 기원합니다~~</b></h3>
+    </p>
+    <div id="numbers">
+
+    </div>
+</body>
+
+</html>
