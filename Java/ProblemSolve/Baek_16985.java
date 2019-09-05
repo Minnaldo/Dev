@@ -13,21 +13,27 @@ public class Baek_16985 {
 
     static void dfs(int x, int y, int ex, int ey, int depth, int cnt, Plate[] maze) {
 
-        if (depth == 4 && x == ex && y == ey) {
-            ans = Math.min(ans, cnt);
-            return;
-        }
+        Queue<Node> q = new LinkedList<>();
+        q.add(new Node(depth, y, x, 1));
 
-        for (int i = 0; i < 6; i++) {
-            int nd = depth + dir[i][0];
-            int ny = y + dir[i][1];
-            int nx = x + dir[i][2];
-            // 범위 내 일때
-            if (nd >= 0 && ny >= 0 && nx >= 0 && nd < 5 && nx < 5 && ny < 5) {
-                if (!maze[nd].visit[ny][nx] && maze[nd].map[ny][nx] == 1) {
-                    maze[nd].visit[ny][nx] = true;
-                    dfs(nx, ny, ex, ey, nd, cnt + 1, maze);
-                    maze[nd].visit[ny][nx] = false;
+        while (!q.isEmpty()) {
+            Node node = q.poll();
+
+            for (int i = 0; i < 6; i++) {
+                int nz = node.z + dir[i][0];
+                int ny = node.y + dir[i][1];
+                int nx = node.x + dir[i][2];
+
+                if (nz == 4 && ny == ey && nx == ex) {
+                    ans = Math.min(ans, node.cnt);
+                    return;
+                }
+
+                if (nz < 0 || ny < 0 || nx < 0 || nz >= 5 || ny >= 5 || nx >= 5)
+                    continue;
+                if (!maze[nz].visit[ny][nx] && maze[nz].map[ny][nx] == 1) {
+                    maze[nz].visit[ny][nx] = true;
+                    q.add(new Node(nz, ny, nx, node.cnt + 1));
                 }
             }
         }
@@ -101,6 +107,17 @@ public class Baek_16985 {
         Plate(int[][] map) {
             this.map = map;
             this.visit = new boolean[5][5];
+        }
+    }
+
+    static class Node {
+        int z, y, x, cnt;
+
+        Node(int z, int y, int x, int cnt) {
+            this.z = z;
+            this.y = y;
+            this.x = x;
+            this.cnt = cnt;
         }
     }
 }
