@@ -1,85 +1,90 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ *  * 전형적인 시뮬레이션 문제
+ *  * 문제에서 요구하는 기능만 구현하면 문제없다
+ */
+
 public class Baek_14503 {
 
-    static int[][] dir = { { 0, -1 }, { -1, 0 }, { 0, 1 }, { 1, 0 } };
-    static int[][] dir2 = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
+    static boolean[][] visit;
+    static int[][] map, dir = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } }; // 상 우 하 좌
+    static int ans = 0, n, m;
+    static Bot bot;
 
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int n = Integer.parseInt(st.nextToken());
-            int m = Integer.parseInt(st.nextToken());
-            int[][] map = new int[n + 2][m + 2];
-
-            int ans = 1;
+            ans = 1;
+            n = Integer.parseInt(st.nextToken());
+            m = Integer.parseInt(st.nextToken());
+            map = new int[n][m];
+            visit = new boolean[n][m];
 
             st = new StringTokenizer(br.readLine());
-            int r = Integer.parseInt(st.nextToken()) + 1;
-            int c = Integer.parseInt(st.nextToken()) + 1;
-            int see = Integer.parseInt(st.nextToken());
+            bot = new Bot(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
+                    Integer.parseInt(st.nextToken()));
 
-            for (int i = 1; i <= n; i++) {
+            for (int i = 0; i < n; i++) {
                 st = new StringTokenizer(br.readLine());
-                for (int j = 1; j <= m; j++) {
+                for (int j = 0; j < m; j++) {
                     map[i][j] = Integer.parseInt(st.nextToken());
+                    if (map[i][j] == 1)
+                        visit[i][j] = true;
                 }
             }
-
-            for (int i = 0; i < n + 2; i++) {
-                map[i][0] = map[i][m + 1] = 1;
-            }
-            for (int i = 0; i < m + 2; i++) {
-                map[0][i] = map[n + 1][i] = 1;
-            }
-
-            // 현재 로봇청소기가 있는 곳을 청소한 곳으로 만든다.
-            map[r][c] = -1;
-            while (true) {
-                int cnt = 0;
-                int cnt2 = 0;
-                for (int i = 0; i < 4; i++, cnt2++) {
-                    int ny = r + dir[(i + see) % 3][0];
-                    int nx = c + dir[(i + see) % 3][0];
-
-                    if (cnt2 == 3) {
-                        break;
-                    }
-
-                    if (ny >= 0 && nx >= 0 && ny < n && nx < m) {
-                        if (map[ny][nx] == 0) {
-                            // 청소하지 않은 구역일 때
-                            see = (i + see) % 3;
-                            r = ny;
-                            c = nx;
-                            map[r][c] = -1;
-                            ans++;
-                            break;
-                        } else {
-                            see = (i + see) % 3;
-                            cnt++;
-                        }
-                    }
-                }
-
-                if (cnt == 3) {
-                    // 후진 좌표를 구한다
-                    int ry = r + dir2[(see + 2) % 4][0];
-                    int rx = c + dir2[(see + 2) % 4][0];
-
-                    if (map[ry][rx] == 1) {
-                        break;
-                    } else {
-                        r = ry;
-                        c = rx;
-                    }
-                }
-            }
-
+            solution();
             System.out.println(ans);
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    static void solution() {
+        map[bot.first][bot.second] = 2;
+        visit[bot.first][bot.second] = true;
+        int nsee = 0;
+        int cnt = 0;
+        while (true) {
+            cnt = 0;
+            for (int i = 0; i < 4; i++) {
+                nsee = (bot.see - 1) == -1 ? 3 : bot.see - 1;
+                int seeY = bot.first + dir[nsee][0];
+                int seeX = bot.second + dir[nsee][1];
+                if (!visit[seeY][seeX] && map[seeY][seeX] == 0) {
+                    bot.see = nsee;
+                    bot.first = seeY;
+                    bot.second = seeX;
+                    visit[seeY][seeX] = true;
+                    map[seeY][seeX] = 2;
+                    ans++;
+                    break;
+                } else if (map[seeY][seeX] > 0) {
+                    bot.see = nsee;
+                    cnt++;
+                }
+            }
+            if (cnt == 4) {
+                int ry = bot.first + dir[(bot.see + 2) % 4][0], rx = bot.second + dir[(bot.see + 2) % 4][1];
+                if (map[ry][rx] == 1) {
+                    break;
+                } else {
+                    bot.first = ry;
+                    bot.second = rx;
+                }
+            }
+        } // end of while
+    }
+
+    static class Bot {
+        int first, second, see;
+
+        Bot(int first, int second, int see) {
+            this.first = first;
+            this.second = second;
+            this.see = see;
         }
     }
 }
