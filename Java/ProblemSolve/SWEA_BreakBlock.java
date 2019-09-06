@@ -18,16 +18,18 @@ public class SWEA_BreakBlock {
                         block++;
                 }
             }
+
             // 최솟값 갱신
             ans = Math.min(ans, block);
             return;
         }
 
-        // int[][] tmpMap = new int[h][w];
-        // tmpMap = mapCopy(map);
+        int[][] tmpMap = new int[h][w];
+        tmpMap = mapCopy(map);
         for (int i = 0; i < w; i++) {
             // i 위치에 떨어트려 터트리고, 지운다
             dfs(drop(map, i), cnt + 1);
+            map = mapCopy(tmpMap);
         }
     }
 
@@ -61,7 +63,6 @@ public class SWEA_BreakBlock {
                 for (int i = 0; i < 4; i++) {
                     int ny = p.first + dir[i][0] * k;
                     int nx = p.second + dir[i][1] * k;
-
                     if (ny >= 0 && nx >= 0 && ny < h && nx < w) {
                         q.add(new Pair(ny, nx, map[ny][nx]));
                         map[ny][nx] = 0;
@@ -78,16 +79,16 @@ public class SWEA_BreakBlock {
         for (int i = 0; i < w; i++) {
             Queue<Integer> tmpQ = new LinkedList<>();
             for (int j = h - 1; j >= 0; j--) {
-                if (map[i][j] != 0) {
-                    tmpQ.add(map[i][j]);
+                if (map[j][i] != 0) {
+                    tmpQ.add(map[j][i]);
                 }
             }
             int idx = h - 1;
             while (!tmpQ.isEmpty()) {
-                map[i][idx--] = tmpQ.poll();
+                map[idx--][i] = tmpQ.poll();
             }
             for (int j = idx; j >= 0; j--) {
-                map[i][j] = 0;
+                map[j][i] = 0;
             }
         }
         return map;
