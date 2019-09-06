@@ -23,16 +23,26 @@ public class SWEA_BreakBlock {
             return;
         }
 
+        // int[][] tmpMap = new int[h][w];
+        // tmpMap = mapCopy(map);
         for (int i = 0; i < w; i++) {
             // i 위치에 떨어트려 터트리고, 지운다
-            drop(map, i);
-            // 다음번 시행을 한다
-            dfs(map, cnt + 1);
+            dfs(drop(map, i), cnt + 1);
         }
     }
 
+    static int[][] mapCopy(int[][] map) {
+        int[][] tmp = new int[h][w];
+
+        for (int i = 0; i < h; i++) {
+            System.arraycopy(map[i], 0, tmp[i], 0, map[i].length);
+        }
+        return tmp;
+    }
+
     // idx위치에 공을 떨어트리는 경우
-    static void drop(int[][] map, int idx) {
+    static int[][] drop(int[][] map, int idx) {
+        Queue<Pair> q = new LinkedList<>();
         int rmNum = 0;
         int top = 0;
         for (int i = 0; i < h; i++) {
@@ -40,12 +50,10 @@ public class SWEA_BreakBlock {
                 rmNum = map[i][idx];
                 top = i;
                 map[i][idx] = 0;
+                q.add(new Pair(top, idx, rmNum));
                 break;
             }
         }
-
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(top, idx, rmNum));
 
         while (!q.isEmpty()) {
             Pair p = q.poll();
@@ -62,26 +70,27 @@ public class SWEA_BreakBlock {
             }
         }
         // 모두 터트린후 블록 내리기
-        down(map);
+        return down(map);
     }
 
-    static void down(int[][] map) {
+    static int[][] down(int[][] map) {
         // 블록들을 내린다
         for (int i = 0; i < w; i++) {
+            Queue<Integer> tmpQ = new LinkedList<>();
             for (int j = h - 1; j >= 0; j--) {
-                int idx = 0;
-                if (map[j][i] == 0) {
-                    for (int a = j; a >= 0; a--) {
-                        if (map[a][i] != 0) {
-                            idx = a;
-                            break;
-                        }
-                    }
-                    map[j][i] = map[idx][i];
-                    map[idx][i] = 0;
+                if (map[i][j] != 0) {
+                    tmpQ.add(map[i][j]);
                 }
             }
+            int idx = h - 1;
+            while (!tmpQ.isEmpty()) {
+                map[i][idx--] = tmpQ.poll();
+            }
+            for (int j = idx; j >= 0; j--) {
+                map[i][j] = 0;
+            }
         }
+        return map;
     }
 
     public static void main(String[] args) {
