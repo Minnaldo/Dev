@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ *  * 경로 맵이 주어졌을 때, 연결된 노드의 갯수를 찾는 문제
+ */
+
 public class Baek_2606 {
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {

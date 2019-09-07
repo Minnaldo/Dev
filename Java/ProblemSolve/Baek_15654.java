@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/** N 과 M (5)
+ *  * N 개의 자연수 중에서 M개를 고른 수열
+ *  * 순열을 구하는 문제
+ *  * N개의 후보에서 M개를 선택하는데, 결과의 순서가 다르면 다른 것
+ */
+
 public class Baek_15654 {
 
     static StringBuilder sb;
