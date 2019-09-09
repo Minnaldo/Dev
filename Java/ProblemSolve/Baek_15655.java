@@ -1,10 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-/** N과 M  (2)
- *  * 1 부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
- *  * 중복이 없어야 하므로, 이전에 골랐던 요소는 체크(visit배열 이용)를 해서 고르지 못하도록 한다
- */
+
 
 public class Baek_15655 {
     static int n, m;

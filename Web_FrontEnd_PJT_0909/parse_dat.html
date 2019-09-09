@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Parse</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        // this fucntion parsing the foodinfo.xml file
+        $.ajax({
+            url: './foodInfo.xml',
+            data: 'get',
+            dataType: 'xml',
+
+            // 일정 갯수의 데이터만 가져오고싶다 ==> for문을 이용한다
+            // 이후 각 페이지별로 배수를 정해, 페이지 (배수 * 범위)로 데이터를 가져오면 될듯
+            success: function (xml) {
+                // 데이터 정제 시작
+                $('food', xml).each(function () {
+                    // xml에서 뽑아온 데이터
+                    var code = $(this).find('code').text();
+                    var name = $(this).find('name').text();
+                    var maker = $(this).find('maker').text();
+                    var material = $(this).find('material').text();
+                    var image = $(this).find('image').text();
+
+                    // 클래스 또는 태그에 붙여넣는다
+                    $('.className or ID').append(
+                    );
+                });
+            }
+        });
+        // this function parsing the foodnutritioninfo.xml file
+        $.ajax({
+            url: './FoodNutritionInfo.xml',
+            data: 'get',
+            dataType: 'xml',
+            // get the xml data in xml file
+            success: function (xml) {
+                // xml파일에서 items태그를 모두 가져와서 function에 맞게 처리
+                //TODO    chk the variable name
+                $('itme', xml).each(function () {
+                    var name = $(this).find('DESC_KOR').text();
+                    var serv_wt = $(this).find('SERVING_WT').text();
+                    var name = $(this).find('NUTR_CONT1').text();
+                    var name = $(this).find('NUTR_CONT2').text();
+                    var name = $(this).find('NUTR_CONT3').text();
+                    var name = $(this).find('NUTR_CONT4').text();
+                    var name = $(this).find('NUTR_CONT5').text();
+                    var name = $(this).find('NUTR_CONT6').text();
+                    var name = $(this).find('NUTR_CONT7').text();
+                    var name = $(this).find('NUTR_CONT8').text();
+                    var name = $(this).find('NUTR_CONT9').text();
+                    var name = $(this).find('BGN_YEAR').text();
+                    var maker = $(this).find('ANIMAL_PLANT').text();
+                });
+            }
+
+        });
+
+        $(function () {
+            $('.info_container').on('mouseover', function () {
+                //  show overlay container
+                $(this).find('.overlay_container').css('display', 'inline-block');
+
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="info_container">
+        <div class="row">
+            <div class="col-3">
+                <img src="" alt="Responsive image" class="img-fluid">
+                <div class="overlay_container bg-dark">
+
+                </div>
+            </div>
+            <div class="col-3">
+                <h3></h3>
+                <div class="separator-2"></div>
+                <div>
+                    ㅣㅓ해버ㅐ러밷러ㅐㄴ먼애
+                    dkjdslkjaf
+                    lkdjfapodjfpojdf
+                    alkdjfasdjflk;adjlf
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary btn-sm">추가</button>
+                    <button type="button" class="btn btn-primary btn-sm">찜</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
