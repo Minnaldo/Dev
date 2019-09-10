@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
+        var chart_data = [];
         // this fucntion parsing the foodinfo.xml file
         $.ajax({
-            url: './foodInfo.xml',
+            url: 'foodInfo.xml',
             data: 'get',
             dataType: 'xml',
 
@@ -25,47 +26,70 @@
                     var material = $(this).find('material').text();
                     var image = $(this).find('image').text();
 
-                    // 클래스 또는 태그에 붙여넣는다
-                    $('.className or ID').append(
-                    );
+
+                    $('#Material').text(material);
+                    $('#product_img').attr('src', './' + image);
                 });
             }
         });
         // this function parsing the foodnutritioninfo.xml file
         $.ajax({
-            url: './FoodNutritionInfo.xml',
+            url: 'FoodNutritionInfo.xml',
             data: 'get',
             dataType: 'xml',
             // get the xml data in xml file
             success: function (xml) {
                 // xml파일에서 items태그를 모두 가져와서 function에 맞게 처리
                 //TODO    chk the variable name
-                $('itme', xml).each(function () {
+                $('item', xml).each(function () {
                     var name = $(this).find('DESC_KOR').text();
                     var serv_wt = $(this).find('SERVING_WT').text();
-                    var name = $(this).find('NUTR_CONT1').text();
-                    var name = $(this).find('NUTR_CONT2').text();
-                    var name = $(this).find('NUTR_CONT3').text();
-                    var name = $(this).find('NUTR_CONT4').text();
-                    var name = $(this).find('NUTR_CONT5').text();
-                    var name = $(this).find('NUTR_CONT6').text();
-                    var name = $(this).find('NUTR_CONT7').text();
-                    var name = $(this).find('NUTR_CONT8').text();
-                    var name = $(this).find('NUTR_CONT9').text();
+                    var nutr1 = $(this).find('NUTR_CONT1').text();
+                    var nutr2 = $(this).find('NUTR_CONT2').text();
+                    var nutr3 = $(this).find('NUTR_CONT3').text();
+                    var nutr4 = $(this).find('NUTR_CONT4').text();
+                    var nutr5 = $(this).find('NUTR_CONT5').text();
+                    var nutr6 = $(this).find('NUTR_CONT6').text();
+                    var nutr7 = $(this).find('NUTR_CONT7').text();
+                    var nutr8 = $(this).find('NUTR_CONT8').text();
+                    var nutr9 = $(this).find('NUTR_CONT9').text();
                     var name = $(this).find('BGN_YEAR').text();
                     var maker = $(this).find('ANIMAL_PLANT').text();
+                    chart_data.push(nutr1);
+                    chart_data.push(nutr2);
+                    chart_data.push(nutr3);
+                    chart_data.push(nutr4);
+                    chart_data.push(nutr5);
+                    chart_data.push(nutr6);
+                    chart_data.push(nutr7);
+                    chart_data.push(nutr8);
+                    chart_data.push(nutr9);
+
+                    $('#product_name').text(name);
+                    $('#manufacturer').text(maker);
                 });
+            },
+
+            error: function (result) {
+                alert("nutrition error");
             }
 
+
         });
 
-        $(function () {
-            $('.info_container').on('mouseover', function () {
-                //  show overlay container
-                $(this).find('.overlay_container').css('display', 'inline-block');
+        var queryString = $("form[name=searchform]").serialize();
+        $.ajax({
+            type: 'get',
+            url: '',
+            data: queryString,
+            dataType: 'json',
+            success: function (query) {
+                var type = queryString[type];
+                var input = queryString[input];
+            },
 
-            });
         });
+
     </script>
 
 </head>
@@ -73,10 +97,10 @@
 <body>
     <div class="info_container">
         <div class="row">
-            <div class="col-3">
-                <img src="" alt="Responsive image" class="img-fluid">
-                <div class="overlay_container bg-dark">
-
+            <div class="col-md-6" style="height: auto; width: auto; max-width: 125px; max-height: 125px">
+                <img src="./img/N45누크바.jpg" alt="Responsive image" class="img-fluid">
+                <div class="overlay">
+                    <button class="btn btn-primary">test btn</button>
                 </div>
             </div>
             <div class="col-3">
@@ -94,7 +118,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 

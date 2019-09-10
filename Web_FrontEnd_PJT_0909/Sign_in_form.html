@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        let alergyInfo = [];
+        $('input').each(function (param) {
+            var chk = $(this).is('checked');
+            if (chk) {
+                // 체크가 되어있으면 값을 집어넣음
+                alergyInfo.push($(this).val());
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -33,59 +44,59 @@
                     Cechk
                 </legend>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline1"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline1" value="대두"><label
                         class="custom-control-label" for="defaultInline1">대두</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline2"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline2" value="땅콩"><label
                         class="custom-control-label" for="defaultInline2">땅콩</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline3"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline3" value="우유"><label
                         class="custom-control-label" for="defaultInline3">우유</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline4"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline4" value="게"><label
                         class="custom-control-label" for="defaultInline4">게</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline5"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline5" value="새우"><label
                         class="custom-control-label" for="defaultInline5">새우</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline6"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline6" value="참치"><label
                         class="custom-control-label" for="defaultInline6">참치</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline7"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline7" value="연어"><label
                         class="custom-control-label" for="defaultInline7">연어</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline8"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline8" value="쑥"><label
                         class="custom-control-label" for="defaultInline8">쑥</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline9"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline9" value="소고기"><label
                         class="custom-control-label" for="defaultInline9">소고기</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline10"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline10" value="닭고기"><label
                         class="custom-control-label" for="defaultInline10">닭고기</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline11"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline11" value="돼지고기"><label
                         class="custom-control-label" for="defaultInline11">돼지고기</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline12"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline12" value="복숭아"><label
                         class="custom-control-label" for="defaultInline12">복숭아</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline13"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline13" value="민들레"><label
                         class="custom-control-label" for="defaultInline13">민들레</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="defaultInline14"><label
+                    <input type="checkbox" class="custom-control-input" id="defaultInline14" value="계란흰자"><label
                         class="custom-control-label" for="defaultInline14">계란흰자</label>
                 </div>
 
