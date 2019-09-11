@@ -7,7 +7,6 @@ import java.net.Socket;
 public class ServerTest {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        // TODO Auto-generated method stub
         ServerSocket ss = new ServerSocket(7000);
 //		BufferedWriter bw=null;
 //		BufferedReader br =null;

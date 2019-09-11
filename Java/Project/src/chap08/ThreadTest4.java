@@ -2,7 +2,6 @@ package chap08;
 
 public class ThreadTest4 {
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         MyThread3 th1 = new MyThread3();
         MyThread4 th2 = new MyThread4();
         th1.start();

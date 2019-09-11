@@ -41,7 +41,6 @@ public class DispatcherGUI {
     CustomerVO selected = new CustomerVO();
 
     private void createGUI() {
-        // TODO Auto-generated method stub
         bI.setText("Insert");
         bU.setText("Update");
         bD.setText("Delete");
@@ -75,7 +74,6 @@ public class DispatcherGUI {
         f.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // TODO Auto-generated method stub
                 super.windowClosing(e);
                 System.exit(0);
             }
@@ -103,7 +101,6 @@ public class DispatcherGUI {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
                 if (selected != null) {
                     try {
                         man.updateCustomer(selected.getNum(), tfName.getText()
@@ -126,7 +123,6 @@ public class DispatcherGUI {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
                 if (selected != null) {
                     try {
                         man.deleteCustomer(selected.getNum());
@@ -150,7 +146,6 @@ public class DispatcherGUI {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                // TODO Auto-generated method stub
                 if (jlist.getValueIsAdjusting()) {
                     selected = (CustomerVO) jlist.getSelectedValue();
                     tfName.setText(selected.getName());
@@ -162,11 +157,9 @@ public class DispatcherGUI {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         try {
             new DispatcherGUI().go();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

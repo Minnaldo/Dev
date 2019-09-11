@@ -11,7 +11,6 @@ public class Check {
 
     public Check() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public Check(String code, String date, String clean, String ready,

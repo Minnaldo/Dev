@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class ClientTest {
 
 	public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
-		// TODO Auto-generated method stub
 		Socket ser = new Socket("localhost",7000);
 		//ser.getInputStream();
 		Scanner s = new Scanner(System.in);
