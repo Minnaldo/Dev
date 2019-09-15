@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="BackEnd_pjt:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/BackEnd_pjt_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="BackEnd_pjt/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BackEnd_pjt" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
