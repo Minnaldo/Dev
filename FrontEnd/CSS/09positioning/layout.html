@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< Updated upstream
 
 <head>
 	<meta charset="UTF-8">
@@ -33,6 +32,7 @@
 		.article {
 			height: 200px;
 			width: 200px;
+			/* 자신은 inline속성을 내부는 block속성을 갖게 함 */
 			display: inline-block;
 		}
 
@@ -41,6 +41,7 @@
 		}
 
 		#outer {
+			/* 블록레벨 요소의 width를 지정후, margin:auto를 하게되면, 해당 요소가 가운데로 오게 됨(요소 크기가 지정한 크기만큼 되고, 마진이 자동적으로 부여됨) */
 			width: 805px;
 			height: 1000px;
 			margin: auto;
@@ -79,72 +80,4 @@
 	</div>
 </body>
 
-=======
-<head>
-<meta charset="UTF-8">
-<title>Layout Sample</title>
-<style type="text/css">
-h1{
-	text-align: center;
-}
-.border{
-	border: 1px solid #000;
-}
-#header{
-	text-align: center;
-}
-#aside{
-	float: left;
-	height: 700px;
-	width: 250px;
-}
-#section{
-	float: left;
-	height: 700px;
-	width: 550px;
-}
-.article{
-	height: 200px;
-	width: 200px;
-	display: inline-block;
-}
-#footer{
-	clear: both;
-}
-#outer{
-	width: 805px;
-	height: 1000px;
-	margin: auto;
-}
-a{
-	text-decoration: none;
-	font-size: 3em;
-}
-ul{
-	list-style: none;
-}
-</style>
-</head>
-<body>
-<div id="outer">
-<h1>Style Sample !!!</h1>
-
-<div id="header" class="border">header 내용을 표시합니다</div>
-<div id="nav" class="border">nav 목록을 표시합니다</div>
-<div id="aside" class="border">
-	<ul>
-		<li><a href="http://www.naver.com">naver</a></li>
-		<li>daum</li>
-		<li>sw expert</li>		
-	</ul>
-</div>
-<div id="section" class="border">
-	<div class="border article">article AAAA</div>
-	<div class="border article">article AAAA</div>
-	<div class="border article">article AAAA</div>	
-</div>
-<div id="footer" class="border">footer</div>
-</div>
-</body>
->>>>>>> Stashed changes
 </html>

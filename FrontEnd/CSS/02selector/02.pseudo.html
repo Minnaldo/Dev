@@ -5,28 +5,32 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<!-- 상태 선택자 (Pseudo) -->
+	<!-- ':' 상태 선택자' -->
 	<style type="text/css">
+	/* 링크가 걸려있는 a태그를 선택 */
 		a:link {
 			color: #FF0000;
 		}
 
-		/* unvisited link */
+		/* 방문한 적이 있는 태그의 색상 */
+		/* 해당 링크를 한번이라도 열었을 때 */
 		a:visited {
 			color: #00FF00;
 		}
 
 		/* visited link */
+		/* a태그중 마우스를 올린 상태의 태그 */
 		a:hover {
 			color: #FF00FF;
 		}
 
-		/* mouse over link */
+		/* mouse press 상태의 태그 */
 		a:active {
 			color: #0000FF;
 		}
 
 		/* selected link */
-
+		/* p태그의 첫번째 자식을 선택 */
 		p:first-child {
 			background: #ffff00;
 		}

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8"/>
-<title>Image Map</title>
+	<meta charset="UTF-8" />
+	<title>Image Map</title>
 </head>
+
 <body>
-<img src="../img/browser.png" alt="web browser" usemap="#browsermap"/>
-<map name="browsermap">
-	<area shape="circle" coords="20,21,13"
-		 href="http://www.microsoft.com"/>
-	<area shape="circle" coords="54,19,13"
-		 href="http://www.mozilla.com/firefox"/>
-	<area shape="circle" coords="89,19,13" 
-		href="http://www.opera.com"/>
-	<area shape="circle" coords="122,20,13" 
-		href="http://www.google.com/chrome/"/>
-	<area shape="circle" coords="157,22,12" 
-		href="http://www.apple.com/safari/"/>
-</map>
+	<img src="../img/browser.png" alt="web browser" usemap="#browsermap" />
+	<!-- map 태그 : 하나의 이미지에 여러개의 링크를 걸때 사용 -->
+	<!-- 밑의 코드는 동그라미 영역을 사용하며 각 영역 크기를 지정해주고, 영역 크기 만큼 링크를 검 -->
+	<map name="browsermap">
+		<area shape="circle" coords="20,21,13" href="http://www.microsoft.com" />
+		<area shape="circle" coords="54,19,13" href="http://www.mozilla.com/firefox" />
+		<area shape="circle" coords="89,19,13" href="http://www.opera.com" />
+		<area shape="circle" coords="122,20,13" href="http://www.google.com/chrome/" />
+		<area shape="circle" coords="157,22,12" href="http://www.apple.com/safari/" />
+	</map>
 </body>
+
 </html>

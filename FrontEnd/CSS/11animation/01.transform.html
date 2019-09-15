@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<style type="text/css">
-div{
-	width: 100px; height:100px;
-	border: 1px solid #000;
-	position: relative;
-	left : 50px;
-	top : 50px;
-}
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
+	<style type="text/css">
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000;
+			position: relative;
+			left: 150px;
+			top: 150px;
+		}
 
-div:hover {
-	transform : rotate(45deg);
-	-moz-transform : rotate(45deg);
-	-webkit-transform : rotate(45deg);
-	-ms-transform : rotate(45deg);
-	-o-transform : rotate(45deg);
-}
-div:ACTIVE {
-	transform : scale(2, 2);
-	-moz-transform :  scale(1.5, 1.5) translate(10px, 10px);
-	
-	-webkit-transform :  scale(2, 4);
-	-ms-transform :  scale(2, 4);
-	-o-transform :  scale(2, 4);
-}
+		div:hover {
+			/* 45도 만큼 회전 */
+			transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+		}
 
-</style>
+		/* 마우스 클릭했을 때 */
+		div:ACTIVE {
+			/* 가로 2배 세로 2배 확대 */
+			transform: scale(2, 2);
+			-moz-transform: scale(1.5, 1.5) translate(10px, 10px);
+
+			/* 가로 2배 세로 4배 확대 */
+			-webkit-transform: scale(2, 4);
+			-ms-transform: scale(2, 4);
+			-o-transform: scale(2, 4);
+		}
+	</style>
 </head>
+
 <body>
-<div>hello</div>
+	<div>hello</div>
 </body>
+
 </html>

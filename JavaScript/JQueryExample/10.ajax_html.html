@@ -8,14 +8,22 @@
 	<script type="text/javascript">
 		$(function () {
 			$('#calc').bind('click', function (evt) {
+				// ajax호출
 				$.ajax({
+					// 클라이언트가 요청을 보낼 서버의 주소
 					url: 'jsp/plus_xml.jsp',
+					// http요청과 함께 서버로 보낼 데이터
 					data: {
+						// key op1의 value는 id를 op1으로 갖는 요소의 value
 						op1: $('#op1').val(),
+						// key op2의 value는 id를 op2으로 갖는 요소의 value
 						op2: $('#op2').val()
 					},
+					// 서버에 보낼 데이터의 타입
 					dataType: 'xml',
+					// http 요청이 성공했을 때
 					success: function (data, status, xhr) {
+						// xml파일의 data태그에서 result태그의 value를 가져와 id값이 result인 요소의 값에 할당
 						$('#result').val($('result', data).attr('value'));
 					},
 					error: function (err) {

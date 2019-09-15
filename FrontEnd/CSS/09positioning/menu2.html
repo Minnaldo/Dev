@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Menu Example</title>
-<style type="text/css">
-nav{
-	border : 1px solid #000;
-}
-ul{
-	list-style: none;
-	margin: 0; padding: 0;
-}
-ul > li{
-	float: left;
-	display: block;
-}
-ul:after{
-	content : '';
-	clear : both;
-	display : block;
-}
-ul  li  a{
-	padding : 5px 15px;
-	text-decoration: none;
-	background: #1e7c9a;
-	color : #fff;
-	display: block;
-}
-ul  li  a:hover{
-	background : #3b3b3b;
-}
-ul  ul{
-	display : none;
-}
-ul li:hover ul{
-	display : block;
-	position : absolute;
-}
-li:hover li{
-	float : none;
-}
-</style>
+	<title>Menu Example</title>
+	<style type="text/css">
+		nav {
+			border: 1px solid #000;
+		}
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		ul>li {
+			float: left;
+			display: block;
+		}
+
+		ul:after {
+			content: '';
+			clear: both;
+			display: block;
+		}
+
+		ul li a {
+			padding: 5px 15px;
+			text-decoration: none;
+			background: #1e7c9a;
+			color: #fff;
+			display: block;
+		}
+
+		ul li a:hover {
+			background: #3b3b3b;
+		}
+
+		ul ul {
+			display: none;
+		}
+
+		ul li:hover ul {
+			display: block;
+			position: absolute;
+		}
+
+		li:hover li {
+			float: none;
+		}
+	</style>
+
 <body>
 	<nav>
 		<ul>
@@ -48,7 +59,8 @@ li:hover li{
 				<ul>
 					<li><a href="#">Markup</a></li>
 					<li><a href="#">Semantic</a></li>
-				</ul></li>
+				</ul>
+			</li>
 			<li><a href="#">CSS</a>
 				<ul>
 					<li><a href="#">Selector</a></li>
@@ -56,14 +68,17 @@ li:hover li{
 					<li><a href="#">Animation</a></li>
 					<li><a href="#">Position</a></li>
 					<li><a href="#">Media Query</a></li>
-				</ul></li>
+				</ul>
+			</li>
 			<li><a href="#">Javascript</a>
 				<ul>
 					<li><a href="#">Core</a></li>
 					<li><a href="#">Built-in Object</a></li>
 					<li><a href="#">API</a></li>
-				</ul></li>
+				</ul>
+			</li>
 		</ul>
 	</nav>
 </body>
+
 </html>

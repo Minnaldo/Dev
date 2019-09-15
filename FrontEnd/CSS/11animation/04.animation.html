@@ -1,49 +1,130 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-@keyframes myfirst{
-	0%   {background:red;       left:0px;       top:0px;}
-	25%  {background:yellow;    left:200px; 	top:0px;}
-	50%  {background:blue; 		left:200px; 	top:200px;}
-	75%  {background:green;     left:0px; 		top:200px;}
-	100% {background:red;       left:0px; 		top:0px;}
-}
-@-moz-keyframes myfirst /* Firefox */
-{
-	0%   {background:red;
-			 left:0px; top:0px;}
-	25%  {background:yellow; 				left:200px; 	top:0px;}
-	50%  {background:blue; 					left:200px; 	top:200px;}
-	75%  {background:green; left:0px; 			top:200px;}
-	100% {background:red; left:0px; 				top:0px;}
-}
-@-webkit-keyframes myfirst /* Safari and Chrome */
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		@keyframes myfirst {
+			0% {
+				background: red;
+				left: 0px;
+				top: 0px;
+			}
 
-{
-	0%   {background:red;
-			 left:0px; top:0px;}
-	25%  {background:yellow; 				left:200px; 	top:0px;}
-	50%  {background:blue; 					left:200px; 	top:200px;}
-	75%  {background:green; left:0px; 			top:200px;}
-	100% {background:red; left:0px; 				top:0px;}
+			25% {
+				background: yellow;
+				left: 200px;
+				top: 0px;
+			}
 
-}
-div{
-	width:100px;
-	height:100px;
-	background:red;
-	position:relative;
-	animation:myfirst 5s;
-	-moz-animation:myfirst 5s;
-	-webkit-animation:myfirst 5s;
-}
+			50% {
+				background: blue;
+				left: 200px;
+				top: 200px;
+			}
 
-</style>
+			75% {
+				background: green;
+				left: 0px;
+				top: 200px;
+			}
+
+			100% {
+				background: red;
+				left: 0px;
+				top: 0px;
+			}
+		}
+
+		@-moz-keyframes myfirst
+
+		/* Firefox */
+			{
+			0% {
+				background: red;
+				left: 0px;
+				top: 0px;
+			}
+
+			25% {
+				background: yellow;
+				left: 200px;
+				top: 0px;
+			}
+
+			50% {
+				background: blue;
+				left: 200px;
+				top: 200px;
+			}
+
+			75% {
+				background: green;
+				left: 0px;
+				top: 200px;
+			}
+
+			100% {
+				background: red;
+				left: 0px;
+				top: 0px;
+			}
+		}
+
+		/* myfirst라는 이름을 가진 keyframes 키워드를 선언 */
+		/* from(0%) - to(100%)  // 0% - 25% -- 100% 등 시점을 선언가능 */
+		@-webkit-keyframes myfirst
+		/* Safari and Chrome */
+
+			{
+			0% {
+				background: red;
+				left: 0px;
+				top: 0px;
+			}
+
+			25% {
+				background: yellow;
+				left: 200px;
+				top: 0px;
+			}
+
+			50% {
+				background: blue;
+				left: 200px;
+				top: 200px;
+			}
+
+			75% {
+				background: green;
+				left: 0px;
+				top: 200px;
+			}
+
+			100% {
+				background: red;
+				left: 0px;
+				top: 0px;
+			}
+
+		}
+
+		div {
+			width: 100px;
+			height: 100px;
+			background: red;
+			position: relative;
+			/* 실행할 animation 종류와, 실행하는 시간 */
+			animation: myfirst 5s;
+			-moz-animation: myfirst 5s;
+			-webkit-animation: myfirst 5s;
+		}
+	</style>
 </head>
+
 <body>
-<div></div>
+	<div></div>
 </body>
+
 </html>

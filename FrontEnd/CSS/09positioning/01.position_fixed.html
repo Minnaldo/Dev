@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<<<<<<< Updated upstream
 
 <head>
 	<style type="text/css">
@@ -15,6 +14,7 @@
 		}
 
 		.fixed {
+			/* 위에서 30px, 오른쪽에서 5px 띄운 위치에 고정 */
 			position: fixed;
 			top: 30px;
 			right: 5px;
@@ -26,6 +26,7 @@
 		}
 
 		.rel_right {
+			/* 부모요소 (여기서는 #outer)를 기준으로 위치를 지정한다 */
 			position: relative;
 			left: 20px;
 		}
@@ -37,8 +38,10 @@
 		}
 
 		.z1 {
+			/* z-index : 쌓는 레벨을 뜻함, 작을수록 밑으로 간다(층수를 생각하자) */
 			z-index: 2;
 			background-color: #00f;
+			/* left에서 200px, top에서 200px 떨어진 위치에 요소를 놓는다 */
 			left: 200px;
 			top: 200px;
 		}
@@ -52,36 +55,6 @@
 	</style>
 </head>
 
-=======
-<head>
-<style type="text/css">
-body {height: 1000px;}
-div {border: 1px solid #000;
-	width: 200px;
-	height: 50px;}
- 
-.fixed {position: fixed;
-		top: 30px;
-		right: 5px;}
-.rel_left {position: relative;
-	left: -20px;}
-.rel_right {position: relative;
-	left: 20px;}
-.abs {position: absolute;
-		left: 100px;
-		top: 50px;}
-.z1 {z-index: 2;
-	background-color: #00f;
-	left: 200px;
-	top: 200px;}
-.z2 {z-index: 3;
-	background-color: #f00;
-	left: 240px;
-	top: 240px;}
-
-</style>
-</head>
->>>>>>> Stashed changes
 <body>
 	<div>dddddddddd</div>
 	<p />
@@ -92,19 +65,10 @@ div {border: 1px solid #000;
 		<div class="rel_right">Related 20px</div>
 
 		<div class="abs z1">Absolute Z1</div>
-<<<<<<< Updated upstream
-
-=======
- 
->>>>>>> Stashed changes
 		<div class="abs z2">Absolute Z2</div>
 
 	</div>
 
 </body>
-<<<<<<< Updated upstream
 
 </html>
-=======
-</html>
->>>>>>> Stashed changes

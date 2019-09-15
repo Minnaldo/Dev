@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Audio</title>
+	<meta charset="UTF-8">
+	<title>Audio</title>
 </head>
+
 <body>
-<audio src="../media/sensitive.ogg" controls="controls"></audio>
-<hr/>
-<audio  controls="controls">
-	<source src="../media/sensitive.ogg" type="audio/ogg"></source>
-	<source src="../media/sensitive.mp3" type="audio/mp3"></source>
-	<source src="../media/sensitive.wav" type="audio/wav"></source>
-</audio>
+	<!-- 플러그인 도움 없이 음악 파일을 재생시켜주는 태그 -->
+	<audio src="../media/sensitive.ogg" controls="controls"></audio>
+	<hr />
+	<!-- 브라우저마다 지원하는 형식이 다르기 때문에, source 태그를 사용한다. type을 지정해주면 트래픽 감소에 도움이 된다 -->
+	<audio controls="controls">
+		<source src="../media/sensitive.ogg" type="audio/ogg">
+		</source>
+		<source src="../media/sensitive.mp3" type="audio/mp3">
+		</source>
+		<source src="../media/sensitive.wav" type="audio/wav">
+		</source>
+	</audio>
 </body>
+
 </html>

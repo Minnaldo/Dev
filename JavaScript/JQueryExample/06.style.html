@@ -20,8 +20,10 @@
 			console.log($('div').outerWidth());
 			console.log($('div').innerWidth());
 
+			// css 속성, 값
 			$('div').css("background", "#ff0");
 			$('div').on('click', function () {
+				// css를 json형태로 부여할 수도 있다.
 				$(this).css({
 					position: 'absolute',
 					left: Math.random() * 300 + 'px',

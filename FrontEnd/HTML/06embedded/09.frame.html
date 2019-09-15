@@ -1,11 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
 </head>
-<frameset rows="50px, *">
-	<frame src="09.frame_top.html"/>
-	<frame src="09.frame_bottom.html"/>
+<!-- 프레임을 어떻게 나눌것인지를 설정함 -->
+<!-- 아래 코드는, 상하로 나누며, 위쪽 프레임은 50px, 아래는 나머지를 차지하도록 함 -->
+<frameset rows="100px, *">
+	<!-- frame 태그는 기본적으로 src를 갖는다. 어떤 문서를 프레임 안으로 불러올 것인가를 명시하는것 -->
+	<frame src="09.frame_top.html" />
+	<frame src="09.frame_bottom.html" />
 </frameset>
+
 </html>

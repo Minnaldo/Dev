@@ -1,37 +1,42 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<title>CSS | Dropdown Menu</title>
-<style>
-#menu ul {
-	list-style: none;
-}
+	<meta charset="utf-8">
+	<title>CSS | Dropdown Menu</title>
+	<style>
+		#menu ul {
+			list-style: none;
+		}
 
-#menu ul li {
-	float: left;
-	padding: 5px;
-	border: 1px solid #000;
-}
+		/* 띄어쓰기는 후손선택자 */
+		/* 후손은 자손을 포함하는 개념이며, 자손은 바로 밑 후손 */
+		#menu ul li {
+			float: left;
+			padding: 5px;
+			border: 1px solid #000;
+		}
 
-#menu ul li:hover>ul {
-	display: block;
-}
+		/* '>'는 자손선택자 */
+		#menu ul li:hover>ul {
+			display: block;
+		}
 
-#menu ul ul {
-	display: none;
-	margin: 0px;
-	padding: 0px;
-	position: absolute;
-}
+		#menu ul ul {
+			display: none;
+			margin: 0px;
+			padding: 0px;
+			position: absolute;
+		}
 
-#menu ul ul li {
-	float: none;
-	margin: 0px;
-	padding: 0px;
-}
-</style>
+		#menu ul ul li {
+			float: none;
+			margin: 0px;
+			padding: 0px;
+		}
+	</style>
 </head>
+
 <body>
 
 	<div id="menu">
@@ -68,4 +73,5 @@
 	</div>
 
 </body>
+
 </html>

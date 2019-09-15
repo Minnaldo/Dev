@@ -25,8 +25,10 @@
 	}
 	function resXml(data) {
 		//$(data).find('friend')
-		
+
 		$("friend",data).each(function() {
+			// this는 friend를 뜻함
+			// $("name",this) ==> $(this).find("name") : friend에서 name을 태그로 갖는 자식을 찾는다
 			var n = $("name", this).text();
 			var a = $("addr", this).text();
 			$("#content").append(n + ":" + a + "<br/>");

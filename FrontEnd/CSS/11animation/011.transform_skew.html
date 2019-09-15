@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>CSS3-Skew</title>
-<style type="text/css">
-.box{
-	border : 1px solid #000;	
-	width : 200px;
-	height : 200px;
-	transition : transform 1s;
-	transition : -moz-transform 1s;
-}
-.box:hover{
-	transform : skew(15deg, 15deg);
-	-moz-transform : skew(15deg, 15deg);
-	-webkit-transform : skew(15deg, 15deg);
-}
 
-</style>
+<head>
+	<title>CSS3-Skew</title>
+	<style type="text/css">
+		.box {
+			border: 1px solid #000;
+			width: 200px;
+			height: 200px;
+			/* animation이 걸리는 시간 */
+			transition: transform 1s;
+			transition: -moz-transform 1s;
+		}
+
+		.box:hover {
+			/* skew - 주어진 각도만큼 각각 x축과 y축 방향으로 기울임 */
+			transform: skew(15deg, 15deg);
+			-moz-transform: skew(15deg, 15deg);
+			-webkit-transform: skew(15deg, 15deg);
+		}
+	</style>
 </head>
+
 <body>
-<div class="box"></div>
+	<div class="box"></div>
 </body>
+
 </html>

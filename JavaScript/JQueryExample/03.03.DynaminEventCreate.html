@@ -9,15 +9,18 @@
 		var i = 0;
 		// init function
 		$(function () {
+			// button 태그에 대해 , 마우스 클릭 이벤트가 발생했을때, button 태그를 추가한다
 			$('button').on('click', function (evt) {
 				// NOTE   create the new button and append to #d1 tag
 				$('<button class="new">New Button' + i++ + '</button>').appendTo($("#d1"));
 			});
 
-			// 위 함수에서 새로 만들어진 새로운 버튼 클래스 new를 하나 지운다
-			// 클릭 이벤트를 새로 만들어진 버튼에 할당
+
+			// id가 d1인 요소를 클릭하면, class가 new인 버튼을 찾아 선택해 지운다
+			// .on(events, [selector], hansler)
 			$('#d1').on('click', "button.new", function (evt) {
 				console.log(evt.target);
+				// this는 class가 new인 버튼
 				$(this).remove();
 			});
 

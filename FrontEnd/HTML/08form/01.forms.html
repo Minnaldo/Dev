@@ -8,14 +8,19 @@
 
 <body>
 	<h1>회원 가입양식</h1>
+	<!-- action 속성 : 데이터를 전송한 url, method : 데이터를 전달하는 방식(GET, POST) -->
 	<form action="example.com" method="post">
 		<div class="idpwd">
+			<!-- label : form의 양식에 이름을 붙이는 태그 -->
 			<label for="id">ID</label>
+			<!-- input : 값을 입력받기 위한 태그 (text,password,email, radio, checkbox, file, image, hidden, submit, button 등의 타입을 가짐)-->
 			<input type="text" name="id" id="id" />
 			<input type="button" value="ID 중복체크" /><br />
 			<label for="pwd">Password</label>
 			<input type="password" name="pwd" id="pwd" />
 		</div>
+		<!-- filedset : html요소를 박스로 묶어주는 태그, 주로 form내부에 사용 -->
+		<!-- legend : 필드셋에 제목을 달아주는 태그 -->
 		<fieldset>
 			<legend>성별</legend>
 			<label>남

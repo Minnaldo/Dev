@@ -1,41 +1,46 @@
 <!-- 10.ajaxJson.html -->
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$("#call").click(send);
-	});
-
-	function send() {
-		$.ajax({
-			type : "get",
-			url : "./jsp/result.jsp",
-			dataType : "json",
-			success : resJSon,
-			error : eXml
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			// call을 id로 갖는 요소에 클릭이벤트 할당
+			$("#call").click(send);
 		});
-	}
 
-	function eXml(s) {
-		console.log(s);
-	}
+		function send() {
+			$.ajax({
+				type: "get",
+				url: "./jsp/result.jsp",
+				dataType: "json",
+				success: resJSon,
+				error: eXml
+			});
+		}
 
-	function resJSon(data) {
-		console.log(data);
-		var list = data.friendList;
-		$.each(list, function(idx) {
-			var f = list[idx].friend;
-			$("#content").append(f.name + ":" + f.addr + "<br/>");
-		});
-	}
-</script>
+		function eXml(s) {
+			console.log(s);
+		}
+
+		function resJSon(data) {
+			console.log(data);
+			// 넘겨받은 json객체에서 friendList를 찾아 list변수에 저장
+			var list = data.friendList;
+			$.each(list, function (idx) {
+				var f = list[idx].friend;
+				$("#content").append(f.name + ":" + f.addr + "<br/>");
+			});
+		}
+	</script>
 </head>
+
 <body>
 	<button id="call">Server Call</button>
 	<div id="content"></div>
 </body>
+
 </html>

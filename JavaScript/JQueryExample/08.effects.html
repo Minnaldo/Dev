@@ -11,19 +11,23 @@ h2{margin-top:20px;}
 <script type="text/javascript">
 
 $(function(){
-	$("#btn1").click(function(){			
+	$("#btn1").click(function(){
 		$(".box1").hide("slow");
 	});
 
 	$("#btn2").click(function(){
+		// show(duration)
+		// 1초에 걸쳐 보여준다
 		$(".box1").show(1000);
 	});
 
 	$("#btn3").click(function(){
+		// 0.5초에 걸쳐 토글
 	 $(".box2").toggle(500);
 	});
-	
+
 	$("#btn4").click(function(){
+		// .next() ==> 뒤따라오는 형제 태그를 선택한다
 		$(this).parent().next().slideUp(500);
 	});
 	$("#btn5").click(function(){
@@ -31,6 +35,7 @@ $(function(){
 	});
 
 	$("#btn6").click(function(){
+		// slideToggle ==> slideDown, slideUP을 번갈아가며 시킨다
 		$(this).parent().next().slideToggle("fast");
 	});
 
@@ -43,10 +48,12 @@ $(function(){
 	});
 
 	$("#btn9").click(function(){
+		// 기본속도로 fade in, fade out 시킨다
 		$(this).parent().next().fadeToggle("normal");
 	});
 
 	$("#btn10").click(function(){
+		// fadeTo(duration,opacity);
 		$(this).parent().next().fadeTo("slow",0.3);
 	});
 
@@ -77,7 +84,7 @@ hide(시간)/show(시간) 시간은 fast, normal, slow 등으로 입력할 수 �
     <button id="btn5">slideDown</button>
     <button id="btn6">slideToggle</button>
   </p>
-  <p>slideUp은 선택 요소를 위로 미끄러지듯 말아 올리면서 숨깁니다.<br />반면, 
+  <p>slideUp은 선택 요소를 위로 미끄러지듯 말아 올리면서 숨깁니다.<br />반면,
 slideDown은 선택 요소를 아래로 미끄러지듯 말아 내리면서 노출시킵니다.</p>
 
   <h2>fadeIn/fadOut</h2>

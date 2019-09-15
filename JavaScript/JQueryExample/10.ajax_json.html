@@ -8,14 +8,21 @@
 	<script type="text/javascript">
 		$(function () {
 			$('#calc').bind('click', function (evt) {
+				// ajax는 타입(type)을 적지않으면 기본적으로 get방식으로 전송
 				$.ajax({
 					url: 'jsp/plus_ajax.jsp',
+					// http로 보내는 데이터
 					data: {
 						op1: $('#op1').val(),
 						op2: $('#op2').val()
 					},
 					dataType: 'json',
 					success: function (data, status, xhr) {
+						// data로 json 형태의 데이터가 넘어옴
+						// result를 키로갖는 요소의 데이터를 가져온다
+						var obj = JSON.parse(data);
+						// 넘어온 데이터를 json데이터로 파싱한 후, 해당 데이터에서 result를 키로갖는 value를 가져옴
+						var resutl = obj.result;
 						$('#result').val(data.result);
 					},
 					error: function (err) {

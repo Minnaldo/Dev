@@ -1,60 +1,66 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Insert title here</title>
-<style type="text/css">
-#wrap {
-	width: 90%;
-	max-width: 960px;
-	min-width: 320px;
-	margin: 10px auto;
-	background-color: #eee;
-}
+	<title>Insert title here</title>
+	<style type="text/css">
+		#wrap {
+			width: 90%;
+			max-width: 960px;
+			min-width: 320px;
+			margin: 10px auto;
+			background-color: #eee;
+		}
 
-#header {
-	height: 50px;
-	background-color: #666;
-	margin-bottom: 10px;
-}
+		#header {
+			height: 50px;
+			background-color: #666;
+			margin-bottom: 10px;
+		}
 
-#nav {
-	float: left;
-	width: 25%;
-	min-height: 150px;
-	background-color: #999;
-	margin-bottom: 10px;
-}
+		#nav {
+			float: left;
+			width: 25%;
+			min-height: 150px;
+			background-color: #999;
+			margin-bottom: 10px;
+		}
 
-#content {
-	float: left;
-	margin-left: 5%;
-	width: 65%;
-	min-height: 150px;
-	background-color: #999;
-	margin-bottom: 10px;
-}
+		#content {
+			float: left;
+			margin-left: 5%;
+			width: 65%;
+			min-height: 150px;
+			background-color: #999;
+			margin-bottom: 10px;
+		}
 
-#footer {
-	clear: both;
-	height: 50px;
-	background-color: #666;
-	margin-bottom: 10px;
-}
-@media screen and (max-width:720px){
-	#nav, #content{
-		float : none;
-		width : 100%;
-		margin : 0;
-	}
-}
-@media all and (min-width:721px) and (max-width:960px){
-	#wrap{
-		width :100%;			
-		margin : 0;	
-	}
-}
-</style>
+		#footer {
+			clear: both;
+			height: 50px;
+			background-color: #666;
+			margin-bottom: 10px;
+		}
+
+		@media screen and (max-width:720px) {
+
+			#nav,
+			#content {
+				float: none;
+				width: 100%;
+				margin: 0;
+			}
+		}
+
+		@media all and (min-width:721px) and (max-width:960px) {
+			#wrap {
+				width: 100%;
+				margin: 0;
+			}
+		}
+	</style>
 </head>
+
 <body>
 	<div id="wrap">
 		<div id="header">Header</div>
@@ -82,4 +88,5 @@
 		<div id="footer">Footer</div>
 	</div>
 </body>
+
 </html>

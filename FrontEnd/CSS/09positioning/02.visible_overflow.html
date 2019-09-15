@@ -14,28 +14,33 @@
 		}
 
 		.a {
+			/* 내용이 요소의 크기를 넘어가도 보여주지 스크롤이 생기지 않고 고정 */
 			overflow: hidden;
 		}
 
 		.b {
+			/* 자리는 차지하나 보여지지 않게함 */
 			visibility: hidden;
 		}
 
 		.c {
+			/* 내용이 크기를 넘어가면 스크롤이 생성됨 */
 			overflow: auto;
 		}
 
 		.d {
+			/* 자리도 차지하지않고, 보여지지도 않음 */
 			display: none;
 		}
 
 		.e {
+			/* 내용이 요소크기를 넘어가도 그대로 넘어가게 둠 */
 			overflow: visible;
-			;
 		}
 
 		label,
 		input {
+			/* input태그를 inlin level block으로 변경 */
 			display: inline;
 		}
 	</style>
