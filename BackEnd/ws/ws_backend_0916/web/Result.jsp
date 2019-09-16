@@ -11,6 +11,21 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    tr:first-child, tr:last-child {
+        background-color: lightgray;
+    }
+
+    td:nth-child(odd) {
+        text-align: center;
+    }
+
+    table {
+        width: 400px;
+        margin: auto;
+    }
+
+</style>
 <body>
 <%
     Manager man = Manager.getInstance();
@@ -21,7 +36,7 @@
 %>
 <div>
     <table>
-        <tr>
+        <tr style="text-align: center; ">
             <td colspan="2">등록된 정보는 다음과 같습니다</td>
         </tr>
         <tr>
@@ -69,7 +84,11 @@
             <td><%=b.getDesc()%>
             </td>
         </tr>
-        <div style="margin-top: 20px; text-align: center;"><a href="./Book.html">추가 등록</a></div>
+        <tr>
+            <td colspan="2">
+                <a href="./Book.html">추가 등록</a>
+            </td>
+        </tr>
     </table>
 </div>
 </body>

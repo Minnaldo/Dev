@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Registration</title>
+    <style>
+        div {
+            margin: auto;
+            width: 500px;
+        }
+
+        td {
+            width: 150px;
+        }
+
+        td:nth-child(odd) {
+            text-align: right;
+            width: 130px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>상품을 등록 해 주세요.</h1>
+</div>
+<div>
+    <table>
+        <tbody>
+        <form id="frm" action="./product.do" method="post">
+            <tr>
+                <td>상품명 :</td>
+                <td><input type="text" name="pname"></td>
+            </tr>
+            <tr>
+                <td>상품 가격 :</td>
+                <td><input type="number" name="pprice"></td>
+            </tr>
+            <tr>
+                <td>상품 설명 :</td>
+                <td><input type="text" name="pdesc"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" value="저장">
+                    <input type="reset" value="취소">
+                </td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
