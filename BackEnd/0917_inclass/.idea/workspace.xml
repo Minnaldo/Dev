@@ -7,11 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd344fbc-251b-4711-8d70-20dcd890f771" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_mysql_connector_java_8_0_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_48.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/servlet_api.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_13.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/0917_inclass.iml" beforeDir="false" afterPath="$PROJECT_DIR$/0917_inclass.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ssafy/controller/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ssafy/controller/MainServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ssafy/model/ConnectionProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ssafy/model/ConnectionProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0916/hw_backend_0916.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0916/hw_backend_0916.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +73,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-8.0.13.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../apache-tomcat/apache-tomcat-9.0.24/lib/jsp-api.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -175,8 +179,8 @@
     <list>
       <item itemvalue="JavaScript Debug.memList.jws" />
       <item itemvalue="JavaScript Debug.registerMem.html" />
-      <item itemvalue="Tomcat Server.TomCat9" />
       <item itemvalue="JavaScript Debug.login.jws" />
+      <item itemvalue="Tomcat Server.TomCat9" />
     </list>
     <recent_temporary>
       <list>
@@ -216,6 +220,7 @@
       <workItem from="1568725349907" duration="684000" />
       <workItem from="1568726069125" duration="283000" />
       <workItem from="1568726396511" duration="1796000" />
+      <workItem from="1568730509641" duration="2295000" />
     </task>
     <servers />
   </component>

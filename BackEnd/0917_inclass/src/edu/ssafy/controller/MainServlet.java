@@ -56,7 +56,7 @@ public class MainServlet extends HttpServlet {
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         MemVO ret = man.memInfo(id);
-
+        System.out.println("id=" + id + "  pw=" + pw);
         if (ret != null) {
             // 비밀번호 체크
             if (man.memberChk(id, pw)) {

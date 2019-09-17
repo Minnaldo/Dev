@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <script type="text/javascript">
+    <script>
         function chk() {
             var id = document.getElementById("in_id").value;
             var pw = document.getElementById("in_pw").value;
-            alert(id + "\t" + pw);
-            if (id.value.length == 0 || pw.value.length == 0) {
-                alert(id + "\n" + pw);
-                location.href("#");
-            } else {
-                frm.submit();
+
+            if (id.length < 5 || pw.length < 5) {
+                alert("올바른 값을 입력해 주세요");
+                in_id.focus();
+                return;
             }
+            frm.submit();
         }
     </script>
 </head>
@@ -31,15 +31,11 @@
                 <td><input type="password" name="pw" id="in_pw"></td>
             </tr>
             <tr>
-                <td>
-
-                </td>
-                <td>
-                    <button onclick="chk">LogIn</button>
+                <td colspan="2" align="center">
+                    <input type="button" onclick="chk()" value="로그인">
                 </td>
             </tr>
         </table>
-        <input type="text" style="display: none" name="chk" value="login">
     </form>
 </div>
 </body>
