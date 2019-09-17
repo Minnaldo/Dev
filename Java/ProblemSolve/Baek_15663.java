@@ -8,9 +8,8 @@ public class Baek_15663 {
     static Vector<String> vec = new Vector<>();
     static HashSet<String> set = new HashSet<>();
 
-    static void func(int[] sel, int k) {
-        if (k == sel.length) {
-            System.out.println(Arrays.toString(sel));
+    static void func(int[] sel, boolean[] visit, int k) {
+        if (k == m) {
             sb = new StringBuilder();
             for (int i = 0; i < sel.length; i++) {
                 sb.append(sel[i]).append(" ");
@@ -19,11 +18,13 @@ public class Baek_15663 {
             return;
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            sel[k] = arr[i];
-            func(sel, k + 1);
-            func(sel, k);
-        }
+        for (int i = 0; i < arr.length; i++)
+            if (!visit[i]) {
+                sel[k] = arr[i];
+                visit[i] = true;
+                func(sel, visit, k + 1);
+                visit[i] = false;
+            }
 
     }
 
@@ -34,12 +35,12 @@ public class Baek_15663 {
         m = Integer.parseInt(st.nextToken());
         arr = new int[n];
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
             arr[i] = Integer.parseInt(st.nextToken());
-        }
         Arrays.sort(arr);
 
-        func(new int[m], 0);
+        func(new int[m], new boolean[n], 0);
+
         vec = new Vector<>(set);
         Collections.sort(vec);
 
