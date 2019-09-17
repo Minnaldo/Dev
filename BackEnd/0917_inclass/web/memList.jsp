@@ -9,15 +9,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <style>
-    {
-        width: 580px
-    ;
-    }
-
     td:nth-child(odd) {
-        width: 150px;
+        width: 130px;
         background-color: lightgray;
         font-weight: bold;
+        text-align: center;
+    }
+
+    td:nth-child(even){
+        width: 130px;
     }
 
     table {
@@ -36,7 +36,6 @@
     </div>
 
     <div style="margin-top: 20px;">
-        <table>
         <%
             ArrayList<MemVO> list = (ArrayList<MemVO>) request.getAttribute("list");
         %>
@@ -44,6 +43,7 @@
             if (list.size() > 0) {
                 for (MemVO m : list) {
         %>
+        <table>
             <tr>
                 <td>이름</td>
                 <td><a href="./main.do?action=meminfo&id=<%=m.getId()%>"><%=m.getName()%><a/>
@@ -69,11 +69,11 @@
                 <td><%=m.getTel()%>
                 </td>
             </tr>
+        </table>
         <%
             }
         %>
-        </table>
-        <a href="login.html">초기 화면</a>
+        <a href="login.html" style="clear: both;">초기 화면</a>
         <%
         } else {
         %>

@@ -4,8 +4,6 @@
       <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.13.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/mysql-connector-java-8.0.13-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

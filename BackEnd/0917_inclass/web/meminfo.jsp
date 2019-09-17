@@ -44,7 +44,7 @@
                 <td><input type="tel" name="tel" id="tel" value="<%=m.getTel()%>"></td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="2" style="text-align: center">
                     <input type="button" value="수정" onclick="updateMem()">
                     <input type="button" value="삭제" onclick="deleteMem()">
                 </td>

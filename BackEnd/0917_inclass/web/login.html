@@ -5,9 +5,10 @@
     <title>Login Page</title>
     <script type="text/javascript">
         function chk() {
-            var id = document.getElementById("in_id");
-            var pw = document.getElementById("in_pw");
-            if (id.value().length == 0 || pw.value().length == 0) {
+            var id = document.getElementById("in_id").value;
+            var pw = document.getElementById("in_pw").value;
+            alert(id + "\t" + pw);
+            if (id.value.length == 0 || pw.value.length == 0) {
                 alert(id + "\n" + pw);
                 location.href("#");
             } else {
@@ -18,12 +19,9 @@
 </head>
 <body>
 <div align="center">
+    <h1 align="center">로그인하여 주세요</h1>
     <form action="./main.do?action=login" method="post" id="frm">
-        <table style="height: 200px; float: left; ">
-            <tr>
-                <td></td>
-                <td>로그인하여 주세요</td>
-            </tr>
+        <table>
             <tr>
                 <td style="text-align: right">ID</td>
                 <td><input type="text" name="id" id="in_id"></td>

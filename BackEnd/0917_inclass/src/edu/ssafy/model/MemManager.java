@@ -29,7 +29,6 @@ public class MemManager {
 
         try {
             conn = ConnectionProxy.getConnection();
-            System.out.println(conn);
             st = conn.prepareStatement(str);
             st.setString(1, id);
             st.setString(2, pwd);
@@ -98,7 +97,7 @@ public class MemManager {
             st = conn.prepareStatement(sql);
             rs = st.executeQuery();
             while (rs.next()) {
-                alist.add(new MemVO(rs.getString("id"), rs.getString("name"), rs.getString("pw"), rs.getString("age"), rs.getString("addr"), rs.getString("tel")));
+                alist.add(new MemVO(rs.getString("id"), rs.getString("name"), rs.getString("pw"), rs.getString("addr"), rs.getString("age"), rs.getString("tel")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,7 +117,7 @@ public class MemManager {
             st.setString(1, id);
             rs = st.executeQuery();
             while (rs.next()) {
-                m = new MemVO(rs.getString("id"), rs.getString("name"), rs.getString("pw"), rs.getString("age"), rs.getString("addr"), rs.getString("tel"));
+                m = new MemVO(rs.getString("id"), rs.getString("name"), rs.getString("pw"), rs.getString("addr"), rs.getString("age"), rs.getString("tel"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,7 +161,7 @@ public class MemManager {
             }
             rs = st.executeQuery();
             while (rs.next()) {
-                aList.add(new MemVO(rs.getString("id"), rs.getString("name"), rs.getString("pw"), rs.getString("age"), rs.getString("addr"), rs.getString("tel")));
+                aList.add(new MemVO(rs.getString("id"), rs.getString("name"), rs.getString("pw"), rs.getString("addr"), rs.getString("age"), rs.getString("tel")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
