@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Baek_15663 {
-    static StringBuilder sb;
+    static StringBuilder sb, sb2;
     static int n, m;
     static int[] arr;
     static Vector<String> vec = new Vector<>();
@@ -11,21 +11,23 @@ public class Baek_15663 {
     static void func(int[] sel, boolean[] visit, int k) {
         if (k == m) {
             sb = new StringBuilder();
-            for (int i = 0; i < sel.length; i++) {
+            for (int i = 0; i < m; i++) {
                 sb.append(sel[i]).append(" ");
             }
-            set.add(sb.toString().trim());
+            if (set.add(sb.toString().trim())) {
+                vec.add(sb.toString().trim());
+            }
             return;
         }
 
-        for (int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++) {
             if (!visit[i]) {
                 sel[k] = arr[i];
                 visit[i] = true;
                 func(sel, visit, k + 1);
                 visit[i] = false;
             }
-
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -41,7 +43,6 @@ public class Baek_15663 {
 
         func(new int[m], new boolean[n], 0);
 
-        vec = new Vector<>(set);
         Collections.sort(vec);
 
         for (String ss : vec) {

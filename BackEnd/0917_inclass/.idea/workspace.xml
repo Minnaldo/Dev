@@ -77,7 +77,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="database.main" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -221,6 +221,7 @@
       <workItem from="1568726069125" duration="283000" />
       <workItem from="1568726396511" duration="1796000" />
       <workItem from="1568730509641" duration="2295000" />
+      <workItem from="1568763138150" duration="1963000" />
     </task>
     <servers />
   </component>
