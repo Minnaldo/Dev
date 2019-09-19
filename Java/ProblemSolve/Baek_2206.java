@@ -5,6 +5,7 @@ public class Baek_2206 {
 
     static int n, m, ans, len;
     static int[][] map, dir = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
+    static boolean[][][] visit;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,7 +15,7 @@ public class Baek_2206 {
         m = Integer.parseInt(st.nextToken());
         ans = 987654321;
         map = new int[n][m];
-        boolean[][] visit = new boolean[n][m];
+        visit = new boolean[n][m][2];
         // init
         for (int i = 0; i < n; i++) {
             char[] tmp = br.readLine().toCharArray();
@@ -23,7 +24,8 @@ public class Baek_2206 {
             }
         }
 
-        visit[0][0] = true;
+        visit[0][0][0] = true;
+        visit[0][0][1] = true;
         Queue<Node> q = new LinkedList<>();
         q.add(new Node(0, 0, 1, true));
 
@@ -40,15 +42,20 @@ public class Baek_2206 {
                 int nx = node.x + dir[i][1];
 
                 if (ny >= 0 && nx >= 0 && ny < n && nx < m) {
-                    if (!visit[ny][nx]) {
-                        if (map[ny][nx] == 0) {
-                            visit[ny][nx] = true;
-                            q.add(new Node(ny, nx, tmpCnt + 1, node.through));
-                        } else {
-                            if (node.through) {
-                                visit[ny][nx] = true;
-                                q.add(new Node(ny, nx, tmpCnt + 1, false));
-                            }
+                    if (map[ny][nx] == 0) {
+                        if (!visit[ny][nx][0]) {
+                            visit[ny][nx][0] = true;
+                            q.add(new Node(ny, nx, node.cnt + 1, node.through));
+                        }
+                        if (!visit[ny][nx][1]) {
+                            visit[ny][nx][1] = true;
+                            q.add(new Node(ny, nx, node.cnt + 1, node.through));
+                        }
+                    }
+                    if (map[ny][nx] == 1) {
+                        if (!visit[ny][nx][1] && node.through) {
+                            visit[ny][nx][1] = true;
+                            q.add(new Node(ny, nx, node.cnt + 1, false));
                         }
                     }
                 }
