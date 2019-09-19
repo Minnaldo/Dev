@@ -22,6 +22,7 @@ public class Baek_2206 {
                 map[i][j] = Character.digit(tmp[j], 10);
             }
         }
+
         visit[0][0] = true;
         Queue<Node> q = new LinkedList<>();
         q.add(new Node(0, 0, 1, true));
@@ -30,8 +31,9 @@ public class Baek_2206 {
             Node node = q.poll();
             if (node.y == n - 1 && node.x == m - 1) {
                 ans = Math.min(ans, node.cnt);
-                // continue;
+                break;
             }
+
             int tmpCnt = node.cnt;
             for (int i = 0; i < 4; i++) {
                 int ny = node.y + dir[i][0];
