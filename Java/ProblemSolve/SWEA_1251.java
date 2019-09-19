@@ -34,6 +34,7 @@ public class SWEA_1251 {
                     idx++;
                 }
             }
+
             Arrays.sort(edges, new Comparator<double[]>() {
 
                 @Override
@@ -42,8 +43,12 @@ public class SWEA_1251 {
                 }
 
             });
+
             double ans = 0;
             int cnt = 0;
+            parents = new int[maxEdge];
+            for (int i = 0; i < maxEdge; i++)
+                parents[i] = i;
             for (int i = 0; i < n; i++) {
                 int a = find((int) edges[i][0]);
                 int b = find((int) edges[i][1]);
