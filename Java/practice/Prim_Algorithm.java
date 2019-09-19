@@ -22,6 +22,13 @@ public class Prim_Algorithm {
             list[i] = new ArrayList();
         }
 
+        PriorityQueue<Edge> pq = new PriorityQueue<>(new Comparator<Edge>() {
+            @Override
+            public int compare(Edge o1, Edge o2) {
+                return o1.value - o2.value;
+            }
+        });
+
         // 간선리스트를 만든다 ( 인접리스트 )
         // 각 정점별로 리스트를 하나씩 갖고있어야 하고
         // 각 리스트에는 도착정점+경로비용의 정보가 있어야 함
