@@ -1,83 +1,80 @@
 import java.io.*;
 import java.util.*;
 
-/* 하나로 */
+/**
+* 
+*/
 
 public class SWEA_1251 {
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
-
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine());
         for (int tc = 1; tc <= t; tc++) {
             int n = Integer.parseInt(br.readLine());
+            double E;
             double[][] island = new double[n][2];
-            StringTokenizer st;
+
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < n; i++)
+                island[i][1] = Double.parseDouble(st.nextToken());
             st = new StringTokenizer(br.readLine());
             for (int i = 0; i < n; i++)
                 island[i][0] = Double.parseDouble(st.nextToken());
-            st = new StringTokenizer(br.readLine());
-            for (int i = 0; i < n; i++)
-                island[i][1] = Double.parseDouble(st.nextToken());
+            E = Double.parseDouble(br.readLine());
 
-            double E = Double.parseDouble(br.readLine());
-            int maxEdge = n * (n - 1) / 2;
-            double[][] edges = new double[maxEdge][3];
-            int idx = 0;
-            // kruskal 적용을 위한 각 정점을 이었을 때의 비용 계산
+            int A = n * (n - 1) / 2;
+
+            ArrayList<Edge>[] list = new ArrayList[n];
             for (int i = 0; i < n; i++) {
+                list[i] = new ArrayList();
+            }
+            // 지점 정보 만들기
+            for (int i = 0; i < n; i++) {
+                double x1 = island[i][1];
+                double y1 = island[i][0];
                 for (int j = i + 1; j < n; j++) {
-                    double L = (Math.pow(island[i][0] + island[j][0], 2) + Math.pow(island[i][1] + island[j][1], 2))
-                            * E;
-                    edges[idx][0] = i;
-                    edges[idx][1] = j;
-                    edges[idx][2] = L;
-                    idx++;
+                    double x2 = island[j][1];
+                    double y2 = island[j][0];
+                    double tmpCost = E * (Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
+                    list[i].add(new Edge(j, tmpCost));
+                    list[j].add(new Edge(i, tmpCost));
                 }
             }
 
-            Arrays.sort(edges, new Comparator<double[]>() {
+            PriorityQueue<Edge> pq = new PriorityQueue<>();
+            pq.addAll(list[0]);
 
-                @Override
-                public int compare(double[] o1, double[] o2) {
-                    return Double.compare(o1[2], o2[2]);
-                }
+            boolean[] visit = new boolean[n];
+            visit[0] = true;
+            int cnt = 1;
+            double ret = 0.0;
+            while (cnt < n) {
+                Edge tmp = pq.poll();
 
-            });
-
-            double ans = 0;
-            int cnt = 0;
-            parents = new int[maxEdge];
-            for (int i = 0; i < maxEdge; i++)
-                parents[i] = i;
-            for (int i = 0; i < n; i++) {
-                int a = find((int) edges[i][0]);
-                int b = find((int) edges[i][1]);
-                if (a != b) {
-                    union(a, b);
-                    ans += edges[i][2];
-                    cnt++;
-                }
-                if (cnt == n - 1)
-                    break;
+                if (visit[tmp.dest])
+                    continue;
+                pq.addAll(list[tmp.dest]);
+                visit[tmp.dest] = true;
+                cnt++;
+                ret += tmp.cost;
             }
 
-            System.out.println("#" + tc + " " + (long) Math.round(ans));
+            System.out.println("#" + tc + " " + (Long) Math.round(ret));
         }
     }
 
-    static int[] parents;
+    static class Edge implements Comparable<Edge> {
+        int dest;
+        double cost;
 
-    static int find(int x) {
-        if (x == parents[x])
-            return x;
-        return parents[x] = find(parents[x]);
+        Edge(int dest, double cost) {
+            this.dest = dest;
+            this.cost = cost;
+        }
+
+        @Override
+        public int compareTo(Edge o) {
+            return Double.compare(this.cost, o.cost);
+        }
     }
-
-    static void union(int x, int y) {
-        int py = find(y);
-        int px = find(x);
-
-        parents[py] = px;
-    }
-
 }
