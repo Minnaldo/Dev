@@ -18,14 +18,6 @@
     <c:otherwise>
         <%-- 사용자 페이지 --%>
         <%--        로그인 정보를 보여주자!! --%>
-        <tr>
-            <td>상품 번호</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>상품 명</td>
-            <td></td>
-        </tr>
         <input type="button" value="로그아웃">
     </c:otherwise>
 </c:choose>

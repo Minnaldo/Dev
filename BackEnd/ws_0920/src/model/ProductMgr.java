@@ -21,8 +21,8 @@ public class ProductMgr {
     private ProductMgr() {
     }
 
-    public boolean addProduct(String id, String name, String price, String stock) {
-        String sql = "insert into products (?,?,?,?)";
+    public boolean addProduct(String id, String name, String price, String stock, String description) {
+        String sql = "insert into products (?,?,?,?,?)";
         boolean ret = false;
         try {
             conn = ConnectionProxy.getConnection();
@@ -31,6 +31,7 @@ public class ProductMgr {
             ps.setString(2, name);
             ps.setString(3, price);
             ps.setString(4, stock);
+            ps.setString(5, description);
             ps.execute();
             ret = true;
         } catch (SQLException e) {
@@ -45,38 +46,47 @@ public class ProductMgr {
         return ret;
     }
 
-    public ArrayList<ProductVO> getProductList() {
-        String sql = "select * from products";
-        ArrayList<ProductVO> list = new ArrayList<>();
-        try {
-            conn = ConnectionProxy.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return list;
-    }
+//    public ArrayList<ProductVO> getProductList() {
+//        String sql = "select * from products";
+//        ArrayList<ProductVO> list = new ArrayList<>();
+//        try {
+//            conn = ConnectionProxy.getConnection();
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list.add(new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"),rs.getString("description")));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return list;
+//    }
 
-    public ArrayList<ProductVO> getProducList(String name) {
-        String sql = "select * from products where name=?";
+    public ArrayList<ProductVO> getProducList(String type, String value) {
+        String sql = "";
+
         ArrayList<ProductVO> list = new ArrayList<>();
         try {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1,name);
+            if (type.equals("name")) {
+                sql = "select * from products where name=?";
+                ps.setString(1, value);
+            } else if (type.equals("price")) {
+                sql = "select * from products where price<=?";
+                ps.setString(1, value);
+            } else if (type == null) {
+                sql = "select * from products";
+            }
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock")));
+                list.add(new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,7 +108,7 @@ public class ProductMgr {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"));
+                p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

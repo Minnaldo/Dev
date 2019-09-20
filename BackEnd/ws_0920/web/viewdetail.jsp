@@ -20,6 +20,7 @@
     <td>재고 수량</td>
     <td>${product.stock}</td>
 </tr>
-<input type="button" value="돌아가기">
+<input type="button" value="돌아가기" onclick="location.href='main.do?action=list'">
+<input type="button" value="상품 삭제" name="remove" onclick="location.href='main.do?action=remove&item=${product.id}'">
 </body>
 </html>

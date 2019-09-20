@@ -5,13 +5,14 @@ public class ProductVO {
     private String name;
     private String price;
     private String stock;
-    private String desc;    // 상품에 대한 설명
+    private String description;    // 상품에 대한 설명
 
-    public ProductVO(String id, String name, String price, String stock) {
+    public ProductVO(String id, String name, String price, String stock, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.description = description;
     }
 
     public String getId() {
@@ -46,6 +47,14 @@ public class ProductVO {
         this.stock = stock;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "ProductVO{" +
@@ -53,6 +62,7 @@ public class ProductVO {
                 ", name='" + name + '\'' +
                 ", price='" + price + '\'' +
                 ", stock='" + stock + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

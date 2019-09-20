@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7efff2d-5b51-46cd-81d2-7eedc8ee0aef" name="Default Changelist" comment="" />
+    <list default="true" id="b7efff2d-5b51-46cd-81d2-7eedc8ee0aef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jstl_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/servlet_api.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../0917_inclass/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../0917_inclass/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_13.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_13.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/tomcat_api.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/control/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/MainServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ProductMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProductMgr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ProductVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProductVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/productList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/productList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/viewdetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/viewdetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ws_0920.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ws_0920.iml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,15 +31,20 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1R62JorbLTlyRVxrEeqxEycz9BG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jstl-1.2.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../apache-tomcat/apache-tomcat-9.0.24/lib/tomcat-api.jar!/" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -132,10 +152,22 @@
       <workItem from="1568973575627" duration="485000" />
       <workItem from="1568974103735" duration="547000" />
       <workItem from="1568974689224" duration="8642000" />
+      <workItem from="1568988232358" duration="4214000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

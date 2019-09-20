@@ -6,36 +6,37 @@
 </head>
 <body>
 <h1>상품 목록</h1>
+<h3>find Product</h3>
 <form action="/main.do" method="post">
     <select name="type">
         <option value="이름"></option>
         <option value="가격"></option>
     </select>
-    <input type="text" name="name">
-    <input type="hidden" name="action" value="scList">
-    <input type="hidden" name="value" value="scName">
+    <input type="text" name="value">
+    <input type="hidden" name="action" value="list">
     <input type="submit">
 </form>
 
 <c:forEach items="${list}" var="product">
     <tr>
         <td>상품 번호 : </td>
-        <td>${list.id}</td>
+        <td>${product.id}</td>
     </tr>
     <tr>
         <td>상품명 : </td>
-        <td><a href="main.do?action=find&name=${list.name}">${list.name}</a></td>
+        <td><a href="main.do?action=find&name=${product.name}">${product.name}</a></td>
     </tr>
     <tr>
         <td>가격 : </td>
-        <td>${list.price}</td>
+        <td>${product.price}</td>
     </tr>
     <tr>
         <td>재고 수량</td>
-        <td>${list.stock}</td>
+        <td>${product.stock}</td>
     </tr>
     <br>
 </c:forEach>
-<h2><a href=""></a></h2>
+
+<input type="button" value="add Product" name="add" onclick="location.href='main.do?action='">
 </body>
 </html>
