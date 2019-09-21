@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet("/main.do")
 public class MainServlet extends HttpServlet {
@@ -20,20 +19,19 @@ public class MainServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String action = request.getParameter("action");
+        String action = request.getParameter("action") == null ? "" : request.getParameter("action");
 
-        if (action.equals("") || action == null) {
-
-        } else if (action.equals("list")) {
+        System.out.println("test: " + action + " size=" + action.length());
+        if (action.equals("list") || action.length() == 0) {
             getList(request, response);
         } else if (action.equals("login")) {
             login(request, response);
         } else if (action.equals("find")) {
             find(request, response);
         } else if (action.equals("remove")) {
-            remove(request,response);
-        } else if(action.equals("add")){
-            addProduct(request,response);
+            remove(request, response);
+        } else if (action.equals("add")) {
+            addProduct(request, response);
         }
     }
 
@@ -43,22 +41,23 @@ public class MainServlet extends HttpServlet {
         String price = request.getParameter("price");
         String stock = request.getParameter("stock");
         String description = request.getParameter("description");
-        boolean ret = mgr.addProduct(id,name,price,stock,description);
+        boolean ret = mgr.addProduct(id, name, price, stock, description);
 //        TODO alert
 
-        request.getRequestDispatcher("main.do?action=list").forward(request,response);
+        request.getRequestDispatcher("main.do?action=list").forward(request, response);
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         mgr.removeProduct(request.getParameter("item"));
-        request.getRequestDispatcher("main.do?action=scList").forward(request,response);
+        request.getRequestDispatcher("main.do?action=scList").forward(request, response);
     }
 
     private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        ProductVO p = mgr.getProduct(name);
+        String type = "name";
+        ProductVO p = mgr.getProduct(type, name);
         request.setAttribute("product", p);
-        request.getRequestDispatcher("viewdetail.jsp").forward(request, response);
+        request.getRequestDispatcher("viewDetail.jsp").forward(request, response);
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,19 +67,24 @@ public class MainServlet extends HttpServlet {
     }
 
     private void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String type = request.getParameter("type");
-        if (type.equals("이름")) {
-//            이름이 같은 요소만 찾기
-            request.setAttribute("list", mgr.getProducList("name",request.getParameter("value")));
-        } else if (type.equals("가격")) {
-//            가격 이하의 요소만 찾기
-            request.setAttribute("list", mgr.getProducList("price",request.getParameter("value")));
+
+        if (request.getParameter("type") == null || request.getParameter("value") == null) {
+            request.setAttribute("list", mgr.getProductList());
+        } else {
+            String type = request.getParameter("type");
+            String value = request.getParameter("value");
+
+            if (type.equals("name"))
+                request.setAttribute("list", mgr.getProductList("name", value));
+            if (type.equals("price"))
+                request.setAttribute("list", mgr.getProductList("price", value));
         }
         request.getRequestDispatcher("productList.jsp").forward(request, response);
+
     }
 
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
         doPost(request, response);
     }
 }

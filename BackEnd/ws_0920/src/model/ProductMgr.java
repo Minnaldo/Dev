@@ -22,14 +22,14 @@ public class ProductMgr {
     }
 
     public boolean addProduct(String id, String name, String price, String stock, String description) {
-        String sql = "insert into products (?,?,?,?,?)";
+        String sql = "insert into products values (?, ?, ?, ?, ?)";
         boolean ret = false;
         try {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             ps.setString(2, name);
-            ps.setString(3, price);
+            ps.setInt(3, Integer.parseInt(price));
             ps.setString(4, stock);
             ps.setString(5, description);
             ps.execute();
@@ -46,43 +46,41 @@ public class ProductMgr {
         return ret;
     }
 
-//    public ArrayList<ProductVO> getProductList() {
-//        String sql = "select * from products";
-//        ArrayList<ProductVO> list = new ArrayList<>();
-//        try {
-//            conn = ConnectionProxy.getConnection();
-//            ps = conn.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"),rs.getString("description")));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return list;
-//    }
-
-    public ArrayList<ProductVO> getProducList(String type, String value) {
-        String sql = "";
-
+    public ArrayList<ProductVO> getProductList() {
+        String sql = "select * from products order by name";
         ArrayList<ProductVO> list = new ArrayList<>();
         try {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<ProductVO> getProductList(String type, String value) {
+        String sql = "";
+        ArrayList<ProductVO> list = new ArrayList<>();
+        try {
+            conn = ConnectionProxy.getConnection();
             if (type.equals("name")) {
-                sql = "select * from products where name=?";
+                sql = "select * from products where name=? order by name";
+                ps = conn.prepareStatement(sql);
                 ps.setString(1, value);
             } else if (type.equals("price")) {
-                sql = "select * from products where price<=?";
-                ps.setString(1, value);
-            } else if (type == null) {
-                sql = "select * from products";
+                sql = "select * from products where price<=? order by price";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, Integer.parseInt(value));
             }
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -100,12 +98,18 @@ public class ProductMgr {
         return list;
     }
 
-    public ProductVO getProduct(String id) {
+    public ProductVO getProduct(String type, String value) {
         ProductVO p = null;
-        String sql = "select * from products where id=?";
+        String sql = "";
+        if (type.equals("name")) {
+            sql = "select * from products where name=?";
+        } else if (type.equals("id")) {
+            sql = "select * from products where id=?";
+        }
         try {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setString(1, value);
             rs = ps.executeQuery();
             while (rs.next()) {
                 p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description"));

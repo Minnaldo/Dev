@@ -50,6 +50,6 @@
         <mime-type>text/xml</mime-type>
     </mime-mapping>
     <welcome-file-list>
-        <welcome-file>/main.do</welcome-file>
+        <welcome-file>main.do</welcome-file>
     </welcome-file-list>
 </web-app>
