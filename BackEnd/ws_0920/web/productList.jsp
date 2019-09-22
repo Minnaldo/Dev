@@ -49,6 +49,6 @@
     </tr>
     </table>
 </c:forEach>
-<h2 style="float: right;"><a href="regProduct.html">상품 추가</a></h2>
+<h2 style="float: right;"><a href="addProduct.html">상품 추가</a></h2>
 </body>
 </html>

@@ -21,7 +21,6 @@ public class MainServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
 
-        System.out.println("test: " + action + " size=" + action.length());
         if (action.equals("list") || action.length() == 0) {
             getList(request, response);
         } else if (action.equals("login")) {
@@ -32,7 +31,19 @@ public class MainServlet extends HttpServlet {
             remove(request, response);
         } else if (action.equals("add")) {
             addProduct(request, response);
+        } else if (action.equals("update")) {
+            updateProduct(request, response);
         }
+    }
+
+    private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id"); // 전체 데이터를 받아서 모두를 업데이트 한다
+        ProductVO p = mgr.getProduct("id", id);
+
+        boolean result = mgr.update(p.getId(), p.getName(), p.getPrice(), p.getStock(), p.getDescription());
+        // 성공하면 리스트 화면으로 돌아가기
+        // 실패하면 어떻게?? 결과페이지? 에러페이지?
+        request.getRequestDispatcher("main.do?action=list").forward(request, response);
     }
 
     private void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

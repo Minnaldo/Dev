@@ -29,8 +29,8 @@ public class ProductMgr {
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             ps.setString(2, name);
-            ps.setInt(3, Integer.parseInt(price));
-            ps.setString(4, stock);
+            ps.setString(3, price);
+            ps.setInt(4, Integer.parseInt(stock));
             ps.setString(5, description);
             ps.execute();
             ret = true;
@@ -124,6 +124,34 @@ public class ProductMgr {
             }
         }
         return p;
+    }
+
+    // TODO name이랑 id 둘다 로 비교를 해볼까?
+    public boolean update(String id, String name, String price, String stock, String description) {
+        String sql = "update products set id = ?, name =? , price =?,stock=?, description=? where id=?";
+        boolean result = false;
+        try {
+            conn = ConnectionProxy.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(2, name);
+            ps.setString(3, price);
+            ps.setString(4, stock);
+            ps.setString(5, description);
+            ps.setString(6, id);
+            ps.execute();
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
     }
 
     public boolean removeProduct(String id) {

@@ -63,7 +63,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -80,7 +80,6 @@
   <component name="RunManager">
     <configuration name="TomCat9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US" />
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="ws_0920:war exploded">
           <settings>
@@ -172,6 +171,7 @@
       <workItem from="1568974689224" duration="8678000" />
       <workItem from="1569033618821" duration="5236000" />
       <workItem from="1569038974795" duration="5169000" />
+      <workItem from="1569052962440" duration="1996000" />
     </task>
     <servers />
   </component>
