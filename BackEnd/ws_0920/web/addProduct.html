@@ -7,14 +7,15 @@
 <body>
 <div align="center">
     <form action="main.do?action=add" method="post">
-        아이디 : <input type="text" name="id"><br>
-        이름 : <input type="text" name="name"><br>
-        가격 : <input type="text" name="price"><br>
-        재고 수량 : <input type="text" name="stock"><br>
-        상세 설명 : <input type="text" name="description"><br>
+        상품 번호 : <input type="number" name="id" placeholder="ex) 1200" required><br>
+        상품 명 : <input type="text" name="name" placeholder="ex) SmartTV"><br>
+        상품 가격 : <input type="number" name="price" placeholder="ex) 36800"><br>
+        재고 수량 : <input type="number" name="stock" placeholder="ex) 20"><br>
+        기타 : <input type="text" name="description"><br>
         <input type="reset" value="초기화">
         <input type="submit" value="저장"><br>
     </form>
 </div>
+<a href="javascript:history.back()">돌아가기</a>
 </body>
 </html>

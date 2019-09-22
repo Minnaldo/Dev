@@ -23,8 +23,6 @@ public class MainServlet extends HttpServlet {
 
         if (action.equals("list") || action.length() == 0) {
             getList(request, response);
-        } else if (action.equals("login")) {
-            login(request, response);
         } else if (action.equals("find")) {
             find(request, response);
         } else if (action.equals("remove")) {
@@ -38,12 +36,14 @@ public class MainServlet extends HttpServlet {
 
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id"); // 전체 데이터를 받아서 모두를 업데이트 한다
-        ProductVO p = mgr.getProduct("id", id);
-
-        boolean result = mgr.update(p.getId(), p.getName(), p.getPrice(), p.getStock(), p.getDescription());
-        // 성공하면 리스트 화면으로 돌아가기
-        // 실패하면 어떻게?? 결과페이지? 에러페이지?
-        request.getRequestDispatcher("main.do?action=list").forward(request, response);
+        String name = request.getParameter("name");
+        String price = request.getParameter("price");
+        String stock = request.getParameter("stock");
+        String description = request.getParameter("description");
+        ProductVO p = mgr.update(id, name, price, stock, description);
+        System.out.println("after update id="+p.getId());
+//        request.getRequestDispatcher("main.do?action=list").forward(request, response);
+        response.sendRedirect("main.do?action=list");
     }
 
     private void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,46 +52,45 @@ public class MainServlet extends HttpServlet {
         String price = request.getParameter("price");
         String stock = request.getParameter("stock");
         String description = request.getParameter("description");
-        boolean ret = mgr.addProduct(id, name, price, stock, description);
-//        TODO alert
+        String url = null;
+        ProductVO p = mgr.getProduct("id", id);
+        if (p == null) {
+            mgr.addProduct(id, name, price, stock, description);
+        } else {
+            // 이미 존재한다는 경고를 보여준다
+            // TODO implement alert function
 
-        request.getRequestDispatcher("main.do?action=list").forward(request, response);
+        }
+        response.sendRedirect("main.do?action=list");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        mgr.removeProduct(request.getParameter("item"));
-        request.getRequestDispatcher("main.do?action=scList").forward(request, response);
+        String id = request.getParameter("id");
+        ProductVO p = mgr.getProduct("id", id);
+        mgr.removeProduct(p.getId());
+        response.sendRedirect("main.do?action=list");
     }
 
     private void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        String type = "name";
-        ProductVO p = mgr.getProduct(type, name);
+        ProductVO p = mgr.search(name);
         request.setAttribute("product", p);
         request.getRequestDispatcher("viewDetail.jsp").forward(request, response);
     }
 
-    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        // TODO
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-    }
-
     private void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getParameter("type") == null || request.getParameter("value") == null) {
+        if (request.getParameter("type") == null || request.getParameter("value") == null || request.getParameter("value").length() == 0) {
             request.setAttribute("list", mgr.getProductList());
         } else {
             String type = request.getParameter("type");
             String value = request.getParameter("value");
-
             if (type.equals("name"))
                 request.setAttribute("list", mgr.getProductList("name", value));
             if (type.equals("price"))
                 request.setAttribute("list", mgr.getProductList("price", value));
         }
         request.getRequestDispatcher("productList.jsp").forward(request, response);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws

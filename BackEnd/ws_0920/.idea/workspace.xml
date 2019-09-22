@@ -63,7 +63,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -171,7 +171,7 @@
       <workItem from="1568974689224" duration="8678000" />
       <workItem from="1569033618821" duration="5236000" />
       <workItem from="1569038974795" duration="5169000" />
-      <workItem from="1569052962440" duration="1996000" />
+      <workItem from="1569052962440" duration="13928000" />
     </task>
     <servers />
   </component>

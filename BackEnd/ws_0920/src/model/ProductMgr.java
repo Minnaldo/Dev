@@ -74,9 +74,9 @@ public class ProductMgr {
         try {
             conn = ConnectionProxy.getConnection();
             if (type.equals("name")) {
-                sql = "select * from products where name=? order by name";
+                sql = "select * from products where name like ? order by name";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, value);
+                ps.setString(1, "%" + value + "%");
             } else if (type.equals("price")) {
                 sql = "select * from products where price<=? order by price";
                 ps = conn.prepareStatement(sql);
@@ -102,14 +102,14 @@ public class ProductMgr {
         ProductVO p = null;
         String sql = "";
         if (type.equals("name")) {
-            sql = "select * from products where name=?";
+            sql = "select * from products where name like ?";
         } else if (type.equals("id")) {
-            sql = "select * from products where id=?";
+            sql = "select * from products where id like ?";
         }
         try {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, value);
+            ps.setString(1, "%" + value + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description"));
@@ -127,7 +127,7 @@ public class ProductMgr {
     }
 
     // TODO name이랑 id 둘다 로 비교를 해볼까?
-    public boolean update(String id, String name, String price, String stock, String description) {
+    public ProductVO update(String id, String name, String price, String stock, String description) {
         String sql = "update products set id = ?, name =? , price =?,stock=?, description=? where id=?";
         boolean result = false;
         try {
@@ -151,7 +151,7 @@ public class ProductMgr {
             }
         }
 
-        return result;
+        return this.getProduct("id", id);
     }
 
     public boolean removeProduct(String id) {
@@ -161,6 +161,7 @@ public class ProductMgr {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
+            ps.execute();
             ret = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,6 +174,31 @@ public class ProductMgr {
         }
 
         return ret;
+    }
+
+    public ProductVO search(String name) {
+        ProductVO p = null;
+        String sql = "select * from products where name=?";
+
+        try {
+            conn = ConnectionProxy.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return p;
     }
 
     private void close() throws SQLException {
