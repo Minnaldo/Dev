@@ -32,6 +32,11 @@
             width: 50%;
             margin: auto;
         }
+        #time{
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+        }
     </style>
     <script>
         function update() {

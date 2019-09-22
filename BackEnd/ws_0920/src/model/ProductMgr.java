@@ -1,10 +1,8 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ProductMgr {
 
@@ -126,7 +124,6 @@ public class ProductMgr {
         return p;
     }
 
-    // TODO name이랑 id 둘다 로 비교를 해볼까?
     public ProductVO update(String id, String name, String price, String stock, String description) {
         String sql = "update products set id = ?, name =? , price =?,stock=?, description=? where id=?";
         boolean result = false;
@@ -151,7 +148,7 @@ public class ProductMgr {
             }
         }
 
-        return this.getProduct("id", id);
+        return getProduct("id", id);
     }
 
     public boolean removeProduct(String id) {
@@ -179,14 +176,13 @@ public class ProductMgr {
     public ProductVO search(String name) {
         ProductVO p = null;
         String sql = "select * from products where name=?";
-
         try {
             conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             rs = ps.executeQuery();
             while (rs.next()) {
-                p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description"));
+                p = new ProductVO(rs.getString("id"), rs.getString("name"), rs.getString("price"), rs.getString("stock"), rs.getString("description") );
             }
         } catch (SQLException e) {
             e.printStackTrace();

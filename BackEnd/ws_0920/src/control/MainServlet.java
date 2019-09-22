@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/main.do")
 public class MainServlet extends HttpServlet {
@@ -41,8 +42,6 @@ public class MainServlet extends HttpServlet {
         String stock = request.getParameter("stock");
         String description = request.getParameter("description");
         ProductVO p = mgr.update(id, name, price, stock, description);
-        System.out.println("after update id="+p.getId());
-//        request.getRequestDispatcher("main.do?action=list").forward(request, response);
         response.sendRedirect("main.do?action=list");
     }
 
@@ -56,12 +55,15 @@ public class MainServlet extends HttpServlet {
         ProductVO p = mgr.getProduct("id", id);
         if (p == null) {
             mgr.addProduct(id, name, price, stock, description);
+            response.sendRedirect("main.do?action=list");
         } else {
-            // 이미 존재한다는 경고를 보여준다
-            // TODO implement alert function
-
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>");
+            out.println("alert('이미 존재하는 상품번호 입니다.')");
+            out.println("location.href='main.do?action=list'");
+            out.println("</script>");
         }
-        response.sendRedirect("main.do?action=list");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

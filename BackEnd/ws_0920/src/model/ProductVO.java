@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class ProductVO {
     private String id;
     private String name;
@@ -8,6 +10,14 @@ public class ProductVO {
     private String description;    // 상품에 대한 설명
 
     public ProductVO(String id, String name, String price, String stock, String description) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.description = description;
+    }
+
+    public ProductVO(String id, String name, String price, String stock, String description, Date savetime) {
         this.id = id;
         this.name = name;
         this.price = price;

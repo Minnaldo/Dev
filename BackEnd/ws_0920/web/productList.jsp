@@ -12,21 +12,38 @@
         }
 
         td {
-            width: 115px;
+            width: 50%;
+            text-overflow: ellipsis;
         }
-        h3{
-            float: right;
-            margin: auto;
+
+        a {
+            text-overflow: ellipsis;
         }
+
         table {
             float: left;
+            border: solid 0.7px black;
+
+            width: 25%;
+            height: 120px;
         }
 
         #list_viewer {
             width: 55%;
             margin: auto;
         }
+
+        aside {
+            position: absolute;
+            right: 50px;
+            width: 20%;
+        }
     </style>
+    <script>
+        function add() {
+            location.href = "./addProduct.html";
+        }
+    </script>
 </head>
 <body>
 <h1 align="center">상품 목록</h1>
@@ -37,12 +54,11 @@
             <select name="type">
                 <option value="name">이름</option>
                 <option value="price">가격</option>
-                <option value="tag">태그</option>
             </select>
             <input type="text" name="value">
             <input type="hidden" name="action" value="list">
             <input type="submit" value="검색">
-            <h3><a href="addProduct.html">상품 추가</a></h3>
+            <a href="addProduct.html">상품 추가</a>
         </form>
     </fieldset>
     <c:if test="${list eq null}">
@@ -69,6 +85,5 @@
         </table>
     </c:forEach>
 </div>
-
 </body>
 </html>
