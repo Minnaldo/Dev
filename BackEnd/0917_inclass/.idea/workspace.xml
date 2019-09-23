@@ -100,6 +100,7 @@
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="START_JAVASCRIPT_DEBUGGER" value="true" />
       <option name="COMMON_VM_ARGUMENTS" value="-Duser.language=en -Duser.region=US" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="0917_inclass:war exploded">
           <settings>
@@ -217,7 +218,7 @@
       <workItem from="1568730509641" duration="2295000" />
       <workItem from="1568763138150" duration="2566000" />
       <workItem from="1568987423830" duration="619000" />
-      <workItem from="1569206194756" duration="8471000" />
+      <workItem from="1569206194756" duration="9333000" />
     </task>
     <servers />
   </component>

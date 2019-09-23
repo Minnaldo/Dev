@@ -5,7 +5,6 @@ import edu.ssafy.model.MemVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,15 +42,15 @@ public class MainServlet extends HttpServlet {
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.getSession().setAttribute("islogin",null);  // 세션에서 로그인 여부만 초기화
-        //        request.getSession().invalidate();  // 세션을 초기화한다, 세션의 모든값을 초기화
+        request.getSession().setAttribute("islogin", null);  // 세션에서 로그인 여부만 초기화
+        request.getSession().invalidate();  // 세션을 초기화한다, 세션의 모든값을 초기화
 
-        Cookie[] cook = request.getCookies();
-        for (int i = 0; i < cook.length; i++) {
-            cook[i].getName();
-            cook[i].getValue();
-            cook[i].setMaxAge(0);   // 쿠키의 삭제 : 시간을 0으로 만들어 삭제한다
-        }
+//        Cookie[] cook = request.getCookies();
+//        for (int i = 0; i < cook.length; i++) {
+//            cook[i].getName();
+//            cook[i].getValue();
+//            cook[i].setMaxAge(0);   // 쿠키의 삭제 : 시간을 0으로 만들어 삭제한다
+//        }
 
         response.sendRedirect("login.html");
     }
