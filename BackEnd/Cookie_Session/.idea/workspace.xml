@@ -63,8 +63,8 @@
       <method v="2" />
     </configuration>
     <configuration name="Tomcat9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="START_JAVASCRIPT_DEBUGGER" value="true" />
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US" />
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="Cookie_Session:war exploded">
           <settings>
@@ -135,6 +135,10 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.viewCookie.jws" />
+      <item itemvalue="Tomcat Server.Tomcat9" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.viewCookie.jws" />
@@ -162,6 +166,7 @@
       <workItem from="1568939920398" duration="238000" />
       <workItem from="1568940175326" duration="11199000" />
       <workItem from="1568955196096" duration="8748000" />
+      <workItem from="1569196947944" duration="1132000" />
     </task>
     <servers />
   </component>
