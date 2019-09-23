@@ -171,3 +171,29 @@ choose if foreach 태그
 - <jsp:useBean /> : JavaBean 객체를 생성 및 사용하기 위한 태그
 - <jsp:setProperty /> : JavaBean 객체 생성시 객체의 필드에 값을 주는 태그
 - <jsp:getProperty /> : JavaBean 객체의 필드값을 얻어올 때 사용하는 태그
+
+### 에러페이지 지정
+- page 지시문 및 errorPage와 isErrorPage 속성을 활용한 에러 페이지 지정
+- web.xml의 <error-code>태그를 활용한 HTTP 에러 코드별 에러 페이지 지정
+- web.xml의 <exception-type>태그를 활용한 Java 고유의 예외 종류벌 에러 페이지 지정
+
+## EL (Expression Language)
+
+### EL 내장객체
+EL은 자동으로 id를 찾아준다 ( 가장 작은 scope 부터 찾아본다 ) -> 중복된다면 가장 작은 범위의 값을 가져오게 된다
+
+| Category | 식별자              | 설명                                                                |
+| -------- | ---------------- | ----------------------------------------------------------------- |
+| JSP      | pageContext      | 현재 페이지의 프로세싱과 상응하는 PageContext인스턴스                                |
+| 범위       | pageScope        | page scope에 저장된 객체를 추출해서 출력할 때 사용                                 |
+|          | requestScope     | request scope에 저장된 객체를 추출해서 출력할 때 사용                              |
+|          | sessioScope      | session scope에 저장된 객체를 추출해서 출력할 때 사용                              |
+|          | applicationScope | application scope에 저장된 객체를 추출해서 출력할 때 사용                          |
+| 요청 매개변수  | param            | ServletRequest.getParameter(String)을 통해 요청 정보를 추출할 때 사용           |
+|          | paramValues      | ServletRequest.getParameterValues(String)를 통해 요청 정보를 추출할 때 사용     |
+| 요청헤더     | header           | HttpServletRequest.getHeader(String)를 통해 헤더 정보를 추출할 때 사용          |
+|          | headerValues     | HttpServlerRequest.getHeaders(String)를 통해 헤더 정보를 추출할 때 사용         |
+| 쿠키       | cookie           | HttpServlerRequest.getCookie(String)를 통해 Cookie 정보를 추출할 때 사용      |
+| 초기화 매개변수 | initParam        | ServletContext.getInitParameter(String)를 통해 초기화 파라미터 정보를 추출할 때 사용 |
+
+
