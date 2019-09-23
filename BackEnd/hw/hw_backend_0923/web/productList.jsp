@@ -48,8 +48,10 @@
 
         $(function () {
             $('.productList').hover(function () {
-                var proname = $(this).children('tr:nth-child(2)').children('td:nth-child(2)').text();
-                console.log("get proname=="+proname);
+                var pname = $(this).children('tr:first').children(':last');
+                var proval = $(this).children('.proname').text();
+
+                console.log("get proname=="+"  proval=="+proval);
                 $.ajax({
                     // xml 파일 위치
                     url: "./ProductData/products.xml",
@@ -107,7 +109,7 @@
             </tr>
             <tr>
                 <td>상품명</td>
-                <td><a href="main.do?action=find&name=${product.name}">${product.name}</a></td>
+                <td class="proname"><a href="main.do?action=find&name=${product.name}">${product.name}</a></td>
             </tr>
             <tr>
                 <td>가격</td>
