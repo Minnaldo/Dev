@@ -44,7 +44,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.emmet.xml" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -161,7 +161,7 @@
       <workItem from="1568939516904" duration="388000" />
       <workItem from="1568939920398" duration="238000" />
       <workItem from="1568940175326" duration="11199000" />
-      <workItem from="1568955196096" duration="6144000" />
+      <workItem from="1568955196096" duration="8748000" />
     </task>
     <servers />
   </component>
