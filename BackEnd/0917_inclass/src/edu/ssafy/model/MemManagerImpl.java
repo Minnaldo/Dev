@@ -6,21 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MemManager {
-
-    private static MemManager instance = new MemManager();
-    private ArrayList<MemVO> list = new ArrayList<>();
+public class MemManagerImpl implements IMemManager {
 
     //    mysql
     private Connection conn;
     private PreparedStatement st;
     private ResultSet rs;
 
-    private MemManager() {
-    }
-
-    public static MemManager getInstance() {
-        return instance;
+    public MemManagerImpl() {
     }
 
     public boolean addMem(String name, String id, String pwd, String addr, String age, String tel) {
@@ -181,7 +174,7 @@ public class MemManager {
             rs = st.executeQuery();
             rs.last();
             int cnt = rs.getRow();
-            if(cnt==1){
+            if (cnt == 1) {
                 ret = true;
             }
         } catch (SQLException e) {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Product</title>
+    <style>
+        td:nth-child(odd){
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <form action="main.do?action=add" method="post">
+        <table>
+            <tr>
+                <td>상품 번호</td>
+                <td><input type="number" name="id" placeholder="ex) 1200" required></td>
+            </tr>
+            <tr>
+                <td>상품 명</td>
+                <td><input type="text" name="name" placeholder="ex) SmartTV" required></td>
+            </tr>
+            <tr>
+                <td>상품 가격</td>
+                <td><input type="number" name="price" placeholder="ex) 36800">
+                </td>
+            </tr>
+            <tr>
+                <td>재고 수량</td>
+                <td><input type="number" name="stock" placeholder="ex) 20">
+                </td>
+            </tr>
+            <tr>
+                <td>기타</td>
+                <td><input type="text" name="description">
+                </td>
+            </tr>
+            <tr>
+        </table>
+        <input type="reset" value="초기화">
+        <input type="submit" value="저장"><br>
+    </form>
+    <br>
+    <a href="javascript:history.back()">돌아가기</a>
+</div>
+</body>
+</html>
