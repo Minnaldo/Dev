@@ -16,4 +16,6 @@ public interface IProductService {
     void find(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
     void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+    void logoin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

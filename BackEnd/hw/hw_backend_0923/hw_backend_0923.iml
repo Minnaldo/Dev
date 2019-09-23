@@ -23,6 +23,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="JAX-WS-Apache Axis" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.48" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.48" level="project" />
+    <orderEntry type="library" name="jstl:jstl:1.2" level="project" />
+    <orderEntry type="library" name="jsp-api" level="project" />
   </component>
 </module>

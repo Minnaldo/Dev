@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<meta charset="UTF-8">
 <head>
+    <meta charset="UTF-8">
     <title>List</title>
     <style>
         td:nth-child(odd) {
@@ -16,16 +16,15 @@
             text-overflow: ellipsis;
         }
 
-        a {
-            text-overflow: ellipsis;
-        }
-
         table {
-            float: left;
             border: solid 0.7px black;
-
             width: 25%;
             height: 120px;
+        }
+
+        .productList {
+            /*z-index: 3;*/
+            border: solid 1px gray;
         }
 
         #list_viewer {
@@ -33,10 +32,16 @@
             margin: auto;
         }
 
-        aside {
-            position: absolute;
-            right: 50px;
-            width: 20%;
+        .detail_popup {
+            position: fixed;
+            bottom: 30px;
+            width: 300px;
+            margin: auto;
+            float: none;
+        }
+
+        .plist {
+            display: inline-block;
         }
     </style>
     <%-- jquery call --%>
@@ -46,39 +51,43 @@
             location.href = "./addProduct.html";
         }
 
-        $(function () {
-            $('.productList').hover(function () {
-                var pname = $(this).children('tr:first').children(':last');
-                var proval = $(this).children('.proname').text();
+        function leave_event() {
+            $('#product_detail').children().remove();
+        }
 
-                console.log("get proname=="+"  proval=="+proval);
-                $.ajax({
-                    // xml 파일 위치
-                    url: "./ProductData/products.xml",
-                    data: "",
-                    type: "GET",
-                    dataType: "xml",
-                    success: function (xml) {
-                        $('product', xml).each(function () {
-                            if (pname == $(this).find('name').text()) {
-                                var id = $(dat).find('id').text();
-                                var name = $(dat).find('name').text();
-                                var price = $(dat).find('price').text();
-                                var stock = $(dat).find('stock').text();
-                                var description = $(dat).find('description').text();
+        function over_event(event) {
+            $('#product_detail').remove();
+            var productName = $(this).find('a').text();
+            $.ajax({
+                // xml 파일 위치
+                url: "./ProductData/products.xml",
+                data: "",
+                type: "GET",
+                dataType: "xml",
+                success: function (xml) {
+                    $('product', xml).each(function () {
+                        if (productName == $(this).find('name').text()) {
+                            var id = $(this).find('id').text();
+                            var name = $(this).find('name').text();
+                            var price = $(this).find('price').text();
+                            var stock = $(this).find('stock').text();
+                            var description = $(this).find('description').text();
 
-                                $('#product_detail').append("<table>" +
-                                    "<tr><td>상품 번호</td><td>id</td></tr>" +
-                                    "<tr><td>상품 명</td><td>name</td></tr>" +
-                                    "<tr><td>상품 가격</td><td>price</td></tr>" +
-                                    "<tr><td>재고</td><td>stock</td></tr>" +
-                                    "<tr><td>기타</td><td>description</td></tr>" +
-                                    "</table>");
-                            }
-                        });
-                    }
-                });
+                            $('#product_detail').append("<table class='detail_popup'>" +
+                                "<tr><td>상품 번호</td><td>" + id + "</td></tr>" +
+                                "<tr><td>상품 명</td><td>" + name + "</td></tr>" +
+                                "<tr><td>상품 가격</td><td>" + price + "</td></tr>" +
+                                "<tr><td>재고</td><td>" + stock + "</td></tr>" +
+                                "<tr><td>기타</td><td>" + description + "</td></tr>" +
+                                "</table>");
+                        }
+                    });
+                }
             });
+        }
+
+        $(function () {
+            $('.productList').hover(over_event, leave_event);
         });
     </script>
 </head>
@@ -102,28 +111,18 @@
         <h2>등록된 상품이 없습니다.</h2>
     </c:if>
     <c:forEach items="${list}" var="product">
-        <table class="productList">
-            <tr>
-                <td>상품 번호</td>
-                <td>${product.id}</td>
-            </tr>
-            <tr>
-                <td>상품명</td>
-                <td class="proname"><a href="main.do?action=find&name=${product.name}">${product.name}</a></td>
-            </tr>
-            <tr>
-                <td>가격</td>
-                <td>${product.price}</td>
-            </tr>
-            <tr>
-                <td>재고 수량</td>
-                <td>${product.stock}</td>
-            </tr>
-        </table>
+        <div class="productList">
+            <div>
+                <div class="plist">상품 번호</div>
+                <div class="plist">${product.id}</div>
+            </div>
+            <div>
+                <div class="plist">상품명</div>
+                <div class="plist"><a href="main.do?action=find&name=${product.name}">${product.name}</a></div>
+            </div>
+        </div>
     </c:forEach>
 </div>
-<div id="product_detail">
-
-</div>
+<div id="product_detail"></div>
 </body>
 </html>

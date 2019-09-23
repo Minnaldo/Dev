@@ -74,4 +74,9 @@ public class ProductServiceImpl implements IProductService {
         request.getRequestDispatcher("productList.jsp").forward(request, response);
     }
 
+    @Override
+    public void logoin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        request.getSession().setAttribute("id", id);
+    }
 }
