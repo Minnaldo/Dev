@@ -192,6 +192,28 @@ public class ProductMgrImpl implements IProductMgr {
         return p;
     }
 
+    @Override
+    public boolean isLogin(String id, String pw) {
+        String sql = "select * from products where id =? and pw = ?";
+        boolean ret = false;
+
+        try {
+            conn = ConnectionProxy.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(2, pw);
+            rs = ps.executeQuery();
+            rs.last();
+            int cnt = rs.getRow();
+            if (cnt == 1) {
+                ret = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
     public void close() throws SQLException {
         if (rs != null) rs.close();
         if (ps != null) ps.close();

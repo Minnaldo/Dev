@@ -18,5 +18,7 @@ public interface IProductMgr {
 
     ProductVO search(String name);
 
+    boolean isLogin(String id, String pw);
+
     void close() throws SQLException;
 }

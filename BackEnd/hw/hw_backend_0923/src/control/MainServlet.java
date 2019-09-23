@@ -30,6 +30,10 @@ public class MainServlet extends HttpServlet {
             service.addProduct(request, response);
         } else if (action.equals("update")) {
             service.updateProduct(request, response);
+        } else if (action.equals("login")) {
+            service.login(request, response);
+        } else if (action.equals("logout")) {
+            service.logout(request, response);
         }
     }
 

@@ -75,8 +75,24 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public void logoin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-        request.getSession().setAttribute("id", id);
+        String pw = request.getParameter("pw");
+        boolean isLogin = mgr.isLogin(id, pw);
+
+        if (isLogin) {
+            request.getSession().setAttribute("islogin", "islogin");
+            request.getSession().setAttribute("loginid", id);
+            response.sendRedirect("main.do?action=list");
+        } else {
+//            회원가입 페이지로
+            response.sendRedirect("");
+        }
+    }
+
+    @Override
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("login.jsp");
     }
 }

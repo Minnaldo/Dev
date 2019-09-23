@@ -6,7 +6,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf780fe9-ff11-41f0-aa7f-d69ef0af5b10" name="Default Changelist" comment="" />
+    <list default="true" id="cf780fe9-ff11-41f0-aa7f-d69ef0af5b10" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../0917_inclass/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../0917_inclass/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jsp_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jsp_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/IProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/business/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/control/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/MainServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/control/loginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/loginFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/IProductMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/IProductMgr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ProductMgrImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProductMgrImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ws_0920/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ws_0920/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +34,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -29,14 +45,16 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1REFSJMizuXboSRLeikhNHGPCX4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/apache-tomcat-9.0.24-windows-x64/apache-tomcat-9.0.24/lib/tomcat-api.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../0917_inclass" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -159,10 +177,22 @@
       <workItem from="1569224369000" duration="530000" />
       <workItem from="1569224914367" duration="4502000" />
       <workItem from="1569234260730" duration="7876000" />
+      <workItem from="1569246460345" duration="2984000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

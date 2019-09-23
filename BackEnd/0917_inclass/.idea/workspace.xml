@@ -6,7 +6,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd344fbc-251b-4711-8d70-20dcd890f771" name="Default Changelist" comment="" />
+    <list default="true" id="fd344fbc-251b-4711-8d70-20dcd890f771" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/.idea/libraries/jsp_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/.idea/libraries/jsp_api.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/src/business/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/src/business/IProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/src/business/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/src/business/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/src/control/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/src/control/MainServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/src/control/loginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/src/control/loginFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/src/model/IProductMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/src/model/IProductMgr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/src/model/ProductMgrImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/src/model/ProductMgrImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hw/hw_backend_0923/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hw/hw_backend_0923/web/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ws_0920/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ws_0920/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +77,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -220,6 +233,7 @@
       <workItem from="1568763138150" duration="2566000" />
       <workItem from="1568987423830" duration="619000" />
       <workItem from="1569206194756" duration="12245000" />
+      <workItem from="1569248740545" duration="1500000" />
     </task>
     <servers />
   </component>
