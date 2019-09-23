@@ -9,7 +9,7 @@ public class ConnectionProxy {
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ssafyweb?useSSL=false&serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8", "alban", "092203");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ssafyweb?useSSL=false&serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true", "root", "root");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

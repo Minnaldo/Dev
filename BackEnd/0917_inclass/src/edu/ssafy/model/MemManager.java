@@ -169,6 +169,30 @@ public class MemManager {
         return aList;
     }
 
+    public boolean isLogin(String id, String pw) {
+        String sql = "select * from memberweb where id = ? and pw =?";
+        boolean ret = false;
+        try {
+            conn = ConnectionProxy.getConnection();
+
+            st = conn.prepareStatement(sql);
+            st.setString(1, id);
+            st.setString(2, pw);
+            rs = st.executeQuery();
+            rs.last();
+            int cnt = rs.getRow();
+            if(cnt==1){
+                ret = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return ret;
+    }
+
     public void close() {
         try {
             if (conn != null) {

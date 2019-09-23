@@ -35,9 +35,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
         <option value="HTML File" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -63,11 +63,16 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ws_0920" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\student\Documents\Dev\BackEnd\0917_inclass\web" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -95,7 +100,6 @@
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="START_JAVASCRIPT_DEBUGGER" value="true" />
       <option name="COMMON_VM_ARGUMENTS" value="-Duser.language=en -Duser.region=US" />
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="0917_inclass:war exploded">
           <settings>
@@ -213,6 +217,7 @@
       <workItem from="1568730509641" duration="2295000" />
       <workItem from="1568763138150" duration="2566000" />
       <workItem from="1568987423830" duration="619000" />
+      <workItem from="1569206194756" duration="8471000" />
     </task>
     <servers />
   </component>

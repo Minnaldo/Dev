@@ -4,6 +4,22 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <display-name>Apache-Axis</display-name>
+    <filter>
+        <filter-name>logFilter</filter-name>
+        <filter-class>edu.ssafy.controller.LoginChkFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>logFilter</filter-name>
+        <url-pattern>/main.do</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>charsetFilter</filter-name>
+        <filter-class>edu.ssafy.controller.KorCharsetFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>charsetFilter</filter-name>
+        <url-pattern>/main.do</url-pattern>
+    </filter-mapping>
     <servlet>
         <display-name>Apache-Axis Servlet</display-name>
         <servlet-name>AxisServlet</servlet-name>
@@ -52,12 +68,4 @@
     <welcome-file-list>
         <welcome-file>login.html</welcome-file>
     </welcome-file-list>
-    <servlet>
-        <servlet-name>main</servlet-name>
-        <servlet-class>edu.ssafy.controller.MainServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/main.do</url-pattern>
-    </servlet-mapping>
 </web-app>

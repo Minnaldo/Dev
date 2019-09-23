@@ -4,6 +4,8 @@ import edu.ssafy.model.MemManager;
 import edu.ssafy.model.MemVO;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,16 +14,16 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 // front servlet
-//@WebServlet("/main.do")
+@WebServlet("/main.do")
 public class MainServlet extends HttpServlet {
     private MemManager man = MemManager.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+//        request.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
 
-        if (action.equals("registmem")) {
+        if (action.equals("l")) {
             registMem(request, response);
         } else if (action.equals("listmem")) {
             listMem(request, response);
@@ -33,9 +35,25 @@ public class MainServlet extends HttpServlet {
             deleteMem(request, response);
         } else if (action.equals("login")) {
             loginMem(request, response);
+        } else if (action.equals("logout")) {
+            logout(request, response);
         } else if (action.equals("search")) {
             searchMem(request, response);
         }
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        request.getSession().setAttribute("islogin",null);  // 세션에서 로그인 여부만 초기화
+        //        request.getSession().invalidate();  // 세션을 초기화한다, 세션의 모든값을 초기화
+
+        Cookie[] cook = request.getCookies();
+        for (int i = 0; i < cook.length; i++) {
+            cook[i].getName();
+            cook[i].getValue();
+            cook[i].setMaxAge(0);   // 쿠키의 삭제 : 시간을 0으로 만들어 삭제한다
+        }
+
+        response.sendRedirect("login.html");
     }
 
     private void searchMem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,13 +73,19 @@ public class MainServlet extends HttpServlet {
 
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
-        MemVO ret = man.memInfo(id);
-        System.out.println("id=" + id + "  pw=" + pw);
-        if (ret != null) {
-            // 비밀번호 체크
-            if (man.memberChk(id, pw)) {
-                request.getRequestDispatcher("./main.do?action=listmem").forward(request, response);
-            }
+        boolean isLogin = man.isLogin(id, pw);
+
+        if (isLogin) {
+//            로그인 처리
+            request.getSession().setAttribute("islogin", "ISLOGIN");  // 세션의 islogin필드에 값을 넣어준다
+            request.getSession().setAttribute("loginid", id);
+
+//            Cookie cooklogin = new Cookie("islogin", isLogin + "");
+//            Cookie cooid = new Cookie("id", id);
+//            response.addCookie(cooklogin);
+//            response.addCookie(cooid);
+            response.sendRedirect("main.do?action=listmem");
+//            request.getRequestDispatcher("main.do?action=listmem").forward(request, response);
         } else {
             // 회원가입 페이지로
             response.sendRedirect("./registerMem.html");
@@ -131,7 +155,6 @@ public class MainServlet extends HttpServlet {
     private void listMem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<MemVO> list = man.searchAll();
         if (list.size() > 0) {
-//            list가 들어간다?
 //            setAttribute는 Object형태로 넘어가기 때문에!
             request.setAttribute("list", list);
             request.getRequestDispatcher("./memList.jsp").forward(request, response);
