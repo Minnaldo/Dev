@@ -2,40 +2,28 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="hw_backend_0923:war exploded" />
+      <artifact name="0924_project:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf780fe9-ff11-41f0-aa7f-d69ef0af5b10" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../0917_inclass/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../0917_inclass/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jsp_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jsp_api.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/IProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/business/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/business/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/control/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/MainServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/control/loginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/loginFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/IProductMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/IProductMgr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ProductMgrImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProductMgrImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ws_0920/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ws_0920/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="369232f7-05c0-4464-b05c-dcf0c0fd45d8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="0924_project" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -44,26 +32,25 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectId" id="1REFSJMizuXboSRLeikhNHGPCX4" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1RGBtPSNX9rP48ypMGe3JO23G5I" />
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="C:/Program Files/Apache Software Foundation/Tomcat 9.0/lib/jsp-api.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="sshConsole" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\student\Documents\Dev\BackEnd\hw\hw_backend_0923\web" />
-      <recent name="C:\Users\student\Documents\Dev\BackEnd\hw\hw_backend_0923\src" />
+      <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\web" />
+      <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\src\model" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -79,23 +66,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.24">
-    <configuration name="productList.jws" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/productList.jws">
-      <method v="2" />
-    </configuration>
     <configuration name="Tomcat 9.0.24" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
-      <option name="START_JAVASCRIPT_DEBUGGER" value="true" />
-      <option name="COMMON_VM_ARGUMENTS" value="-DUser.languate=en -DUser.region=US" />
-      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Duser.region=US -Duser.languate=es " />
       <deployment>
-        <artifact name="hw_backend_0923:war exploded">
+        <artifact name="0924_project:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="Unnamed_hw_backend_0923" />
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_0924_project" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -103,7 +84,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="56023" />
+        <option name="DEBUG_PORT" value="55677" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -153,50 +134,79 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="hw_backend_0923:war exploded" />
+          <artifact name="0924_project:war exploded" />
         </option>
       </method>
     </configuration>
+    <configuration name="main_page.html" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/main_page.html" />
+      <deployment>
+        <artifact name="0924_project:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/0924_project_war_exploded" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="main_page_html_0924_project" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="0924_project:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Tomcat Server.Tomcat 9.0.24" />
+      <item itemvalue="Tomcat Server.main_page.html" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.productList.jws" />
+        <item itemvalue="Tomcat Server.main_page.html" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+    <option name="myConnectionType" value="NONE" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cf780fe9-ff11-41f0-aa7f-d69ef0af5b10" name="Default Changelist" comment="" />
-      <created>1569224346181</created>
+      <changelist id="369232f7-05c0-4464-b05c-dcf0c0fd45d8" name="Default Changelist" comment="" />
+      <created>1569283766237</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1569224346181</updated>
-      <workItem from="1569224349310" duration="9000" />
-      <workItem from="1569224369000" duration="530000" />
-      <workItem from="1569224914367" duration="4502000" />
-      <workItem from="1569234260730" duration="7876000" />
-      <workItem from="1569246460345" duration="2984000" />
-      <workItem from="1569281677121" duration="1559000" />
-      <workItem from="1569283464835" duration="301000" />
+      <updated>1569283766237</updated>
+      <workItem from="1569283769238" duration="136000" />
+      <workItem from="1569283916401" duration="11081000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
