@@ -2,15 +2,15 @@ import java.io.*;
 import java.util.*;
 
 /**
- * *최단경로 * 다익스트라 알고리즘을 이용한 문제 -> 인접행렬 이용시 메모리초과 ( 노드의 수가 많다 ) -> 인접 리스트로 해결
- * * 개선: 우선순위 큐를 이용해 속도를 증가시킬 수 있다.
+ * *최단경로 * 다익스트라 알고리즘을 이용한 문제 -> 인접행렬 이용시 메모리초과 ( 노드의 수가 많다 ) -> 인접 리스트로 해결 *
+ * 개선: 우선순위 큐를 이용해 속도를 증가시킬 수 있다.
  */
 
 public class Baek_1753 {
     static int inf = 987654321;
 
     public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int v = Integer.parseInt(st.nextToken());
         int e = Integer.parseInt(st.nextToken());

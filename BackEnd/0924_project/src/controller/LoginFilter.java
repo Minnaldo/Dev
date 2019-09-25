@@ -12,14 +12,15 @@ public class LoginFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-
+        String action = req.getParameter("action") == null ? "" : req.getParameter("action");
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpServletRequest request = (HttpServletRequest) req;
 
         String id = (String) request.getSession().getAttribute("id");
 
-        if (id == null) {
-            response.sendRedirect("login.html");
+        if (id == null && action.equals("modifyMember") && action.equals("delete") && action.equals("logout")) {
+            response.sendRedirect("main.do?action=");
+            return;
         }
 
         request.setAttribute("loginChk", "1");

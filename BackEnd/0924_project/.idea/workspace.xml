@@ -22,8 +22,12 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="HTML File" />
+        <option value="Jsp File" />
       </list>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/model/FoodDao.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -41,14 +45,16 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="sshConsole" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project" />
+      <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\src" />
       <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\web" />
       <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\src\model" />
     </key>
@@ -66,8 +72,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.24">
+    <configuration name="main_page.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/services/main_page.jsp">
+      <method v="2" />
+    </configuration>
     <configuration name="Tomcat 9.0.24" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="COMMON_VM_ARGUMENTS" value="-Duser.region=US -Duser.languate=es " />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="0924_project:war exploded">
           <settings>
@@ -178,14 +189,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JavaScript Debug.main_page.jsp" />
       <item itemvalue="Tomcat Server.Tomcat 9.0.24" />
       <item itemvalue="Tomcat Server.main_page.html" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.main_page.jsp" />
         <item itemvalue="Tomcat Server.main_page.html" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SshConsoleOptionsProvider">
     <option name="myEncoding" value="UTF-8" />
@@ -202,7 +218,12 @@
       <option name="presentableId" value="Default" />
       <updated>1569283766237</updated>
       <workItem from="1569283769238" duration="136000" />
-      <workItem from="1569283916401" duration="11081000" />
+      <workItem from="1569283916401" duration="27603000" />
+      <workItem from="1569315331599" duration="328000" />
+      <workItem from="1569368635615" duration="1576000" />
+      <workItem from="1569370347534" duration="82000" />
+      <workItem from="1569370446461" duration="126000" />
+      <workItem from="1569370644909" duration="176000" />
     </task>
     <servers />
   </component>

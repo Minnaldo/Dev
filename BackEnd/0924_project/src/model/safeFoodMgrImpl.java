@@ -20,7 +20,7 @@ public class safeFoodMgrImpl implements isafeFoodMgr {
         String sql = "insert into memTable values(?,?,?,?,?,?)";
         boolean ret = false;
         try {
-            conn = ConnectionProxy_Member.getConnection();
+            conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             ps.setString(2, pw);
@@ -43,7 +43,7 @@ public class safeFoodMgrImpl implements isafeFoodMgr {
         String sql = "select * from memTable where id = ? and pw = ?";
         boolean ret = false;
         try {
-            conn = ConnectionProxy_Member.getConnection();
+            conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             ps.setString(2, pw);
@@ -65,7 +65,7 @@ public class safeFoodMgrImpl implements isafeFoodMgr {
         String sql = "select * from memTable where id=?";
         ArrayList<MemberVO> ret = new ArrayList<>();
         try {
-            conn = ConnectionProxy_Member.getConnection();
+            conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
             rs = ps.executeQuery();
@@ -84,7 +84,7 @@ public class safeFoodMgrImpl implements isafeFoodMgr {
     public void deleteMember(String id) {
         String sql = "delete from memTable where id = ?";
         try {
-            conn = ConnectionProxy_Member.getConnection();
+            conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
         } catch (SQLException e) {
@@ -100,7 +100,7 @@ public class safeFoodMgrImpl implements isafeFoodMgr {
         MemberVO m = null;
         String sql = "select * from memTable where id=?";
         try {
-            conn = ConnectionProxy_Member.getConnection();
+            conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             rs.last();
@@ -121,7 +121,7 @@ public class safeFoodMgrImpl implements isafeFoodMgr {
         String sql = "update memTable set pw=?, name=?, addr=?, tel=?, allergy=? where id=? ";
         boolean ret = false;
         try {
-            conn = ConnectionProxy_Member.getConnection();
+            conn = ConnectionProxy.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, pw);
             ps.setString(2, name);
