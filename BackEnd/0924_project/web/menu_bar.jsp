@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> Stashed changes
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,7 +28,17 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
     <jsp:include page="login.jsp"></jsp:include>
 </nav>
+<<<<<<< Updated upstream
 
 <jsp:include page="sign_up.jsp"></jsp:include>
+=======
+<c:choose>
+    <c:when test="${islogin eq '1'}">
+    </c:when>
+    <c:otherwise>
+        <jsp:include page="sign_up.jsp"></jsp:include>
+    </c:otherwise>
+</c:choose>
+>>>>>>> Stashed changes
 </body>
 </html>

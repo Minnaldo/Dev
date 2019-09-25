@@ -18,6 +18,10 @@ public class LoginFilter implements Filter {
 
         String id = (String) request.getSession().getAttribute("id");
 
+<<<<<<< Updated upstream
+=======
+//        TODO 로그인 기능 제대로 구현
+>>>>>>> Stashed changes
         if (id == null && action.equals("modifyMember") && action.equals("delete") && action.equals("logout")) {
             response.sendRedirect("main.do?action=");
             return;

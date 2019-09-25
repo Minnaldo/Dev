@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+=======
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+>>>>>>> Stashed changes
 <!doctype html>
 <html lang="en">
 <head>
@@ -141,7 +145,11 @@
 	background-color: black;
 }
 </style>
+<<<<<<< Updated upstream
 <script src="./js/Chart.js"></script>
+=======
+<script src="js/Chart.js"></script>
+>>>>>>> Stashed changes
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -151,6 +159,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
+<<<<<<< Updated upstream
 <script type="text/javascript">
         $(document).ready(function () {
             // this fucntion parsing the foodinfo.xml file
@@ -163,6 +172,22 @@
                             var nutr7 = ${list.chole};                          
                             var nutr8 = ${list.fattyacid};                           
                             var nutr9 = ${list.transfat};
+=======
+<script>
+        $(document).ready(function () {
+            // this fucntion parsing the foodinfo.xml file
+                            var nutr1 = ""+${list.calory};
+                            var nutr2 = ""+${list.carbo};
+                            var nutr3 = ""+${list.protein};
+                            var nutr4 = ""+${list.fat};
+                            var nutr5 = ""+${list.sugar};
+                            var nutr6 = ""+${list.natrium};
+                            var nutr7 = ""+${list.chole};                          
+                            var nutr8 = ""+${list.fattyacid};                           
+                            var nutr9 = ""+${list.transfat};                           
+                            var name = ""+${list.name};
+                            var maker = ""+${list.maker};
+>>>>>>> Stashed changes
                             $('#calorie').text(nutr1);
                             $('#carbohydrate').text(nutr2);
                             $('#protein').text(nutr3);
@@ -202,12 +227,20 @@
                             options: {
                                 responsive: true
                             }
+<<<<<<< Updated upstream
                         })
         });
 </script>
 </head>
 <body>
 	​
+=======
+                        });
+ 
+    </script>
+</head>
+<body>​
+>>>>>>> Stashed changes
 	<jsp:include page="menu_bar.jsp"></jsp:include>
 	<jsp:include page="nav_bar.jsp"></jsp:include>
 	<h1 class="page-title text-center">제품 정보</h1>
@@ -215,13 +248,21 @@
 		<img src="./img/shopping-bag.png" width="50" />
 	</div>
 	<div class="container">
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 		<div class="table-responsive">
 			<table class="table">
 				<tbody>
 					<tr>
+<<<<<<< Updated upstream
 						<td rowspan="4" width=150><img src="${list.img }"
 							width="150px"></td>
+=======
+						<td rowspan="4" width=150><img src="${list.img }" width="150px"></td>
+>>>>>>> Stashed changes
 						<td width=100>제품명</td>
 						<td id="product_name">${list.name}</td>
 					</tr>

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+<<<<<<< Updated upstream
 /**
  * xml문서 내의 파일을 db에 저장하고, 음식관련된 정보를 저장한다
  */
@@ -59,6 +60,55 @@ public class FoodDaoImpl implements FoodDao {
         try {
             ps = conn.prepareStatement(str);
             rs = ps.executeQuery();
+=======
+public class FoodDaoImpl extends ConnectionProxy implements FoodDao {
+    private List<Food> foods;
+
+    private Connection con;
+    private PreparedStatement pt;
+    private ResultSet rs;
+
+    public void loadData(String string, String string2) {
+        FoodSaxParser parser = new FoodSaxParser(string, string2);
+        foods = parser.getFoods();
+        String str = "insert into food values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        for (Food f : foods) {
+            try {
+                con = ConnectionProxy.getConnection();
+                pt = con.prepareStatement(str);
+                pt.setInt(1, f.getCode());
+                pt.setString(2, f.getName());
+                pt.setDouble(3, f.getSupportpereat());
+                pt.setDouble(4, f.getCalory());
+                pt.setDouble(5, f.getCarbo());
+                pt.setDouble(6, f.getProtein());
+                pt.setDouble(7, f.getFat());
+                pt.setDouble(8, f.getSugar());
+                pt.setDouble(9, f.getNatrium());
+                pt.setDouble(10, f.getChole());
+                pt.setDouble(11, f.getFattyacid());
+                pt.setDouble(12, f.getTransfat());
+                pt.setString(13, f.getMaker());
+                pt.setString(14, f.getMaterial());
+                pt.setString(15, f.getImg());
+                pt.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        close();
+    }
+
+
+    public List<Food> searchAll() {
+        List<Food> finds = new LinkedList<Food>();
+        Food f = null;
+        String str = "select * from food";
+        try {
+            con = ConnectionProxy.getConnection();
+            pt = con.prepareStatement(str);
+            rs = pt.executeQuery();
+>>>>>>> Stashed changes
             while (rs.next()) {
                 f = new Food();
                 f.setCode(rs.getInt("code"));
@@ -88,6 +138,7 @@ public class FoodDaoImpl implements FoodDao {
 
     @Override
     public List<Food> search_name(String name) {
+<<<<<<< Updated upstream
         List<Food> finds = new LinkedList<Food>();
         String str = "select * from food where name like ?";
         Food f = null;
@@ -95,6 +146,16 @@ public class FoodDaoImpl implements FoodDao {
             ps = conn.prepareStatement(str);
             ps.setString(1, "%" + name + "%");
             ResultSet rs = ps.executeQuery();
+=======
+        List<Food> finds = new LinkedList<>();
+        String str = "select * from food where name like ?";
+        Food f = null;
+        try {
+            con = ConnectionProxy.getConnection();
+            pt = con.prepareStatement(str);
+            pt.setString(1, "%" + name + "%");
+            rs = pt.executeQuery();
+>>>>>>> Stashed changes
             while (rs.next()) {
                 f = new Food();
                 f.setCode(rs.getInt("code"));
@@ -125,12 +186,22 @@ public class FoodDaoImpl implements FoodDao {
     @Override
     public List<Food> search_company(String company) {
         List<Food> finds = new LinkedList<Food>();
+<<<<<<< Updated upstream
         String str = "select * from food where maker like ?";
         Food f = null;
         try {
             ps = conn.prepareStatement(str);
             ps.setString(1, "%" + company + "%");
             ResultSet rs = ps.executeQuery();
+=======
+        String str = "select * from food where company like ?";
+        Food f = null;
+        try {
+            con = ConnectionProxy.getConnection();
+            pt = con.prepareStatement(str);
+            pt.setString(1, "%" + company + "%");
+            rs = pt.executeQuery();
+>>>>>>> Stashed changes
             while (rs.next()) {
                 f = new Food();
                 f.setCode(rs.getInt("code"));
@@ -164,9 +235,16 @@ public class FoodDaoImpl implements FoodDao {
         String str = "select * from food where material like ?";
         Food f = null;
         try {
+<<<<<<< Updated upstream
             ps = conn.prepareStatement(str);
             ps.setString(1, "%" + material + "%");
             ResultSet rs = ps.executeQuery();
+=======
+            con = ConnectionProxy.getConnection();
+            pt = con.prepareStatement(str);
+            pt.setString(1, "%" + material + "%");
+            rs = pt.executeQuery();
+>>>>>>> Stashed changes
             while (rs.next()) {
                 f = new Food();
                 f.setCode(rs.getInt("code"));
@@ -198,8 +276,13 @@ public class FoodDaoImpl implements FoodDao {
     public void close() {
         try {
             if (rs != null) rs.close();
+<<<<<<< Updated upstream
             if (ps != null) ps.close();
             if (conn != null) conn.close();
+=======
+            if (pt != null) pt.close();
+            if (con != null) con.close();
+>>>>>>> Stashed changes
         } catch (SQLException e) {
             e.printStackTrace();
         }

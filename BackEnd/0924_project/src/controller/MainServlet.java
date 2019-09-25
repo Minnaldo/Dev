@@ -1,17 +1,25 @@
 package controller;
 
+<<<<<<< Updated upstream
 import business.iSafeFoodServiceImpl;
 import model.FoodDaoImpl;
 
+=======
+>>>>>>> Stashed changes
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import business.safeFoodServiceImpl;
+import model.FoodDaoImpl;
+
 import java.io.IOException;
 
 @WebServlet("/main.do")
 public class MainServlet extends HttpServlet {
+<<<<<<< Updated upstream
     public iSafeFoodServiceImpl service = new iSafeFoodServiceImpl();
 
     @Override
@@ -23,6 +31,16 @@ public class MainServlet extends HttpServlet {
                 getServletContext().getRealPath("WEB-INF/res/FoodNutritionInfo.xml"));
     }
 
+=======
+    public safeFoodServiceImpl service = new safeFoodServiceImpl();
+
+    @Override
+    public void init() throws ServletException {
+        new FoodDaoImpl().loadData(getServletContext().getRealPath("./res/foodInfo.xml"),
+                getServletContext().getRealPath("./res/FoodNutritionInfo.xml"));
+    }
+
+>>>>>>> Stashed changes
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -42,6 +60,7 @@ public class MainServlet extends HttpServlet {
         } else if (action.equals("modifyMember")) {
             service.modifyMember(request, response);
         } else if (action.equals("detail")) {
+<<<<<<< Updated upstream
             service.datail(request, response);
         } else if (action.equals("search")) {
             String scondition = request.getParameter("s_condition");
@@ -52,6 +71,18 @@ public class MainServlet extends HttpServlet {
                 service.searchCompany(request, response);
             else if (scondition.equals("재료명"))
                 service.searchMaterial(request, response);
+=======
+            service.detail(request, response);
+        } else if (action.equals("search")) {
+            String scondition = request.getParameter("s_condition");
+            if (scondition.equals("상품명")) {
+                service.searchName(request, response);
+            } else if (scondition.equals("제조사")) {
+                service.searchCompany(request, response);
+            } else if (scondition.equals("재료명")) {
+                service.searchMaterial(request, response);
+            }
+>>>>>>> Stashed changes
         } else if (action.equals("plist")) {
             service.searchFoodAll(request, response);
         } else if (action.equals("")) {

@@ -45,7 +45,11 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< Updated upstream
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../0917_inclass" />
+>>>>>>> Stashed changes
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -53,8 +57,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+<<<<<<< Updated upstream
       <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project" />
       <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\src" />
+=======
+      <recent name="C:\Users\alban\Documents\Dev\BackEnd\0924_project\out\artifacts\0924_project_war_exploded" />
+      <recent name="C:\Users\alban\Documents\Dev\BackEnd\0924_project\web" />
+      <recent name="C:\Users\alban\Documents\Dev\BackEnd\0924_project\src" />
+>>>>>>> Stashed changes
       <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\web" />
       <recent name="C:\Users\student\Documents\Dev\BackEnd\0924_project\src\model" />
     </key>
@@ -71,6 +81,7 @@
       </list>
     </option>
   </component>
+<<<<<<< Updated upstream
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.24">
     <configuration name="main_page.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/services/main_page.jsp">
       <method v="2" />
@@ -79,6 +90,12 @@
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="COMMON_VM_ARGUMENTS" value="-Duser.region=US -Duser.languate=es " />
       <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+=======
+  <component name="RunManager">
+    <configuration name="Tomcat 9.0.24" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Duser.region=US -Duser.language=es " />
+>>>>>>> Stashed changes
       <deployment>
         <artifact name="0924_project:war exploded">
           <settings>
@@ -149,6 +166,7 @@
         </option>
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="main_page.html" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/main_page.html" />
       <deployment>
@@ -199,6 +217,8 @@
         <item itemvalue="Tomcat Server.main_page.html" />
       </list>
     </recent_temporary>
+=======
+>>>>>>> Stashed changes
   </component>
   <component name="ServiceViewManager">
     <option name="showServicesTree" value="false" />
@@ -218,12 +238,18 @@
       <option name="presentableId" value="Default" />
       <updated>1569283766237</updated>
       <workItem from="1569283769238" duration="136000" />
+<<<<<<< Updated upstream
       <workItem from="1569283916401" duration="27603000" />
       <workItem from="1569315331599" duration="328000" />
       <workItem from="1569368635615" duration="1576000" />
       <workItem from="1569370347534" duration="82000" />
       <workItem from="1569370446461" duration="126000" />
       <workItem from="1569370644909" duration="176000" />
+=======
+      <workItem from="1569283916401" duration="11081000" />
+      <workItem from="1569322517222" duration="4543000" />
+      <workItem from="1569327171014" duration="4733000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

@@ -4,8 +4,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <welcome-file-list>
+<<<<<<< Updated upstream
         <welcome-file>main.do</welcome-file>
         <welcome-file>detail.jsp</welcome-file>
+=======
+        <welcome-file>/main.do</welcome-file>
+>>>>>>> Stashed changes
     </welcome-file-list>
     <display-name>Apache-Axis</display-name>
     <servlet>
