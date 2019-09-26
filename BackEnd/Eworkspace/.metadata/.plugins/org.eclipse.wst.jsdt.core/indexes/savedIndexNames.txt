@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+C:\Users\alban\Documents\Dev\BackEnd\Eworkspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2892726955.index
-1447874262.index
-1084780271.index
-1806712970.index
-897831174.index
-858494924.index
