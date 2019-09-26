@@ -15,25 +15,17 @@ public class Baek_11055 {
         for (int i = 0; i < n; i++)
             arr[i] = Integer.parseInt(st.nextToken());
 
-        int[] tmp = new int[n];
-        tmp[0] = arr[0];
-        int idx = 1;
-        for (int i = 1; i < n; i++) {
-            int tmpSum = 0;
-            for (int j = 0; j < i; j++) {
-                tmpSum += arr[j];
-                if (tmp[j] < arr[i]) {
-                    if (tmpSum < tmpSum - tmp[j] + arr[i]) {
-                        tmp[j] = arr[i];
-                        tmpSum += (arr[i] - tmp[j]);
-                        break;
-                    }
+        int ans = 0, tmpSum = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            int cur = arr[i];
+            tmpSum = cur;
+            for (int j = i - 1; j >= 0; j--) {
+                if (arr[j] < cur) {
+                    tmpSum += arr[j];
+                    cur = arr[j];
                 }
             }
-        }
-        int ans = 0;
-        for (int i = 0; i < idx; i++) {
-            ans += tmp[i];
+            ans = Math.max(ans, tmpSum);
         }
 
         System.out.println(ans);

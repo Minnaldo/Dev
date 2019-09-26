@@ -52,8 +52,7 @@ public class Baek_1753 {
             // 목적지로 가는 비용보다 작으면 갱신
             for (int j = 0; j < list[minIdx].size(); j++) {
                 if (list[minIdx].get(j).cost != 0 && !visit[list[minIdx].get(j).dst]) {
-                    dst[list[minIdx].get(j).dst] = Math.min(dst[list[minIdx].get(j).dst],
-                            dst[minIdx] + list[minIdx].get(j).cost);
+                    dst[list[minIdx].get(j).dst] = Math.min(dst[list[minIdx].get(j).dst], dst[minIdx] + list[minIdx].get(j).cost);
                 }
             }
             visit[minIdx] = true;
