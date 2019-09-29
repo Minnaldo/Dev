@@ -187,7 +187,7 @@ EL은 자동으로 id를 찾아준다 ( 가장 작은 scope 부터 찾아본다 
 | JSP      | pageContext      | 현재 페이지의 프로세싱과 상응하는 PageContext인스턴스                                |
 | 범위       | pageScope        | page scope에 저장된 객체를 추출해서 출력할 때 사용                                 |
 |          | requestScope     | request scope에 저장된 객체를 추출해서 출력할 때 사용                              |
-|          | sessioScope      | session scope에 저장된 객체를 추출해서 출력할 때 사용                              |
+|          | sessionScope      | session scope에 저장된 객체를 추출해서 출력할 때 사용                              |
 |          | applicationScope | application scope에 저장된 객체를 추출해서 출력할 때 사용                          |
 | 요청 매개변수  | param            | ServletRequest.getParameter(String)을 통해 요청 정보를 추출할 때 사용           |
 |          | paramValues      | ServletRequest.getParameterValues(String)를 통해 요청 정보를 추출할 때 사용     |

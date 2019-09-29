@@ -5,7 +5,6 @@ import java.util.*;
  *  * 1 부터 N까지 자연수 중에서 M개를 고른 수열
  *  * 같은 수를 여러번 골라도 된다 ==> 중복을 허용한다
  *  * 고른 수열은 비내림차순 이어야 한다 --> 오름차순 정렬이 되어있어야 한다.
- *  TODO need some summary for this problem
  */
 
 public class Baek_15652 {
