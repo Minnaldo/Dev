@@ -1,7 +1,7 @@
 # Servlet & JSP Summary
 
 ## JSP 개요
-Java Server Pages의 약어로, 웹페이지를 동적으로 처리할 수 있는 기술 중의 하나로 서블릿 프로그램의 기능을 HTML 팡리 내에 스크립트 형식으로 구현할 수 있다.
+Java Server Pages의 약어로, 웹페이지를 동적으로 처리할 수 있는 기술 중의 하나로 서블릿 프로그램의 기능을 HTML  내에 스크립트 형식으로 구현할 수 있다.
 > HTML 파일 내에 스크립트 형식으로 구현
 
 ### JSP의 LifeCycle
